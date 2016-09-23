@@ -1,38 +1,22 @@
 const React = require('react')
-const $ = require('jquery')
+const { PropTypes } = require('react')
+const { connect } = require('react-redux')
 
 const TimeSeriesChart = require('./TimeSeriesChart')
 
-const DataDisplay = React.createClass({
-  getInitialState: function () {
-    return {
-      budgetItems: []
-    }
-  },
-  componentDidMount: function () {
-    const component = this
-    $.getJSON(
-      'https://dev-budget.jumpstart.ge/en/api/v1',
-      {
-        financeType: 'spent_finance',
-        budgetItemIds: [1366, 990]
-      },
-      function (response) {
-        component.setState({
-          error: response.error,
-          budgetItems: response.budget_items
-        })
-      }
-    )
+let DataDisplay = React.createClass({
+  propTypes: {
+    error: PropTypes.string.isRequired,
+    budgetItems: PropTypes.array.isRequired
   },
   render: function () {
-    if (this.state.error) {
+    if (this.props.error.length > 0) {
       return (
         <div>
-          API Error: {this.state.error}
+          API Error: {this.props.error}
         </div>
       )
-    } else if (this.state.budgetItems.length === 0) {
+    } else if (this.props.budgetItems.length === 0) {
       return (
         <div>
           Data Loading
@@ -41,10 +25,11 @@ const DataDisplay = React.createClass({
     } else {
       return (
         <div>
-          <p>this.props.inputValue</p>
           {
-            this.state.budgetItems.map(
+            this.props.budgetItems.map(
               function (budgetItem, index) {
+                if (!budgetItem) return <p>Budget item wrong format</p>
+
                 const uniqueId = 'time-series-chart' + index
 
                 return <TimeSeriesChart
@@ -62,5 +47,14 @@ const DataDisplay = React.createClass({
     }
   }
 })
+
+const mapStateToProps = function (state) {
+  return {
+    budgetItems: state.budgetItems,
+    error: state.error
+  }
+}
+
+DataDisplay = connect(mapStateToProps)(DataDisplay)
 
 module.exports = DataDisplay
