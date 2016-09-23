@@ -12,8 +12,9 @@ const DataDisplay = React.createClass({
   componentDidMount: function () {
     const component = this
     $.getJSON(
-      'https://dev-budget.jumpstart.ge/en/api',
+      'https://dev-budget.jumpstart.ge/en/api/v1',
       {
+        financeType: 'spent_finance',
         budgetItemIds: [1366, 990]
       },
       function (response) {
@@ -28,13 +29,13 @@ const DataDisplay = React.createClass({
     if (this.state.error) {
       return (
         <div>
-          Error from API: {this.state.error}
+          API Error: {this.state.error}
         </div>
       )
     } else if (this.state.budgetItems.length === 0) {
       return (
         <div>
-          Data loading!
+          Data Loading
         </div>
       )
     } else {
