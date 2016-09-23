@@ -1,7 +1,14 @@
 const React = require('react')
+const { string, array } = React.PropTypes
 const Highcharts = require('highcharts')
 
 const TimeSeriesChart = React.createClass({
+  propTypes: {
+    container: string.isRequired,
+    timePeriods: array.isRequired,
+    amounts: array.isRequired,
+    name: string
+  },
   // When the DOM is ready, create the chart.
   componentDidMount: function () {
     const options = {
@@ -46,14 +53,5 @@ const TimeSeriesChart = React.createClass({
     return <div id={this.props.container} />
   }
 })
-
-const { string, array } = React.PropTypes
-
-TimeSeriesChart.propTypes = {
-  container: string.isRequired,
-  timePeriods: array.isRequired,
-  amounts: array.isRequired,
-  name: string
-}
 
 module.exports = TimeSeriesChart
