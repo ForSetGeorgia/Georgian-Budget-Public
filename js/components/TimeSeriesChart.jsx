@@ -56,4 +56,4 @@ TimeSeriesChart.propTypes = {
   name: string
 }
 
-module.export = TimeSeriesChart
+module.exports = TimeSeriesChart

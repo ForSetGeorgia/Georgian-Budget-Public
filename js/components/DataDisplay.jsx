@@ -1,5 +1,5 @@
 const React = require('react')
-var $ = require('jquery')
+const $ = require('jquery')
 
 const TimeSeriesChart = require('./TimeSeriesChart')
 
@@ -14,17 +14,24 @@ const DataDisplay = React.createClass({
     $.getJSON(
       'https://dev-budget.jumpstart.ge/en/api',
       {
-        budgetItemIds: [6244]
+        budgetItemIds: [1366, 990]
       },
       function (response) {
         component.setState({
+          error: response.error,
           budgetItems: response.budget_items
         })
       }
     )
   },
   render: function () {
-    if (this.state.budgetItems.length === 0) {
+    if (this.state.error) {
+      return (
+        <div>
+          Error from API: {this.state.error}
+        </div>
+      )
+    } else if (this.state.budgetItems.length === 0) {
       return (
         <div>
           Data loading!
@@ -37,7 +44,7 @@ const DataDisplay = React.createClass({
           {
             this.state.budgetItems.map(
               function (budgetItem, index) {
-                var uniqueId = 'time-series-chart' + index
+                const uniqueId = 'time-series-chart' + index
 
                 return <TimeSeriesChart
                   key={uniqueId}
