@@ -3,6 +3,8 @@ const { PropTypes } = React
 const { connect } = require('react-redux')
 const $ = require('jquery')
 
+const Select = require('react-select')
+
 const { setError, clearError, setBudgetItems } = require('../actions')
 
 let BudgetItemSelect = React.createClass({
@@ -10,22 +12,29 @@ let BudgetItemSelect = React.createClass({
     handleInputChange: PropTypes.func.isRequired
   },
   render: function () {
+    var options = [
+      { value: '1336', label: 'სსიპ - საჯარო აუდიტის ინსტიტუტი' },
+      { value: '963', label: 'მოსამართლეებისა და სასამართლოს თანამშრომლების მომზადება-გადამზადება' }
+    ];
     return (
-      <div>
-        <input type='text' defaultValue='980' onChange={this.props.handleInputChange} />
-      </div>
+      <Select
+        name='budget-item-select'
+        value='981'
+        options={options}
+        onChange={this.props.handleInputChange}
+      />
     )
   }
 })
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleInputChange: function (event) {
+    handleInputChange: function (selected) {
       $.getJSON(
         'https://dev-budget.jumpstart.ge/en/api/v1',
         {
           financeType: 'spent_finance',
-          budgetItemIds: [Number(event.target.value)]
+          budgetItemIds: [Number(selected.value)]
         },
         function (response) {
           if (response.error) {
