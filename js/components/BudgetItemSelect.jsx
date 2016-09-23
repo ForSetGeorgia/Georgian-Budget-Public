@@ -1,4 +1,6 @@
-var BudgetItemDropdown = React.createClass({
+const React = require('react')
+
+const BudgetItemSelect = React.createClass({
   getInitialState: function () {
     return {
       budgetItemId: '1'
@@ -18,3 +20,5 @@ var BudgetItemDropdown = React.createClass({
     )
   }
 })
+
+module.exports = BudgetItemSelect
