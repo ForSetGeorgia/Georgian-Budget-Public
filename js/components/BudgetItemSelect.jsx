@@ -14,8 +14,8 @@ let BudgetItemSelect = React.createClass({
   },
   render: function () {
     var options = [
-      { value: 1336, label: 'სსიპ - საჯარო აუდიტის ინსტიტუტი' },
-      { value: 963, label: 'მოსამართლეებისა და სასამართლოს თანამშრომლების მომზადება-გადამზადება' }
+      { value: 1769, label: 'სსიპ - საჯარო აუდიტის ინსტიტუტი' },
+      { value: 1396, label: 'მოსამართლეებისა და სასამართლოს თანამშრომლების მომზადება-გადამზადება' }
     ]
     return (
       <Select
@@ -43,7 +43,7 @@ const mapDispatchToProps = (dispatch) => {
       $.getJSON(
         'https://dev-budget.jumpstart.ge/en/api/v1',
         {
-          financeType: 'spent_finance',
+          financeType: 'planned_finance',
           budgetItemIds: [value]
         },
         function (response) {
