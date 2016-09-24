@@ -3,14 +3,17 @@ const { string, array } = React.PropTypes
 const Highcharts = require('highcharts')
 
 const TimeSeriesChart = React.createClass({
+
   propTypes: {
     container: string.isRequired,
     timePeriods: array.isRequired,
     amounts: array.isRequired,
     name: string
   },
+
   // When the DOM is ready, create the chart.
   componentDidMount: function () {
+    // Set container which the chart should render to.
     const options = {
       title: {
         text: 'Spent Finances',
@@ -36,10 +39,9 @@ const TimeSeriesChart = React.createClass({
       }]
     }
 
-    // Set container which the chart should render to.
     this.chart = new Highcharts.Chart(
-        this.props.container,
-        options
+      this.props.container,
+      options
     )
   },
 

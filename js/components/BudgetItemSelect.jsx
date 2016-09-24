@@ -5,21 +5,22 @@ const $ = require('jquery')
 
 const Select = require('react-select')
 
-const { setError, clearError, setBudgetItems } = require('../actions')
+const { setSelectedBudgetItemId, setError, clearError, setBudgetItems } = require('../actions')
 
 let BudgetItemSelect = React.createClass({
   propTypes: {
-    handleInputChange: PropTypes.func.isRequired
+    handleInputChange: PropTypes.func.isRequired,
+    selectedItem: PropTypes.number.isRequired
   },
   render: function () {
     var options = [
-      { value: '1336', label: 'სსიპ - საჯარო აუდიტის ინსტიტუტი' },
-      { value: '963', label: 'მოსამართლეებისა და სასამართლოს თანამშრომლების მომზადება-გადამზადება' }
-    ];
+      { value: 1336, label: 'სსიპ - საჯარო აუდიტის ინსტიტუტი' },
+      { value: 963, label: 'მოსამართლეებისა და სასამართლოს თანამშრომლების მომზადება-გადამზადება' }
+    ]
     return (
       <Select
         name='budget-item-select'
-        value='981'
+        value={this.props.selectedItem}
         options={options}
         onChange={this.props.handleInputChange}
       />
@@ -27,14 +28,23 @@ let BudgetItemSelect = React.createClass({
   }
 })
 
+const mapStateToProps = (state) => {
+  return {
+    selectedItem: state.selectedItem
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     handleInputChange: function (selected) {
+      const value = Number(selected.value)
+
+      dispatch(setSelectedBudgetItemId(value))
       $.getJSON(
         'https://dev-budget.jumpstart.ge/en/api/v1',
         {
           financeType: 'spent_finance',
-          budgetItemIds: [Number(selected.value)]
+          budgetItemIds: [value]
         },
         function (response) {
           if (response.error) {
@@ -51,6 +61,6 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-BudgetItemSelect = connect(null, mapDispatchToProps)(BudgetItemSelect)
+BudgetItemSelect = connect(mapStateToProps, mapDispatchToProps)(BudgetItemSelect)
 
 module.exports = BudgetItemSelect

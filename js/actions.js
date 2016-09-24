@@ -5,6 +5,7 @@ const setError = function (error) {
   }
 }
 
+// eslint-disable-next-line handle-callback-err
 const clearError = function (error) {
   return {
     type: 'CLEAR_ERROR'
@@ -18,4 +19,11 @@ const setBudgetItems = function (budgetItems) {
   }
 }
 
-module.exports = { setError, clearError, setBudgetItems }
+const setSelectedBudgetItemId = function (selectedItem) {
+  return {
+    type: 'SET_SELECTED_BUDGET_ITEM_ID',
+    selectedItem: selectedItem
+  }
+}
+
+module.exports = { setError, clearError, setBudgetItems, setSelectedBudgetItemId }

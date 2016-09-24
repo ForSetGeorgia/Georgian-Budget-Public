@@ -9,6 +9,7 @@ let DataDisplay = React.createClass({
     error: PropTypes.string.isRequired,
     budgetItems: PropTypes.array.isRequired
   },
+
   render: function () {
     if (this.props.error.length > 0) {
       return (
@@ -27,10 +28,10 @@ let DataDisplay = React.createClass({
         <div>
           {
             this.props.budgetItems.map(
-              function (budgetItem, index) {
+              function (budgetItem) {
                 if (!budgetItem) return <p>Budget item wrong format</p>
 
-                const uniqueId = 'time-series-chart' + index
+                const uniqueId = `budget-item-${budgetItem.name}`
 
                 return <TimeSeriesChart
                   key={uniqueId}
