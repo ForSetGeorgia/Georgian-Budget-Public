@@ -1,48 +1,46 @@
-const { compose, createStore } = require('redux')
+const { combineReducers, compose, createStore } = require('redux')
 
-const reducer = function (state = initialState, action) {
+const error = (state = '', action) => {
   switch (action.type) {
     case 'SET_ERROR': {
-      return Object.assign(
-        {},
-        state,
-        {
-          error: action.error
-        }
-      )
+      return action.error
     }
     case 'CLEAR_ERROR': {
-      return Object.assign(
-        {},
-        state,
-        {
-          error: ''
-        }
-      )
-    }
-    case 'SET_BUDGET_ITEMS': {
-      return Object.assign(
-        {},
-        state,
-        {
-          budgetItems: action.budgetItems
-        }
-      )
-    }
-    case 'SET_SELECTED_BUDGET_ITEM_ID': {
-      return Object.assign(
-        {},
-        state,
-        {
-          selectedItem: action.selectedItem
-        }
-      )
+      return ''
     }
     default: {
       return state
     }
   }
 }
+
+const budgetItems = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_BUDGET_ITEMS': {
+      return action.budgetItems
+    }
+    default: {
+      return state
+    }
+  }
+}
+
+const selectedItem = (state = 1, action) => {
+  switch (action.type) {
+    case 'SET_SELECTED_BUDGET_ITEM_ID': {
+      return action.selectedItem
+    }
+    default: {
+      return state
+    }
+  }
+}
+
+const reducer = combineReducers({
+  error,
+  budgetItems,
+  selectedItem
+})
 
 const initialState = {
   selectedItem: 1,
