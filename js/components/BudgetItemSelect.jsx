@@ -1,7 +1,7 @@
 const React = require('react')
 const { PropTypes } = React
 const { connect } = require('react-redux')
-const $ = require('jquery')
+const axios = require('axios')
 
 const Select = require('react-select')
 
@@ -38,25 +38,28 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleInputChange: function (selected) {
       const value = Number(selected.value)
-
       dispatch(setSelectedBudgetItemId(value))
-      $.getJSON(
+
+      axios.get(
         'https://dev-budget.jumpstart.ge/en/api/v1',
         {
-          financeType: 'planned_finance',
-          budgetItemIds: [value]
-        },
-        function (response) {
-          if (response.error) {
-            dispatch(setError(response.error))
-          } else {
-            dispatch(clearError())
-          }
-          if (response.budget_items) {
-            dispatch(setBudgetItems(response.budget_items))
+          params: {
+            financeType: 'planned_finance',
+            budgetItemIds: [value]
           }
         }
-      )
+      ).then((response) => {
+        if (response.error) {
+          dispatch(setError(response.error))
+        } else {
+          dispatch(clearError())
+        }
+        if (response.data.budget_items) {
+          dispatch(setBudgetItems(response.data.budget_items))
+        }
+      }).catch((error) => {
+        dispatch(setError(`Error communicating with Server: ${error}`))
+      })
     }
   }
 }
