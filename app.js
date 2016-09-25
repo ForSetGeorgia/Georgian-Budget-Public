@@ -44,6 +44,8 @@ const app = express()
 app.use('/public', express.static('./public'))
 
 app.use((req, res) => {
+  var url = req.protocol + '://' + req.get('host') + req.originalUrl
+
   match(
     { routes: Routes(), location: req.url },
     (error, redirectLocation, renderProps) => {
@@ -57,7 +59,7 @@ app.use((req, res) => {
             React.createElement(RouterContext, renderProps)
           )
         )
-        res.status(200).send(template({ body }))
+        res.status(200).send(template({ url, body }))
       } else {
         res.status(404).send('Not found')
       }
