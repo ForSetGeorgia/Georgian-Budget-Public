@@ -1,4 +1,4 @@
-const { createStore } = require('redux')
+const { compose, createStore } = require('redux')
 
 const reducer = function (state = initialState, action) {
   switch (action.type) {
@@ -53,7 +53,9 @@ const initialState = {
 const store = createStore(
   reducer,
   initialState,
-  window.devToolsExtension && window.devToolsExtension()
+  compose(
+    typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : (f) => f
+  )
 )
 
 module.exports = store
