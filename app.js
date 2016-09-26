@@ -63,7 +63,7 @@ app.use((req, res) => {
         )
 
         React.createElement(Meta, { url })
-        
+
         const head = Helmet.rewind()
         const title = head.title.toString()
         const meta = head.meta.toString()
