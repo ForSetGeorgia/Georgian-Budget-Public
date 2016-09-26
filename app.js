@@ -80,5 +80,8 @@ app.use((req, res) => {
   )
 })
 
+app.set('trust proxy', true);
+app.set('trust proxy', 'loopback');
+
 console.log('listening on port ' + port)
 app.listen(port)
