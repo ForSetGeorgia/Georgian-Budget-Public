@@ -23,7 +23,7 @@
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "highcharts": "^4.2.7",
-    "lodash._baseclone": "^4.5.7",
+    "lodash": "^4.16.2",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-helmet": "^3.1.0",
