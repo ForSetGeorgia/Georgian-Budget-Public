@@ -32,6 +32,8 @@ const fs = require('fs')
 const port = 8080
 
 const Routes = require('./js/components/Routes.jsx')
+const Helmet = require('react-helmet')
+const Meta = require('./js/components/Meta')
 
 // Read index.html into memory
 const baseTemplate = fs.readFileSync('./index.html')
@@ -59,7 +61,19 @@ app.use((req, res) => {
             React.createElement(RouterContext, renderProps)
           )
         )
-        res.status(200).send(template({ url, body }))
+
+        React.createElement(Meta, { url })
+        
+        const head = Helmet.rewind()
+        const title = head.title.toString()
+        const meta = head.meta.toString()
+
+        res.status(200).send(template({
+          title,
+          meta,
+          body
+        }))
+
       } else {
         res.status(404).send('Not found')
       }
