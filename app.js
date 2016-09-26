@@ -26,7 +26,7 @@ const Provider = ReactRedux.Provider
 const store = require('./js/store.js')
 
 // Provides templating language used in index.html
-const _ = require('lodash')
+const _template = require('lodash.template')
 
 // Node package, stands for file system. Will be used to read index.html
 // into memory
@@ -43,7 +43,7 @@ const Meta = require('./js/components/Meta')
 const baseTemplate = fs.readFileSync('./index.html')
 
 // Create a template function that returns a string based on index.html
-const template = _.template(baseTemplate)
+const template = _template(baseTemplate)
 
 const app = express()
 
