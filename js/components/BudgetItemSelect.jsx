@@ -41,7 +41,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(setSelectedBudgetItemId(value))
 
       axios.get(
-        'https://dev-budget.jumpstart.ge/en/api/v1',
+        'https://dev-budgetapi.jumpstart.ge/en/api/v1',
         {
           params: {
             financeType: 'planned_finance',
