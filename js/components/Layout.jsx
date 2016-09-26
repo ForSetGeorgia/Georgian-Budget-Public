@@ -6,14 +6,14 @@ const Layout = (props) => {
   return (
     <div>
       <Helmet
-        htmlAttributes={{"lang": "ka"}}
+        htmlAttributes={{'lang': 'ka'}}
         title='Home'
-        titleTemplate="%s | Georgian Budget"
+        titleTemplate='%s | Georgian Budget'
         link={[
-          {"rel": "stylesheet", "href": "https://unpkg.com/react-select/dist/react-select.css"}
+          {'rel': 'stylesheet', 'href': 'https://unpkg.com/react-select/dist/react-select.css'}
         ]}
       />
-      <Meta url={props.location.pathname}/>
+      <Meta url={props.location.pathname} />
       {props.children}
     </div>
   )
@@ -22,6 +22,7 @@ const Layout = (props) => {
 const { object } = React.PropTypes
 
 Layout.propTypes = {
+  location: object.isRequired,
   children: object.isRequired
 }
 

@@ -7,7 +7,8 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "start": "nodemon -L app.js",
-    "test": "standard"
+    "test": "standard",
+    "fix": "standard --fix"
   },
   "author": "JumpStart Georgia",
   "license": "MIT",

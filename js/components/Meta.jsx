@@ -4,8 +4,8 @@ const Helmet = require('react-helmet')
 const Meta = (props) => (
   <Helmet
     meta={[
-      {"charset": "UTF-8"},
-      {"property": "og:url", "content": props.url  }
+      { 'charset': 'UTF-8' },
+      { 'property': 'og:url', 'content': props.url }
     ]}
   />
 )
