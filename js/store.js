@@ -1,7 +1,17 @@
 const { combineReducers, compose, createStore } = require('redux')
+const { routerReducer } = require('react-router-redux')
+
 const reducers = require('./reducers')
 
-const reducer = combineReducers(reducers)
+const reducer = combineReducers(
+  Object.assign(
+    {},
+    reducers,
+    {
+      routing: routerReducer
+    }
+  )
+)
 
 const initialState = {
   selectedItem: 1,
