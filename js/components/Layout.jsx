@@ -3,8 +3,6 @@ const Helmet = require('react-helmet')
 const Meta = require('./Meta')
 
 const Layout = (props) => {
-  console.log(props)
-
   return (
     <div>
       <Helmet
