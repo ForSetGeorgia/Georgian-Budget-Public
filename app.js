@@ -1,3 +1,7 @@
+require('dotenv').config();
+
+console.log(`Starting app in ${process.env.NODE_ENV} environment`)
+
 // tells node to run all required files through babel
 // Note: this file is not run through babel, so it cannot use all
 // ES2015 syntax
