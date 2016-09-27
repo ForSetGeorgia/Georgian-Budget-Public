@@ -19,11 +19,11 @@ const setBudgetItems = function (budgetItems) {
   }
 }
 
-const selectBudgetItemId = function (id) {
+const setSelectedBudgetItemIds = function (ids) {
   return {
-    type: 'SELECT_BUDGET_ITEM_ID',
-    id: id
+    type: 'SET_SELECTED_BUDGET_ITEM_IDS',
+    ids: ids
   }
 }
 
-module.exports = { setError, clearError, setBudgetItems, selectBudgetItemId }
+module.exports = { setError, clearError, setBudgetItems, setSelectedBudgetItemIds }

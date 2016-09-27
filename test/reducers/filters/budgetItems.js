@@ -6,7 +6,7 @@ const budgetItemsFilter = require('../../../js/reducers/filters/budgetItems')
 const initialState = require('../../../js/initialState').filters.budgetItems
 
 describe('budget items filter reducer', () => {
-  it('handles SELECT_BUDGET_ITEM_ID action', () => {
+  it('handles SET_SELECTED_BUDGET_ITEM_IDS action', () => {
     const previousState = Object.assign(
       {},
       initialState,
@@ -16,8 +16,8 @@ describe('budget items filter reducer', () => {
     )
 
     const action = {
-      type: 'SELECT_BUDGET_ITEM_ID',
-      id: 15
+      type: 'SET_SELECTED_BUDGET_ITEM_IDS',
+      ids: [4, 6, 1]
     }
 
     const newState = budgetItemsFilter(previousState, action)
@@ -26,7 +26,7 @@ describe('budget items filter reducer', () => {
       {},
       initialState,
       {
-        selectedIds: [1, 15]
+        selectedIds: [4, 6, 1]
       }
     )
 

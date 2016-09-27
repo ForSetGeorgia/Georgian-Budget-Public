@@ -1,11 +1,11 @@
 module.exports = (state = {}, action) => {
   switch (action.type) {
-    case 'SELECT_BUDGET_ITEM_ID':
+    case 'SET_SELECTED_BUDGET_ITEM_IDS':
       return Object.assign(
         {},
         state,
         {
-          selectedIds: state.selectedIds.concat(action.id)
+          selectedIds: action.ids
         }
       )
     default:

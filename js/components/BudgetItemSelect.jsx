@@ -5,7 +5,7 @@ const axios = require('axios')
 
 const Select = require('react-select')
 
-const { selectBudgetItemId, setError, clearError, setBudgetItems } = require('../actions')
+const { setSelectedBudgetItemIds, setError, clearError, setBudgetItems } = require('../actions')
 
 let BudgetItemSelect = React.createClass({
   propTypes: {
@@ -20,9 +20,11 @@ let BudgetItemSelect = React.createClass({
     return (
       <Select
         name='budget-item-select'
-        value={this.props.selectedIds[0]}
+        value={this.props.selectedIds}
         options={options}
         onChange={this.props.handleInputChange}
+        multi
+        simpleValue
       />
     )
   }
@@ -37,15 +39,16 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleInputChange: function (selected) {
-      const value = Number(selected.value)
-      dispatch(selectBudgetItemId(value))
+      const selectedIds = selected.split(',').map((id) => Number(id))
+
+      dispatch(setSelectedBudgetItemIds(selectedIds))
 
       axios.get(
         'https://dev-budgetapi.jumpstart.ge/en/api/v1',
         {
           params: {
             financeType: 'planned_finance',
-            budgetItemIds: [value]
+            budgetItemIds: selectedIds
           }
         }
       ).then((response) => {
