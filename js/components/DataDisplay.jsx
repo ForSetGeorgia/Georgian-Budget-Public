@@ -34,10 +34,11 @@ let DataDisplay = React.createClass({
 
                 return <TimeSeriesChart
                   key={uniqueId}
-                  container={uniqueId}
-                  name={budgetItem.name}
-                  timePeriods={budgetItem.time_periods}
-                  amounts={budgetItem.amounts}
+                  containerId={uniqueId}
+                  title={budgetItem.chart_name}
+                  subtitle={budgetItem.name}
+                  xAxisCategories={budgetItem.time_periods}
+                  yAxisAmounts={budgetItem.amounts}
                 />
               }
             )
