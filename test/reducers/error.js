@@ -2,8 +2,8 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const error = require('../js/reducers/error')
-const initialState = require('../js/initialState').error
+const error = require('../../js/reducers/error')
+const initialState = require('../../js/initialState').error
 
 describe('error reducer', () => {
   it('handles SET_ERROR action', () => {
