@@ -2,7 +2,7 @@ const React = require('react')
 const Select = require('react-select')
 const { connect } = require('react-redux')
 
-const { setFinanceType } = require('../actions')
+const { setFinanceType, updateBudgetItems } = require('../actions')
 
 const FinanceTypeSelect = (props) => {
   const options = [
@@ -34,6 +34,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   handleChange (selected) {
     dispatch(setFinanceType(selected.value))
+    dispatch(updateBudgetItems())
   }
 })
 

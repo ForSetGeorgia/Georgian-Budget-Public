@@ -1,11 +1,10 @@
 const React = require('react')
 const { func, number, arrayOf } = React.PropTypes
 const { connect } = require('react-redux')
-const axios = require('axios')
 
 const Select = require('react-select')
 
-const { setSelectedBudgetItemIds, setError, clearError, setBudgetItems } = require('../actions')
+const { setSelectedBudgetItemIds, updateBudgetItems } = require('../actions')
 
 let BudgetItemSelect = React.createClass({
   propTypes: {
@@ -42,27 +41,7 @@ const mapDispatchToProps = (dispatch) => {
       const selectedIds = selected.split(',').map((id) => Number(id))
 
       dispatch(setSelectedBudgetItemIds(selectedIds))
-
-      axios.get(
-        'https://dev-budgetapi.jumpstart.ge/en/api/v1',
-        {
-          params: {
-            financeType: 'planned_finance',
-            budgetItemIds: selectedIds
-          }
-        }
-      ).then((response) => {
-        if (response.error) {
-          dispatch(setError(response.error))
-        } else {
-          dispatch(clearError())
-        }
-        if (response.data.budget_items) {
-          dispatch(setBudgetItems(response.data.budget_items))
-        }
-      }).catch((error) => {
-        dispatch(setError(`Error communicating with Server: ${error}`))
-      })
+      dispatch(updateBudgetItems())
     }
   }
 }

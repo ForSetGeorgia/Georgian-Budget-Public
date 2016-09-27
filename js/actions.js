@@ -1,7 +1,9 @@
+const axios = require('axios')
+
 const setError = function (text) {
   return {
     type: 'SET_ERROR',
-    error: text
+    text: text
   }
 }
 
@@ -33,4 +35,29 @@ const setFinanceType = function (value) {
   }
 }
 
-module.exports = { setError, clearError, setBudgetItems, setSelectedBudgetItemIds, setFinanceType }
+const updateBudgetItems = () => (dispatch, getState) => {
+  const state = getState()
+
+  axios.get(
+    'https://dev-budgetapi.jumpstart.ge/en/api/v1',
+    {
+      params: {
+        financeType: state.filters.financeType.value,
+        budgetItemIds: state.filters.budgetItems.selectedIds
+      }
+    }
+  ).then((response) => {
+    if (response.error) {
+      dispatch(setError(response.error))
+    } else {
+      dispatch(clearError())
+    }
+    if (response.data.budget_items) {
+      dispatch(setBudgetItems(response.data.budget_items))
+    }
+  }).catch((error) => {
+    dispatch(setError(`Error communicating with Server: ${error}`))
+  })
+}
+
+module.exports = { setError, clearError, setBudgetItems, setSelectedBudgetItemIds, setFinanceType, updateBudgetItems }

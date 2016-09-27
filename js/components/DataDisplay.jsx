@@ -30,7 +30,7 @@ let DataDisplay = React.createClass({
               function (budgetItem) {
                 if (!budgetItem) return <p>Budget item wrong format</p>
 
-                const uniqueId = `budget-item-${budgetItem.name}`
+                const uniqueId = `budget-item-${budgetItem.name}-${budgetItem.chart_name}`
 
                 return <TimeSeriesChart
                   key={uniqueId}
