@@ -13,7 +13,7 @@ let BudgetItemSelect = React.createClass({
     selectedIds: arrayOf(number).isRequired
   },
   render: function () {
-    var options = [
+    const options = [
       { value: 1769, label: 'სსიპ - საჯარო აუდიტის ინსტიტუტი' },
       { value: 1396, label: 'მოსამართლეებისა და სასამართლოს თანამშრომლების მომზადება-გადამზადება' }
     ]

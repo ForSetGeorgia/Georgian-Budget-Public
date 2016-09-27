@@ -26,4 +26,11 @@ const setSelectedBudgetItemIds = function (ids) {
   }
 }
 
-module.exports = { setError, clearError, setBudgetItems, setSelectedBudgetItemIds }
+const setFinanceType = function (value) {
+  return {
+    type: 'SET_FINANCE_TYPE',
+    value: value
+  }
+}
+
+module.exports = { setError, clearError, setBudgetItems, setSelectedBudgetItemIds, setFinanceType }
