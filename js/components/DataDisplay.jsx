@@ -2,6 +2,7 @@ const React = require('react')
 const { PropTypes } = require('react')
 const { connect } = require('react-redux')
 
+const Error = require('./Error')
 const TimeSeriesChart = require('./TimeSeriesChart')
 
 let DataDisplay = React.createClass({
@@ -13,9 +14,7 @@ let DataDisplay = React.createClass({
   render: function () {
     if (this.props.error.show) {
       return (
-        <div>
-          API Error: {this.props.error.text}
-        </div>
+        <Error text={this.props.error.text} />
       )
     } else if (this.props.budgetItems.length === 0) {
       return (
