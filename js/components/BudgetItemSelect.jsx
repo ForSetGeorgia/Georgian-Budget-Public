@@ -1,16 +1,16 @@
 const React = require('react')
-const { PropTypes } = React
+const { func, number, arrayOf } = React.PropTypes
 const { connect } = require('react-redux')
 const axios = require('axios')
 
 const Select = require('react-select')
 
-const { setSelectedBudgetItemId, setError, clearError, setBudgetItems } = require('../actions')
+const { selectBudgetItemId, setError, clearError, setBudgetItems } = require('../actions')
 
 let BudgetItemSelect = React.createClass({
   propTypes: {
-    handleInputChange: PropTypes.func.isRequired,
-    selectedItem: PropTypes.number.isRequired
+    handleInputChange: func.isRequired,
+    selectedIds: arrayOf(number).isRequired
   },
   render: function () {
     var options = [
@@ -20,7 +20,7 @@ let BudgetItemSelect = React.createClass({
     return (
       <Select
         name='budget-item-select'
-        value={this.props.selectedItem}
+        value={this.props.selectedIds[0]}
         options={options}
         onChange={this.props.handleInputChange}
       />
@@ -30,7 +30,7 @@ let BudgetItemSelect = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    selectedItem: state.selectedItem
+    selectedIds: state.filters.budgetItems.selectedIds
   }
 }
 
@@ -38,7 +38,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleInputChange: function (selected) {
       const value = Number(selected.value)
-      dispatch(setSelectedBudgetItemId(value))
+      dispatch(selectBudgetItemId(value))
 
       axios.get(
         'https://dev-budgetapi.jumpstart.ge/en/api/v1',

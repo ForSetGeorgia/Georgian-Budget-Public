@@ -1,5 +1,9 @@
 module.exports = {
-  selectedItem: 1,
+  filters: {
+    budgetItems: {
+      selectedIds: []
+    }
+  },
   budgetItems: [],
   error: {
     show: false,
