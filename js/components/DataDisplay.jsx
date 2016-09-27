@@ -6,15 +6,15 @@ const TimeSeriesChart = require('./TimeSeriesChart')
 
 let DataDisplay = React.createClass({
   propTypes: {
-    error: PropTypes.string.isRequired,
+    error: PropTypes.object.isRequired,
     budgetItems: PropTypes.array.isRequired
   },
 
   render: function () {
-    if (this.props.error.length > 0) {
+    if (this.props.error.show) {
       return (
         <div>
-          API Error: {this.props.error}
+          API Error: {this.props.error.text}
         </div>
       )
     } else if (this.props.budgetItems.length === 0) {

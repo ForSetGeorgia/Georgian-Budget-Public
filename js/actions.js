@@ -1,7 +1,7 @@
-const setError = function (error) {
+const setError = function (text) {
   return {
     type: 'SET_ERROR',
-    error: error
+    error: text
   }
 }
 

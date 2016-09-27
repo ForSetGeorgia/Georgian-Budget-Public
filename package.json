@@ -4,10 +4,11 @@
   "description": "This site allows users to interact with data from the Georgian-Budget project's API.",
   "main": "index.js",
   "scripts": {
+    "test": "mocha --require test/helpers/setup.js",
+    "lint": "standard",
     "build": "webpack",
     "watch": "webpack --watch",
     "start": "nodemon -L app.js",
-    "test": "standard",
     "fix": "standard --fix"
   },
   "author": "JumpStart Georgia",
@@ -44,6 +45,10 @@
     "redux": "^3.3.1",
     "standard": "^8.1.0",
     "webpack": "^1.13.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
   },
   "directories": {},
   "repository": {
