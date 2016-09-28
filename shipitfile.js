@@ -15,8 +15,7 @@ module.exports = function (shipit) {
       shared: {
         overwrite: true,
         dirs: [
-          'node_modules',
-          'log'
+          'node_modules'
         ],
         files: [
           '.env'

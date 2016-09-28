@@ -1,10 +1,6 @@
 {
   "apps": [{
     "name": "Budget-Public-Staging",
-    "script": "app.js",
-    "error_file"      : "log/err.log",
-    "out_file"        : "log/out.log",
-    "merge_logs"      : true,
-    "log_date_format" : "YYYY-MM-DD HH:mm Z"
+    "script": "app.js"
   }]
 }
