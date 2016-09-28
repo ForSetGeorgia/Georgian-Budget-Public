@@ -1,12 +1,35 @@
 module.exports = function (shipit) {
   require('shipit-deploy')(shipit)
+  require('shipit-shared')(shipit);
+  require('shipit-npm')(shipit);
 
   shipit.initConfig({
     default: {
+      npm: {
+        remote: true
+      },
+
+      shared: {
+        overwrite: true,
+        dirs: [
+          'node_modules'
+        ],
+        files: [
+          '.env'
+        ]
+      },
+
       workspace: 'tmp/build',
       deployTo: '/home/budget-staging/Budget-Public-Staging',
       repositoryUrl: 'https://github.com/JumpStartGeorgia/Georgian-Budget-Public',
-      ignores: ['.git', 'node_modules'],
+      ignores: [
+        '.git',
+        'node_modules',
+        'shipitfile.js',
+        'Dockerfile',
+        'docker-compose.yml',
+        'test'
+      ],
       rsync: ['--del'],
       keepReleases: 5,
       shallowClone: true
@@ -15,14 +38,15 @@ module.exports = function (shipit) {
       servers: 'budget-staging@alpha.jumpstart.ge'
     },
     production: {
-
     }
   });
 
-  shipit.on('updated', function() {
-    shipit.remote(`node -v && cd ${shipit.releasePath} && npm install --production`)
-    shipit.remote(`node -v && cd ${shipit.releasePath} && npm build`)
+  shipit.on('npm_installed', function() {
+    shipit.start('build')
   })
 
-  
+  shipit.blTask('build', function() {
+    shipit.log('Running npm build to build project')
+    shipit.remote(`node -v && cd ${shipit.releasePath} && npm run build`)
+  })
 }

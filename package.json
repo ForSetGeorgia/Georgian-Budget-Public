@@ -52,7 +52,8 @@
     "mocha": "^2.4.5",
     "shipit-cli": "^1.4.1",
     "shipit-deploy": "^2.2.0",
-    "shipit-npm": "^0.2.0"
+    "shipit-npm": "^0.2.0",
+    "shipit-shared": "^4.4.1"
   },
   "directories": {},
   "repository": {
