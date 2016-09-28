@@ -1,6 +1,7 @@
 {
-    "uid": "Budget-Public-Staging",
-    "append": "true",
-    "script": "app.js",
-    "sourceDir": "./"
+  "uid": "Budget-Public-Staging",
+  "append": "true",
+  "script": "app.js",
+  "sourceDir": "/home/budget-staging/Budget-Public-Staging/current",
+  "pidFile": "tmp/pid"
 }
