@@ -1,5 +1,6 @@
 {
     "uid": "Budget-Public-Staging",
+    "watch": "true",
     "script": "app.js",
     "sourceDir": "/home/budget-staging/Budget-Public-Staging/current"
 }
