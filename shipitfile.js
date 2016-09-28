@@ -67,7 +67,7 @@ module.exports = function (shipit) {
   shipit.blTask('start_server', function() {
     shipit.log('Starting node server')
     return shipit.remote(
-      `node -v && cd /home/budget-staging/Budget-Public-Staging/current && (forever restart --spinSleepTime=2000 config/forever/staging.json) || (forever start --spinSleepTime=2000 config/forever/staging.json && forever list)`
+      `node -v && cd /home/budget-staging/Budget-Public-Staging/current && pm2 startOrRestart config/pm2.json`
     )
   })
 }
