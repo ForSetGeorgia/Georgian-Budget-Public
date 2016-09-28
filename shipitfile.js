@@ -45,7 +45,7 @@ module.exports = function (shipit) {
     shipit.start('build')
   })
 
-  shipit.on('deployed', function() {
+  shipit.on('published', function() {
     shipit.start('start_server')
   })
 
@@ -56,6 +56,6 @@ module.exports = function (shipit) {
 
   shipit.blTask('start_server', function() {
     shipit.log('Starting node server')
-    shipit.remote(`node -v && cd ${shipit.currentPath} && npm start`)
+    shipit.remote(`node -v && cd ${shipit.currentPath} && forever start ./config/forever.json`)
   })
 }

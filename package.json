@@ -8,8 +8,7 @@
     "lint": "standard",
     "build": "webpack",
     "watch": "webpack --watch",
-    "start-dev": "nodemon -L app.js",
-    "start": "forever start ./config/forever.json",
+    "start": "nodemon -L app.js",
     "fix": "standard --fix"
   },
   "author": "JumpStart Georgia",

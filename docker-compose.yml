@@ -6,6 +6,6 @@ services:
     volumes:
       - .:/myapp
       - /myapp/node_modules
-    command: /bin/sh -c 'npm run start-dev'
+    command: /bin/sh -c 'npm run start'
     ports:
       - "8080:8080"
