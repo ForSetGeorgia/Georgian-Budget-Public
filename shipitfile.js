@@ -1,3 +1,5 @@
+var chalk = require('chalk');
+
 module.exports = function (shipit) {
   require('shipit-deploy')(shipit)
   require('shipit-shared')(shipit);
@@ -6,7 +8,8 @@ module.exports = function (shipit) {
   shipit.initConfig({
     default: {
       npm: {
-        remote: true
+        remote: true,
+        triggerEvent: 'sharedEnd'
       },
 
       shared: {
@@ -45,17 +48,25 @@ module.exports = function (shipit) {
     shipit.start('build')
   })
 
+  shipit.blTask('build', function() {
+    shipit.log('Running npm build to build project')
+    return shipit.remote(
+      `node -v && cd ${shipit.releasePath} && npm run build`
+    ).then(function() {
+      shipit.log(chalk.green('npm build complete'));
+    }).catch(function(e) {
+      shipit.log(chalk.red(e));
+    })
+  })
+
   shipit.on('published', function() {
     shipit.start('start_server')
   })
 
-  shipit.blTask('build', function() {
-    shipit.log('Running npm build to build project')
-    shipit.remote(`node -v && cd ${shipit.releasePath} && npm run build`)
-  })
-
   shipit.blTask('start_server', function() {
     shipit.log('Starting node server')
-    shipit.remote(`node -v && cd ${shipit.currentPath} && forever start ./config/forever.json`)
+    return shipit.remote(
+      `node -v && cd ${shipit.currentPath} && (forever restart --spinSleepTime=2000 ./config/forever/staging.json && forever list) || (forever start --spinSleepTime=2000 ./config/forever/staging.json && forever list)`
+    )
   })
 }
