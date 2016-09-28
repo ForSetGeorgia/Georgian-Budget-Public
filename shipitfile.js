@@ -19,8 +19,7 @@ module.exports = function (shipit) {
           'log'
         ],
         files: [
-          '.env',
-          'tmp/foreverPidFile'
+          '.env'
         ]
       },
 
