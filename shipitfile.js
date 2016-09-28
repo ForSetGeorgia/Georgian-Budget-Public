@@ -18,7 +18,8 @@ module.exports = function (shipit) {
           'node_modules'
         ],
         files: [
-          '.env'
+          '.env',
+          'tmp/foreverPidFile'
         ]
       },
 
