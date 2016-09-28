@@ -6,3 +6,5 @@ node_modules/
 .env
 tmp/*
 !tmp/.keep
+log/*
+!log/.keep
