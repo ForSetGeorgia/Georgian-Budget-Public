@@ -1,4 +1,17 @@
+require('dotenv').config()
+const Env = process.env.NODE_ENV || 'development'
+
 const path = require('path')
+
+const preloaders = []
+
+if (Env === 'development') {
+  preloaders.push({
+    test: /\.jsx?$/,
+    loader: 'eslint-loader',
+    exclude: /node_modules/
+  })
+}
 
 module.exports = {
   context: __dirname,
@@ -17,13 +30,7 @@ module.exports = {
     chunks: false
   },
   module: {
-    preLoaders: [
-      {
-        test: /\.jsx?$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/
-      }
-    ],
+    preLoaders: preloaders,
     loaders: [
       {
         test: /\.jsx?$/,
