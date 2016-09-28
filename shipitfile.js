@@ -45,8 +45,17 @@ module.exports = function (shipit) {
     shipit.start('build')
   })
 
+  shipit.on('deployed', function() {
+    shipit.start('start_server')
+  })
+
   shipit.blTask('build', function() {
     shipit.log('Running npm build to build project')
     shipit.remote(`node -v && cd ${shipit.releasePath} && npm run build`)
+  })
+
+  shipit.blTask('start_server', function() {
+    shipit.log('Starting node server')
+    shipit.remote(`node -v && cd ${shipit.currentPath} && npm start`)
   })
 }

@@ -9,7 +9,7 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "start-dev": "nodemon -L app.js",
-    "start": "forever start app.js",
+    "start": "forever start ./config/forever.json",
     "fix": "standard --fix"
   },
   "author": "JumpStart Georgia",
