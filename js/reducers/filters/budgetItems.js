@@ -8,6 +8,14 @@ module.exports = (state = {}, action) => {
           selectedIds: action.ids
         }
       )
+    case 'SET_BUDGET_ITEM_FILTER_OPTIONS':
+      return Object.assign(
+        {},
+        state,
+        {
+          options: action.options
+        }
+      )
     default:
       return state
   }

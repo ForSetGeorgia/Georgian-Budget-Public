@@ -1,26 +1,30 @@
 const React = require('react')
-const { func, number, arrayOf } = React.PropTypes
+const { func, number, arrayOf, shape, string } = React.PropTypes
 const { connect } = require('react-redux')
 
 const Select = require('react-select')
 
-const { setSelectedBudgetItemIds, updateBudgetItems } = require('../actions')
+const { setSelectedBudgetItemIds, updateBudgetItems, updateBudgetItemFilterOptions } = require('../actions')
 
 let BudgetItemSelect = React.createClass({
   propTypes: {
     handleInputChange: func.isRequired,
-    selectedIds: arrayOf(number).isRequired
+    loadOptions: func.isRequired,
+    selectedIds: arrayOf(number).isRequired,
+    options: arrayOf(shape({
+      value: number.isRequired,
+      label: string.isRequired
+    })).isRequired
+  },
+  componentDidMount () {
+    this.props.loadOptions()
   },
   render: function () {
-    const options = [
-      { value: 354, label: 'სსიპ - საჯარო აუდიტის ინსტიტუტი' },
-      { value: 362, label: 'მოსამართლეებისა და სასამართლოს თანამშრომლების მომზადება-გადამზადება' }
-    ]
     return (
       <Select
         name='budget-item-select'
         value={this.props.selectedIds}
-        options={options}
+        options={this.props.options}
         onChange={this.props.handleInputChange}
         multi
         simpleValue
@@ -31,12 +35,16 @@ let BudgetItemSelect = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    selectedIds: state.filters.budgetItems.selectedIds
+    selectedIds: state.filters.budgetItems.selectedIds,
+    options: state.filters.budgetItems.options
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    loadOptions: function (selected) {
+      dispatch(updateBudgetItemFilterOptions())
+    },
     handleInputChange: function (selected) {
       let selectedIds
       if (selected.length === 0) {

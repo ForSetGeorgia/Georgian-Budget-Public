@@ -16,6 +16,7 @@ const FinanceTypeSelect = (props) => {
       value={props.selectedValue}
       options={options}
       onChange={props.handleChange}
+      clearable={false}
     />
   )
 }

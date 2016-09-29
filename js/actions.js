@@ -56,7 +56,9 @@ const updateBudgetItems = () => (dispatch, getState) => {
         budgetItemIds: state.filters.budgetItems.selectedIds
       }
     }
-  ).then((response) => {
+  ).catch((error) => {
+    dispatch(addError(`Error communicating with API: ${error}`))
+  }).then((response) => {
     if (typeof response.data !== 'object') {
       dispatch(addError('Error communicating with API'))
       return
@@ -78,9 +80,58 @@ const updateBudgetItems = () => (dispatch, getState) => {
     if (budgetItems) {
       dispatch(setBudgetItems(budgetItems))
     }
-  }).catch((error) => {
-    dispatch(addError(`Error communicating with API: ${error}`))
   })
 }
 
-module.exports = { addError, clearErrors, setBudgetItems, setSelectedBudgetItemIds, setFinanceType, updateBudgetItems }
+const setBudgetItemFilterOptions = (options) => {
+  return {
+    type: 'SET_BUDGET_ITEM_FILTER_OPTIONS',
+    options: options
+  }
+}
+
+const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
+  axios.get(
+    `${process.env.API_URL}/en/v1`,
+    {
+      params: {
+        budgetItemFields: 'id,name',
+
+        filters: {
+          budgetItemType: 'program'
+        }
+      }
+    }
+  ).catch((error) => {
+    dispatch(addError(`Error communicating with API: ${error}`))
+  }).then((response) => {
+    if (typeof response.data !== 'object') {
+      dispatch(addError('Error communicating with API'))
+      return
+    }
+
+    const errors = response.data.errors
+    const budgetItems = response.data.budget_items
+
+    if (errors.length === 0) {
+      dispatch(clearErrors())
+    }
+
+    if (errors.length > 0) {
+      errors.forEach((error) => {
+        dispatch(addError(error.text))
+      })
+    }
+
+    if (budgetItems) {
+      const budgetItemFilterOptions = budgetItems.map((budgetItem) => ({
+        value: budgetItem.id,
+        label: budgetItem.name
+      }))
+
+      dispatch(setBudgetItemFilterOptions(budgetItemFilterOptions))
+    }
+  })
+}
+
+module.exports = { addError, clearErrors, setBudgetItems, setSelectedBudgetItemIds, setFinanceType, updateBudgetItems, updateBudgetItemFilterOptions }
