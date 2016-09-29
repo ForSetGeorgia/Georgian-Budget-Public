@@ -1,7 +1,9 @@
 require('dotenv').config()
+
 const Env = process.env.NODE_ENV || 'development'
 
 const path = require('path')
+const webpack = require('webpack')
 
 const preloaders = []
 
@@ -12,6 +14,10 @@ if (Env === 'development') {
     exclude: /node_modules/
   })
 }
+
+const definePlugin = new webpack.DefinePlugin({
+  'process.env.API_URL': JSON.stringify(process.env.API_URL)
+});
 
 module.exports = {
   context: __dirname,
@@ -35,11 +41,10 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader'
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
       }
     ]
-  }
+  },
+  plugins: [
+    definePlugin
+  ]
 }

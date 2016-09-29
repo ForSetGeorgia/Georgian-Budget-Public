@@ -13,8 +13,8 @@ let BudgetItemSelect = React.createClass({
   },
   render: function () {
     const options = [
-      { value: 1769, label: 'სსიპ - საჯარო აუდიტის ინსტიტუტი' },
-      { value: 1396, label: 'მოსამართლეებისა და სასამართლოს თანამშრომლების მომზადება-გადამზადება' }
+      { value: 354, label: 'სსიპ - საჯარო აუდიტის ინსტიტუტი' },
+      { value: 362, label: 'მოსამართლეებისა და სასამართლოს თანამშრომლების მომზადება-გადამზადება' }
     ]
     return (
       <Select
@@ -38,7 +38,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleInputChange: function (selected) {
-      const selectedIds = selected.split(',').map((id) => Number(id))
+      let selectedIds
+      if (selected.length === 0) {
+        selectedIds = []
+      } else {
+        selectedIds = selected.split(',').map((id) => Number(id))
+      }
 
       dispatch(setSelectedBudgetItemIds(selectedIds))
       dispatch(updateBudgetItems())

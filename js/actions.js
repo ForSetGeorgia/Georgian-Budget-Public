@@ -42,8 +42,13 @@ const setFinanceType = function (value) {
 const updateBudgetItems = () => (dispatch, getState) => {
   const state = getState()
 
+  if (state.filters.budgetItems.selectedIds.length === 0) {
+    dispatch(setBudgetItems([]))
+    return
+  }
+
   axios.get(
-    'https://dev-budgetapi.jumpstart.ge/en/api/v1',
+    `${process.env.API_URL}/en/api/v1`,
     {
       params: {
         financeType: state.filters.financeType.value,
@@ -51,13 +56,18 @@ const updateBudgetItems = () => (dispatch, getState) => {
       }
     }
   ).then((response) => {
-    if (response.error) {
-      dispatch(addError(response.error))
+    const errors = response.data.errors
+    const budgetItems = response.data.budget_items
+
+    if (errors.length > 0) {
+      errors.forEach((error) => {
+        dispatch(addError(error.text))
+      })
     } else {
       dispatch(clearErrors())
     }
-    if (response.data.budget_items) {
-      dispatch(setBudgetItems(response.data.budget_items))
+    if (budgetItems) {
+      dispatch(setBudgetItems(budgetItems))
     }
   }).catch((error) => {
     dispatch(addError(`Error communicating with Server: ${error}`))
