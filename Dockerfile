@@ -5,7 +5,7 @@ RUN mkdir $APPHOME
 WORKDIR $APPHOME
 
 RUN apt-get update && \
-    apt-get install -y nodejs npm
+    apt-get install -y nodejs npm nodemon
 
 COPY package.json $APPHOME/
 
