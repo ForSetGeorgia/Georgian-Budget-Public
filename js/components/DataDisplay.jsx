@@ -36,14 +36,14 @@ let DataDisplay = React.createClass({
               function (budgetItem) {
                 if (!budgetItem) return null
 
-                const uniqueId = `budget-item-${budgetItem.name}-${budgetItem.chart_name}`
+                const uniqueId = `budget-item-${budgetItem.name}-${budgetItem.chartName}`
 
                 return <TimeSeriesChart
                   key={uniqueId}
                   containerId={uniqueId}
-                  title={budgetItem.chart_name}
+                  title={budgetItem.chartName}
                   subtitle={budgetItem.name}
-                  xAxisCategories={budgetItem.time_periods}
+                  xAxisCategories={budgetItem.timePeriods}
                   yAxisAmounts={budgetItem.amounts}
                 />
               }

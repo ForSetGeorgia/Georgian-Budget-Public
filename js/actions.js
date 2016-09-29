@@ -65,7 +65,7 @@ const updateBudgetItems = () => (dispatch, getState) => {
     }
 
     const errors = response.data.errors
-    const budgetItems = response.data.budget_items
+    const budgetItems = response.data.budgetItems
 
     if (errors.length === 0) {
       dispatch(clearErrors())
@@ -111,7 +111,7 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
     }
 
     const errors = response.data.errors
-    const budgetItems = response.data.budget_items
+    const budgetItems = response.data.budgetItems
 
     if (errors.length === 0) {
       dispatch(clearErrors())
