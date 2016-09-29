@@ -44,11 +44,12 @@ const updateBudgetItems = () => (dispatch, getState) => {
 
   if (state.filters.budgetItems.selectedIds.length === 0) {
     dispatch(setBudgetItems([]))
+    dispatch(clearErrors())
     return
   }
 
   axios.get(
-    `${process.env.API_URL}/en/api/v1`,
+    `${process.env.API_URL}/en/v1`,
     {
       params: {
         financeType: state.filters.financeType.value,
@@ -56,21 +57,29 @@ const updateBudgetItems = () => (dispatch, getState) => {
       }
     }
   ).then((response) => {
+    if (typeof response.data !== 'object') {
+      dispatch(addError('Error communicating with API'))
+      return
+    }
+
     const errors = response.data.errors
     const budgetItems = response.data.budget_items
+
+    if (errors.length === 0) {
+      dispatch(clearErrors())
+    }
 
     if (errors.length > 0) {
       errors.forEach((error) => {
         dispatch(addError(error.text))
       })
-    } else {
-      dispatch(clearErrors())
     }
+
     if (budgetItems) {
       dispatch(setBudgetItems(budgetItems))
     }
   }).catch((error) => {
-    dispatch(addError(`Error communicating with Server: ${error}`))
+    dispatch(addError(`Error communicating with API: ${error}`))
   })
 }
 
