@@ -8,8 +8,5 @@ module.exports = {
     }
   },
   budgetItems: [],
-  error: {
-    show: false,
-    text: ''
-  }
+  errors: []
 }

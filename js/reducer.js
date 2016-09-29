@@ -3,7 +3,7 @@ const { routerReducer } = require('react-router-redux')
 
 const reducers = {
   filters: require('./reducers/filters'),
-  error: require('./reducers/error'),
+  errors: require('./reducers/errors'),
   budgetItems: require('./reducers/budgetItems')
 }
 

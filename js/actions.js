@@ -1,16 +1,20 @@
 const axios = require('axios')
 
-const setError = function (text) {
+let errorIncrement = 0
+const addError = function (text) {
+  errorIncrement++
+
   return {
-    type: 'SET_ERROR',
+    type: 'ADD_ERROR',
+    id: errorIncrement,
     text: text
   }
 }
 
 // eslint-disable-next-line handle-callback-err
-const clearError = function (error) {
+const clearErrors = function (error) {
   return {
-    type: 'CLEAR_ERROR'
+    type: 'CLEAR_ERRORS'
   }
 }
 
@@ -48,16 +52,16 @@ const updateBudgetItems = () => (dispatch, getState) => {
     }
   ).then((response) => {
     if (response.error) {
-      dispatch(setError(response.error))
+      dispatch(addError(response.error))
     } else {
-      dispatch(clearError())
+      dispatch(clearErrors())
     }
     if (response.data.budget_items) {
       dispatch(setBudgetItems(response.data.budget_items))
     }
   }).catch((error) => {
-    dispatch(setError(`Error communicating with Server: ${error}`))
+    dispatch(addError(`Error communicating with Server: ${error}`))
   })
 }
 
-module.exports = { setError, clearError, setBudgetItems, setSelectedBudgetItemIds, setFinanceType, updateBudgetItems }
+module.exports = { addError, clearErrors, setBudgetItems, setSelectedBudgetItemIds, setFinanceType, updateBudgetItems }

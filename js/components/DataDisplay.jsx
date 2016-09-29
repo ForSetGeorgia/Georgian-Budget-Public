@@ -1,5 +1,5 @@
 const React = require('react')
-const { PropTypes } = require('react')
+const { arrayOf, object, array } = React.PropTypes
 const { connect } = require('react-redux')
 
 const Error = require('./Error')
@@ -7,14 +7,20 @@ const TimeSeriesChart = require('./TimeSeriesChart')
 
 let DataDisplay = React.createClass({
   propTypes: {
-    error: PropTypes.object.isRequired,
-    budgetItems: PropTypes.array.isRequired
+    errors: arrayOf(object).isRequired,
+    budgetItems: array.isRequired
   },
 
   render: function () {
-    if (this.props.error.show) {
+    if (this.props.errors.length > 0) {
       return (
-        <Error text={this.props.error.text} />
+        <div>
+          {
+            this.props.errors.map((error) => (
+              <Error text={error.text} key={error.id} />
+            ))
+          }
+        </div>
       )
     } else if (this.props.budgetItems.length === 0) {
       return (
@@ -28,7 +34,7 @@ let DataDisplay = React.createClass({
           {
             this.props.budgetItems.map(
               function (budgetItem) {
-                if (!budgetItem) return <p>Budget item wrong format</p>
+                if (!budgetItem) return null
 
                 const uniqueId = `budget-item-${budgetItem.name}-${budgetItem.chart_name}`
 
@@ -52,7 +58,7 @@ let DataDisplay = React.createClass({
 const mapStateToProps = function (state) {
   return {
     budgetItems: state.budgetItems,
-    error: state.error
+    errors: state.errors
   }
 }
 
