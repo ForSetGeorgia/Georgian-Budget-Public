@@ -14,7 +14,7 @@ const TimeSeriesChart = React.createClass({
   // When the DOM is ready, create the chart.
   componentDidMount: function () {
     const Highcharts = require('../highcharts')
-    
+
     // Set container which the chart should render to.
     const options = {
       title: {
@@ -33,7 +33,7 @@ const TimeSeriesChart = React.createClass({
       },
       yAxis: {
         title: {
-          text: 'Amount Spent (lari)'
+          text: this.props.title
         }
       },
       series: [{

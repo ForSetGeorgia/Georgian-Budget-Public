@@ -14,10 +14,10 @@ let BudgetItemTypeSelect = React.createClass({
 
   render: function () {
     const options = [
-      { value: 'total', label: 'Complete Georgian Budget' },
-      { value: 'program', label: 'Programs' },
-      { value: 'spending_agency', label: 'Spending Agencies' },
-      { value: 'priority', label: 'Priorities' }
+      { value: 'total', label: 'საქართველოს მთლიანი ბიუჯეტი' },
+      { value: 'program', label: 'პროგრამები' },
+      { value: 'spending_agency', label: 'მხარჯავი დაწესებულებები' },
+      { value: 'priority', label: 'პრიორიტეტები' }
     ]
 
     return (

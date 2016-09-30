@@ -5,7 +5,7 @@ const LoadingIndicator = (props) => {
   if (props.hidden) style.display = 'none'
   return (
     <div style={style}>
-      Data Loading
+      მონაცემები ჩაიტვირთება
     </div>
   )
 }

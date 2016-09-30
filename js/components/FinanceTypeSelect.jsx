@@ -6,8 +6,8 @@ const { setFinanceType, updateBudgetItems } = require('../actions')
 
 const FinanceTypeSelect = (props) => {
   const options = [
-    { value: 'spent_finance', label: 'Spent Finances' },
-    { value: 'planned_finance', label: 'Planned Finances' }
+    { value: 'spent_finance', label: 'დახარჯული ფინანსები' },
+    { value: 'planned_finance', label: 'დაგეგმილი ფინანსები' }
   ]
 
   return (
