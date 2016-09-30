@@ -3,6 +3,7 @@ const { func, number, arrayOf, shape, string, bool } = React.PropTypes
 const { connect } = require('react-redux')
 
 const Select = require('react-select')
+const LoadingIndicator = require('./LoadingIndicator')
 
 const { setSelectedBudgetItemIds, updateBudgetItems, updateBudgetItemFilterOptions } = require('../actions')
 
@@ -15,27 +16,32 @@ let BudgetItemSelect = React.createClass({
       value: number.isRequired,
       label: string.isRequired
     })).isRequired,
-    hidden: bool
+    hidden: bool,
+    loading: bool
   },
   componentDidMount () {
     this.props.loadOptions()
   },
   render: function () {
-    let style = {}
-    if (this.props.hidden) style.display = 'none'
+    if (this.props.loading) {
+      return <LoadingIndicator hidden={this.props.hidden} />
+    } else {
+      let style = {}
+      if (this.props.hidden) style.display = 'none'
 
-    return (
-      <Select
-        name='budget-item-select'
-        style={style}
-        value={this.props.selectedIds}
-        options={this.props.options}
-        onChange={this.props.handleInputChange}
-        disabled={this.props.options.length === 0}
-        multi
-        simpleValue
-      />
-    )
+      return (
+        <Select
+          name='budget-item-select'
+          style={style}
+          value={this.props.selectedIds}
+          options={this.props.options}
+          onChange={this.props.handleInputChange}
+          disabled={this.props.options.length === 0}
+          multi
+          simpleValue
+        />
+      )
+    }
   }
 })
 

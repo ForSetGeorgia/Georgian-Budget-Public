@@ -1,5 +1,21 @@
 module.exports = (state = {}, action) => {
   switch (action.type) {
+    case 'START_LOADING_BUDGET_ITEM_FILTER':
+      return Object.assign(
+        {},
+        state,
+        {
+          loading: true
+        }
+      )
+    case 'FINISH_LOADING_BUDGET_ITEM_FILTER':
+      return Object.assign(
+        {},
+        state,
+        {
+          loading: false
+        }
+      )
     case 'SET_SELECTED_BUDGET_ITEM_IDS':
       return Object.assign(
         {},

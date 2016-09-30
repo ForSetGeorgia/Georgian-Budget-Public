@@ -18,6 +18,14 @@ const clearErrors = function (error) {
   }
 }
 
+const startLoadingBudgetItemFilter = () => ({
+  type: 'START_LOADING_BUDGET_ITEM_FILTER'
+})
+
+const finishLoadingBudgetItemFilter = () => ({
+  type: 'FINISH_LOADING_BUDGET_ITEM_FILTER'
+})
+
 const setBudgetItems = function (budgetItems) {
   return {
     type: 'SET_BUDGET_ITEMS',
@@ -113,6 +121,7 @@ const setBudgetItemFilterOptions = (options) => {
 const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
   const budgetItemType = getState().filters.budgetItemType.value
 
+  dispatch(startLoadingBudgetItemFilter())
   axios.get(
     `${process.env.API_URL}/en/v1`,
     {
@@ -158,6 +167,7 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
       }))
 
       dispatch(setBudgetItemFilterOptions(budgetItemFilterOptions))
+      dispatch(finishLoadingBudgetItemFilter())
     }
   })
 }

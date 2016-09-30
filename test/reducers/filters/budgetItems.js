@@ -6,6 +6,58 @@ const budgetItemsFilter = require('../../../js/reducers/filters/budgetItems')
 const initialState = require('../../../js/initialState').filters.budgetItems
 
 describe('budget items filter reducer', () => {
+  it('handles START_LOADING_BUDGET_ITEM_FILTER', () => {
+    const previousState = Object.assign(
+      {},
+      initialState,
+      {
+        loading: false
+      }
+    )
+
+    const action = {
+      type: 'START_LOADING_BUDGET_ITEM_FILTER'
+    }
+
+    const newState = budgetItemsFilter(previousState, action)
+
+    const expectedState = Object.assign(
+      {},
+      initialState,
+      {
+        loading: true
+      }
+    )
+
+    expect(newState).to.deep.equal(expectedState)
+  })
+
+  it('handles FINISH_LOADING_BUDGET_ITEM_FILTER', () => {
+    const previousState = Object.assign(
+      {},
+      initialState,
+      {
+        loading: true
+      }
+    )
+
+    const action = {
+      type: 'FINISH_LOADING_BUDGET_ITEM_FILTER'
+    }
+
+    const newState = budgetItemsFilter(previousState, action)
+
+    const expectedState = Object.assign(
+      {},
+      initialState,
+      {
+        loading: false
+      }
+    )
+
+    expect(newState).to.deep.equal(expectedState)
+  })
+
   it('handles SET_BUDGET_ITEM_TYPE action when not budget item type is not total', () => {
     const previousState = Object.assign(
       {},

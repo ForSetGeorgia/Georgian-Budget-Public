@@ -1,5 +1,5 @@
 const React = require('react')
-const { arrayOf, object, array, bool } = React.PropTypes
+const { arrayOf, object, bool } = React.PropTypes
 const { connect } = require('react-redux')
 
 const Error = require('./Error')
