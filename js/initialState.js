@@ -17,5 +17,6 @@ module.exports = {
     budgetItems: [],
     errors: [],
     loading: true
-  }
+  },
+  locale: 'ka'
 }

@@ -3,7 +3,8 @@ const { routerReducer } = require('react-router-redux')
 
 const reducers = {
   filters: require('./reducers/filters'),
-  data: require('./reducers/data')
+  data: require('./reducers/data'),
+  locale: require('./reducers/locale')
 }
 
 const reducer = combineReducers(

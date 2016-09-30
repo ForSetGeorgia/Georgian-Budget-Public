@@ -62,6 +62,7 @@ const finishLoadingData = () => ({
 
 const updateBudgetItems = () => (dispatch, getState) => {
   const state = getState()
+  const locale = state.locale
 
   if (state.filters.budgetItems.selectedIds.length === 0) {
     dispatch(setBudgetItems([]))
@@ -71,7 +72,7 @@ const updateBudgetItems = () => (dispatch, getState) => {
   dispatch(beginLoadingData())
 
   axios.get(
-    `${process.env.API_URL}/en/v1`,
+    `${process.env.API_URL}/${locale}/v1`,
     {
       params: {
         filters: {
@@ -118,11 +119,14 @@ const setBudgetItemFilterOptions = (options) => {
 }
 
 const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
-  const budgetItemType = getState().filters.budgetItemType.value
+  const state = getState()
+
+  const locale = state.locale
+  const budgetItemType = state.filters.budgetItemType.value
 
   dispatch(startLoadingBudgetItemFilter())
   axios.get(
-    `${process.env.API_URL}/en/v1`,
+    `${process.env.API_URL}/${locale}/v1`,
     {
       params: {
         budgetItemFields: 'id,name',
