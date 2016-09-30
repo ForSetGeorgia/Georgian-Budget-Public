@@ -13,8 +13,8 @@ const Explore = () => (
     />
 
     <BudgetItemTypeSelect />
-    <FinanceTypeSelect />
     <BudgetItemSelect />
+    <FinanceTypeSelect />
 
     <DataDisplay />
   </main>
