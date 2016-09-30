@@ -1,15 +1,21 @@
 const React = require('react')
-const { Route, IndexRoute } = require('react-router')
+const { IndexRedirect, Redirect, Route } = require('react-router')
 
 const Layout = require('./Layout')
 const Explore = require('./Explore')
-const Landing = require('./Landing')
+// const Landing = require('./Landing')
+const About = require('./About')
 
 const Routes = () => (
-  <Route path='/ka' component={Layout}>
-    <IndexRoute component={Landing} />
-    <Route path='explore' component={Explore} />
-  </Route>
+  <div>
+    <Route path='/ka' component={Layout}>
+      {/* <IndexRoute component={Landing} /> */}
+      <IndexRedirect to='explore' />
+      <Route path='about' component={About} />
+      <Route path='explore' component={Explore} />
+    </Route>
+    <Redirect from='*' to='/ka/explore' />
+  </div>
 )
 
 module.exports = Routes

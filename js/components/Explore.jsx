@@ -1,6 +1,4 @@
 const React = require('react')
-const { Link } = require('react-router')
-
 const Helmet = require('react-helmet')
 
 const BudgetItemTypeSelect = require('./BudgetItemTypeSelect')
@@ -13,9 +11,6 @@ const Explore = () => (
     <Helmet
       title='Explore'
     />
-    <Link to='/ka'>
-      Back to home!
-    </Link>
 
     <BudgetItemTypeSelect />
     <FinanceTypeSelect />
