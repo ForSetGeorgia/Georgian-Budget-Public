@@ -65,7 +65,6 @@ const updateBudgetItems = () => (dispatch, getState) => {
 
   if (state.filters.budgetItems.selectedIds.length === 0) {
     dispatch(setBudgetItems([]))
-    dispatch(clearErrors())
     return
   }
 
@@ -136,7 +135,7 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
   ).catch((error) => {
     dispatch(addError(`Error communicating with API: ${error}`))
   }).then((response) => {
-    if (typeof response.data !== 'object') {
+    if (!response || !response.data || typeof response.data !== 'object') {
       dispatch(addError('Error communicating with API'))
       return
     }
@@ -144,29 +143,47 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
     const errors = response.data.errors
     const budgetItems = response.data.budgetItems
 
-    if (errors.length === 0) {
-      dispatch(clearErrors())
-    }
-
-    if (errors.length > 0) {
+    if (errors && errors.length > 0) {
       errors.forEach((error) => {
-        dispatch(addError(error.text))
+        if (error.text) {
+          dispatch(addError(error.text))
+        } else {
+          dispatch(addError('Error communicating with API'))
+        }
       })
     }
 
     if (budgetItems) {
-      if (budgetItemType === 'total') {
-        dispatch(setSelectedBudgetItemIds([budgetItems[0].id]))
-        dispatch(updateBudgetItems())
-        return
-      }
+      const budgetItemFilterOptions = budgetItems.map((budgetItem) => {
+        const option = {
+          value: budgetItem.id,
+          label: budgetItem.name
+        }
 
-      const budgetItemFilterOptions = budgetItems.map((budgetItem) => ({
-        value: budgetItem.id,
-        label: budgetItem.name
-      }))
+        let errored = false
+
+        if (typeof option.value !== 'number') {
+          dispatch(addError('Budget item does not have valid id to use as option value'))
+          errored = true
+        }
+
+        if (typeof option.label !== 'string') {
+          dispatch(addError(`Budget item (id: ${option.value}) does not have valid name to use as option label`))
+          errored = true
+        }
+
+        if (errored) return null
+
+        return option
+      }).filter((option) => option !== null && option !== undefined)
 
       dispatch(setBudgetItemFilterOptions(budgetItemFilterOptions))
+
+      if (budgetItemType === 'total' && budgetItemFilterOptions.length > 0) {
+        dispatch(setSelectedBudgetItemIds([budgetItemFilterOptions[0].value]))
+        dispatch(updateBudgetItems())
+      }
+
       dispatch(finishLoadingBudgetItemFilter())
     }
   })

@@ -27,7 +27,7 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/public/'
   },
-  devtool: Env === 'production' ? 'source-map' : 'eval',
+  devtool: Env === 'production' ? 'source-map' : 'eval-cheap-module-source-map',
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
