@@ -28,6 +28,10 @@ const TimeSeriesChart = React.createClass({
       legend: {
         enabled: false
       },
+      tooltip: {
+        pointFormat: '{point.y}',
+        valueSuffix: ' ლარი'
+      },
       xAxis: {
         categories: this.props.xAxisCategories
       },
