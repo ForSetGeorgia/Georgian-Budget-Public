@@ -76,9 +76,9 @@ const updateBudgetItems = () => (dispatch, getState) => {
     {
       params: {
         filters: {
-          budgetItemType: state.filters.budgetItemType.value
+          budgetItemType: state.filters.budgetItemType.value,
+          financeType: state.filters.financeType.value
         },
-        financeType: state.filters.financeType.value,
         budgetItemIds: state.filters.budgetItems.selectedIds
       }
     }
