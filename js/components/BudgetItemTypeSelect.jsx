@@ -26,6 +26,7 @@ let BudgetItemTypeSelect = React.createClass({
         value={this.props.value}
         options={options}
         onChange={this.props.handleChange}
+        clearable={false}
       />
     )
   }
