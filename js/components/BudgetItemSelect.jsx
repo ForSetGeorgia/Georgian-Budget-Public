@@ -1,5 +1,5 @@
 const React = require('react')
-const { func, number, arrayOf, shape, string } = React.PropTypes
+const { func, number, arrayOf, shape, string, bool } = React.PropTypes
 const { connect } = require('react-redux')
 
 const Select = require('react-select')
@@ -14,15 +14,20 @@ let BudgetItemSelect = React.createClass({
     options: arrayOf(shape({
       value: number.isRequired,
       label: string.isRequired
-    })).isRequired
+    })).isRequired,
+    hidden: bool
   },
   componentDidMount () {
     this.props.loadOptions()
   },
   render: function () {
+    let style = {}
+    if (this.props.hidden) style.display = 'none'
+
     return (
       <Select
         name='budget-item-select'
+        style={style}
         value={this.props.selectedIds}
         options={this.props.options}
         onChange={this.props.handleInputChange}
@@ -35,10 +40,7 @@ let BudgetItemSelect = React.createClass({
 })
 
 const mapStateToProps = (state) => {
-  return {
-    selectedIds: state.filters.budgetItems.selectedIds,
-    options: state.filters.budgetItems.options
-  }
+  return state.filters.budgetItems
 }
 
 const mapDispatchToProps = (dispatch) => {

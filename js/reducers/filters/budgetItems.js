@@ -17,11 +17,22 @@ module.exports = (state = {}, action) => {
         }
       )
     case 'SET_BUDGET_ITEM_TYPE':
+      if (action.value === 'total') {
+        return Object.assign(
+          {},
+          state,
+          {
+            options: [],
+            hidden: true
+          }
+        )
+      }
       return Object.assign(
         {},
         state,
         {
-          options: []
+          options: [],
+          hidden: false
         }
       )
     default:

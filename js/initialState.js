@@ -2,10 +2,11 @@ module.exports = {
   filters: {
     budgetItems: {
       selectedIds: [],
-      options: []
+      options: [],
+      hidden: true
     },
     budgetItemType: {
-      value: 'spending_agency'
+      value: 'total'
     },
     financeType: {
       value: 'spent_finance'
