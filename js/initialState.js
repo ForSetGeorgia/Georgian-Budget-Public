@@ -12,6 +12,9 @@ module.exports = {
       value: 'spent_finance'
     }
   },
-  budgetItems: [],
-  errors: []
+  data: {
+    budgetItems: [],
+    errors: [],
+    loading: true
+  },
 }

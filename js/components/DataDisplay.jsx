@@ -1,14 +1,16 @@
 const React = require('react')
-const { arrayOf, object, array } = React.PropTypes
+const { arrayOf, object, array, bool } = React.PropTypes
 const { connect } = require('react-redux')
 
 const Error = require('./Error')
 const TimeSeriesChart = require('./TimeSeriesChart')
+const LoadingIndicator = require('./LoadingIndicator')
 
 let DataDisplay = React.createClass({
   propTypes: {
     errors: arrayOf(object).isRequired,
-    budgetItems: array.isRequired
+    loading: bool.isRequired,
+    budgetItems: arrayOf(object).isRequired
   },
 
   render: function () {
@@ -22,11 +24,11 @@ let DataDisplay = React.createClass({
           }
         </div>
       )
-    } else if (this.props.budgetItems.length === 0) {
+    }
+
+    if (this.props.loading) {
       return (
-        <div>
-          Data Loading
-        </div>
+        <LoadingIndicator />
       )
     } else {
       return (
@@ -56,10 +58,7 @@ let DataDisplay = React.createClass({
 })
 
 const mapStateToProps = function (state) {
-  return {
-    budgetItems: state.budgetItems,
-    errors: state.errors
-  }
+  return state.data
 }
 
 DataDisplay = connect(mapStateToProps)(DataDisplay)

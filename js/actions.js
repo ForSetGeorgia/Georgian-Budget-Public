@@ -44,6 +44,14 @@ const setBudgetItemType = (value) => ({
   value: value
 })
 
+const beginLoadingData = () => ({
+  type: 'BEGIN_LOADING_DATA'
+})
+
+const finishLoadingData = () => ({
+  type: 'FINISH_LOADING_DATA'
+})
+
 const updateBudgetItems = () => (dispatch, getState) => {
   const state = getState()
 
@@ -52,6 +60,8 @@ const updateBudgetItems = () => (dispatch, getState) => {
     dispatch(clearErrors())
     return
   }
+
+  dispatch(beginLoadingData())
 
   axios.get(
     `${process.env.API_URL}/en/v1`,
@@ -88,6 +98,8 @@ const updateBudgetItems = () => (dispatch, getState) => {
     if (budgetItems) {
       dispatch(setBudgetItems(budgetItems))
     }
+
+    dispatch(finishLoadingData())
   })
 }
 
