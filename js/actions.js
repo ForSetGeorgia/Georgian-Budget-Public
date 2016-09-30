@@ -99,6 +99,8 @@ const setBudgetItemFilterOptions = (options) => {
 }
 
 const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
+  const budgetItemType = getState().filters.budgetItemType.value
+
   axios.get(
     `${process.env.API_URL}/en/v1`,
     {
@@ -106,7 +108,7 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
         budgetItemFields: 'id,name',
 
         filters: {
-          budgetItemType: getState().filters.budgetItemType.value
+          budgetItemType: budgetItemType
         }
       }
     }
@@ -132,6 +134,12 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
     }
 
     if (budgetItems) {
+      if (budgetItemType === 'total') {
+        dispatch(setSelectedBudgetItemIds([budgetItems[0].id]))
+        dispatch(updateBudgetItems())
+        return
+      }
+
       const budgetItemFilterOptions = budgetItems.map((budgetItem) => ({
         value: budgetItem.id,
         label: budgetItem.name
