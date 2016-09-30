@@ -1,6 +1,5 @@
 const React = require('react')
 const { string, array } = React.PropTypes
-const Highcharts = require('highcharts')
 
 const TimeSeriesChart = React.createClass({
 
@@ -14,6 +13,8 @@ const TimeSeriesChart = React.createClass({
 
   // When the DOM is ready, create the chart.
   componentDidMount: function () {
+    const Highcharts = require('../highcharts')
+    
     // Set container which the chart should render to.
     const options = {
       title: {
