@@ -30,7 +30,9 @@ let DataDisplay = React.createClass({
       return (
         <LoadingIndicator />
       )
-    } else {
+    }
+
+    if (this.props.budgetItems.length > 0) {
       return (
         <div>
           {
@@ -54,6 +56,8 @@ let DataDisplay = React.createClass({
         </div>
       )
     }
+
+    return <div></div>
   }
 })
 
