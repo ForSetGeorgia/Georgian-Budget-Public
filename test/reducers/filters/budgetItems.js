@@ -64,7 +64,7 @@ describe('budget items filter reducer', () => {
       initialState,
       {
         options: [
-          {value: 10, label: 'hello!' }
+          { id: 10, name: 'hello!' }
         ],
         hidden: true
       }
@@ -95,7 +95,7 @@ describe('budget items filter reducer', () => {
       initialState,
       {
         options: [
-          { value: 3443, label: '2343' }
+          { id: 3443, name: '2343' }
         ],
         hidden: false
       }
@@ -126,7 +126,7 @@ describe('budget items filter reducer', () => {
       initialState,
       {
         options: [
-          { value: 10, label: 'helo' }
+          { id: 10, name: 'helo' }
         ]
       }
     )
@@ -134,8 +134,8 @@ describe('budget items filter reducer', () => {
     const action = {
       type: 'SET_BUDGET_ITEM_FILTER_OPTIONS',
       options: [
-        { value: 12, label: 'hello' },
-        { value: 54, label: 'fdf' }
+        { id: 12, name: 'hello' },
+        { id: 54, name: 'fdf' }
       ]
     }
 
@@ -146,8 +146,8 @@ describe('budget items filter reducer', () => {
       initialState,
       {
         options: [
-          { value: 12, label: 'hello' },
-          { value: 54, label: 'fdf' }
+          { id: 12, name: 'hello' },
+          { id: 54, name: 'fdf' }
         ]
       }
     )

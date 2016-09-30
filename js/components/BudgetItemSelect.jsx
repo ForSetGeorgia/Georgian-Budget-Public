@@ -9,12 +9,12 @@ const { setSelectedBudgetItemIds, updateBudgetItems, updateBudgetItemFilterOptio
 
 let BudgetItemSelect = React.createClass({
   propTypes: {
-    handleInputChange: func.isRequired,
+    handleChange: func.isRequired,
     loadOptions: func.isRequired,
     selectedIds: arrayOf(number).isRequired,
     options: arrayOf(shape({
-      value: number.isRequired,
-      label: string.isRequired
+      id: number.isRequired,
+      name: string.isRequired
     })).isRequired,
     hidden: bool,
     loading: bool
@@ -35,8 +35,10 @@ let BudgetItemSelect = React.createClass({
           style={style}
           value={this.props.selectedIds}
           options={this.props.options}
-          onChange={this.props.handleInputChange}
+          onChange={this.props.handleChange}
           disabled={this.props.options.length === 0}
+          labelKey='name'
+          valueKey='id'
           multi
           simpleValue
         />
@@ -54,7 +56,7 @@ const mapDispatchToProps = (dispatch) => {
     loadOptions: function (selected) {
       dispatch(updateBudgetItemFilterOptions())
     },
-    handleInputChange: function (selected) {
+    handleChange: function (selected) {
       let selectedIds
       if (selected.length === 0) {
         selectedIds = []
