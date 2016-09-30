@@ -16,6 +16,14 @@ module.exports = (state = {}, action) => {
           options: action.options
         }
       )
+    case 'SET_BUDGET_ITEM_TYPE':
+      return Object.assign(
+        {},
+        state,
+        {
+          options: []
+        }
+      )
     default:
       return state
   }

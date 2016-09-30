@@ -26,6 +26,7 @@ let BudgetItemSelect = React.createClass({
         value={this.props.selectedIds}
         options={this.props.options}
         onChange={this.props.handleInputChange}
+        disabled={this.props.options.length === 0}
         multi
         simpleValue
       />

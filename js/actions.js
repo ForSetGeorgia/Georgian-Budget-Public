@@ -39,6 +39,11 @@ const setFinanceType = function (value) {
   }
 }
 
+const setBudgetItemType = (value) => ({
+  type: 'SET_BUDGET_ITEM_TYPE',
+  value: value
+})
+
 const updateBudgetItems = () => (dispatch, getState) => {
   const state = getState()
 
@@ -52,6 +57,9 @@ const updateBudgetItems = () => (dispatch, getState) => {
     `${process.env.API_URL}/en/v1`,
     {
       params: {
+        filters: {
+          budgetItemType: state.filters.budgetItemType.value
+        },
         financeType: state.filters.financeType.value,
         budgetItemIds: state.filters.budgetItems.selectedIds
       }
@@ -98,7 +106,7 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
         budgetItemFields: 'id,name',
 
         filters: {
-          budgetItemType: 'program'
+          budgetItemType: getState().filters.budgetItemType.value
         }
       }
     }
@@ -134,4 +142,4 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
   })
 }
 
-module.exports = { addError, clearErrors, setBudgetItems, setSelectedBudgetItemIds, setFinanceType, updateBudgetItems, updateBudgetItemFilterOptions }
+module.exports = { addError, clearErrors, setBudgetItems, setSelectedBudgetItemIds, setFinanceType, setBudgetItemType, updateBudgetItems, updateBudgetItemFilterOptions }

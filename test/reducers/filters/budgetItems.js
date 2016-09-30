@@ -6,6 +6,35 @@ const budgetItemsFilter = require('../../../js/reducers/filters/budgetItems')
 const initialState = require('../../../js/initialState').filters.budgetItems
 
 describe('budget items filter reducer', () => {
+  it('handles SET_BUDGET_ITEM_TYPE action', () => {
+    const previousState = Object.assign(
+      {},
+      initialState,
+      {
+        options: [
+          {value: 10, label: 'hello!' }
+        ]
+      }
+    )
+
+    const action = {
+      type: 'SET_BUDGET_ITEM_TYPE',
+      value: 'woooo'
+    }
+
+    const newState = budgetItemsFilter(previousState, action)
+
+    const expectedState = Object.assign(
+      {},
+      initialState,
+      {
+        options: []
+      }
+    )
+
+    expect(newState).to.deep.equal(expectedState)
+  })
+
   it('handles SET_BUDGET_ITEM_FILTER_OPTIONS action', () => {
     const previousState = Object.assign(
       {},

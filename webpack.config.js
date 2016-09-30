@@ -24,16 +24,17 @@ module.exports = {
   entry: './js/browser.jsx',
   output: {
     path: path.join(__dirname, '/public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/public/'
   },
-  devtool: 'source-map',
+  devtool: Env === 'production' ? 'source-map' : 'eval',
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
   stats: {
     colors: true,
     reasons: true,
-    chunks: false
+    chunks: true
   },
   module: {
     preLoaders: preloaders,
