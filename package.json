@@ -7,7 +7,7 @@
     "test": "mocha --recursive --require test/helpers/setup.js",
     "lint": "standard",
     "build": "webpack",
-    "watch": "webpack --watch",
+    "watch": "webpack-dev-server",
     "start": "pm2 start app.js --watch --ignore-watch='public' && pm2 logs app",
     "fix": "standard --fix"
   },
@@ -54,7 +54,8 @@
     "shipit-cli": "^1.4.1",
     "shipit-deploy": "^2.2.0",
     "shipit-npm": "^0.2.0",
-    "shipit-shared": "^4.4.1"
+    "shipit-shared": "^4.4.1",
+    "webpack-dev-server": "^1.16.1"
   },
   "directories": {},
   "repository": {
