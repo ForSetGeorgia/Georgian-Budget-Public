@@ -7,7 +7,7 @@ module.exports = {
       loading: true
     },
     budgetItemType: {
-      value: 'total'
+      value: ''
     },
     financeType: {
       value: 'spent_finance'
