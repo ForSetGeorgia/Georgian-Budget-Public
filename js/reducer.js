@@ -1,20 +1,11 @@
 const { combineReducers } = require('redux')
 const { routerReducer } = require('react-router-redux')
 
-const reducers = {
+const reducer = combineReducers({
   filters: require('./reducers/filters'),
   data: require('./reducers/data'),
-  locale: require('./reducers/locale')
-}
-
-const reducer = combineReducers(
-  Object.assign(
-    {},
-    reducers,
-    {
-      routing: routerReducer
-    }
-  )
-)
+  locale: require('./reducers/locale'),
+  routing: routerReducer
+})
 
 module.exports = reducer
