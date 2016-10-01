@@ -1,9 +1,10 @@
 const React = require('react')
+// const { IndexRoute, Redirect, Route } = require('react-router')
 const { IndexRedirect, Redirect, Route } = require('react-router')
 
 const Layout = require('./Layout')
-const Explore = require('./Explore')
 // const Landing = require('./Landing')
+const Explore = require('./Explore')
 const About = require('./About')
 
 const Routes = () => (
