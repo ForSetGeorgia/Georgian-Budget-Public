@@ -1,5 +1,5 @@
 const React = require('react')
-const { string, func } = React.PropTypes
+const { string, func, object } = React.PropTypes
 const { connect } = require('react-redux')
 
 const Select = require('react-select')
@@ -7,10 +7,15 @@ const Select = require('react-select')
 const { setBudgetItemType, updateBudgetItemFilterOptions } = require('../actions')
 
 let BudgetItemTypeSelect = React.createClass({
+  contextTypes: {
+    router: object
+  },
+
   propTypes: {
     value: string,
     queryValue: string,
-    handleChange: func
+    location: object,
+    dispatchBudgetItemType: func
   },
 
   options: [
@@ -21,14 +26,39 @@ let BudgetItemTypeSelect = React.createClass({
   ],
 
   componentDidMount () {
-    const { handleChange, queryValue } = this.props
+    const { queryValue } = this.props
     const optionValues = this.options.map((option) => option.value)
 
     if (queryValue && optionValues.includes(queryValue)) {
-      handleChange({ value: queryValue })
+      this.handleChangeEvent({ value: queryValue })
     } else {
-      handleChange({ value: 'total' })
+      this.handleChangeEvent({ value: 'total' })
     }
+  },
+
+  handleChangeEvent (selected) {
+    const { value } = selected
+    if (!value) return
+
+    this.props.dispatchBudgetItemType(selected)
+
+    // If the value in the URL and the new value are not the same,
+    // update the URL query param with the new value
+    if (this.props.queryValue === value) return
+
+    const newLocation = Object.assign(
+      {},
+      this.props.location,
+      {
+        query: Object.assign(
+          {},
+          this.props.location.query,
+          { budgetItemType: value }
+        )
+      }
+    )
+
+    this.context.router.push(newLocation)
   },
 
   render: function () {
@@ -37,7 +67,7 @@ let BudgetItemTypeSelect = React.createClass({
         name='budget-item-type-select'
         value={this.props.value}
         options={this.options}
-        onChange={this.props.handleChange}
+        onChange={this.handleChangeEvent}
         clearable={false}
       />
     )
@@ -45,20 +75,23 @@ let BudgetItemTypeSelect = React.createClass({
 })
 
 const mapStateToProps = (state) => {
-  const locationBeforeTransitions = state.routing.locationBeforeTransitions
   const props = {
     value: state.filters.budgetItemType.value
   }
 
-  if (locationBeforeTransitions && locationBeforeTransitions.query) {
-    props.queryValue = locationBeforeTransitions.query.budgetItemType
-  }
+  const { locationBeforeTransitions } = state.routing
+
+  if (!locationBeforeTransitions) return props
+  props.location = locationBeforeTransitions
+
+  if (!locationBeforeTransitions.query) return props
+  props.queryValue = locationBeforeTransitions.query.budgetItemType
 
   return props
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  handleChange (selected) {
+  dispatchBudgetItemType (selected) {
     dispatch(setBudgetItemType(selected.value))
     dispatch(updateBudgetItemFilterOptions())
   }
