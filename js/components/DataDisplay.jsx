@@ -2,9 +2,9 @@ const React = require('react')
 const { arrayOf, object, bool } = React.PropTypes
 const { connect } = require('react-redux')
 
-const Error = require('./Error')
-const TimeSeriesChart = require('./TimeSeriesChart')
-const LoadingIndicator = require('./LoadingIndicator')
+const Error = require('js/components/Error')
+const TimeSeriesChart = require('js/components/TimeSeriesChart')
+const LoadingIndicator = require('js/components/LoadingIndicator')
 
 let DataDisplay = React.createClass({
   propTypes: {

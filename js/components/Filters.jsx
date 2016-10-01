@@ -1,9 +1,8 @@
 const React = require('react')
 
-const BudgetItemTypeSelect = require('./BudgetItemTypeSelect')
-const BudgetItemTypeSelect = require(`${NODE_PATH}/js/components/BudgetItemTypeSelect`)
-const BudgetItemSelect = require('./BudgetItemSelect')
-const FinanceTypeSelect = require('./FinanceTypeSelect')
+const BudgetItemTypeSelect = require('js/components/BudgetItemTypeSelect')
+const BudgetItemSelect = require('js/components/BudgetItemSelect')
+const FinanceTypeSelect = require('js/components/FinanceTypeSelect')
 
 const Filters = React.createClass({
   render () {

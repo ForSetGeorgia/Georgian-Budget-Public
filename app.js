@@ -23,7 +23,7 @@ const ReactRedux = require('react-redux')
 const Provider = ReactRedux.Provider
 
 // Must specify .js because node does not use webpack
-const store = require('./js/store.js')
+const store = require('js/store.js')
 
 // Provides templating language used in index.html
 const _template = require('lodash.template')
@@ -35,12 +35,12 @@ const fs = require('fs')
 // The port we've chosen to run our app on
 const port = 8080
 
-const Routes = require('./js/components/Routes.jsx')
+const Routes = require('js/components/Routes.jsx')
 const Helmet = require('react-helmet')
-const Meta = require('./js/components/Meta')
+const Meta = require('js/components/Meta')
 
 // Read index.html into memory
-const baseTemplate = fs.readFileSync('./index.html')
+const baseTemplate = fs.readFileSync('index.html')
 
 // Create a template function that returns a string based on index.html
 const template = _template(baseTemplate)

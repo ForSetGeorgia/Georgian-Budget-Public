@@ -3,7 +3,7 @@ const { func, number, arrayOf, shape, string, bool } = React.PropTypes
 const { connect } = require('react-redux')
 
 const Select = require('react-select')
-const LoadingIndicator = require('./LoadingIndicator')
+const LoadingIndicator = require('js/components/LoadingIndicator')
 
 const { setSelectedBudgetItemIds, updateBudgetItems, updateBudgetItemFilterOptions } = require('../actions')
 

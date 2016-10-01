@@ -31,7 +31,8 @@ module.exports = {
   },
   devtool: Env === 'development' ? devSourceMaps : 'source-map',
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    root: [ path.resolve('.') ]
   },
   stats: {
     colors: true,

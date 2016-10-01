@@ -66,7 +66,7 @@ module.exports = function (shipit) {
   shipit.blTask('start_server', function() {
     shipit.log('Starting node server')
     return shipit.remote(
-      `node -v && cd /home/budget-staging/Budget-Public-Staging/current && pm2 startOrRestart config/pm2.json`
+      `NODE_PATH=. node -v && cd /home/budget-staging/Budget-Public-Staging/current && pm2 startOrRestart config/pm2.json`
     )
   })
 }

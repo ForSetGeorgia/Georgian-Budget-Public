@@ -2,7 +2,7 @@ const React = require('react')
 const { Provider } = require('react-redux')
 const { Router } = require('react-router')
 
-const Routes = require('./Routes')
+const Routes = require('js/components/Routes')
 const store = require('../store')
 const history = require('../history')
 

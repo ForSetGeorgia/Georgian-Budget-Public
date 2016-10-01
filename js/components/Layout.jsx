@@ -1,6 +1,6 @@
 const React = require('react')
 const Helmet = require('react-helmet')
-const Meta = require('./Meta')
+const Meta = require('js/components/Meta')
 
 const Layout = (props) => {
   return (

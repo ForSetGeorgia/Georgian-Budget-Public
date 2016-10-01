@@ -2,10 +2,10 @@ const React = require('react')
 // const { IndexRoute, Redirect, Route } = require('react-router')
 const { IndexRedirect, Redirect, Route } = require('react-router')
 
-const Layout = require('./Layout')
-// const Landing = require('./Landing')
-const Explore = require('./Explore')
-const About = require('./About')
+const Layout = require('js/components/Layout')
+// const Landing = require('js/components/Landing')
+const Explore = require('js/components/Explore')
+const About = require('js/components/About')
 
 const Routes = () => (
   <div>
