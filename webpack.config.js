@@ -19,6 +19,8 @@ const definePlugin = new webpack.DefinePlugin({
   'process.env.API_URL': JSON.stringify(process.env.API_URL)
 });
 
+const devSourceMaps = 'eval-cheap-module-source-map'
+
 module.exports = {
   context: __dirname,
   entry: './js/browser.jsx',
@@ -27,7 +29,7 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/public/'
   },
-  devtool: Env === 'production' ? 'source-map' : 'eval-cheap-module-source-map',
+  devtool: Env === 'development' ? devSourceMaps : 'source-map',
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
