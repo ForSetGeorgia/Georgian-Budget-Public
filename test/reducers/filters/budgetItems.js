@@ -2,8 +2,8 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const budgetItemsFilter = require('../../../js/reducers/filters/budgetItems')
-const initialState = require('../../../js/initialState').filters.budgetItems
+const budgetItemsFilter = require('js/reducers/filters/budgetItems')
+const initialState = require('js/initialState').filters.budgetItems
 
 describe('budget items filter reducer', () => {
   it('handles START_LOADING_BUDGET_ITEM_FILTER', () => {

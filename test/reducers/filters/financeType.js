@@ -2,8 +2,8 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const financeTypeFilter = require('../../../js/reducers/filters/financeType')
-const initialState = require('../../../js/initialState').filters.financeType
+const financeTypeFilter = require('js/reducers/filters/financeType')
+const initialState = require('js/initialState').filters.financeType
 
 describe('finance type filter reducer', () => {
   it('handles SET_FINANCE_TYPE action', () => {

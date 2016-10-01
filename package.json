@@ -4,7 +4,7 @@
   "description": "This site allows users to interact with data from the Georgian-Budget project's API.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive --require test/helpers/setup.js",
+    "test": "NODE_PATH=. mocha --recursive --require test/helpers/setup.js",
     "lint": "standard",
     "build": "webpack",
     "watch": "webpack-dev-server",
