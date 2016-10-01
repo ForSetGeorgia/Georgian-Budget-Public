@@ -8,13 +8,13 @@ const { setBudgetItemType, updateBudgetItemFilterOptions } = require('../actions
 
 let BudgetItemTypeSelect = React.createClass({
   contextTypes: {
+    location: object,
     router: object
   },
 
   propTypes: {
     value: string,
     queryValue: string,
-    location: object,
     dispatchBudgetItemType: func
   },
 
@@ -48,11 +48,11 @@ let BudgetItemTypeSelect = React.createClass({
 
     const newLocation = Object.assign(
       {},
-      this.props.location,
+      this.context.location,
       {
         query: Object.assign(
           {},
-          this.props.location.query,
+          this.context.location.query,
           { budgetItemType: value }
         )
       }
@@ -81,10 +81,7 @@ const mapStateToProps = (state) => {
 
   const { locationBeforeTransitions } = state.routing
 
-  if (!locationBeforeTransitions) return props
-  props.location = locationBeforeTransitions
-
-  if (!locationBeforeTransitions.query) return props
+  if (!locationBeforeTransitions || !locationBeforeTransitions.query) return props
   props.queryValue = locationBeforeTransitions.query.budgetItemType
 
   return props

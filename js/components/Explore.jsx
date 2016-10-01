@@ -1,10 +1,8 @@
 const React = require('react')
 const Helmet = require('react-helmet')
 
-const BudgetItemTypeSelect = require('./BudgetItemTypeSelect')
-const BudgetItemSelect = require('./BudgetItemSelect')
-const FinanceTypeSelect = require('./FinanceTypeSelect')
 const DataDisplay = require('./DataDisplay')
+const Filters = require('./Filters')
 
 const Explore = () => (
   <main>
@@ -12,10 +10,7 @@ const Explore = () => (
       title='Explore'
     />
 
-    <BudgetItemTypeSelect />
-    <BudgetItemSelect />
-    <FinanceTypeSelect />
-
+    <Filters />
     <DataDisplay />
   </main>
 )
