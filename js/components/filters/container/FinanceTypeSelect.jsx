@@ -35,9 +35,7 @@ const Container = React.createClass({
     this.context.router.push(
       getLocationWithQuery(
         this.context.location,
-        {
-          financeType: value
-        }
+        { financeType: value }
       )
     )
   },
