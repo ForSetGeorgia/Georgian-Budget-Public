@@ -6,7 +6,7 @@ const FinanceTypeSelect = require('../presentation/FinanceTypeSelect')
 
 const Container = React.createClass({
   propTypes: {
-    handleChange: func,
+    dispatchNewFinanceType: func,
     selectedValue: string
   },
 
@@ -15,10 +15,14 @@ const Container = React.createClass({
     { value: 'planned_finance', label: 'დაგეგმილი ფინანსები' }
   ],
 
+  handleChangeEvent (selected) {
+    this.props.dispatchNewFinanceType(selected.value)
+  },
+
   render () {
     return (
       <FinanceTypeSelect
-        handleChange={this.props.handleChange}
+        handleChange={this.handleChangeEvent}
         selectedValue={this.props.selectedValue}
         options={this.options}
       />
@@ -31,8 +35,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handleChange (selected) {
-    dispatch(setFinanceType(selected.value))
+  dispatchNewFinanceType (value) {
+    dispatch(setFinanceType(value))
     dispatch(updateBudgetItems())
   }
 })
