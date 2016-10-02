@@ -2,7 +2,7 @@ const React = require('react')
 const Select = require('react-select')
 const { connect } = require('react-redux')
 
-const { setFinanceType, updateBudgetItems } = require('../actions')
+const { setFinanceType, updateBudgetItems } = require('js/actions')
 
 const FinanceTypeSelect = (props) => {
   const options = [

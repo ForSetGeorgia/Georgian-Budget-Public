@@ -2,7 +2,7 @@ const React = require('react')
 const Helmet = require('react-helmet')
 
 const DataDisplay = require('js/components/DataDisplay')
-const Filters = require('js/components/Filters')
+const Filters = require('./filters/Filters')
 
 const Explore = () => (
   <main>
