@@ -20,6 +20,13 @@ const Container = React.createClass({
     dispatchBudgetItemType: func
   },
 
+  options: [
+    { value: 'total', label: 'საქართველოს მთლიანი ბიუჯეტი' },
+    { value: 'program', label: 'პროგრამები' },
+    { value: 'spending_agency', label: 'მხარჯავი დაწესებულებები' },
+    { value: 'priority', label: 'პრიორიტეტები' }
+  ],
+
   handleChangeEvent (selected) {
     const { value } = selected
     if (!value) return
@@ -54,6 +61,7 @@ const Container = React.createClass({
       value={this.currentValue()}
       queryValue={this.props.queryValue}
       handleChangeEvent={this.handleChangeEvent}
+      options={this.options}
     />
   }
 

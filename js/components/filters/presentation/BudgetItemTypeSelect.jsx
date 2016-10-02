@@ -1,5 +1,5 @@
 const React = require('react')
-const { string, func } = React.PropTypes
+const { string, func, arrayOf, shape } = React.PropTypes
 
 const Select = require('react-select')
 
@@ -7,19 +7,13 @@ let BudgetItemTypeSelect = React.createClass({
   propTypes: {
     value: string,
     queryValue: string,
-    handleChangeEvent: func
+    handleChangeEvent: func,
+    options: arrayOf(shape({ value: string, label: string }))
   },
-
-  options: [
-    { value: 'total', label: 'საქართველოს მთლიანი ბიუჯეტი' },
-    { value: 'program', label: 'პროგრამები' },
-    { value: 'spending_agency', label: 'მხარჯავი დაწესებულებები' },
-    { value: 'priority', label: 'პრიორიტეტები' }
-  ],
 
   componentDidMount () {
     const { queryValue } = this.props
-    const optionValues = this.options.map((option) => option.value)
+    const optionValues = this.props.options.map((option) => option.value)
 
     if (queryValue && optionValues.includes(queryValue)) {
       this.props.handleChangeEvent({ value: queryValue })
@@ -38,7 +32,7 @@ let BudgetItemTypeSelect = React.createClass({
           id='budget-item-type-select'
           name='budget-item-type-select'
           value={this.props.value}
-          options={this.options}
+          options={this.props.options}
           onChange={this.props.handleChangeEvent}
           clearable={false}
         />
