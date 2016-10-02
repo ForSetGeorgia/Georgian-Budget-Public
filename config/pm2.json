@@ -1,6 +1,6 @@
 {
   "apps": [{
     "name": "Budget-Public-Staging",
-    "script": "app.js"
+    "script": "./app.js"
   }]
 }
