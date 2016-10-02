@@ -3,7 +3,6 @@ const { string, func, object } = React.PropTypes
 
 const Select = require('react-select')
 
-
 let BudgetItemTypeSelect = React.createClass({
   contextTypes: {
     location: object,

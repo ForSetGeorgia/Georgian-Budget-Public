@@ -1,8 +1,5 @@
 const React = require('react')
 const Select = require('react-select')
-const { connect } = require('react-redux')
-
-const { setFinanceType, updateBudgetItems } = require('js/actions')
 
 const FinanceTypeSelect = (props) => {
   const options = [
@@ -34,15 +31,4 @@ FinanceTypeSelect.propTypes = {
   handleChange: func.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  selectedValue: state.filters.financeType.value
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  handleChange (selected) {
-    dispatch(setFinanceType(selected.value))
-    dispatch(updateBudgetItems())
-  }
-})
-
-module.exports = connect(mapStateToProps, mapDispatchToProps)(FinanceTypeSelect)
+module.exports = FinanceTypeSelect
