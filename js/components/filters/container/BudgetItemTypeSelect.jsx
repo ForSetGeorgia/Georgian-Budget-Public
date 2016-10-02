@@ -27,7 +27,7 @@ const Container = React.createClass({
     { value: 'priority', label: 'პრიორიტეტები' }
   ],
 
-  optionValues () {
+  get optionValues () {
     return this.options.map((option) => option.value)
   },
 
@@ -41,25 +41,25 @@ const Container = React.createClass({
     // update the URL query param with the new value
     if (this.props.queryValue === value) return
 
-    const newLocation = Object.assign(
-      {},
-      this.context.location,
-      {
-        query: Object.assign(
-          {},
-          this.context.location.query,
-          { budgetItemType: value }
-        )
-      }
+    this.context.router.push(
+      Object.assign(
+        {},
+        this.context.location,
+        {
+          query: Object.assign(
+            {},
+            this.context.location.query,
+            { budgetItemType: value }
+          )
+        }
+      )
     )
-
-    this.context.router.push(newLocation)
   },
 
   componentDidMount () {
     const { queryValue } = this.props
 
-    if (queryValue && this.optionValues().includes(queryValue)) {
+    if (queryValue && this.optionValues.includes(queryValue)) {
       this.handleChangeEvent({ value: queryValue })
     } else {
       this.handleChangeEvent({ value: 'total' })
