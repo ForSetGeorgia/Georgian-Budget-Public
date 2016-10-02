@@ -2,7 +2,7 @@ const React = require('react')
 const { object, string, func } = React.PropTypes
 const { connect } = require('react-redux')
 const { setFinanceType, updateBudgetItems } = require('js/actions')
-const updateLocationWithQuery = require('js/helpers/updateLocationWithQuery')
+const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const FinanceTypeSelect = require('../presentation/FinanceTypeSelect')
 
 const Container = React.createClass({
@@ -33,7 +33,7 @@ const Container = React.createClass({
     this.props.dispatchNewFinanceType(value)
 
     this.context.router.push(
-      updateLocationWithQuery(
+      getLocationWithQuery(
         this.context.location,
         {
           financeType: value
