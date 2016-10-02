@@ -6,20 +6,8 @@ const Select = require('react-select')
 let BudgetItemTypeSelect = React.createClass({
   propTypes: {
     value: string,
-    queryValue: string,
     handleChangeEvent: func,
     options: arrayOf(shape({ value: string, label: string }))
-  },
-
-  componentDidMount () {
-    const { queryValue } = this.props
-    const optionValues = this.props.options.map((option) => option.value)
-
-    if (queryValue && optionValues.includes(queryValue)) {
-      this.props.handleChangeEvent({ value: queryValue })
-    } else {
-      this.props.handleChangeEvent({ value: 'total' })
-    }
   },
 
   render: function () {

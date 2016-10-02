@@ -27,6 +27,10 @@ const Container = React.createClass({
     { value: 'priority', label: 'პრიორიტეტები' }
   ],
 
+  optionValues () {
+    return this.options.map((option) => option.value)
+  },
+
   handleChangeEvent (selected) {
     const { value } = selected
     if (!value) return
@@ -52,14 +56,19 @@ const Container = React.createClass({
     this.context.router.push(newLocation)
   },
 
-  currentValue () {
-    return this.props.value
+  componentDidMount () {
+    const { queryValue } = this.props
+
+    if (queryValue && this.optionValues().includes(queryValue)) {
+      this.handleChangeEvent({ value: queryValue })
+    } else {
+      this.handleChangeEvent({ value: 'total' })
+    }
   },
 
   render () {
     return <BudgetItemTypeSelect
-      value={this.currentValue()}
-      queryValue={this.props.queryValue}
+      value={this.props.value}
       handleChangeEvent={this.handleChangeEvent}
       options={this.options}
     />
