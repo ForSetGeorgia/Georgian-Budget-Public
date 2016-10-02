@@ -4,7 +4,7 @@ const { connect } = require('react-redux')
 
 const Select = require('react-select')
 
-const { setBudgetItemType, updateBudgetItemFilterOptions } = require('../actions')
+const { setBudgetItemType, updateBudgetItemFilterOptions } = require('js/actions')
 
 let BudgetItemTypeSelect = React.createClass({
   contextTypes: {
