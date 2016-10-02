@@ -30,7 +30,7 @@ const UGLIFY = STAGING || PROD
 
 if (UGLIFY) {
   plugins.push(new webpack.optimize.UglifyJsPlugin({
-    mangle: false,
+    mangle: true,
     sourceMap: true
   }))
 }
