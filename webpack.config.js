@@ -45,7 +45,7 @@ module.exports = {
     filename: UGLIFY ? 'bundle.min.js' : 'bundle.js',
     publicPath: '/public/'
   },
-  devtool: DEV ? 'eval-cheap-module-source-map' : 'source-map',
+  devtool: DEV ? 'eval-source-map' : 'source-map',
   resolve: {
     extensions: ['', '.js', '.jsx'],
     root: [ path.resolve('.') ]
