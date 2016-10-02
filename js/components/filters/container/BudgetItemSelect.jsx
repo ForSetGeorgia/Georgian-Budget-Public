@@ -1,7 +1,7 @@
 const BudgetItemSelect = require('../presentation/BudgetItemSelect')
 const { connect } = require('react-redux')
 
-const { 
+const {
   setSelectedBudgetItemIds,
   updateBudgetItems,
   updateBudgetItemFilterOptions
