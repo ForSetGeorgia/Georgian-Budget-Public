@@ -1,6 +1,7 @@
 const React = require('react')
 const { string, func, object } = React.PropTypes
 const { connect } = require('react-redux')
+const { updateLocationWithQuery } = require('js/helpers/updateLocationWithQuery')
 const BudgetItemTypeSelect = require('../presentation/BudgetItemTypeSelect')
 
 const {
@@ -42,16 +43,9 @@ const Container = React.createClass({
     if (this.props.queryValue === value) return
 
     this.context.router.push(
-      Object.assign(
-        {},
+      updateLocationWithQuery(
         this.context.location,
-        {
-          query: Object.assign(
-            {},
-            this.context.location.query,
-            { budgetItemType: value }
-          )
-        }
+        { budgetItemType: value }
       )
     )
   },
