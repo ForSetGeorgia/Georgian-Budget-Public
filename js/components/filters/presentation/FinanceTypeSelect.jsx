@@ -2,11 +2,6 @@ const React = require('react')
 const Select = require('react-select')
 
 const FinanceTypeSelect = (props) => {
-  const options = [
-    { value: 'spent_finance', label: 'დახარჯული ფინანსები' },
-    { value: 'planned_finance', label: 'დაგეგმილი ფინანსები' }
-  ]
-
   return (
     <div>
       <label htmlFor='finance-type-select'>
@@ -16,7 +11,7 @@ const FinanceTypeSelect = (props) => {
         id='finance-type-select'
         name='finance-type-select'
         value={props.selectedValue}
-        options={options}
+        options={props.options}
         onChange={props.handleChange}
         clearable={false}
       />
@@ -24,11 +19,12 @@ const FinanceTypeSelect = (props) => {
   )
 }
 
-const { string, func } = React.PropTypes
+const { string, func, arrayOf, shape } = React.PropTypes
 
 FinanceTypeSelect.propTypes = {
   selectedValue: string.isRequired,
-  handleChange: func.isRequired
+  handleChange: func.isRequired,
+  options: arrayOf(shape({ value: string, label: string })).isRequired
 }
 
 module.exports = FinanceTypeSelect
