@@ -1,6 +1,6 @@
 const React = require('react')
 
-const BudgetItemTypeSelect = require('./presentation/BudgetItemTypeSelect')
+const BudgetItemTypeSelect = require('./container/BudgetItemTypeSelect')
 const BudgetItemSelect = require('./container/BudgetItemSelect')
 const FinanceTypeSelect = require('./presentation/FinanceTypeSelect')
 
