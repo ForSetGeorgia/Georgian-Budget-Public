@@ -1,5 +1,5 @@
 const React = require('react')
-const { string, func } = React.PropTypes
+const { string, func, object } = React.PropTypes
 const { connect } = require('react-redux')
 const BudgetItemTypeSelect = require('../presentation/BudgetItemTypeSelect')
 
@@ -9,6 +9,10 @@ const {
 } = require('js/actions')
 
 const Container = React.createClass({
+  contextTypes: {
+    location: object,
+    router: object
+  },
 
   propTypes: {
     value: string,
@@ -16,11 +20,40 @@ const Container = React.createClass({
     dispatchBudgetItemType: func
   },
 
+  handleChangeEvent (selected) {
+    const { value } = selected
+    if (!value) return
+
+    this.props.dispatchBudgetItemType(selected)
+
+    // If the value in the URL and the new value are not the same,
+    // update the URL query param with the new value
+    if (this.props.queryValue === value) return
+
+    const newLocation = Object.assign(
+      {},
+      this.context.location,
+      {
+        query: Object.assign(
+          {},
+          this.context.location.query,
+          { budgetItemType: value }
+        )
+      }
+    )
+
+    this.context.router.push(newLocation)
+  },
+
+  currentValue () {
+    return this.props.value
+  },
+
   render () {
     return <BudgetItemTypeSelect
-      value={this.props.value}
+      value={this.currentValue()}
       queryValue={this.props.queryValue}
-      dispatchBudgetItemType={this.props.dispatchBudgetItemType}
+      handleChangeEvent={this.handleChangeEvent}
     />
   }
 

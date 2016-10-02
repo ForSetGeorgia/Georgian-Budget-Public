@@ -1,18 +1,13 @@
 const React = require('react')
-const { string, func, object } = React.PropTypes
+const { string, func } = React.PropTypes
 
 const Select = require('react-select')
 
 let BudgetItemTypeSelect = React.createClass({
-  contextTypes: {
-    location: object,
-    router: object
-  },
-
   propTypes: {
     value: string,
     queryValue: string,
-    dispatchBudgetItemType: func
+    handleChangeEvent: func
   },
 
   options: [
@@ -27,35 +22,10 @@ let BudgetItemTypeSelect = React.createClass({
     const optionValues = this.options.map((option) => option.value)
 
     if (queryValue && optionValues.includes(queryValue)) {
-      this.handleChangeEvent({ value: queryValue })
+      this.props.handleChangeEvent({ value: queryValue })
     } else {
-      this.handleChangeEvent({ value: 'total' })
+      this.props.handleChangeEvent({ value: 'total' })
     }
-  },
-
-  handleChangeEvent (selected) {
-    const { value } = selected
-    if (!value) return
-
-    this.props.dispatchBudgetItemType(selected)
-
-    // If the value in the URL and the new value are not the same,
-    // update the URL query param with the new value
-    if (this.props.queryValue === value) return
-
-    const newLocation = Object.assign(
-      {},
-      this.context.location,
-      {
-        query: Object.assign(
-          {},
-          this.context.location.query,
-          { budgetItemType: value }
-        )
-      }
-    )
-
-    this.context.router.push(newLocation)
   },
 
   render: function () {
@@ -69,7 +39,7 @@ let BudgetItemTypeSelect = React.createClass({
           name='budget-item-type-select'
           value={this.props.value}
           options={this.options}
-          onChange={this.handleChangeEvent}
+          onChange={this.props.handleChangeEvent}
           clearable={false}
         />
       </div>
