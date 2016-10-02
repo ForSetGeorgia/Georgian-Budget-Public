@@ -16,7 +16,7 @@ module.exports = {
   data: {
     budgetItems: [],
     errors: [],
-    loading: true
+    loading: false
   },
   locale: 'ka'
 }

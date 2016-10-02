@@ -3,7 +3,6 @@ const { func, number, arrayOf, shape, string, bool } = React.PropTypes
 const { connect } = require('react-redux')
 
 const Select = require('react-select')
-const LoadingIndicator = require('js/components/LoadingIndicator')
 
 const { setSelectedBudgetItemIds, updateBudgetItems, updateBudgetItemFilterOptions } = require('js/actions')
 
@@ -36,32 +35,29 @@ let BudgetItemSelect = React.createClass({
     }
   },
   render: function () {
-    if (this.props.loading) {
-      return <LoadingIndicator hidden={this.props.hidden} />
-    } else {
-      let style = {}
-      if (this.props.hidden) style.display = 'none'
+    let style = {}
+    if (this.props.hidden) style.display = 'none'
 
-      return (
-        <div style={style}>
-          <label htmlFor='budget-item-select'>
-            {this.labelText()}
-          </label>
-          <Select
-            id='budget-item-select'
-            name='budget-item-select'
-            value={this.props.selectedIds}
-            options={this.props.options}
-            onChange={this.props.handleChange}
-            disabled={this.props.options.length === 0}
-            labelKey='name'
-            valueKey='id'
-            multi
-            simpleValue
-          />
-        </div>
-      )
-    }
+    return (
+      <div style={style}>
+        <label htmlFor='budget-item-select'>
+          {this.labelText()}
+        </label>
+        <Select
+          id='budget-item-select'
+          name='budget-item-select'
+          value={this.props.selectedIds}
+          options={this.props.options}
+          onChange={this.props.handleChange}
+          disabled={this.props.options.length === 0}
+          isLoading={this.props.loading}
+          labelKey='name'
+          valueKey='id'
+          multi
+          simpleValue
+        />
+      </div>
+    )
   }
 })
 

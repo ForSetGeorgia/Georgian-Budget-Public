@@ -11,13 +11,19 @@ const FinanceTypeSelect = (props) => {
   ]
 
   return (
-    <Select
-      name='finance-type-select'
-      value={props.selectedValue}
-      options={options}
-      onChange={props.handleChange}
-      clearable={false}
-    />
+    <div>
+      <label htmlFor='finance-type-select'>
+        აირჩიე ფინანსები
+      </label>
+      <Select
+        id='finance-type-select'
+        name='finance-type-select'
+        value={props.selectedValue}
+        options={options}
+        onChange={props.handleChange}
+        clearable={false}
+      />
+    </div>
   )
 }
 

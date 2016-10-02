@@ -63,13 +63,19 @@ let BudgetItemTypeSelect = React.createClass({
 
   render: function () {
     return (
-      <Select
-        name='budget-item-type-select'
-        value={this.props.value}
-        options={this.options}
-        onChange={this.handleChangeEvent}
-        clearable={false}
-      />
+      <div>
+        <label htmlFor='budget-item-type-select'>
+          აირჩიე Budget Item Type
+        </label>
+        <Select
+          id='budget-item-type-select'
+          name='budget-item-type-select'
+          value={this.props.value}
+          options={this.options}
+          onChange={this.handleChangeEvent}
+          clearable={false}
+        />
+      </div>
     )
   }
 })
