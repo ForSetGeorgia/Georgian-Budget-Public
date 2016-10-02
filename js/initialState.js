@@ -10,7 +10,7 @@ module.exports = {
       value: ''
     },
     financeType: {
-      value: 'spent_finance'
+      value: ''
     }
   },
   data: {

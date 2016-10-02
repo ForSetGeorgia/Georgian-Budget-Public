@@ -10,7 +10,7 @@ const FinanceTypeSelect = (props) => {
       <Select
         id='finance-type-select'
         name='finance-type-select'
-        value={props.selectedValue}
+        value={props.value}
         options={props.options}
         onChange={props.handleChange}
         clearable={false}
@@ -22,7 +22,7 @@ const FinanceTypeSelect = (props) => {
 const { string, func, arrayOf, shape } = React.PropTypes
 
 FinanceTypeSelect.propTypes = {
-  selectedValue: string.isRequired,
+  value: string.isRequired,
   handleChange: func.isRequired,
   options: arrayOf(shape({ value: string, label: string })).isRequired
 }

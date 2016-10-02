@@ -21,6 +21,8 @@ const Container = React.createClass({
     dispatchBudgetItemType: func
   },
 
+  defaultValue: 'total',
+
   options: [
     { value: 'total', label: 'საქართველოს მთლიანი ბიუჯეტი' },
     { value: 'program', label: 'პროგრამები' },
@@ -53,10 +55,10 @@ const Container = React.createClass({
   componentDidMount () {
     const { queryValue } = this.props
 
-    if (queryValue && this.optionValues.includes(queryValue)) {
+    if (this.optionValues.includes(queryValue)) {
       this.handleChangeEvent({ value: queryValue })
     } else {
-      this.handleChangeEvent({ value: 'total' })
+      this.handleChangeEvent({ value: this.defaultValue })
     }
   },
 
@@ -71,19 +73,12 @@ const Container = React.createClass({
 })
 
 const mapStateToProps = (state) => {
-  const props = {
-    value: state.filters.budgetItemType.value
-  }
-
   const { locationBeforeTransitions } = state.routing
 
-  if (!locationBeforeTransitions || !locationBeforeTransitions.query) {
-    props.queryValue = undefined
-  } else {
-    props.queryValue = locationBeforeTransitions.query.budgetItemType
+  return {
+    value: state.filters.budgetItemType.value,
+    queryValue: ((locationBeforeTransitions || {}).query || {}).budgetItemType
   }
-
-  return props
 }
 
 const mapDispatchToProps = (dispatch) => ({
