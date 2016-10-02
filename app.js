@@ -1,5 +1,10 @@
 require('dotenv').config();
 
+const Env = process.env.NODE_ENV || 'development'
+const DEV = Env === 'development'
+const STAGING = Env === 'staging'
+const PROD = Env === 'production'
+
 console.log(`Starting app in ${process.env.NODE_ENV} environment`)
 
 // tells node to run all required files through babel
@@ -49,6 +54,9 @@ const app = express()
 
 app.use('/public', express.static('./public'))
 
+const UGLIFY = PROD || STAGING
+const bundleJSFileName = UGLIFY ? 'bundle.min.js' : 'bundle.js'
+
 app.use((req, res) => {
   var url = req.protocol + '://' + req.get('host') + req.originalUrl
 
@@ -75,7 +83,8 @@ app.use((req, res) => {
         res.status(200).send(template({
           title,
           meta,
-          body
+          body,
+          bundleJSFileName
         }))
       } else {
         res.status(404).send('Not found')

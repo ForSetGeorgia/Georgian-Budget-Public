@@ -1,13 +1,18 @@
 require('dotenv').config()
 
 const Env = process.env.NODE_ENV || 'development'
+const DEV = Env === 'development'
+const STAGING = Env === 'staging'
+const PROD = Env === 'production'
+
+console.log('Running webpack in ' + Env + ' environment')
 
 const path = require('path')
 const webpack = require('webpack')
 
 const preloaders = []
 
-if (Env === 'development') {
+if (DEV) {
   preloaders.push({
     test: /\.jsx?$/,
     loader: 'eslint-loader',
@@ -15,21 +20,32 @@ if (Env === 'development') {
   })
 }
 
-const definePlugin = new webpack.DefinePlugin({
-  'process.env.API_URL': JSON.stringify(process.env.API_URL)
-});
+const plugins = [
+  new webpack.DefinePlugin({
+    'process.env.API_URL': JSON.stringify(process.env.API_URL)
+  })
+]
 
-const devSourceMaps = 'eval-cheap-module-source-map'
+const UGLIFY = STAGING || PROD
+
+if (UGLIFY) {
+  plugins.push(new webpack.optimize.UglifyJsPlugin({
+    mangle: false,
+    sourceMap: true
+  }))
+}
+
+console.log('PLUGINS ARE: ', plugins)
 
 module.exports = {
   context: __dirname,
   entry: './js/browser.jsx',
   output: {
     path: path.join(__dirname, '/public'),
-    filename: 'bundle.js',
+    filename: UGLIFY ? 'bundle.min.js' : 'bundle.js',
     publicPath: '/public/'
   },
-  devtool: Env === 'development' ? devSourceMaps : 'source-map',
+  devtool: DEV ? 'eval-cheap-module-source-map' : 'source-map',
   resolve: {
     extensions: ['', '.js', '.jsx'],
     root: [ path.resolve('.') ]
@@ -48,7 +64,5 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    definePlugin
-  ]
+  plugins: plugins
 }
