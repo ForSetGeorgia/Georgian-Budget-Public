@@ -6,7 +6,6 @@ const Select = require('react-select')
 let BudgetItemSelect = React.createClass({
   propTypes: {
     handleChange: func.isRequired,
-    loadOptions: func.isRequired,
     selectedIds: arrayOf(number).isRequired,
     budgetItemType: string,
     options: arrayOf(shape({
@@ -16,9 +15,7 @@ let BudgetItemSelect = React.createClass({
     hidden: bool,
     loading: bool
   },
-  componentDidMount () {
-    this.props.loadOptions()
-  },
+
   labelText () {
     switch (this.props.budgetItemType) {
       case 'program':
@@ -31,6 +28,7 @@ let BudgetItemSelect = React.createClass({
         return 'none'
     }
   },
+
   render: function () {
     let style = {}
     if (this.props.hidden) style.display = 'none'

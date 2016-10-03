@@ -23,6 +23,10 @@ const Container = React.createClass({
     loadOptions: func
   },
 
+  componentDidMount () {
+    this.props.loadOptions()
+  },
+
   render () {
     return (
       <BudgetItemSelect
@@ -32,7 +36,6 @@ const Container = React.createClass({
         hidden={this.props.hidden}
         loading={this.props.loading}
         handleChange={this.props.handleChange}
-        loadOptions={this.props.loadOptions}
       />
     )
   }
