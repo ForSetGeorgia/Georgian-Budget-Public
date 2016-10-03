@@ -13,20 +13,8 @@ let BudgetItemSelect = React.createClass({
       name: string.isRequired
     })).isRequired,
     hidden: bool,
+    labelText: string,
     loading: bool
-  },
-
-  labelText () {
-    switch (this.props.budgetItemType) {
-      case 'program':
-        return 'აირჩიე პროგრამა'
-      case 'priority':
-        return 'აირჩიე პრიორიტეტი'
-      case 'spending_agency':
-        return 'აირჩიე მხარჯავი დაწესებულება'
-      default:
-        return 'none'
-    }
   },
 
   render: function () {
@@ -36,7 +24,7 @@ let BudgetItemSelect = React.createClass({
     return (
       <div className='filter' style={style}>
         <label htmlFor='budget-item-select'>
-          {this.labelText()}
+          {this.props.labelText}
         </label>
         <Select
           id='budget-item-select'

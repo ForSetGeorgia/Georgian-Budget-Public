@@ -27,6 +27,19 @@ const Container = React.createClass({
     this.props.loadOptions()
   },
 
+  labelText () {
+    switch (this.props.budgetItemType) {
+      case 'program':
+        return 'აირჩიე პროგრამა'
+      case 'priority':
+        return 'აირჩიე პრიორიტეტი'
+      case 'spending_agency':
+        return 'აირჩიე მხარჯავი დაწესებულება'
+      default:
+        return 'none'
+    }
+  },
+
   render () {
     return (
       <BudgetItemSelect
@@ -36,6 +49,7 @@ const Container = React.createClass({
         hidden={this.props.hidden}
         loading={this.props.loading}
         handleChange={this.props.handleChange}
+        labelText={this.labelText()}
       />
     )
   }
