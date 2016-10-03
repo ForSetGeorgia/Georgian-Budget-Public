@@ -79,11 +79,13 @@ app.use((req, res) => {
         const head = Helmet.rewind()
         const title = head.title.toString()
         const meta = head.meta.toString()
+        const link = head.link.toString()
 
         res.status(200).send(template({
           title,
           meta,
           body,
+          link,
           bundleJSFileName
         }))
       } else {
