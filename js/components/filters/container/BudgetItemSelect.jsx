@@ -19,7 +19,7 @@ const Container = React.createClass({
     })).isRequired,
     hidden: bool,
     loading: bool,
-    handleChange: func,
+    dispatchNewSelectedBudgetItemIds: func,
     loadOptions: func
   },
 
@@ -40,6 +40,10 @@ const Container = React.createClass({
     }
   },
 
+  handleChange (selected) {
+    this.props.dispatchNewSelectedBudgetItemIds(selected)
+  },
+
   render () {
     return (
       <BudgetItemSelect
@@ -48,7 +52,7 @@ const Container = React.createClass({
         options={this.props.options}
         hidden={this.props.hidden}
         loading={this.props.loading}
-        handleChange={this.props.handleChange}
+        handleChange={this.handleChange}
         labelText={this.labelText()}
       />
     )
@@ -68,7 +72,7 @@ const mapDispatchToProps = (dispatch) => {
     loadOptions: function (selected) {
       dispatch(updateBudgetItemFilterOptions())
     },
-    handleChange: function (selected) {
+    dispatchNewSelectedBudgetItemIds: function (selected) {
       let selectedIds
       if (selected.length === 0) {
         selectedIds = []
