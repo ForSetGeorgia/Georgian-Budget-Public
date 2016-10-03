@@ -11,14 +11,14 @@ const {
 
 const Container = React.createClass({
   contextTypes: {
-    location: object,
     router: object
   },
 
   propTypes: {
     value: string,
     queryValue: string,
-    dispatchBudgetItemType: func
+    dispatchBudgetItemType: func,
+    location: object
   },
 
   defaultValue: 'total',
@@ -46,7 +46,7 @@ const Container = React.createClass({
 
     this.context.router.push(
       getLocationWithQuery(
-        this.context.location,
+        this.props.location,
         { budgetItemType: value }
       )
     )
@@ -72,12 +72,10 @@ const Container = React.createClass({
 
 })
 
-const mapStateToProps = (state) => {
-  const { locationBeforeTransitions } = state.routing
-
+const mapStateToProps = (state, ownProps) => {
   return {
     value: state.filters.budgetItemType.value,
-    queryValue: ((locationBeforeTransitions || {}).query || {}).budgetItemType
+    queryValue: ownProps.location.query.budgetItemType
   }
 }
 

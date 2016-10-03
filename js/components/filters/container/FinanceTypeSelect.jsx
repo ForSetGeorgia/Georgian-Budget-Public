@@ -7,14 +7,14 @@ const FinanceTypeSelect = require('../presentation/FinanceTypeSelect')
 
 const Container = React.createClass({
   contextTypes: {
-    router: object,
-    location: object
+    router: object
   },
 
   propTypes: {
     dispatchNewFinanceType: func.isRequired,
     value: string.isRequired,
-    queryValue: string
+    queryValue: string,
+    location: object
   },
 
   defaultValue: 'spent_finance',
@@ -34,7 +34,7 @@ const Container = React.createClass({
 
     this.context.router.push(
       getLocationWithQuery(
-        this.context.location,
+        this.props.location,
         { financeType: value }
       )
     )
@@ -61,12 +61,10 @@ const Container = React.createClass({
   }
 })
 
-const mapStateToProps = (state) => {
-  const { locationBeforeTransitions } = state.routing
-
+const mapStateToProps = (state, ownProps) => {
   return {
     value: state.filters.financeType.value,
-    queryValue: ((locationBeforeTransitions || {}).query || {}).financeType
+    queryValue: ownProps.location.query.financeType
   }
 }
 
