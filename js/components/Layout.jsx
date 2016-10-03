@@ -16,6 +16,7 @@ const Layout = (props) => {
           {'rel': 'stylesheet', 'href': '/public/bundle.css'}
         ]}
       />
+
       <MetaContainer />
       <Header />
 

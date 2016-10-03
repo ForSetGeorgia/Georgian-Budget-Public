@@ -5,9 +5,11 @@ const Meta = (props) => (
   <Helmet
     meta={[
       { 'charset': 'UTF-8' },
-      { 'property': 'og:url', 'content': props.url }
+      { 'property': 'og:url', 'content': props.url },
+      { 'name': 'viewport', 'content': 'width=device-width, initial-scale=1' }
     ]}
   />
+  
 )
 
 const { string } = React.PropTypes
