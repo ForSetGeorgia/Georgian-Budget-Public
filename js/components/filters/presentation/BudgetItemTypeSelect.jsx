@@ -14,7 +14,7 @@ let BudgetItemTypeSelect = React.createClass({
     return (
       <div className='filter'>
         <label htmlFor='budget-item-type-select'>
-          აირჩიე Budget Item Type
+          აირჩიე სახეობა
         </label>
         <Select
           id='budget-item-type-select'
