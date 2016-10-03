@@ -1,7 +1,8 @@
 const React = require('react')
-const BudgetItemSelect = require('../presentation/BudgetItemSelect')
-const { func, number, arrayOf, shape, string, bool } = React.PropTypes
+const { object, func, number, arrayOf, shape, string, bool } = React.PropTypes
 const { connect } = require('react-redux')
+const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
+const BudgetItemSelect = require('../presentation/BudgetItemSelect')
 
 const {
   setSelectedBudgetItemIds,
@@ -10,9 +11,14 @@ const {
 } = require('js/actions')
 
 const Container = React.createClass({
+  contextTypes: {
+    router: object
+  },
+
   propTypes: {
     budgetItemType: string,
     selectedIds: arrayOf(number).isRequired,
+    querySelectedIds: arrayOf(string),
     options: arrayOf(shape({
       id: number.isRequired,
       name: string.isRequired
@@ -20,11 +26,8 @@ const Container = React.createClass({
     hidden: bool,
     loading: bool,
     dispatchNewSelectedBudgetItemIds: func,
-    loadOptions: func
-  },
-
-  componentDidMount () {
-    this.props.loadOptions()
+    loadOptions: func,
+    location: object
   },
 
   labelText () {
@@ -41,14 +44,28 @@ const Container = React.createClass({
   },
 
   handleChange (selected) {
-    let selectedIds
-    if (selected.length === 0) {
-      selectedIds = []
-    } else {
-      selectedIds = selected.split(',').map((id) => Number(id))
-    }
+    const selectedIds = selected.length === 0 ? [] : selected.split(',').map(
+      (id) => Number(id)
+    )
 
     this.props.dispatchNewSelectedBudgetItemIds(selectedIds)
+
+    this.context.router.push(
+      getLocationWithQuery(
+        this.props.location,
+        {
+          budgetItemIds: selectedIds
+        }
+      )
+    )
+  },
+
+  componentDidMount () {
+    this.props.loadOptions()
+
+    if (this.props.querySelectedIds.length === 0) return
+
+    this.handleChange(this.props.querySelectedIds.join(','))
   },
 
   render () {
@@ -66,13 +83,18 @@ const Container = React.createClass({
   }
 })
 
-const mapStateToProps = (state) => ({
-  selectedIds: state.filters.budgetItems.selectedIds,
-  options: state.filters.budgetItems.options,
-  hidden: state.filters.budgetItems.hidden,
-  loading: state.filters.budgetItems.loading,
-  budgetItemType: state.filters.budgetItemType.value
-})
+const mapStateToProps = (state, ownProps) => {
+  const { budgetItemIds } = ownProps.location.query
+
+  return {
+    selectedIds: state.filters.budgetItems.selectedIds,
+    querySelectedIds: typeof budgetItemIds === 'string' ? [budgetItemIds] : budgetItemIds,
+    options: state.filters.budgetItems.options,
+    hidden: state.filters.budgetItems.hidden,
+    loading: state.filters.budgetItems.loading,
+    budgetItemType: state.filters.budgetItemType.value
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {

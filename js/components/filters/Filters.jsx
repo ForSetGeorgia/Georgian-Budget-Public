@@ -14,7 +14,7 @@ const Filters = React.createClass({
     return (
       <div>
         <BudgetItemTypeSelect location={this.context.location} />
-        <BudgetItemSelect />
+        <BudgetItemSelect location={this.context.location} />
         <FinanceTypeSelect location={this.context.location} />
       </div>
     )
