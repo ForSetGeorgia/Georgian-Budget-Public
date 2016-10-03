@@ -65,8 +65,10 @@ module.exports = function (shipit) {
 
   shipit.blTask('start_server', function() {
     shipit.log('Starting node server')
-    return shipit.remote(
-      `node -v && cd ${shipit.currentPath} && NODE_PATH=. pm2 startOrRestart ${shipit.currentPath}/config/pm2.json`
-    )
+    command = `node -v && cd ${shipit.config.deployTo} && NODE_PATH=. pm2 startOrRestart ./current/config/pm2.json`
+
+    console.log(command)
+
+    return shipit.remote(command)
   })
 }
