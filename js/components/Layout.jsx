@@ -1,6 +1,8 @@
 const React = require('react')
 const Helmet = require('react-helmet')
+
 const MetaContainer = require('js/components/MetaContainer')
+const Header = require('js/components/Header')
 
 const Layout = (props) => {
   return (
@@ -15,6 +17,8 @@ const Layout = (props) => {
         ]}
       />
       <MetaContainer />
+      <Header />
+
       {props.children}
     </div>
   )
