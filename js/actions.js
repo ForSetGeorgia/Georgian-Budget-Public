@@ -63,9 +63,16 @@ const finishLoadingData = () => ({
 const updateBudgetItems = () => (dispatch, getState) => {
   const state = getState()
   const locale = state.locale
+  const budgetItemType = state.filters.budgetItemType.value
+  const financeType = state.filters.financeType.value
+  const budgetItems = state.filters.budgetItems.selectedIds
 
   if (state.filters.budgetItems.selectedIds.length === 0) {
     dispatch(setBudgetItems([]))
+    return
+  }
+
+  if (budgetItemType.length === 0 || financeType.length === 0 || budgetItems.length === 0) {
     return
   }
 
@@ -76,10 +83,10 @@ const updateBudgetItems = () => (dispatch, getState) => {
     {
       params: {
         filters: {
-          budgetItemType: state.filters.budgetItemType.value,
-          financeType: state.filters.financeType.value
+          budgetItemType: budgetItemType,
+          financeType: financeType
         },
-        budgetItemIds: state.filters.budgetItems.selectedIds
+        budgetItemIds: budgetItems
       }
     }
   ).catch((error) => {
