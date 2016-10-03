@@ -34,6 +34,18 @@ const Container = React.createClass({
     return this.options.map((option) => option.value)
   },
 
+  updateQueryWithNewType (value) {
+    this.context.router.push(
+      getLocationWithQuery(
+        this.props.location,
+        {
+          budgetItemType: value,
+          budgetItemIds: []
+        }
+      )
+    )
+  },
+
   handleChangeEvent (selected) {
     const { value } = selected
     if (!value) return
@@ -44,12 +56,7 @@ const Container = React.createClass({
     // update the URL query param with the new value
     if (this.props.queryValue === value) return
 
-    this.context.router.push(
-      getLocationWithQuery(
-        this.props.location,
-        { budgetItemType: value }
-      )
-    )
+    this.updateQueryWithNewType(value)
   },
 
   componentDidMount () {

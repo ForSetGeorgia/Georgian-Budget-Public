@@ -43,13 +43,7 @@ const Container = React.createClass({
     }
   },
 
-  handleChange (selected) {
-    const selectedIds = selected.length === 0 ? [] : selected.split(',').map(
-      (id) => Number(id)
-    )
-
-    this.props.dispatchNewSelectedBudgetItemIds(selectedIds)
-
+  updateURLWithSelected (selectedIds) {
     this.context.router.push(
       getLocationWithQuery(
         this.props.location,
@@ -60,12 +54,22 @@ const Container = React.createClass({
     )
   },
 
+  handleChange (selected) {
+    const selectedIds = selected.length === 0 ? [] : selected.split(',').map(
+      (id) => Number(id)
+    )
+
+    this.props.dispatchNewSelectedBudgetItemIds(selectedIds)
+    this.updateURLWithSelected(selectedIds)
+  },
+
   componentDidMount () {
-    this.props.loadOptions()
+    const { loadOptions, querySelectedIds } = this.props
+    loadOptions()
 
-    if (this.props.querySelectedIds.length === 0) return
+    if (!querySelectedIds || querySelectedIds.length === 0) return
 
-    this.handleChange(this.props.querySelectedIds.join(','))
+    this.handleChange(querySelectedIds.join(','))
   },
 
   render () {
