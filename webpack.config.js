@@ -37,6 +37,20 @@ if (UGLIFY) {
   }))
 }
 
+const loaders = [
+  {
+    test: /\.jsx?$/,
+    loader: 'babel'
+  },
+  {
+    test: /\.scss$/,
+    // loader: 'style!css!sass'
+    loader: ExtractTextPlugin.extract('style-loader', UGLIFY ? 'css-loader?minimize!' : 'css-loader')
+  }
+]
+
+console.log('PRELOADERS ARE: ', preloaders)
+console.log('LOADERS ARE: ', loaders)
 console.log('PLUGINS ARE: ', plugins)
 
 module.exports = {
@@ -59,17 +73,7 @@ module.exports = {
   },
   module: {
     preLoaders: preloaders,
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        loader: 'babel'
-      },
-      {
-        test: /\.scss$/,
-        // loader: 'style!css!sass'
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
-      }
-    ]
+    loaders: loaders
   },
   plugins: plugins
 }
