@@ -86,7 +86,8 @@ app.use((req, res) => {
           meta,
           body,
           link,
-          bundleJSFileName
+          bundleJSFileName,
+          url
         }))
       } else {
         res.status(404).send('Not found')

@@ -1,6 +1,6 @@
 const React = require('react')
 const Helmet = require('react-helmet')
-const Meta = require('js/components/Meta')
+const MetaContainer = require('js/components/MetaContainer')
 
 const Layout = (props) => {
   return (
@@ -14,7 +14,7 @@ const Layout = (props) => {
           {'rel': 'stylesheet', 'href': '/public/bundle.css'}
         ]}
       />
-      <Meta url={props.location.pathname} />
+      <MetaContainer />
       {props.children}
     </div>
   )
