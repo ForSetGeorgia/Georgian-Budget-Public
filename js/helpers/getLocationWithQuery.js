@@ -1,3 +1,11 @@
+function QueryParamError(message) {
+  this.message = message
+  this.stack = (new Error()).stack
+}
+
+QueryParamError.prototype = Object.create(Error.prototype)
+QueryParamError.prototype.name = 'QueryParamError'
+
 module.exports = (location, query) => {
   const newQueryKeys = Object.getOwnPropertyNames(query)
 
@@ -5,7 +13,7 @@ module.exports = (location, query) => {
 
   for (let i = 0; i < newQueryKeys.length; i++) {
     if (!allowedQueryKeys.includes(newQueryKeys[i])) {
-      throw `Query key ${newQueryKeys[i]} is not allowed`
+      throw new QueryParamError(`Query key ${newQueryKeys[i]} is not allowed`)
     }
   }
 
