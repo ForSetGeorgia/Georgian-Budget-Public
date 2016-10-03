@@ -41,7 +41,14 @@ const Container = React.createClass({
   },
 
   handleChange (selected) {
-    this.props.dispatchNewSelectedBudgetItemIds(selected)
+    let selectedIds
+    if (selected.length === 0) {
+      selectedIds = []
+    } else {
+      selectedIds = selected.split(',').map((id) => Number(id))
+    }
+
+    this.props.dispatchNewSelectedBudgetItemIds(selectedIds)
   },
 
   render () {
@@ -72,14 +79,7 @@ const mapDispatchToProps = (dispatch) => {
     loadOptions: function (selected) {
       dispatch(updateBudgetItemFilterOptions())
     },
-    dispatchNewSelectedBudgetItemIds: function (selected) {
-      let selectedIds
-      if (selected.length === 0) {
-        selectedIds = []
-      } else {
-        selectedIds = selected.split(',').map((id) => Number(id))
-      }
-
+    dispatchNewSelectedBudgetItemIds: function (selectedIds) {
       dispatch(setSelectedBudgetItemIds(selectedIds))
       dispatch(updateBudgetItems())
     }
