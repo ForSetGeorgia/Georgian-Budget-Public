@@ -36,7 +36,7 @@ let BudgetItemSelect = React.createClass({
     if (this.props.hidden) style.display = 'none'
 
     return (
-      <div style={style}>
+      <div className='filter' style={style}>
         <label htmlFor='budget-item-select'>
           {this.labelText()}
         </label>

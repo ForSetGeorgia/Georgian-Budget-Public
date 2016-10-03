@@ -12,7 +12,7 @@ let BudgetItemTypeSelect = React.createClass({
 
   render: function () {
     return (
-      <div>
+      <div className='filter'>
         <label htmlFor='budget-item-type-select'>
           აირჩიე Budget Item Type
         </label>

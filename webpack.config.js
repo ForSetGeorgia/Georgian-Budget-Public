@@ -1,4 +1,5 @@
 require('dotenv').config()
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const Env = process.env.NODE_ENV || 'development'
 const DEV = Env === 'development'
@@ -23,7 +24,8 @@ if (DEV) {
 const plugins = [
   new webpack.DefinePlugin({
     'process.env.API_URL': JSON.stringify(process.env.API_URL)
-  })
+  }),
+  new ExtractTextPlugin('bundle.css')
 ]
 
 const UGLIFY = STAGING || PROD
@@ -47,7 +49,7 @@ module.exports = {
   },
   devtool: DEV ? 'eval-source-map' : 'source-map',
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.js', '.jsx', '.scss'],
     root: [ path.resolve('.') ]
   },
   stats: {
@@ -60,7 +62,12 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader'
+        loader: 'babel'
+      },
+      {
+        test: /\.scss$/,
+        // loader: 'style!css!sass'
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
       }
     ]
   },
