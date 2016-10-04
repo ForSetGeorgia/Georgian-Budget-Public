@@ -1,4 +1,4 @@
-function QueryParamError(message) {
+function QueryParamError (message) {
   this.message = message
   this.stack = (new Error()).stack
 }
