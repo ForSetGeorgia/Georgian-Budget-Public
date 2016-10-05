@@ -33,7 +33,7 @@ const Container = React.createClass({
 
   render () {
     return <Meta
-      url={this.url()}      
+      url={this.url()}
     />
   }
 })
