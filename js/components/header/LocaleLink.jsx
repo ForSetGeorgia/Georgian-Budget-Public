@@ -1,19 +1,29 @@
 const React = require('react')
-const { string, func } = React.PropTypes
+const { object, string } = React.PropTypes
 
 const LocaleLinkPresentation = require('./LocaleLinkPresentation')
 
 const LocaleLink = React.createClass({
+  contextTypes: {
+    location: object
+  },
+
   propTypes: {
     text: string.isRequired,
-    currentUrlWithLocale: func.isRequired,
     locale: string.isRequired
+  },
+
+  currentUrlWithLocale (locale) {
+    const { pathname, search } = this.context.location
+
+    const newPathname = pathname.replace(/\/\w{2}\//, `/${locale}/`)
+    return `${newPathname}${search}`
   },
 
   render () {
     return (
       <LocaleLinkPresentation
-        currentUrlWithLocale={this.props.currentUrlWithLocale}
+        currentUrlWithLocale={this.currentUrlWithLocale}
         text={this.props.text}
         locale={this.props.locale}
       />
