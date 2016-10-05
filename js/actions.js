@@ -60,6 +60,11 @@ const finishLoadingData = () => ({
   type: 'FINISH_LOADING_DATA'
 })
 
+const setLocale = (value) => ({
+  type: 'SET_LOCALE',
+  value: value
+})
+
 const updateBudgetItems = () => (dispatch, getState) => {
   const state = getState()
   const locale = state.locale
@@ -200,4 +205,14 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
   })
 }
 
-module.exports = { addError, clearErrors, setBudgetItems, setSelectedBudgetItemIds, setFinanceType, setBudgetItemType, updateBudgetItems, updateBudgetItemFilterOptions }
+module.exports = {
+  addError,
+  clearErrors,
+  setBudgetItems,
+  setSelectedBudgetItemIds,
+  setFinanceType,
+  setBudgetItemType,
+  setLocale,
+  updateBudgetItems,
+  updateBudgetItemFilterOptions
+}
