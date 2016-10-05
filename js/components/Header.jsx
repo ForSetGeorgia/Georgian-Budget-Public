@@ -1,6 +1,6 @@
 const React = require('react')
 const { Link } = require('react-router')
-const LocaleLink = require('js/components/LocaleLink')
+const LocaleLink = require('js/components/header/LocaleLink')
 const { object } = React.PropTypes
 
 const Header = React.createClass({
