@@ -23,7 +23,7 @@ const Layout = React.createClass({
     return (
       <div className='layout'>
         <Helmet
-          htmlAttributes={{'lang': 'ka'}}
+          htmlAttributes={{'lang': this.props.params.locale}}
           title='Home'
           titleTemplate='%s | Georgian Budget'
           link={[
