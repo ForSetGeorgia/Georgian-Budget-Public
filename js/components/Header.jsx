@@ -1,5 +1,6 @@
 const React = require('react')
 const { Link } = require('react-router')
+const LocaleLink = require('js/components/LocaleLink')
 const { object } = React.PropTypes
 
 const Header = React.createClass({
@@ -7,7 +8,7 @@ const Header = React.createClass({
     location: object
   },
 
-  urlWithLocale (locale) {
+  currentUrlWithLocale (locale) {
     const { pathname, search } = this.context.location
 
     const newPathname = pathname.replace(/\/\w{2}\//, `/${locale}/`)
@@ -23,12 +24,16 @@ const Header = React.createClass({
         <Link to='/ka/about'>
           შესახებ
         </Link>
-        <Link to={this.urlWithLocale('ka')}>
-          ქართული
-        </Link>
-        <Link to={this.urlWithLocale('en')}>
-          English
-        </Link>
+        <LocaleLink
+          currentUrlWithLocale={this.currentUrlWithLocale}
+          text='ქართული'
+          locale='ka'
+        />
+        <LocaleLink
+          currentUrlWithLocale={this.currentUrlWithLocale}
+          text='English'
+          locale='en'
+        />
       </div>
     )
   }
