@@ -9,12 +9,13 @@ const About = require('js/components/About')
 
 const Routes = () => (
   <div>
-    <Route path='/ka' component={Layout}>
+    <Route path='/:locale' component={Layout}>
       {/* <IndexRoute component={Landing} /> */}
       <IndexRedirect to='explore' />
       <Route path='about' component={About} />
       <Route path='explore' component={Explore} />
     </Route>
+
     <Redirect from='*' to='/ka/explore' />
   </div>
 )

@@ -1,34 +1,43 @@
 const React = require('react')
 const Helmet = require('react-helmet')
+const { object } = React.PropTypes
 
 const MetaContainer = require('js/components/MetaContainer')
 const Header = require('js/components/Header')
 
-const Layout = (props) => {
-  return (
-    <div className='layout'>
-      <Helmet
-        htmlAttributes={{'lang': 'ka'}}
-        title='Home'
-        titleTemplate='%s | Georgian Budget'
-        link={[
-          {'rel': 'stylesheet', 'href': '/public/bundle.css'}
-        ]}
-      />
+const Layout = React.createClass({
+  propTypes: {
+    location: object.isRequired,
+    children: object.isRequired
+  },
 
-      <MetaContainer />
-      <Header />
+  childContextTypes: {
+    location: object
+  },
 
-      {props.children}
-    </div>
-  )
-}
+  getChildContext () {
+    return { location: this.props.location }
+  },
 
-const { object } = React.PropTypes
+  render () {
+    return (
+      <div className='layout'>
+        <Helmet
+          htmlAttributes={{'lang': 'ka'}}
+          title='Home'
+          titleTemplate='%s | Georgian Budget'
+          link={[
+            {'rel': 'stylesheet', 'href': '/public/bundle.css'}
+          ]}
+        />
 
-Layout.propTypes = {
-  location: object.isRequired,
-  children: object.isRequired
-}
+        <MetaContainer />
+        <Header />
+
+        {this.props.children}
+      </div>
+    )
+  }
+})
 
 module.exports = Layout
