@@ -1,6 +1,6 @@
 const React = require('react')
 const Helmet = require('react-helmet')
-const { object } = React.PropTypes
+const { string, shape, object } = React.PropTypes
 
 const MetaContainer = require('js/components/MetaContainer')
 const Header = require('js/components/Header')
@@ -8,7 +8,8 @@ const Header = require('js/components/Header')
 const Layout = React.createClass({
   propTypes: {
     location: object.isRequired,
-    children: object.isRequired
+    children: object.isRequired,
+    params: shape({ shape: string })
   },
 
   childContextTypes: {
