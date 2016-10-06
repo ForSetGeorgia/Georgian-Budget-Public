@@ -44,8 +44,13 @@ const loaders = [
   },
   {
     test: /\.scss$/,
-    // loader: 'style!css!sass'
-    loader: ExtractTextPlugin.extract('style-loader', UGLIFY ? 'css-loader?minimize!' : 'css-loader')
+    loader: ExtractTextPlugin.extract(
+      'style',
+      [
+        UGLIFY ? 'css?minimize!' : 'css',
+        'sass'
+      ]
+    )
   }
 ]
 
