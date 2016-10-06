@@ -1,29 +1,50 @@
 const React = require('react')
-const { object, string } = React.PropTypes
+const { object, string, func } = React.PropTypes
+const { connect } = require('react-redux')
+
+const { setLocale, updateBudgetItemFilterOptions, updateBudgetItems } = require('js/actions')
 
 const LocaleLinkPresentation = require('./LocaleLinkPresentation')
 
 const LocaleLink = React.createClass({
   contextTypes: {
+    router: object,
     location: object
   },
 
   propTypes: {
     text: string.isRequired,
-    locale: string.isRequired
+    locale: string.isRequired,
+    dispatchChangeLocale: func.isRequired
   },
 
-  currentUrlWithLocale (locale) {
-    const { pathname, search } = this.context.location
+  changeLocaleInURL () {
+    const { location, router } = this.context
 
-    const newPathname = pathname.replace(/\/\w{2}\//, `/${locale}/`)
-    return `${newPathname}${search}`
+    const newPathname = location.pathname.replace(
+      /\/\w{2}\//, `/${this.props.locale}/`
+    )
+
+    router.push(
+      Object.assign(
+        {},
+        location,
+        {
+          pathname: newPathname
+        }
+      )
+    )
+  },
+
+  changeLocale () {
+    this.changeLocaleInURL()
+    this.props.dispatchChangeLocale(this.props.locale)
   },
 
   render () {
     return (
       <LocaleLinkPresentation
-        currentUrlWithLocale={this.currentUrlWithLocale}
+        changeLocale={this.changeLocale}
         text={this.props.text}
         locale={this.props.locale}
       />
@@ -31,4 +52,12 @@ const LocaleLink = React.createClass({
   }
 })
 
-module.exports = LocaleLink
+const mapDispatchToProps = (dispatch) => ({
+  dispatchChangeLocale (locale) {
+    dispatch(setLocale(locale))
+    dispatch(updateBudgetItemFilterOptions())
+    dispatch(updateBudgetItems())
+  }
+})
+
+module.exports = connect(null, mapDispatchToProps)(LocaleLink)

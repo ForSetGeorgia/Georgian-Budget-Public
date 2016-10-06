@@ -1,17 +1,15 @@
 const React = require('react')
 const { string, func } = React.PropTypes
-const { Link } = require('react-router')
 
 const LocaleLink = (props) => (
-  <Link to={props.currentUrlWithLocale(props.locale)}>
+  <button type='button' onClick={props.changeLocale}>
     {props.text}
-  </Link>
+  </button>
 )
 
 LocaleLink.propTypes = {
   text: string.isRequired,
-  currentUrlWithLocale: func.isRequired,
-  locale: string.isRequired
+  changeLocale: func.isRequired
 }
 
 module.exports = LocaleLink

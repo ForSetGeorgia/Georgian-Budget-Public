@@ -77,8 +77,10 @@ const updateBudgetItems = () => (dispatch, getState) => {
     return
   }
 
-  if (budgetItemType.length === 0 || financeType.length === 0 || budgetItems.length === 0) {
-    return
+  const requiredState = [locale, budgetItemType, financeType, budgetItems]
+
+  for (let i = 0; i < requiredState.length; i++) {
+    if (requiredState[i].length === 0) return
   }
 
   dispatch(beginLoadingData())
@@ -135,6 +137,12 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
 
   const locale = state.locale
   const budgetItemType = state.filters.budgetItemType.value
+
+  const requiredState = [locale, budgetItemType]
+
+  for (let i = 0; i < requiredState.length; i++) {
+    if (requiredState[i].length === 0) return
+  }
 
   dispatch(startLoadingBudgetItemFilter())
   axios.get(

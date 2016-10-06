@@ -18,5 +18,5 @@ module.exports = {
     errors: [],
     loading: false
   },
-  locale: 'ka'
+  locale: ''
 }
