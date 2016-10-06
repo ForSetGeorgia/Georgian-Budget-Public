@@ -15,6 +15,7 @@ const LocaleLink = React.createClass({
   propTypes: {
     text: string.isRequired,
     locale: string.isRequired,
+    currentLocale: string.isRequired,
     dispatchChangeLocale: func.isRequired
   },
 
@@ -37,8 +38,11 @@ const LocaleLink = React.createClass({
   },
 
   changeLocale () {
+    const { currentLocale, locale, dispatchChangeLocale } = this.props
+    if (currentLocale === locale) return
+
     this.changeLocaleInURL()
-    this.props.dispatchChangeLocale(this.props.locale)
+    dispatchChangeLocale(locale)
   },
 
   render () {
@@ -52,6 +56,10 @@ const LocaleLink = React.createClass({
   }
 })
 
+const mapStateToProps = (state) => ({
+  currentLocale: state.locale
+})
+
 const mapDispatchToProps = (dispatch) => ({
   dispatchChangeLocale (locale) {
     dispatch(setLocale(locale))
@@ -60,4 +68,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-module.exports = connect(null, mapDispatchToProps)(LocaleLink)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(LocaleLink)
