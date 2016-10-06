@@ -22,13 +22,13 @@ const Layout = React.createClass({
 
   childContextTypes: {
     location: object,
-    changeLocale: func
+    handleChangeLocaleEvent: func
   },
 
   getChildContext () {
     return {
       location: this.props.location,
-      changeLocale: this.changeLocale
+      handleChangeLocaleEvent: this.handleChangeLocaleEvent
     }
   },
 
@@ -57,6 +57,10 @@ const Layout = React.createClass({
 
     this.changeLocaleInURL(locale)
     dispatchChangeLocale(locale)
+  },
+
+  handleChangeLocaleEvent (e) {
+    this.changeLocale(e.target.value)
   },
 
   componentDidMount () {

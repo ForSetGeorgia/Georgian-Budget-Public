@@ -1,31 +1,19 @@
 const React = require('react')
 const { string, func } = React.PropTypes
 
-const LocaleLinkPresentation = require('./LocaleLinkPresentation')
+const LocaleLink = ({ locale, text }, { handleChangeLocaleEvent }) => (
+  <button value={locale} type='button' onClick={handleChangeLocaleEvent}>
+    {text}
+  </button>
+)
 
-const LocaleLink = React.createClass({
-  contextTypes: {
-    changeLocale: func
-  },
+LocaleLink.propTypes = {
+  text: string.isRequired,
+  locale: string.isRequired
+}
 
-  propTypes: {
-    text: string.isRequired,
-    locale: string.isRequired
-  },
-
-  changeLocale () {
-    this.context.changeLocale(this.props.locale)
-  },
-
-  render () {
-    return (
-      <LocaleLinkPresentation
-        changeLocale={this.changeLocale}
-        text={this.props.text}
-        locale={this.props.locale}
-      />
-    )
-  }
-})
+LocaleLink.contextTypes = {
+  handleChangeLocaleEvent: func
+}
 
 module.exports = LocaleLink
