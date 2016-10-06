@@ -4,14 +4,14 @@ const { Link } = require('react-router')
 const Helmet = require('react-helmet')
 
 const Landing = () => (
-  <main>
+  <div>
     <Helmet
       title='Home'
     />
     <Link to='/ka/explore/'>
       Click here to explore!
     </Link>
-  </main>
+  </div>
 )
 
 module.exports = Landing

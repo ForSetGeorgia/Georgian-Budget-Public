@@ -39,6 +39,7 @@
     "lodash.template": "^4.4.0",
     "node-ensure": "0.0.0",
     "node-sass": "^3.10.1",
+    "normalize.css": "^5.0.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-helmet": "^3.1.0",

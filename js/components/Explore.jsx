@@ -7,14 +7,14 @@ const Filters = require('./filters/Filters')
 const Explore = React.createClass({
   render () {
     return (
-      <main>
+      <div>
         <Helmet
           title='Explore'
         />
 
         <Filters />
         <DataDisplay />
-      </main>
+      </div>
     )
   }
 })

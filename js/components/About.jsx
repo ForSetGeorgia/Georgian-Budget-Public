@@ -2,13 +2,13 @@ const React = require('react')
 const Helmet = require('react-helmet')
 
 const About = () => (
-  <main>
+  <div>
     <Helmet
       title='About'
     />
 
     This is the about page
-  </main>
+  </div>
 )
 
 module.exports = About

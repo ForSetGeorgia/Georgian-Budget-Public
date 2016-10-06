@@ -71,7 +71,7 @@ const Layout = React.createClass({
 
   render () {
     return (
-      <div className='layout'>
+      <div>
         <Helmet
           htmlAttributes={{'lang': this.props.params.locale}}
           title='Home'
@@ -84,7 +84,9 @@ const Layout = React.createClass({
         <MetaContainer />
         <Header />
 
-        {this.props.children}
+        <main className='main-content'>
+          {this.props.children}
+        </main>
       </div>
     )
   }

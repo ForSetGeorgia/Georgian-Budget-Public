@@ -3,7 +3,7 @@ const { Link } = require('react-router')
 const LocaleLink = require('js/components/header/LocaleLink')
 
 const Header = () => (
-  <div>
+  <div className='app-header'>
     <Link to='/ka/explore'>
       Explore
     </Link>
