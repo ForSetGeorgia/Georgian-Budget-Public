@@ -3,6 +3,8 @@
 @import '~node_modules/normalize.css/normalize.css';
 @import '~node_modules/react-select/dist/react-select.css';
 
-@import 'app-header';
-@import 'main-content';
-@import 'filter';
+@import 'components/app-header';
+@import 'components/app-navigation';
+@import 'components/brand';
+@import 'components/filter';
+@import 'components/main-content';

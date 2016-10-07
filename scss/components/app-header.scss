@@ -1,0 +1,17 @@
+$header-hover-color: black;
+
+.app-header {
+  background: #20cc92;
+  height: 155px;
+}
+
+  .app-header-content {
+    margin: 0 auto;
+    max-width: $max-content-width;
+    padding: 0 $content-padding;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    height: inherit;
+    align-items: center;
+  }

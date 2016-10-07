@@ -22,12 +22,21 @@ const Layout = React.createClass({
 
   childContextTypes: {
     location: object,
+    currentLocale: string,
     handleChangeLocaleEvent: func
   },
 
   getChildContext () {
+    let currentLocale
+    if (this.props.currentLocale) {
+      currentLocale = this.props.currentLocale
+    } else {
+      currentLocale = this.props.params.locale
+    }
+
     return {
       location: this.props.location,
+      currentLocale: currentLocale,
       handleChangeLocaleEvent: this.handleChangeLocaleEvent
     }
   },
