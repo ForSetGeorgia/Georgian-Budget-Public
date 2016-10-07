@@ -54,11 +54,7 @@ const loaders = [
   }
 ]
 
-console.log('PRELOADERS ARE: ', preloaders)
-console.log('LOADERS ARE: ', loaders)
-console.log('PLUGINS ARE: ', plugins)
-
-module.exports = {
+const config = {
   context: __dirname,
   entry: './js/browser.jsx',
   output: {
@@ -82,3 +78,7 @@ module.exports = {
   },
   plugins: plugins
 }
+
+console.log('CONFIG IS: ', config)
+
+module.exports = config
