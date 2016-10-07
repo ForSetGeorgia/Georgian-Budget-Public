@@ -86,7 +86,7 @@ const Layout = React.createClass({
           title='Home'
           titleTemplate='%s | Georgian Budget'
           link={[
-            {'rel': 'stylesheet', 'href': '/public/bundle.css'}
+            {'rel': 'stylesheet', 'href': '/public/bundles/bundle.css'}
           ]}
         />
 

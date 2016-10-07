@@ -39,6 +39,10 @@ const bundleJSFileName = UGLIFY ? 'bundle.min.js' : 'bundle.js'
 app.use((req, res) => {
   var url = req.protocol + '://' + req.get('host') + req.originalUrl
 
+  if (DEV) {
+    webpack_isomorphic_tools.refresh()
+  }
+
   match(
     { routes: Routes(), location: req.url },
     (error, redirectLocation, renderProps) => {

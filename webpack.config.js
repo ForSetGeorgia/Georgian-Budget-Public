@@ -1,5 +1,4 @@
 require('dotenv').config()
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const Env = process.env.NODE_ENV || 'development'
 const DEV = Env === 'development'
@@ -10,6 +9,14 @@ console.log('Running webpack in ' + Env + ' environment')
 
 const path = require('path')
 const webpack = require('webpack')
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const Webpack_isomorphic_tools_plugin = require('webpack-isomorphic-tools/plugin')
+
+var webpack_isomorphic_tools_plugin = new Webpack_isomorphic_tools_plugin(
+  require('./webpack-isomorphic-tools-configuration')
+)
+
+if (DEV) webpack_isomorphic_tools_plugin = webpack_isomorphic_tools_plugin.development()
 
 const preloaders = []
 
@@ -25,7 +32,8 @@ const plugins = [
   new webpack.DefinePlugin({
     'process.env.API_URL': JSON.stringify(process.env.API_URL)
   }),
-  new ExtractTextPlugin('bundle.css')
+  new ExtractTextPlugin('bundle.css'),
+  webpack_isomorphic_tools_plugin
 ]
 
 const UGLIFY = STAGING || PROD
@@ -51,6 +59,10 @@ const loaders = [
         'sass'
       ]
     )
+  },
+  {
+    test: /\.svg$/,
+    loader: 'svg-inline'
   }
 ]
 
@@ -58,13 +70,12 @@ const config = {
   context: __dirname,
   entry: './js/browser.jsx',
   output: {
-    path: path.join(__dirname, '/public'),
-    filename: UGLIFY ? 'bundle.min.js' : 'bundle.js',
-    publicPath: '/public/'
+    path: path.join(__dirname, '/public/bundles'),
+    filename: UGLIFY ? 'bundle.min.js' : 'bundle.js'
   },
   devtool: DEV ? 'eval-source-map' : 'source-map',
   resolve: {
-    extensions: ['', '.js', '.jsx', '.scss'],
+    extensions: ['', '.js', '.jsx', '.scss', '.svg'],
     root: [ path.resolve('.') ]
   },
   stats: {

@@ -10,6 +10,19 @@ const DEV = Env === 'development'
 const STAGING = Env === 'staging'
 const PROD = Env === 'production'
 
-console.log(`Starting app in ${process.env.NODE_ENV} environment`)
+const Webpack_isomorphic_tools = require('webpack-isomorphic-tools')
 
-require('js/server.js')
+const project_base_path = require('path').resolve(__dirname)
+
+global.webpack_isomorphic_tools = new Webpack_isomorphic_tools(
+  require('./webpack-isomorphic-tools-configuration.js')
+)
+
+if (DEV) global.webpack_isomorphic_tools = global.webpack_isomorphic_tools.development()
+
+global.webpack_isomorphic_tools.server(
+  project_base_path,
+  function() {
+    require('js/server.js')
+  }
+)

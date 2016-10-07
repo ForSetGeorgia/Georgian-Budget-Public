@@ -1,4 +1,6 @@
-public/bundle*
+public/bundles/*
+webpack-assets.json
+webpack-stats.json
 node_modules/
 .eslintcache
 .DS_Store

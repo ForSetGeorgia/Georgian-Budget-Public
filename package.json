@@ -52,7 +52,9 @@
     "sass-loader": "^4.0.2",
     "standard": "^8.1.0",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.2"
+    "svg-inline-loader": "^0.7.1",
+    "webpack": "^1.13.2",
+    "webpack-isomorphic-tools": "^2.5.8"
   },
   "devDependencies": {
     "chai": "^3.5.0",

@@ -19,7 +19,7 @@ module.exports = (props) => {
           <div dangerouslySetInnerHTML={{ __html: body }} />
         </div>
 
-        <script src={`/public/${bundleJSFileName}`}></script>
+        <script src={`/public/bundles/${bundleJSFileName}`}></script>
       </body>
     </html>
   )
