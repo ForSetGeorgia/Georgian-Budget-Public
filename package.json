@@ -6,8 +6,8 @@
   "scripts": {
     "test": "NODE_PATH=. mocha --recursive --require test/helpers/setup.js",
     "lint": "standard",
-    "build": "webpack",
-    "watch": "webpack --watch",
+    "build": "NODE_PATH=. webpack --config config/webpack/config.js",
+    "watch": "NODE_PATH=. webpack --watch --config config/webpack/config.js",
     "start": "NODE_PATH=. pm2 start app.js --watch --ignore-watch='public' && pm2 logs app",
     "fix": "standard --fix"
   },

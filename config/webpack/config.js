@@ -1,4 +1,5 @@
 require('dotenv').config()
+const paths = require('config/paths')
 
 const Env = process.env.NODE_ENV || 'development'
 const DEV = Env === 'development'
@@ -13,7 +14,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const Webpack_isomorphic_tools_plugin = require('webpack-isomorphic-tools/plugin')
 
 var webpack_isomorphic_tools_plugin = new Webpack_isomorphic_tools_plugin(
-  require('./webpack-isomorphic-tools-configuration')
+  require('./isomorphic-tools.config.js')
 )
 
 if (DEV) webpack_isomorphic_tools_plugin = webpack_isomorphic_tools_plugin.development()
@@ -67,16 +68,16 @@ const loaders = [
 ]
 
 const config = {
-  context: __dirname,
-  entry: './js/browser.jsx',
+  context: paths.ROOT,
+  entry: 'js/browser.jsx',
   output: {
-    path: path.join(__dirname, '/public/bundles'),
+    path: paths.BUNDLES,
     filename: UGLIFY ? 'bundle.min.js' : 'bundle.js'
   },
   devtool: DEV ? 'eval-source-map' : 'source-map',
   resolve: {
     extensions: ['', '.js', '.jsx', '.scss', '.svg'],
-    root: [ path.resolve('.') ]
+    root: [ paths.ROOT ]
   },
   stats: {
     colors: true,
