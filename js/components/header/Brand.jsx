@@ -1,6 +1,5 @@
 const React = require('react')
 const { Link } = require('react-router')
-
 const Svg = require('js/components/Svg')
 
 const Brand = (_props, { currentLocale }) => {

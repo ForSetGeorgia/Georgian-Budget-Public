@@ -1,6 +1,7 @@
 const React = require('react')
 const { Link } = require('react-router')
 const LocaleLink = require('./LocaleLink')
+const Svg = require('js/components/Svg')
 
 module.exports = () => (
   <div className='app-navigation'>
@@ -30,13 +31,19 @@ module.exports = () => (
       href='https://www.facebook.com/sharer/sharer.php'
       className='app-navigation-link'
     >
-      Facebook
+      <Svg
+        className='app-navigation-link-img'
+        markup={require('public/images/facebook_icon')}
+      />
     </a>
     <a
       href='https://twitter.com/share'
       className='app-navigation-link'
     >
-      Twitter
+    <Svg
+      className='app-navigation-link-img'
+      markup={require('public/images/twitter_icon')}
+    />
     </a>
   </div>
 )

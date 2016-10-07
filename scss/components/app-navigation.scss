@@ -1,14 +1,28 @@
 .app-navigation {}
 
   .app-navigation-link {
-    background-color: initial;
     color: inherit;
     text-decoration: none;
-    border: 0;
-    padding: 0 10px;
-    cursor: pointer;
+    padding: 0 1.5rem;
+    max-height: 1em;
+    display: inline-block;
+    fill: currentColor;
+    vertical-align: middle;
+    line-height: 1;
+    min-height: 1em;
 
     &:hover {
       color: $header-hover-color;
     }
   }
+
+    .app-navigation-link-img {
+      display: block;
+      min-width: 1em;
+      vertical-align: middle;
+    }
+
+      .app-navigation-link-img svg {
+        min-height: 1em;
+        max-height: 1em;
+      }
