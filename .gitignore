@@ -1,5 +1,4 @@
-public/*
-!public/.keep
+public/bundle*
 node_modules/
 .eslintcache
 .DS_Store
