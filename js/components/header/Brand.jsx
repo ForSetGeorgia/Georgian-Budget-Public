@@ -10,7 +10,7 @@ const Brand = (_props, { currentLocale }) => {
     <h1 className='brand'>
 
       <Link className='brand-link' to={`/${currentLocale}`}>
-        <Svg markup={brandSvg} />
+        <Svg className='brand-link-img' markup={brandSvg} />
       </Link>
     </h1>
   )

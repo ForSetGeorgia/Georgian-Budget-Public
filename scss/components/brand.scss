@@ -7,8 +7,13 @@
   .brand-link {
     text-decoration: none;
     color: inherit;
-
-    &:hover {
-      color: $header-hover-color;
-    }
   }
+
+    .brand-link-img {
+      color: inherit;
+      fill: currentColor;
+
+      &:hover {
+        color: $header-hover-color;
+      }
+    }
