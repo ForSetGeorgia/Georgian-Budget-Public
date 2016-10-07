@@ -26,5 +26,17 @@ module.exports = () => (
       locale='en'
       className='app-navigation-link'
     />
+    <a
+      href='https://www.facebook.com/sharer/sharer.php'
+      className='app-navigation-link'
+    >
+      Facebook
+    </a>
+    <a
+      href='https://twitter.com/share'
+      className='app-navigation-link'
+    >
+      Twitter
+    </a>
   </div>
 )
