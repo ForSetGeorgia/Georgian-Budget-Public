@@ -64,6 +64,10 @@ const loaders = [
   {
     test: /\.svg$/,
     loader: 'svg-inline'
+  },
+  {
+    test: /\.ttf$/,
+    loader: 'url?limit=10000'
   }
 ]
 
