@@ -30,25 +30,13 @@ const Provider = ReactRedux.Provider
 // Must specify .js because node does not use webpack
 const store = require('js/store.js')
 
-// Provides templating language used in index.html
-const _template = require('lodash.template')
-
-// Node package, stands for file system. Will be used to read index.html
-// into memory
-const fs = require('fs')
-
 // The port we've chosen to run our app on
 const port = 8080
 
 const Routes = require('js/components/Routes.jsx')
 const Helmet = require('react-helmet')
-const Meta = require('js/components/Meta')
-
-// Read index.html into memory
-const baseTemplate = fs.readFileSync('index.html')
-
-// Create a template function that returns a string based on index.html
-const template = _template(baseTemplate)
+const Meta = require('js/components/Meta.jsx')
+const Html = require('Html.jsx')
 
 const app = express()
 
@@ -77,18 +65,25 @@ app.use((req, res) => {
         React.createElement(Meta, { url })
 
         const head = Helmet.rewind()
-        const title = head.title.toString()
-        const meta = head.meta.toString()
-        const link = head.link.toString()
+        const title = head.title.toComponent()
+        const meta = head.meta.toComponent()
+        const link = head.link.toComponent()
 
-        res.status(200).send(template({
-          title,
-          meta,
-          body,
-          link,
-          bundleJSFileName,
-          url
-        }))
+        const html = '<!DOCTYPE html>' + ReactDOMServer.renderToStaticMarkup(
+          React.createElement(
+            Html,
+            {
+              title,
+              meta,
+              body,
+              link,
+              bundleJSFileName,
+              url
+            }
+          )
+        )
+
+        res.status(200).send(html)
       } else {
         res.status(404).send('Not found')
       }
