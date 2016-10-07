@@ -1,3 +1,5 @@
+// Only used on server
+
 const React = require('react')
 
 module.exports = (props) => {
