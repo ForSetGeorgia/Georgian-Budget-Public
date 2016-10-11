@@ -1,5 +1,13 @@
 .brand {
   margin: 0;
+}
+
+:lang(ka) .brand {
+  min-width: 220px;
+  max-width: 220px;
+}
+
+:lang(en) .brand {
   min-width: 180px;
   max-width: 180px;
 }
