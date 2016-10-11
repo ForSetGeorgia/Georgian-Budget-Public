@@ -40,10 +40,10 @@ module.exports = () => (
       href='https://twitter.com/share'
       className='app-navigation-link'
     >
-    <Svg
-      className='app-navigation-link-img'
-      markup={require('public/images/twitter_icon')}
-    />
+      <Svg
+        className='app-navigation-link-img'
+        markup={require('public/images/twitter_icon')}
+      />
     </a>
   </div>
 )
