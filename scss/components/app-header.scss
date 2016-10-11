@@ -37,6 +37,11 @@ $header-height: 155px;
 
       .app-header-content-brandAndButton-button {
         color: inherit;
+        height: 30px;
+        padding: 0;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-around;
 
         @media (min-width: $width-display-full-menu) {
           display: none;
@@ -46,4 +51,23 @@ $header-height: 155px;
           color: $header-hover-color;
         }
       }
-      
+
+        .app-header-content-brandAndButton-button-bar {
+          display: block;
+          width: 26px;
+          height: 3px;
+          padding: 3px 0;
+          border-radius: 1px;
+          color: inherit;
+          background-color: currentColor;
+          background-clip: content-box;
+          box-sizing: content-box;
+        }
+
+        .app-header-content-brandAndButton-button-bar:first-child {
+          padding-top: 0;
+        }
+
+        .app-header-content-brandAndButton-button-bar:last-child {
+          padding-bottom: 0;
+        }

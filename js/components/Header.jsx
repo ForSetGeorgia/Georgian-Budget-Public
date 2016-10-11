@@ -23,7 +23,9 @@ const Header = React.createClass({
             <Brand />
 
             <button type='button' className='app-header-content-brandAndButton-button' onClick={this.toggleShowMenu}>
-              Menu
+              <span className='app-header-content-brandAndButton-button-bar'></span>
+              <span className='app-header-content-brandAndButton-button-bar'></span>
+              <span className='app-header-content-brandAndButton-button-bar'></span>
             </button>
           </div>
 
