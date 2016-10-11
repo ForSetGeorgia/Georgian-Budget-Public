@@ -1,8 +1,9 @@
+$width-display-full-menu: 700px;
 $header-hover-color: black;
+$header-height: 155px;
 
 .app-header {
   background: #20cc92;
-  height: 155px;
 }
 
   .app-header-content {
@@ -10,8 +11,39 @@ $header-hover-color: black;
     max-width: $max-content-width;
     padding: 0 $content-padding;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     color: white;
     height: inherit;
     align-items: center;
+
+    @media (min-width: $width-display-full-menu) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
+
+    .app-header-content-brandAndButton {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: $header-height;
+
+      @media (min-width: $width-display-full-menu) {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+      .app-header-content-brandAndButton-button {
+        color: inherit;
+
+        @media (min-width: $width-display-full-menu) {
+          display: none;
+        }
+
+        &:hover {
+          color: $header-hover-color;
+        }
+      }
+      

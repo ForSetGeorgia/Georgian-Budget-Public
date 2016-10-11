@@ -1,36 +1,25 @@
-$width-display-full-menu: 700px;
-
-.app-navigation-button {
-  color: inherit;
-
-  @media (min-width: $width-display-full-menu) {
-    display: none;
-  }
-
-  &:hover {
-    color: $header-hover-color;
-  }
-}
-
-.app-navigation-menu {
+.app-navigation {
   display: none;
   flex-direction: column;
+  margin-top: -2.2/10 * $header-height;
 
   @media (min-width: $width-display-full-menu) {
+    margin-top: 0;
     display: flex;
     flex-direction: row;
   }
 }
 
-.app-navigation-menu.is-shown-on-small-screens {
+.app-navigation.is-shown-on-small-screens {
   display: flex;
 }
 
-  .app-navigation-menu-link {
+  .app-navigation-link {
     color: inherit;
     text-decoration: none;
     fill: currentColor;
     vertical-align: middle;
+    padding: 0.5rem;
     line-height: 1;
 
     &:hover {
@@ -45,13 +34,13 @@ $width-display-full-menu: 700px;
     }
   }
 
-    .app-navigation-menu-link-img {
+    .app-navigation-link-img {
       display: block;
       min-width: 1em;
       vertical-align: middle;
     }
 
-      .app-navigation-menu-link-img svg {
+      .app-navigation-link-img svg {
         min-height: 1em;
         max-height: 1em;
       }

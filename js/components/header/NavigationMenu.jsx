@@ -7,41 +7,41 @@ const NavigationMenu = (props) => (
   <div className={props.className}>
     <Link
       to='/ka/explore'
-      className='app-navigation-menu-link'
+      className='app-navigation-link'
     >
       Explore
     </Link>
     <Link
       to='/ka/about'
-      className='app-navigation-menu-link'
+      className='app-navigation-link'
     >
       შესახებ
     </Link>
     <LocaleLink
       text='ქა'
       locale='ka'
-      className='app-navigation-menu-link'
+      className='app-navigation-link'
     />
     <LocaleLink
       text='En'
       locale='en'
-      className='app-navigation-menu-link'
+      className='app-navigation-link'
     />
     <a
       href='https://www.facebook.com/sharer/sharer.php'
-      className='app-navigation-menu-link'
+      className='app-navigation-link'
     >
       <Svg
-        className='app-navigation-menu-link-img'
+        className='app-navigation-link-img'
         markup={require('public/images/facebook_icon')}
       />
     </a>
     <a
       href='https://twitter.com/share'
-      className='app-navigation-menu-link'
+      className='app-navigation-link'
     >
       <Svg
-        className='app-navigation-menu-link-img'
+        className='app-navigation-link-img'
         markup={require('public/images/twitter_icon')}
       />
     </a>

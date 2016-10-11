@@ -16,7 +16,7 @@ const Header = React.createClass({
   },
 
   render () {
-    let menuClassName = 'app-navigation-menu'
+    let menuClassName = 'app-navigation'
     if (this.state.menuIsShownOnSmallScreens) {
       menuClassName += ' is-shown-on-small-screens'
     }
@@ -24,11 +24,13 @@ const Header = React.createClass({
     return (
       <div className='app-header'>
         <header className='app-header-content'>
-          <Brand />
+          <div className='app-header-content-brandAndButton'>
+            <Brand />
 
-          <button type='button' className='app-navigation-button' onClick={this.toggleShowMenu}>
-            Menu
-          </button>
+            <button type='button' className='app-header-content-brandAndButton-button' onClick={this.toggleShowMenu}>
+              Menu
+            </button>
+          </div>
 
           <NavigationMenu className={menuClassName} />
         </header>
