@@ -1,56 +1,57 @@
-$width-display-full-menu: 600px;
+$width-display-full-menu: 700px;
 
-.app-navigation {
+.app-navigation-button {
+  color: inherit;
 
+  @media (min-width: $width-display-full-menu) {
+    display: none;
+  }
+
+  &:hover {
+    color: $header-hover-color;
+  }
 }
 
-  .app-navigation-button {
-    color: inherit;
+.app-navigation-menu {
+  display: none;
+  flex-direction: column;
 
-    @media (min-width: $width-display-full-menu) {
-      display: none;
-    }
+  @media (min-width: $width-display-full-menu) {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.app-navigation-menu.is-shown-on-small-screens {
+  display: flex;
+}
+
+  .app-navigation-menu-link {
+    color: inherit;
+    text-decoration: none;
+    fill: currentColor;
+    vertical-align: middle;
+    line-height: 1;
 
     &:hover {
       color: $header-hover-color;
     }
-  }
-
-  .app-navigation-menu {
-    display: none;
 
     @media (min-width: $width-display-full-menu) {
-      display: initial;
-    }
-  }
-
-  .app-navigation-menu.is-shown-on-small-screens {
-    display: initial;
-  }
-
-    .app-navigation-menu-link {
-      color: inherit;
-      text-decoration: none;
       padding: 0 1.5rem;
       max-height: 1em;
       display: inline-block;
-      fill: currentColor;
-      vertical-align: middle;
-      line-height: 1;
       min-height: 1em;
+    }
+  }
 
-      &:hover {
-        color: $header-hover-color;
-      }
+    .app-navigation-menu-link-img {
+      display: block;
+      min-width: 1em;
+      vertical-align: middle;
     }
 
-      .app-navigation-menu-link-img {
-        display: block;
-        min-width: 1em;
-        vertical-align: middle;
+      .app-navigation-menu-link-img svg {
+        min-height: 1em;
+        max-height: 1em;
       }
-
-        .app-navigation-menu-link-img svg {
-          min-height: 1em;
-          max-height: 1em;
-        }
