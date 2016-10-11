@@ -3,7 +3,7 @@ const { Link } = require('react-router')
 const LocaleLink = require('./LocaleLink')
 const Svg = require('js/components/Svg')
 
-const NavigationMenu = (props) => (
+const Navigation = (props) => (
   <div className={props.className}>
     <Link
       to='/ka/explore'
@@ -50,8 +50,8 @@ const NavigationMenu = (props) => (
 
 const { string } = React.PropTypes
 
-NavigationMenu.propTypes = {
+Navigation.propTypes = {
   className: string
 }
 
-module.exports = NavigationMenu
+module.exports = Navigation

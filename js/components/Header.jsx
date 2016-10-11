@@ -1,6 +1,6 @@
 const React = require('react')
 const Brand = require('js/components/header/Brand')
-const NavigationMenu = require('js/components/header/NavigationMenu')
+const Navigation = require('js/components/header/Navigation')
 
 const Header = React.createClass({
   getInitialState () {
@@ -32,7 +32,7 @@ const Header = React.createClass({
             </button>
           </div>
 
-          <NavigationMenu className={menuClassName} />
+          <Navigation className={menuClassName} />
         </header>
       </div>
     )
