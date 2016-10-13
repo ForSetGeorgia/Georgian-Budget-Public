@@ -15,8 +15,6 @@ addLocaleData(require('node_modules/react-intl/locale-data/ka'))
 const ConnectedIntlProvider = React.createClass({
   propTypes: {
     children: object.isRequired,
-    currentLocale: string.isRequired,
-    messages: object.isRequired,
     params: shape({ locale: string.isRequired }),
     dispatchChangeLocale: func.isRequired,
     location: object.isRequired
@@ -33,11 +31,9 @@ const ConnectedIntlProvider = React.createClass({
   },
 
   getChildContext () {
-    const currentLocale = this.props.params.locale
-
     return {
       location: this.props.location,
-      currentLocale: currentLocale,
+      currentLocale: this.props.params.locale,
       handleChangeLocaleEvent: this.handleChangeLocaleEvent
     }
   },
@@ -63,44 +59,37 @@ const ConnectedIntlProvider = React.createClass({
     )
   },
 
-  changeLocale (locale) {
-    const { currentLocale, dispatchChangeLocale } = this.props
-    if (currentLocale === locale) return
+  changeLocale (newLocale) {
+    const { params, dispatchChangeLocale } = this.props
+    if (params.locale === newLocale) return
 
-    this.changeLocaleInURL(locale)
-    dispatchChangeLocale(locale)
+    this.changeLocaleInURL(newLocale)
+    dispatchChangeLocale(newLocale)
+  },
+
+  componentDidMount () {
+    this.props.dispatchChangeLocale(this.props.params.locale)
   },
 
   handleChangeLocaleEvent (e) {
     this.changeLocale(e.target.value)
   },
 
-  locale () {
-    if (this.props.currentLocale) return this.props.currentLocale
-    return this.props.params.locale
-  },
-
   messages () {
-    return require(`locales/${this.locale()}.json`)
+    return require(`locales/${this.props.params.locale}.json`)
   },
 
   render () {
+    const { locale } = this.props.params
     const { children } = this.props
 
     return (
-      <IntlProvider locale={this.locale()} messages={this.messages()}>
-        <Layout children={children} locale={this.locale()} />
+      <IntlProvider locale={locale} messages={this.messages()}>
+        <Layout children={children} locale={locale} />
       </IntlProvider>
     )
   }
 })
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    currentLocale: state.locale,
-    messages: state.messages
-  }
-}
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchChangeLocale (locale) {
@@ -110,4 +99,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(ConnectedIntlProvider)
+module.exports = connect(null, mapDispatchToProps)(ConnectedIntlProvider)
