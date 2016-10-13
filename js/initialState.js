@@ -18,5 +18,6 @@ module.exports = {
     errors: [],
     loading: false
   },
-  locale: ''
+  locale: '',
+  messages: {}
 }

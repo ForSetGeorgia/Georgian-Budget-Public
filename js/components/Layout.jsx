@@ -2,7 +2,12 @@ const React = require('react')
 const Helmet = require('react-helmet')
 const { string, shape, object, func } = React.PropTypes
 const { connect } = require('react-redux')
-const { setLocale, updateBudgetItemFilterOptions, updateBudgetItems } = require('js/actions')
+const {
+  setLocale,
+  setMessages,
+  updateBudgetItemFilterOptions,
+  updateBudgetItems
+} = require('js/actions')
 
 const MetaContainer = require('js/components/MetaContainer')
 const Header = require('js/components/Header')
@@ -48,6 +53,8 @@ const Layout = React.createClass({
     const newPathname = location.pathname.replace(
       /\/\w{2}\//, `/${locale}/`
     )
+
+    if (newPathname === location.pathname) return
 
     router.push(
       Object.assign(
@@ -108,6 +115,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatchChangeLocale (locale) {
     dispatch(setLocale(locale))
+    const messages = require(`locales/${locale}.json`)
+
+    dispatch(setMessages(messages))
     dispatch(updateBudgetItemFilterOptions())
     dispatch(updateBudgetItems())
   }

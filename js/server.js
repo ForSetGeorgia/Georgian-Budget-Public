@@ -15,6 +15,8 @@ const ReactRouter = require('react-router')
 const RouterContext = ReactRouter.RouterContext
 const match = ReactRouter.match
 
+const IntlProvider = require('react-intl').IntlProvider
+
 const ReactRedux = require('react-redux')
 const Provider = ReactRedux.Provider
 
@@ -51,9 +53,14 @@ app.use((req, res) => {
       } else if (redirectLocation) {
         res.redirect(302, redirectLocation.pathname + redirectLocation.search)
       } else if (renderProps) {
+        const locale = req.originalUrl.match(/\/(\w{2})\//)[1]
+        const messages = require(`locales/${locale}.json`)
+
         const body = ReactDOMServer.renderToString(
           React.createElement(Provider, {store},
-            React.createElement(RouterContext, renderProps)
+            React.createElement(IntlProvider, {locale, messages},
+              React.createElement(RouterContext, renderProps)
+            )
           )
         )
 

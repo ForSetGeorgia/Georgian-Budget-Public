@@ -65,6 +65,11 @@ const setLocale = (value) => ({
   value: value
 })
 
+const setMessages = (messages) => ({
+  type: 'SET_MESSAGES',
+  messages
+})
+
 const updateBudgetItems = () => (dispatch, getState) => {
   const state = getState()
   const locale = state.locale
@@ -221,6 +226,7 @@ module.exports = {
   setFinanceType,
   setBudgetItemType,
   setLocale,
+  setMessages,
   updateBudgetItems,
   updateBudgetItemFilterOptions
 }

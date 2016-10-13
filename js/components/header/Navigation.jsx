@@ -2,6 +2,7 @@ const React = require('react')
 const { Link } = require('react-router')
 const LocaleLink = require('./LocaleLink')
 const Svg = require('js/components/Svg')
+const { FormattedMessage } = require('react-intl')
 
 const Navigation = (props) => {
   let className = 'app-navigation'
@@ -21,7 +22,10 @@ const Navigation = (props) => {
         to='/ka/about'
         className='app-navigation-link'
       >
-        შესახებ
+        <FormattedMessage
+          id='about'
+          defaultMessage='Default'
+        />
       </Link>
       <LocaleLink
         text='ქა'

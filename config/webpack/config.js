@@ -68,6 +68,10 @@ const loaders = [
   {
     test: /\.ttf$/,
     loader: 'url?limit=10000'
+  },
+  {
+    test: /\.json$/,
+    loader: 'json'
   }
 ]
 
