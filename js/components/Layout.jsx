@@ -115,9 +115,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatchChangeLocale (locale) {
     dispatch(setLocale(locale))
-    const messages = require(`locales/${locale}.json`)
 
+    const messages = require(`locales/${locale}.json`)
     dispatch(setMessages(messages))
+
     dispatch(updateBudgetItemFilterOptions())
     dispatch(updateBudgetItems())
   }
