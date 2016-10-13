@@ -16,15 +16,20 @@ const Navigation = (props) => {
         to='/ka/explore'
         className='app-navigation-link'
       >
-        Explore
+        <FormattedMessage
+          id='app.header.explore'
+          description='Explore link in the Header navigation'
+          defaultMessage='Explore'
+        />
       </Link>
       <Link
         to='/ka/about'
         className='app-navigation-link'
       >
         <FormattedMessage
-          id='about'
-          defaultMessage='Default'
+          id='app.header.about'
+          description='About link in the Header navigation'
+          defaultMessage='About'
         />
       </Link>
       <LocaleLink
