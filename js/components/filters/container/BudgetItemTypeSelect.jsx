@@ -1,6 +1,7 @@
 const React = require('react')
 const { string, func, object } = React.PropTypes
 const { connect } = require('react-redux')
+const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const BudgetItemTypeSelect = require('../presentation/BudgetItemTypeSelect')
 
@@ -8,6 +9,19 @@ const {
   setBudgetItemType,
   updateBudgetItemFilterOptions
 } = require('js/actions')
+
+const messages = defineMessages({
+  label: {
+    id: 'app.filters.budgetItemType.label',
+    description: 'Label text for budget item type filter',
+    defaultMessage: 'Select budget item type'
+  },
+  programs: {
+    id: 'budgetType.program.other',
+    description: 'The text for multiple programs',
+    defaultMessage: 'Programs'
+  }
+})
 
 const Container = React.createClass({
   contextTypes: {
@@ -18,20 +32,25 @@ const Container = React.createClass({
     value: string,
     queryValue: string,
     dispatchBudgetItemType: func,
-    location: object
+    location: object,
+    intl: intlShape
   },
 
   defaultValue: 'total',
 
-  options: [
-    { value: 'total', label: 'საქართველოს მთლიანი ბიუჯეტი' },
-    { value: 'program', label: 'პროგრამები' },
-    { value: 'spending_agency', label: 'მხარჯავი დაწესებულებები' },
-    { value: 'priority', label: 'პრიორიტეტები' }
-  ],
+  options () {
+    const { intl } = this.props
 
-  get optionValues () {
-    return this.options.map((option) => option.value)
+    return [
+      { value: 'total', label: 'საქართველოს მთლიანი ბიუჯეტი' },
+      { value: 'program', label: intl.formatMessage(messages.programs) },
+      { value: 'spending_agency', label: 'მხარჯავი დაწესებულებები' },
+      { value: 'priority', label: 'პრიორიტეტები' }
+    ]
+  },
+
+  optionValues () {
+    return this.options().map((option) => option.value)
   },
 
   updateQueryWithNewType (value) {
@@ -62,7 +81,7 @@ const Container = React.createClass({
   componentDidMount () {
     const { queryValue } = this.props
 
-    if (this.optionValues.includes(queryValue)) {
+    if (this.optionValues().includes(queryValue)) {
       this.handleChangeEvent({ value: queryValue })
     } else {
       this.handleChangeEvent({ value: this.defaultValue })
@@ -71,9 +90,10 @@ const Container = React.createClass({
 
   render () {
     return <BudgetItemTypeSelect
+      label={this.props.intl.formatMessage(messages.label)}
       value={this.props.value}
       handleChangeEvent={this.handleChangeEvent}
-      options={this.options}
+      options={this.options()}
     />
   }
 
@@ -93,4 +113,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(Container)
+module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(Container))

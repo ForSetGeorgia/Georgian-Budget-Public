@@ -5,6 +5,7 @@ const Select = require('react-select')
 
 let BudgetItemTypeSelect = React.createClass({
   propTypes: {
+    label: string,
     value: string,
     handleChangeEvent: func,
     options: arrayOf(shape({ value: string, label: string }))
@@ -14,7 +15,7 @@ let BudgetItemTypeSelect = React.createClass({
     return (
       <div className='filter'>
         <label htmlFor='budget-item-type-select'>
-          აირჩიე სახეობა
+          {this.props.label}
         </label>
         <Select
           id='budget-item-type-select'

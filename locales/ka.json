@@ -1,4 +1,6 @@
 {
   "app.header.about": "შესახებ",
-  "app.header.explore": "ექსპლორი"
+  "app.header.explore": "ექსპლორი",
+  "app.filters.budgetItemType.label": "აირჩიე სახეობა",
+  "budgetType.program.other": "პროგრამები"
 }
