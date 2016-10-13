@@ -53,20 +53,16 @@ app.use((req, res) => {
       } else if (redirectLocation) {
         res.redirect(302, redirectLocation.pathname + redirectLocation.search)
       } else if (renderProps) {
-        const locale = req.originalUrl.match(/\/(\w{2})\//)[1]
-        const messages = require(`locales/${locale}.json`)
-
         const body = ReactDOMServer.renderToString(
           React.createElement(Provider, {store},
-            React.createElement(IntlProvider, {locale, messages},
-              React.createElement(RouterContext, renderProps)
-            )
+            React.createElement(RouterContext, renderProps)
           )
         )
 
         React.createElement(Meta, { url })
 
         const head = Helmet.rewind()
+        const htmlAttributes = head.htmlAttributes.toComponent()
         const title = head.title.toComponent()
         const meta = head.meta.toComponent()
         const link = head.link.toComponent()
@@ -75,6 +71,7 @@ app.use((req, res) => {
           React.createElement(
             Html,
             {
+              htmlAttributes,
               title,
               meta,
               body,

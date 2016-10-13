@@ -3,10 +3,10 @@
 const React = require('react')
 
 module.exports = (props) => {
-  const { title, meta, body, link, bundleJSFileName, url } = props
+  const { htmlAttributes, title, meta, body, link, bundleJSFileName, url } = props
 
   return (
-    <html lang="en">
+    <html {...htmlAttributes}>
       <head>
         {meta}
 
