@@ -71,6 +71,30 @@ const Container = React.createClass({
     this.handleChange(querySelectedIds.join(','))
   },
 
+  labelText () {
+    let type
+
+    switch (this.props.budgetItemType) {
+      case 'spending_agency':
+        type = 'spendingAgency'
+        break
+      case 'total':
+        type = 'wholeBudget'
+        break
+      default:
+        type = this.props.budgetItemType
+    }
+
+    return this.props.intl.formatMessage(
+      messages.label,
+      {
+        type: type ? this.props.intl.formatMessage(
+          budgetItemTypeMessages[type].one
+        ) : ''
+      }
+    )
+  },
+
   render () {
     return (
       <BudgetItemSelect
@@ -80,14 +104,7 @@ const Container = React.createClass({
         hidden={this.props.hidden}
         loading={this.props.loading}
         handleChange={this.handleChange}
-        labelText={this.props.intl.formatMessage(
-          messages.label,
-          {
-            type: this.props.intl.formatMessage(
-              budgetItemTypeMessages.program.one
-            )
-          }
-        )}
+        labelText={this.labelText()}
       />
     )
   }

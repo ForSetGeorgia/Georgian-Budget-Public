@@ -4,7 +4,7 @@
   "app.filters.budgetItemType.label": "აირჩიე სახეობა",
   "app.filters.financeType.label": "აირჩიე ფინანსები",
   "app.filters.budgetItem.label": "აირჩიე {type}",
-  "budgetType.wholeBudget.one": "საქართველოს მთლიანი ბიუჯეტი",
+  "budgetType.wholeBudget.one": "მთლიანი ბიუჯეტი",
   "budgetType.program.one": "პროგრამა",
   "budgetType.program.other": "პროგრამები",
   "budgetType.spendingAgency.one": "მხარჯავი დაწესებულება",
