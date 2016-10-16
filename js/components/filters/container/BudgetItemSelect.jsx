@@ -1,6 +1,9 @@
 const React = require('react')
 const { object, func, number, arrayOf, shape, string, bool } = React.PropTypes
 const { connect } = require('react-redux')
+const { injectIntl, intlShape, defineMessages } = require('react-intl')
+
+const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const BudgetItemSelect = require('../presentation/BudgetItemSelect')
 
@@ -9,6 +12,14 @@ const {
   updateBudgetItems,
   updateBudgetItemFilterOptions
 } = require('js/actions')
+
+const messages = defineMessages({
+  label: {
+    id: 'app.filters.budgetItem.label',
+    description: 'Budget item filter label',
+    defaultMessage: 'Select {type}'
+  }
+})
 
 const Container = React.createClass({
   contextTypes: {
@@ -27,20 +38,8 @@ const Container = React.createClass({
     loading: bool,
     dispatchNewSelectedBudgetItemIds: func,
     loadOptions: func,
-    location: object
-  },
-
-  labelText () {
-    switch (this.props.budgetItemType) {
-      case 'program':
-        return 'აირჩიე პროგრამა'
-      case 'priority':
-        return 'აირჩიე პრიორიტეტი'
-      case 'spending_agency':
-        return 'აირჩიე მხარჯავი დაწესებულება'
-      default:
-        return 'none'
-    }
+    location: object,
+    intl: intlShape
   },
 
   updateURLWithSelected (selectedIds) {
@@ -81,7 +80,14 @@ const Container = React.createClass({
         hidden={this.props.hidden}
         loading={this.props.loading}
         handleChange={this.handleChange}
-        labelText={this.labelText()}
+        labelText={this.props.intl.formatMessage(
+          messages.label,
+          {
+            type: this.props.intl.formatMessage(
+              budgetItemTypeMessages.program.one
+            )
+          }
+        )}
       />
     )
   }
@@ -112,4 +118,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(Container)
+module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(Container))
