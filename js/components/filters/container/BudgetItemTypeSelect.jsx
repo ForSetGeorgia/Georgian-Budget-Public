@@ -4,6 +4,7 @@ const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const BudgetItemTypeSelect = require('../presentation/BudgetItemTypeSelect')
+const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 
 const {
   setBudgetItemType,
@@ -15,28 +16,7 @@ const messages = defineMessages({
     id: 'app.filters.budgetItemType.label',
     description: 'Label text for budget item type filter',
     defaultMessage: 'Select budget item type'
-  },
-  wholeBudget: {
-    id: 'budgetType.wholeBudget',
-    description: 'Name of the whole Georgian budget',
-    defaultMessage: 'Whole Budget'
-  },
-  programs: {
-    id: 'budgetType.program.other',
-    description: 'The text for multiple programs',
-    defaultMessage: 'Programs'
-  },
-  spendingAgencies: {
-    id: 'budgetType.spendingAgency.other',
-    description: 'Multiple spending agencies',
-    defaultMessage: 'Spending Agencies'
-  },
-  priorities: {
-    id: 'budgetType.priority.other',
-    description: 'Multiple priorities',
-    defaultMessage: 'Priorities'
   }
-
 })
 
 const Container = React.createClass({
@@ -58,10 +38,10 @@ const Container = React.createClass({
     const { intl } = this.props
 
     return [
-      { value: 'total', label: intl.formatMessage(messages.wholeBudget) },
-      { value: 'program', label: intl.formatMessage(messages.programs) },
-      { value: 'spending_agency', label: intl.formatMessage(messages.spendingAgencies) },
-      { value: 'priority', label: intl.formatMessage(messages.priorities) }
+      { value: 'total', label: intl.formatMessage(budgetItemTypeMessages.wholeBudget.one) },
+      { value: 'program', label: intl.formatMessage(budgetItemTypeMessages.program.other) },
+      { value: 'spending_agency', label: intl.formatMessage(budgetItemTypeMessages.spendingAgency.other) },
+      { value: 'priority', label: intl.formatMessage(budgetItemTypeMessages.priority.other) }
     ]
   },
 

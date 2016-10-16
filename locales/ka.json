@@ -4,10 +4,12 @@
   "app.filters.budgetItemType.label": "აირჩიე სახეობა",
   "app.filters.financeType.label": "აირჩიე ფინანსები",
   "app.filters.budgetItem.label": "აირჩიე {type}",
-  "budgetType.wholeBudget": "საქართველოს მთლიანი ბიუჯეტი",
+  "budgetType.wholeBudget.one": "საქართველოს მთლიანი ბიუჯეტი",
   "budgetType.program.one": "პროგრამა",
   "budgetType.program.other": "პროგრამები",
+  "budgetType.spendingAgency.one": "მხარჯავი დაწესებულება",
   "budgetType.spendingAgency.other": "მხარჯავი დაწესებულებები",
+  "budgetType.priority.one": "პრიორიტეტი",
   "budgetType.priority.other": "პრიორიტეტები",
   "financeType.spentFinance.other": "დახარჯული ფინანსები",
   "financeType.plannedFinance.other": "დაგეგმილი ფინანსები"
