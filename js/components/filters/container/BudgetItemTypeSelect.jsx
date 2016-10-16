@@ -16,11 +16,27 @@ const messages = defineMessages({
     description: 'Label text for budget item type filter',
     defaultMessage: 'Select budget item type'
   },
+  wholeBudget: {
+    id: 'budgetType.wholeBudget',
+    description: 'Name of the whole Georgian budget',
+    defaultMessage: 'Whole Budget'
+  },
   programs: {
     id: 'budgetType.program.other',
     description: 'The text for multiple programs',
     defaultMessage: 'Programs'
+  },
+  spendingAgencies: {
+    id: 'budgetType.spendingAgency.other',
+    description: 'Multiple spending agencies',
+    defaultMessage: 'Spending Agencies'
+  },
+  priorities: {
+    id: 'budgetType.priority.other',
+    description: 'Multiple priorities',
+    defaultMessage: 'Priorities'
   }
+
 })
 
 const Container = React.createClass({
@@ -42,10 +58,10 @@ const Container = React.createClass({
     const { intl } = this.props
 
     return [
-      { value: 'total', label: 'საქართველოს მთლიანი ბიუჯეტი' },
+      { value: 'total', label: intl.formatMessage(messages.wholeBudget) },
       { value: 'program', label: intl.formatMessage(messages.programs) },
-      { value: 'spending_agency', label: 'მხარჯავი დაწესებულებები' },
-      { value: 'priority', label: 'პრიორიტეტები' }
+      { value: 'spending_agency', label: intl.formatMessage(messages.spendingAgencies) },
+      { value: 'priority', label: intl.formatMessage(messages.priorities) }
     ]
   },
 

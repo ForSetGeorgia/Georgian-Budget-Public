@@ -5,7 +5,7 @@ const FinanceTypeSelect = (props) => {
   return (
     <div className='filter'>
       <label htmlFor='finance-type-select'>
-        აირჩიე ფინანსები
+        {props.label}
       </label>
       <Select
         id='finance-type-select'
@@ -24,7 +24,8 @@ const { string, func, arrayOf, shape } = React.PropTypes
 FinanceTypeSelect.propTypes = {
   value: string.isRequired,
   handleChange: func.isRequired,
-  options: arrayOf(shape({ value: string, label: string })).isRequired
+  options: arrayOf(shape({ value: string, label: string })).isRequired,
+  label: string.isRequired
 }
 
 module.exports = FinanceTypeSelect

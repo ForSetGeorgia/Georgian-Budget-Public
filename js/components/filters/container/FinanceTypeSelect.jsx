@@ -1,9 +1,29 @@
 const React = require('react')
 const { object, string, func } = React.PropTypes
 const { connect } = require('react-redux')
+const { injectIntl, intlShape, defineMessages } = require('react-intl')
+
 const { setFinanceType, updateBudgetItems } = require('js/actions')
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const FinanceTypeSelect = require('../presentation/FinanceTypeSelect')
+
+const messages = defineMessages({
+  label: {
+    id: 'app.filters.financeType.label',
+    description: 'Label for finance type filter',
+    defaultMessage: 'Select finance type'
+  },
+  spentFinance: {
+    id: 'financeType.spentFinance.other',
+    description: 'Multiple spent finances',
+    defaultMessage: 'Spent Finances'
+  },
+  plannedFinance: {
+    id: 'financeType.plannedFinance.other',
+    description: 'Multiple planned finances',
+    defaultMessage: 'Planned Finances'
+  }
+})
 
 const Container = React.createClass({
   contextTypes: {
@@ -14,18 +34,23 @@ const Container = React.createClass({
     dispatchNewFinanceType: func.isRequired,
     value: string.isRequired,
     queryValue: string,
-    location: object
+    location: object,
+    intl: intlShape
   },
 
   defaultValue: 'spent_finance',
 
-  options: [
-    { value: 'spent_finance', label: 'დახარჯული ფინანსები' },
-    { value: 'planned_finance', label: 'დაგეგმილი ფინანსები' }
-  ],
+  options () {
+    const { intl } = this.props
 
-  get optionValues () {
-    return this.options.map((option) => option.value)
+    return [
+      { value: 'spent_finance', label: intl.formatMessage(messages.spentFinance) },
+      { value: 'planned_finance', label: intl.formatMessage(messages.plannedFinance) }
+    ]
+  },
+
+  optionValues () {
+    return this.options().map((option) => option.value)
   },
 
   handleChangeEvent (selected) {
@@ -43,7 +68,7 @@ const Container = React.createClass({
   componentDidMount () {
     const { queryValue } = this.props
 
-    if (this.optionValues.includes(queryValue)) {
+    if (this.optionValues().includes(queryValue)) {
       this.handleChangeEvent({ value: queryValue })
     } else {
       this.handleChangeEvent({ value: this.defaultValue })
@@ -51,11 +76,14 @@ const Container = React.createClass({
   },
 
   render () {
+    const { intl, value } = this.props
+
     return (
       <FinanceTypeSelect
         handleChange={this.handleChangeEvent}
-        value={this.props.value}
-        options={this.options}
+        value={value}
+        options={this.options()}
+        label={intl.formatMessage(messages.label)}
       />
     )
   }
@@ -75,4 +103,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(Container)
+module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(Container))
