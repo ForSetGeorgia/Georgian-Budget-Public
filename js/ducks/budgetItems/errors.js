@@ -1,5 +1,5 @@
-const ADD_ERROR = 'georgianBudget/data/errors/ADD_ERROR'
-const CLEAR_ERRORS = 'georgianBudget/data/errors/CLEAR_ERRORS'
+const ADD_ERROR = 'georgianBudget/budgetItems/errors/ADD_ERROR'
+const CLEAR_ERRORS = 'georgianBudget/budgetItems/errors/CLEAR_ERRORS'
 
 const reducer = (state = [], action) => {
   switch (action.type) {

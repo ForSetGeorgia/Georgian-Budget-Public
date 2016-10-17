@@ -1,5 +1,5 @@
-const BEGIN_LOADING_DATA = 'georgianBudget/data/loading/BEGIN_LOADING_DATA'
-const FINISH_LOADING_DATA = 'georgianBudget/data/loading/FINISH_LOADING_DATA'
+const BEGIN_LOADING_DATA = 'georgianBudget/budgetItems/loading/BEGIN_LOADING_DATA'
+const FINISH_LOADING_DATA = 'georgianBudget/budgetItems/loading/FINISH_LOADING_DATA'
 
 const reducer = (state = false, action) => {
   switch (action.type) {

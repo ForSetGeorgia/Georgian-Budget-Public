@@ -37,7 +37,7 @@ BudgetItemSelect.propTypes = {
     id: number.isRequired,
     name: string.isRequired
   })).isRequired,
-  hidden: bool,
+  visible: bool,
   labelText: string,
   loading: bool
 }

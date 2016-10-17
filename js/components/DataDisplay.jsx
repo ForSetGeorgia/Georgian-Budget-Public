@@ -10,7 +10,7 @@ let DataDisplay = React.createClass({
   propTypes: {
     errors: arrayOf(object).isRequired,
     loading: bool.isRequired,
-    budgetItems: arrayOf(object).isRequired
+    data: arrayOf(object).isRequired
   },
 
   render: function () {
@@ -32,11 +32,11 @@ let DataDisplay = React.createClass({
       )
     }
 
-    if (this.props.budgetItems.length > 0) {
+    if (this.props.data.length > 0) {
       return (
         <div>
           {
-            this.props.budgetItems.map(
+            this.props.data.map(
               function (budgetItem) {
                 if (!budgetItem) return null
 
@@ -62,7 +62,7 @@ let DataDisplay = React.createClass({
 })
 
 const mapStateToProps = function (state) {
-  return state.data
+  return state.budgetItems
 }
 
 DataDisplay = connect(mapStateToProps)(DataDisplay)

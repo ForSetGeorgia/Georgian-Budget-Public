@@ -6,7 +6,7 @@ const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const BudgetItemTypeSelect = require('../presentation/BudgetItemTypeSelect')
 const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 
-const { setBudgetItems } = require('js/ducks/data/budgetItems')
+const { setBudgetItems } = require('js/ducks/budgetItems/data')
 
 const { setBudgetItemsFilterVisibility } =
 require('js/ducks/filters/budgetItems')

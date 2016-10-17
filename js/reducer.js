@@ -3,7 +3,7 @@ const { routerReducer } = require('react-router-redux')
 
 const reducer = combineReducers({
   filters: require('js/ducks/filters'),
-  data: require('js/ducks/data'),
+  budgetItems: require('js/ducks/budgetItems'),
   locale: require('js/ducks/locale'),
   routing: routerReducer
 })

@@ -13,8 +13,8 @@ module.exports = {
       value: ''
     }
   },
-  data: {
-    budgetItems: [],
+  budgetItems: {
+    data: [],
     errors: [],
     loading: false
   },
