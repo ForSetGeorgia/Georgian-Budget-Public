@@ -3,15 +3,13 @@
 
 const { expect } = require('chai')
 const locale = require('js/ducks/locale')
+const { setLocale } = locale
 
 describe('locale reducer', () => {
-  it('handles SET_LOCALE action', () => {
+  it('handles setLocale action', () => {
     const previousState = 'ka'
 
-    const action = {
-      type: 'SET_LOCALE',
-      value: 'en'
-    }
+    const action = setLocale('en')
 
     const nextState = locale(previousState, action)
 

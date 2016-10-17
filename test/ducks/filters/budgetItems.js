@@ -2,11 +2,18 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const budgetItemsFilter = require('js/ducks/filters/budgetItems')
 const initialState = require('js/initialState').filters.budgetItems
+const budgetItemsFilter = require('js/ducks/filters/budgetItems')
+
+const {
+  startLoadingBudgetItemFilter,
+  finishLoadingBudgetItemFilter,
+  setBudgetItemFilterOptions,
+  setSelectedBudgetItemIds
+} = budgetItemsFilter
 
 describe('budget items filter reducer', () => {
-  it('handles START_LOADING_BUDGET_ITEM_FILTER', () => {
+  it('handles startLoadingBudgetItemFilter action', () => {
     const previousState = Object.assign(
       {},
       initialState,
@@ -15,10 +22,7 @@ describe('budget items filter reducer', () => {
       }
     )
 
-    const action = {
-      type: 'START_LOADING_BUDGET_ITEM_FILTER'
-    }
-
+    const action = startLoadingBudgetItemFilter()
     const newState = budgetItemsFilter(previousState, action)
 
     const expectedState = Object.assign(
@@ -32,7 +36,7 @@ describe('budget items filter reducer', () => {
     expect(newState).to.deep.equal(expectedState)
   })
 
-  it('handles FINISH_LOADING_BUDGET_ITEM_FILTER', () => {
+  it('handles finishLoadingBudgetItemFilter', () => {
     const previousState = Object.assign(
       {},
       initialState,
@@ -41,10 +45,7 @@ describe('budget items filter reducer', () => {
       }
     )
 
-    const action = {
-      type: 'FINISH_LOADING_BUDGET_ITEM_FILTER'
-    }
-
+    const action = finishLoadingBudgetItemFilter()
     const newState = budgetItemsFilter(previousState, action)
 
     const expectedState = Object.assign(
@@ -120,7 +121,7 @@ describe('budget items filter reducer', () => {
     expect(newState).to.deep.equal(expectedState)
   })
 
-  it('handles SET_BUDGET_ITEM_FILTER_OPTIONS action', () => {
+  it('handles setBudgetItemFilterOptions action', () => {
     const previousState = Object.assign(
       {},
       initialState,
@@ -131,13 +132,10 @@ describe('budget items filter reducer', () => {
       }
     )
 
-    const action = {
-      type: 'SET_BUDGET_ITEM_FILTER_OPTIONS',
-      options: [
-        { id: 12, name: 'hello' },
-        { id: 54, name: 'fdf' }
-      ]
-    }
+    const action = setBudgetItemFilterOptions([
+      { id: 12, name: 'hello' },
+      { id: 54, name: 'fdf' }
+    ])
 
     const newState = budgetItemsFilter(previousState, action)
 
@@ -155,7 +153,7 @@ describe('budget items filter reducer', () => {
     expect(newState).to.deep.equal(expectedState)
   })
 
-  it('handles SET_SELECTED_BUDGET_ITEM_IDS action', () => {
+  it('handles setSelectedBudgetItemIds action', () => {
     const previousState = Object.assign(
       {},
       initialState,
@@ -164,11 +162,7 @@ describe('budget items filter reducer', () => {
       }
     )
 
-    const action = {
-      type: 'SET_SELECTED_BUDGET_ITEM_IDS',
-      ids: [4, 6, 1]
-    }
-
+    const action = setSelectedBudgetItemIds([4, 6, 1])
     const newState = budgetItemsFilter(previousState, action)
 
     const expectedState = Object.assign(
