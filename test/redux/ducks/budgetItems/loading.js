@@ -3,21 +3,21 @@
 
 const { expect } = require('chai')
 const loading = require('js/redux/ducks/budgetItems/loading')
-const { beginLoadingData, finishLoadingData } = loading
+const { beginLoadingBudgetItems, finishLoadingBudgetItems } = loading
 
 describe('data loading reducer', () => {
-  it('handles beginLoadingData', () => {
+  it('handles beginLoadingBudgetItems', () => {
     const previousState = false
 
-    const action = beginLoadingData()
+    const action = beginLoadingBudgetItems()
 
     expect(loading(previousState, action)).to.be.true
   })
 
-  it('handles finishLoadingData', () => {
+  it('handles finishLoadingBudgetItems', () => {
     const previousState = true
 
-    const action = finishLoadingData()
+    const action = finishLoadingBudgetItems()
 
     expect(loading(previousState, action)).to.be.false
   })

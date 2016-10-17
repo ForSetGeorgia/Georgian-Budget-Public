@@ -7,7 +7,7 @@ const {
   setBudgetItemFilterOptions
 } = require('./ducks/filters/budgetItems')
 
-const { beginLoadingData, finishLoadingData } = require('./ducks/budgetItems/loading')
+const { beginLoadingBudgetItems, finishLoadingBudgetItems } = require('./ducks/budgetItems/loading')
 const { setBudgetItems } = require('./ducks/budgetItems/data')
 
 const georgianBudgetAPI = require('js/services/georgianBudgetAPI')
@@ -30,7 +30,7 @@ const updateBudgetItems = () => (dispatch, getState) => {
     if (requiredState[i].length === 0) return
   }
 
-  dispatch(beginLoadingData())
+  dispatch(beginLoadingBudgetItems())
 
   georgianBudgetAPI.get(locale, 'v1', {
     params: {
@@ -65,7 +65,7 @@ const updateBudgetItems = () => (dispatch, getState) => {
       dispatch(setBudgetItems(budgetItems))
     }
 
-    dispatch(finishLoadingData())
+    dispatch(finishLoadingBudgetItems())
   })
 }
 

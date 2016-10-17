@@ -12,11 +12,11 @@ const reducer = (state = false, action) => {
   }
 }
 
-reducer.beginLoadingData = () => ({
+reducer.beginLoadingBudgetItems = () => ({
   type: BEGIN_LOADING_DATA
 })
 
-reducer.finishLoadingData = () => ({
+reducer.finishLoadingBudgetItems = () => ({
   type: FINISH_LOADING_DATA
 })
 
