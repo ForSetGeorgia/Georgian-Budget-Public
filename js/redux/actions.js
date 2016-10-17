@@ -1,5 +1,3 @@
-const axios = require('axios')
-
 const { addError, clearErrors } = require('./ducks/budgetItems/errors')
 
 const {
@@ -12,16 +10,7 @@ const {
 const { beginLoadingData, finishLoadingData } = require('./ducks/budgetItems/loading')
 const { setBudgetItems } = require('./ducks/budgetItems/data')
 
-const georgianBudgetAPI = (function () {
-  exports.get = (locale, version, options) => {
-    return axios.get(
-      `${process.env.API_URL}/${locale}/${version}`,
-      options
-    )
-  }
-
-  return exports
-})()
+const georgianBudgetAPI = require('js/services/georgianBudgetAPI')
 
 const updateBudgetItems = () => (dispatch, getState) => {
   const state = getState()
