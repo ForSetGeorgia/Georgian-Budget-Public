@@ -71,9 +71,9 @@ const Container = React.createClass({
     const { value } = selected
     if (!value) return
 
-    this.props.setBudgetItemType(selected.value)
+    this.props.setBudgetItemType(value)
     this.props.setBudgetItems([])
-    this.props.setBudgetItemsFilterVisibility(selected.value !== 'total')
+    this.props.setBudgetItemsFilterVisibility(value !== 'total')
     this.props.updateBudgetItemFilterOptions()
 
     // If the value in the URL and the new value are not the same,
