@@ -6,7 +6,7 @@ const budgetItems = require('js/ducks/data/budgetItems')
 const { setBudgetItems } = budgetItems
 
 describe('budget items reducer', () => {
-  it('handles SET_BUDGET_ITEMS action', () => {
+  it('handles setBudgetItems action', () => {
     const previousState = [{
       id: '1',
       value: '2',

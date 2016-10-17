@@ -7,7 +7,7 @@ const { setBudgetItemType } = budgetItemTypeFilter
 const initialState = require('js/initialState').filters.budgetItemType
 
 describe('budget item type filter reducer', () => {
-  it('handles SET_BUDGET_ITEM_TYPE', () => {
+  it('handles setBudgetItemType', () => {
     const previousState = Object.assign(
       {},
       initialState,

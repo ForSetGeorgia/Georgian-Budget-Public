@@ -6,7 +6,7 @@ const loading = require('js/ducks/data/loading')
 const { beginLoadingData, finishLoadingData } = loading
 
 describe('data loading reducer', () => {
-  it('handles BEGIN_LOADING_DATA', () => {
+  it('handles beginLoadingData', () => {
     const previousState = false
 
     const action = beginLoadingData()
@@ -14,7 +14,7 @@ describe('data loading reducer', () => {
     expect(loading(previousState, action)).to.be.true
   })
 
-  it('handles FINISH_LOADING_DATA', () => {
+  it('handles finishLoadingData', () => {
     const previousState = true
 
     const action = finishLoadingData()

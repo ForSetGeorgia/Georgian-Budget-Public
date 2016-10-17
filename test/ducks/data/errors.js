@@ -7,7 +7,7 @@ const { addError, clearErrors } = errors
 const initialState = require('js/initialState').data.errors
 
 describe('errors reducer', () => {
-  it('handles ADD_ERROR action for new error', () => {
+  it('handles addError action for new error', () => {
     const previousState = initialState.concat([
       {
         text: 'Woo!',
@@ -28,7 +28,7 @@ describe('errors reducer', () => {
     expect(newState).to.deep.equal(expectedState)
   })
 
-  it('handles ADD_ERROR action for error with text that already exists', () => {
+  it('handles addError action for error with text that already exists', () => {
     const previousState = initialState.concat([
       {
         text: 'This is the same error',
@@ -43,7 +43,7 @@ describe('errors reducer', () => {
     expect(newState).to.deep.equal(previousState)
   })
 
-  it('handles CLEAR_ERRORS action', () => {
+  it('handles clearErrors action', () => {
     const previousState = initialState.concat([
       {
         text: 'This is my error',
