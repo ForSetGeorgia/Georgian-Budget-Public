@@ -2,9 +2,9 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const financeTypeFilter = require('js/ducks/filters/financeType')
+const financeTypeFilter = require('js/redux/ducks/filters/financeType')
 const { setFinanceType } = financeTypeFilter
-const initialState = require('js/initialState').filters.financeType
+const initialState = require('js/redux/initialState').filters.financeType
 
 describe('finance type filter reducer', () => {
   it('handles setFinanceType action', () => {

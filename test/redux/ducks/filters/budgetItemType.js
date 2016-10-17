@@ -2,9 +2,9 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const budgetItemTypeFilter = require('js/ducks/filters/budgetItemType')
+const budgetItemTypeFilter = require('js/redux/ducks/filters/budgetItemType')
 const { setBudgetItemType } = budgetItemTypeFilter
-const initialState = require('js/initialState').filters.budgetItemType
+const initialState = require('js/redux/initialState').filters.budgetItemType
 
 describe('budget item type filter reducer', () => {
   it('handles setBudgetItemType', () => {

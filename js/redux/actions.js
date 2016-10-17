@@ -1,16 +1,16 @@
 const axios = require('axios')
 
-const { addError, clearErrors } = require('js/ducks/budgetItems/errors')
+const { addError, clearErrors } = require('./ducks/budgetItems/errors')
 
 const {
   startLoadingBudgetItemFilter,
   finishLoadingBudgetItemFilter,
   setSelectedBudgetItemIds,
   setBudgetItemFilterOptions
-} = require('js/ducks/filters/budgetItems')
+} = require('./ducks/filters/budgetItems')
 
-const { beginLoadingData, finishLoadingData } = require('js/ducks/budgetItems/loading')
-const { setBudgetItems } = require('js/ducks/budgetItems/data')
+const { beginLoadingData, finishLoadingData } = require('./ducks/budgetItems/loading')
+const { setBudgetItems } = require('./ducks/budgetItems/data')
 
 const updateBudgetItems = () => (dispatch, getState) => {
   const state = getState()

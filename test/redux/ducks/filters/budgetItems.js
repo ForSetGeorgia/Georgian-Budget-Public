@@ -2,8 +2,8 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const initialState = require('js/initialState').filters.budgetItems
-const budgetItemsFilter = require('js/ducks/filters/budgetItems')
+const initialState = require('js/redux/initialState').filters.budgetItems
+const budgetItemsFilter = require('js/redux/ducks/filters/budgetItems')
 
 const {
   startLoadingBudgetItemFilter,

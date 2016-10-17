@@ -6,13 +6,13 @@ const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const BudgetItemTypeSelect = require('../presentation/BudgetItemTypeSelect')
 const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 
-const { setBudgetItems } = require('js/ducks/budgetItems/data')
+const { setBudgetItems } = require('js/redux/ducks/budgetItems/data')
 
 const { setBudgetItemsFilterVisibility } =
-require('js/ducks/filters/budgetItems')
+require('js/redux/ducks/filters/budgetItems')
 
-const { setBudgetItemType } = require('js/ducks/filters/budgetItemType')
-const { updateBudgetItemFilterOptions } = require('js/actions')
+const { setBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
+const { updateBudgetItemFilterOptions } = require('js/redux/actions')
 
 const messages = defineMessages({
   label: {

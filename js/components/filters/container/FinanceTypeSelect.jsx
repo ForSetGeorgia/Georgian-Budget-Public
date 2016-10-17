@@ -5,8 +5,8 @@ const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const financeTypeMessages = require('js/messages/financeTypes')
 
-const { updateBudgetItems } = require('js/actions')
-const { setFinanceType } = require('js/ducks/filters/financeType')
+const { updateBudgetItems } = require('js/redux/actions')
+const { setFinanceType } = require('js/redux/ducks/filters/financeType')
 
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const FinanceTypeSelect = require('../presentation/FinanceTypeSelect')

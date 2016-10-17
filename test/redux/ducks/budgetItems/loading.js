@@ -2,7 +2,7 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const loading = require('js/ducks/budgetItems/loading')
+const loading = require('js/redux/ducks/budgetItems/loading')
 const { beginLoadingData, finishLoadingData } = loading
 
 describe('data loading reducer', () => {

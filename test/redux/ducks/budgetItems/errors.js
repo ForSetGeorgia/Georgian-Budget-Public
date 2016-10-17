@@ -2,9 +2,9 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const errors = require('js/ducks/budgetItems/errors')
+const errors = require('js/redux/ducks/budgetItems/errors')
 const { addError, clearErrors } = errors
-const initialState = require('js/initialState').budgetItems.errors
+const initialState = require('js/redux/initialState').budgetItems.errors
 
 describe('errors reducer', () => {
   it('handles addError action for new error', () => {

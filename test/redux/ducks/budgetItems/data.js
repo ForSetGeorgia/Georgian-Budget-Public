@@ -2,7 +2,7 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const budgetItems = require('js/ducks/budgetItems/data')
+const budgetItems = require('js/redux/ducks/budgetItems/data')
 const { setBudgetItems } = budgetItems
 
 describe('budget items reducer', () => {

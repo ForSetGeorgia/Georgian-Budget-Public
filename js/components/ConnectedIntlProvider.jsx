@@ -5,9 +5,9 @@ const { connect } = require('react-redux')
 const {
   updateBudgetItemFilterOptions,
   updateBudgetItems
-} = require('js/actions')
+} = require('js/redux/actions')
 
-const { setLocale } = require('js/ducks/locale')
+const { setLocale } = require('js/redux/ducks/locale')
 
 const Layout = require('js/components/Layout')
 
