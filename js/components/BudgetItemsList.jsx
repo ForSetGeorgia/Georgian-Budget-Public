@@ -6,7 +6,7 @@ const Error = require('js/components/Error')
 const TimeSeriesChart = require('js/components/TimeSeriesChart')
 const LoadingIndicator = require('js/components/LoadingIndicator')
 
-let DataDisplay = React.createClass({
+let BudgetItemsList = React.createClass({
   propTypes: {
     errors: arrayOf(object).isRequired,
     loading: bool.isRequired,
@@ -65,6 +65,6 @@ const mapStateToProps = function (state) {
   return state.budgetItems
 }
 
-DataDisplay = connect(mapStateToProps)(DataDisplay)
+BudgetItemsList = connect(mapStateToProps)(BudgetItemsList)
 
-module.exports = DataDisplay
+module.exports = BudgetItemsList
