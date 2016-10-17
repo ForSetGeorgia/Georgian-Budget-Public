@@ -72,6 +72,17 @@ const updateBudgetItems = () => (dispatch, getState) => {
   })
 }
 
+const georgianBudgetAPI = (function () {
+  exports.get = (locale, version, options) => {
+    return axios.get(
+      `${process.env.API_URL}/${locale}/${version}`,
+      options
+    )
+  }
+
+  return exports
+})()
+
 const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
   const state = getState()
 
@@ -85,18 +96,16 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
   }
 
   dispatch(startLoadingBudgetItemFilter())
-  axios.get(
-    `${process.env.API_URL}/${locale}/v1`,
-    {
-      params: {
-        budgetItemFields: 'id,name',
 
-        filters: {
-          budgetItemType: budgetItemType
-        }
+  georgianBudgetAPI.get(locale, 'v1', {
+    params: {
+      budgetItemFields: 'id,name',
+
+      filters: {
+        budgetItemType: budgetItemType
       }
     }
-  ).catch((error) => {
+  }).catch((error) => {
     dispatch(addError(`Error communicating with API: ${error}`))
   }).then((response) => {
     if (!response || !response.data || typeof response.data !== 'object') {
