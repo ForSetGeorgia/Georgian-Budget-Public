@@ -12,6 +12,17 @@ const {
 const { beginLoadingData, finishLoadingData } = require('./ducks/budgetItems/loading')
 const { setBudgetItems } = require('./ducks/budgetItems/data')
 
+const georgianBudgetAPI = (function () {
+  exports.get = (locale, version, options) => {
+    return axios.get(
+      `${process.env.API_URL}/${locale}/${version}`,
+      options
+    )
+  }
+
+  return exports
+})()
+
 const updateBudgetItems = () => (dispatch, getState) => {
   const state = getState()
   const locale = state.locale
@@ -32,18 +43,15 @@ const updateBudgetItems = () => (dispatch, getState) => {
 
   dispatch(beginLoadingData())
 
-  axios.get(
-    `${process.env.API_URL}/${locale}/v1`,
-    {
-      params: {
-        filters: {
-          budgetItemType: budgetItemType,
-          financeType: financeType
-        },
-        budgetItemIds: budgetItems
-      }
+  georgianBudgetAPI.get(locale, 'v1', {
+    params: {
+      filters: {
+        budgetItemType: budgetItemType,
+        financeType: financeType
+      },
+      budgetItemIds: budgetItems
     }
-  ).catch((error) => {
+  }).catch((error) => {
     dispatch(addError(`Error communicating with API: ${error}`))
   }).then((response) => {
     if (typeof response.data !== 'object') {
@@ -71,17 +79,6 @@ const updateBudgetItems = () => (dispatch, getState) => {
     dispatch(finishLoadingData())
   })
 }
-
-const georgianBudgetAPI = (function () {
-  exports.get = (locale, version, options) => {
-    return axios.get(
-      `${process.env.API_URL}/${locale}/${version}`,
-      options
-    )
-  }
-
-  return exports
-})()
 
 const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
   const state = getState()
