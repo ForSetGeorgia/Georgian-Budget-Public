@@ -19,13 +19,6 @@ const setSelectedBudgetItemIds = function (ids) {
   }
 }
 
-const setFinanceType = function (value) {
-  return {
-    type: 'SET_FINANCE_TYPE',
-    value: value
-  }
-}
-
 const setBudgetItemType = (value) => ({
   type: 'SET_BUDGET_ITEM_TYPE',
   value: value
@@ -182,7 +175,6 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
 module.exports = {
   setBudgetItems,
   setSelectedBudgetItemIds,
-  setFinanceType,
   setBudgetItemType,
   updateBudgetItems,
   updateBudgetItemFilterOptions

@@ -3,7 +3,9 @@ const { object, string, func } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 
-const { setFinanceType, updateBudgetItems } = require('js/actions')
+const { updateBudgetItems } = require('js/actions')
+const { setFinanceType } = require('js/ducks/filters/financeType')
+
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const FinanceTypeSelect = require('../presentation/FinanceTypeSelect')
 
