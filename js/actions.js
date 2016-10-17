@@ -1,6 +1,7 @@
 const axios = require('axios')
 
 const { addError, clearErrors } = require('js/ducks/data/errors')
+const { beginLoadingData, finishLoadingData } = require('js/ducks/data/loading')
 
 const startLoadingBudgetItemFilter = () => ({
   type: 'START_LOADING_BUDGET_ITEM_FILTER'
@@ -34,14 +35,6 @@ const setFinanceType = function (value) {
 const setBudgetItemType = (value) => ({
   type: 'SET_BUDGET_ITEM_TYPE',
   value: value
-})
-
-const beginLoadingData = () => ({
-  type: 'BEGIN_LOADING_DATA'
-})
-
-const finishLoadingData = () => ({
-  type: 'FINISH_LOADING_DATA'
 })
 
 const updateBudgetItems = () => (dispatch, getState) => {

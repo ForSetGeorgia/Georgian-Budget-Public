@@ -9,4 +9,12 @@ const reducer = (state = false, action) => {
   }
 }
 
+reducer.beginLoadingData = () => ({
+  type: 'BEGIN_LOADING_DATA'
+})
+
+reducer.finishLoadingData = () => ({
+  type: 'FINISH_LOADING_DATA'
+})
+
 module.exports = reducer
