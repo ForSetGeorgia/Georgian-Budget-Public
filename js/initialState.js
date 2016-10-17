@@ -3,7 +3,7 @@ module.exports = {
     budgetItems: {
       selectedIds: [],
       options: [],
-      hidden: true,
+      visible: false,
       loading: true
     },
     budgetItemType: {

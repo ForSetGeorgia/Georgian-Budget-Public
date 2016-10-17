@@ -52,7 +52,7 @@ const reducer = (state = {}, action) => {
         {},
         state,
         {
-          hidden: !action.value
+          visible: action.value
         }
       )
     default:

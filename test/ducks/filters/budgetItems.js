@@ -120,7 +120,7 @@ describe('budget items filter reducer', () => {
       {},
       initialState,
       {
-        hidden: true
+        visible: false
       }
     )
 
@@ -131,7 +131,7 @@ describe('budget items filter reducer', () => {
       {},
       initialState,
       {
-        hidden: false
+        visible: true
       }
     )
 
@@ -143,7 +143,7 @@ describe('budget items filter reducer', () => {
       {},
       initialState,
       {
-        hidden: false
+        visible: true
       }
     )
 
@@ -154,7 +154,7 @@ describe('budget items filter reducer', () => {
       {},
       initialState,
       {
-        hidden: true
+        visible: false
       }
     )
 
