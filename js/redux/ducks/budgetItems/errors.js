@@ -30,7 +30,7 @@ const reducer = (state = [], action) => {
 }
 
 let errorIncrement = 0
-reducer.addError = function (text, id = errorIncrement++) {
+reducer.addBudgetItemsError = function (text, id = errorIncrement++) {
   return {
     type: ADD_ERROR,
     id: id,

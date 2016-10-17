@@ -1,4 +1,4 @@
-const { addError, clearErrors } = require('./ducks/budgetItems/errors')
+const { addBudgetItemsError, clearErrors } = require('./ducks/budgetItems/errors')
 
 const {
   startLoadingBudgetItemFilter,
@@ -41,10 +41,10 @@ const updateBudgetItems = () => (dispatch, getState) => {
       budgetItemIds: budgetItems
     }
   }).catch((error) => {
-    dispatch(addError(`Error communicating with API: ${error}`))
+    dispatch(addBudgetItemsError(`Error communicating with API: ${error}`))
   }).then((response) => {
     if (typeof response.data !== 'object') {
-      dispatch(addError('Error communicating with API'))
+      dispatch(addBudgetItemsError('Error communicating with API'))
       return
     }
 
@@ -57,7 +57,7 @@ const updateBudgetItems = () => (dispatch, getState) => {
 
     if (errors.length > 0) {
       errors.forEach((error) => {
-        dispatch(addError(error.text))
+        dispatch(addBudgetItemsError(error.text))
       })
     }
 
@@ -92,10 +92,10 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
       }
     }
   }).catch((error) => {
-    dispatch(addError(`Error communicating with API: ${error}`))
+    dispatch(addBudgetItemsError(`Error communicating with API: ${error}`))
   }).then((response) => {
     if (!response || !response.data || typeof response.data !== 'object') {
-      dispatch(addError('Error communicating with API'))
+      dispatch(addBudgetItemsError('Error communicating with API'))
       return
     }
 
@@ -105,9 +105,9 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
     if (errors && errors.length > 0) {
       errors.forEach((error) => {
         if (error.text) {
-          dispatch(addError(error.text))
+          dispatch(addBudgetItemsError(error.text))
         } else {
-          dispatch(addError('Error communicating with API'))
+          dispatch(addBudgetItemsError('Error communicating with API'))
         }
       })
     }
@@ -122,12 +122,12 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
         let errored = false
 
         if (typeof option.id !== 'number') {
-          dispatch(addError('Budget item does not have valid id to use as option value'))
+          dispatch(addBudgetItemsError('Budget item does not have valid id to use as option value'))
           errored = true
         }
 
         if (typeof option.name !== 'string') {
-          dispatch(addError(`Budget item (id: ${option.name}) does not have valid name to use as option label`))
+          dispatch(addBudgetItemsError(`Budget item (id: ${option.name}) does not have valid name to use as option label`))
           errored = true
         }
 
