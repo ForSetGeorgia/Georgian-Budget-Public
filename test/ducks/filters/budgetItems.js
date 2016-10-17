@@ -2,7 +2,7 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const budgetItemsFilter = require('js/reducers/filters/budgetItems')
+const budgetItemsFilter = require('js/ducks/filters/budgetItems')
 const initialState = require('js/initialState').filters.budgetItems
 
 describe('budget items filter reducer', () => {
