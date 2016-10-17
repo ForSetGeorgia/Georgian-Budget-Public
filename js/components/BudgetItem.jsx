@@ -2,13 +2,20 @@ const React = require('react')
 const TimeSeriesChart = require('js/components/TimeSeriesChart')
 
 const BudgetItem = (props) => (
-  <TimeSeriesChart
-    containerId={`${props.id}-financesChart`}
-    title={props.chartName}
-    subtitle={props.name}
-    xAxisCategories={props.timePeriods}
-    yAxisAmounts={props.amounts}
-  />
+  <div>
+
+    <h3>
+      {props.name}
+    </h3>
+
+    <TimeSeriesChart
+      containerId={`${props.id}-financesChart`}
+      title={props.chartName}
+      xAxisCategories={props.timePeriods}
+      yAxisAmounts={props.amounts}
+    />
+
+  </div>
 )
 
 const { array, string } = React.PropTypes
