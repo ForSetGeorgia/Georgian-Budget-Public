@@ -10,11 +10,8 @@ const SET_SELECTED_BUDGET_ITEM_IDS =
 const SET_BUDGET_ITEM_FILTER_OPTIONS =
 'georgianBudget/filters/budgetItems/SET_BUDGET_ITEM_FILTER_OPTIONS'
 
-const HIDE_BUDGET_ITEMS_FILTER =
-'georgianBudget/filters/budgetItems/HIDE_BUDGET_ITEMS_FILTER'
-
-const SHOW_BUDGET_ITEMS_FILTER =
-'georgianBudget/filters/budgetItems/SHOW_BUDGET_ITEMS_FILTER'
+const SET_BUDGET_ITEMS_FILTER_VISIBILITY =
+'georgianBudget/filters/budgetItems/SET_BUDGET_ITEMS_FILTER_VISIBILITY'
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -50,20 +47,12 @@ const reducer = (state = {}, action) => {
           options: action.options
         }
       )
-    case HIDE_BUDGET_ITEMS_FILTER:
+    case SET_BUDGET_ITEMS_FILTER_VISIBILITY:
       return Object.assign(
         {},
         state,
         {
-          hidden: true
-        }
-      )
-    case SHOW_BUDGET_ITEMS_FILTER:
-      return Object.assign(
-        {},
-        state,
-        {
-          hidden: false
+          hidden: !action.value
         }
       )
     default:
@@ -93,15 +82,10 @@ reducer.setBudgetItemFilterOptions = (options) => {
   }
 }
 
-reducer.hideBudgetItemsFilter = (options) => {
+reducer.setBudgetItemsFilterVisibility = (isVisible) => {
   return {
-    type: HIDE_BUDGET_ITEMS_FILTER
-  }
-}
-
-reducer.showBudgetItemsFilter = (options) => {
-  return {
-    type: SHOW_BUDGET_ITEMS_FILTER
+    type: SET_BUDGET_ITEMS_FILTER_VISIBILITY,
+    value: isVisible
   }
 }
 

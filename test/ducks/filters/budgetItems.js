@@ -10,8 +10,7 @@ const {
   finishLoadingBudgetItemFilter,
   setBudgetItemFilterOptions,
   setSelectedBudgetItemIds,
-  hideBudgetItemsFilter,
-  showBudgetItemsFilter
+  setBudgetItemsFilterVisibility
 } = budgetItemsFilter
 
 describe('budget items filter reducer', () => {
@@ -59,52 +58,6 @@ describe('budget items filter reducer', () => {
     )
 
     expect(newState).to.deep.equal(expectedState)
-  })
-
-  it('handles hideBudgetItemsFilter action', () => {
-    const previousState = Object.assign(
-      {},
-      initialState,
-      {
-        hidden: false
-      }
-    )
-
-    const action = hideBudgetItemsFilter()
-    const nextState = budgetItemsFilter(previousState, action)
-
-    const expectedState = Object.assign(
-      {},
-      initialState,
-      {
-        hidden: true
-      }
-    )
-
-    expect(nextState).to.deep.equal(expectedState)
-  })
-
-  it('handles showBudgetItemsFilter action', () => {
-    const previousState = Object.assign(
-      {},
-      initialState,
-      {
-        hidden: true
-      }
-    )
-
-    const action = showBudgetItemsFilter()
-    const nextState = budgetItemsFilter(previousState, action)
-
-    const expectedState = Object.assign(
-      {},
-      initialState,
-      {
-        hidden: false
-      }
-    )
-
-    expect(nextState).to.deep.equal(expectedState)
   })
 
   it('handles setBudgetItemFilterOptions action', () => {
@@ -160,5 +113,51 @@ describe('budget items filter reducer', () => {
     )
 
     expect(newState).to.deep.equal(expectedState)
+  })
+
+  it('handles setBudgetItemsFilterVisibility action when isVisible is true', () => {
+    const previousState = Object.assign(
+      {},
+      initialState,
+      {
+        hidden: true
+      }
+    )
+
+    const action = setBudgetItemsFilterVisibility(true)
+    const nextState = budgetItemsFilter(previousState, action)
+
+    const expectedState = Object.assign(
+      {},
+      initialState,
+      {
+        hidden: false
+      }
+    )
+
+    expect(nextState).to.deep.equal(expectedState)
+  })
+
+  it('handles setBudgetItemsFilterVisibility action when isVisible is false', () => {
+    const previousState = Object.assign(
+      {},
+      initialState,
+      {
+        hidden: false
+      }
+    )
+
+    const action = setBudgetItemsFilterVisibility(false)
+    const nextState = budgetItemsFilter(previousState, action)
+
+    const expectedState = Object.assign(
+      {},
+      initialState,
+      {
+        hidden: true
+      }
+    )
+
+    expect(nextState).to.deep.equal(expectedState)
   })
 })

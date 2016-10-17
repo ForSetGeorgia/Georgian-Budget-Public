@@ -8,10 +8,8 @@ const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 
 const { setBudgetItems } = require('js/ducks/data/budgetItems')
 
-const {
-  hideBudgetItemsFilter,
-  showBudgetItemsFilter
-} = require('js/ducks/filters/budgetItems')
+const { setBudgetItemsFilterVisibility } 
+= require('js/ducks/filters/budgetItems')
 
 const { setBudgetItemType } = require('js/ducks/filters/budgetItemType')
 const { updateBudgetItemFilterOptions } = require('js/actions')
@@ -111,13 +109,7 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchBudgetItemType (selected) {
     dispatch(setBudgetItemType(selected.value))
     dispatch(setBudgetItems([]))
-
-    if (selected.value === 'total') {
-      dispatch(hideBudgetItemsFilter())
-    } else {
-      dispatch(showBudgetItemsFilter())
-    }
-
+    dispatch(setBudgetItemsFilterVisibility(selected.value !== 'total'))
     dispatch(updateBudgetItemFilterOptions())
   }
 })
