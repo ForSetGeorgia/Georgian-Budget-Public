@@ -1,22 +1,6 @@
 const axios = require('axios')
 
-let errorIncrement = 0
-const addError = function (text) {
-  errorIncrement++
-
-  return {
-    type: 'ADD_ERROR',
-    id: errorIncrement,
-    text: text
-  }
-}
-
-// eslint-disable-next-line handle-callback-err
-const clearErrors = function (error) {
-  return {
-    type: 'CLEAR_ERRORS'
-  }
-}
+const { addError, clearErrors } = require('js/ducks/data/errors')
 
 const startLoadingBudgetItemFilter = () => ({
   type: 'START_LOADING_BUDGET_ITEM_FILTER'
@@ -209,8 +193,6 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
 }
 
 module.exports = {
-  addError,
-  clearErrors,
   setBudgetItems,
   setSelectedBudgetItemIds,
   setFinanceType,

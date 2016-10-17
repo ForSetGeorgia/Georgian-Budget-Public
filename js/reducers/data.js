@@ -2,6 +2,6 @@ const { combineReducers } = require('redux')
 
 module.exports = combineReducers({
   budgetItems: require('./data/budgetItems'),
-  errors: require('./data/errors'),
+  errors: require('../ducks/data/errors'),
   loading: require('./data/loading')
 })

@@ -2,7 +2,7 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const errors = require('js/reducers/data/errors')
+const errors = require('js/ducks/data/errors')
 const initialState = require('js/initialState').data.errors
 
 describe('errors reducer', () => {

@@ -1,4 +1,4 @@
-module.exports = (state = [], action) => {
+const reducer = (state = [], action) => {
   switch (action.type) {
     case 'ADD_ERROR': {
       let errorAlreadyExists = false
@@ -25,3 +25,23 @@ module.exports = (state = [], action) => {
     }
   }
 }
+
+let errorIncrement = 0
+reducer.addError = function (text) {
+  errorIncrement++
+
+  return {
+    type: 'ADD_ERROR',
+    id: errorIncrement,
+    text: text
+  }
+}
+
+// eslint-disable-next-line handle-callback-err
+reducer.clearErrors = function (error) {
+  return {
+    type: 'CLEAR_ERRORS'
+  }
+}
+
+module.exports = reducer
