@@ -1,6 +1,8 @@
+const SET_FINANCE_TYPE = 'georgianBudget/filters/SET_FINANCE_TYPE'
+
 const reducer = (state = {}, action) => {
   switch (action.type) {
-    case 'SET_FINANCE_TYPE':
+    case SET_FINANCE_TYPE:
       return Object.assign(
         {},
         state,
@@ -15,7 +17,7 @@ const reducer = (state = {}, action) => {
 
 reducer.setFinanceType = function (value) {
   return {
-    type: 'SET_FINANCE_TYPE',
+    type: SET_FINANCE_TYPE,
     value: value
   }
 }

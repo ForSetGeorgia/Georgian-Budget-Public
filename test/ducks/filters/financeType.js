@@ -3,10 +3,11 @@
 
 const { expect } = require('chai')
 const financeTypeFilter = require('js/ducks/filters/financeType')
+const { setFinanceType } = financeTypeFilter
 const initialState = require('js/initialState').filters.financeType
 
 describe('finance type filter reducer', () => {
-  it('handles SET_FINANCE_TYPE action', () => {
+  it('handles setFinanceType action', () => {
     const previousState = Object.assign(
       {},
       initialState,
@@ -15,11 +16,7 @@ describe('finance type filter reducer', () => {
       }
     )
 
-    const action = {
-      type: 'SET_FINANCE_TYPE',
-      value: 'planned_finance'
-    }
-
+    const action = setFinanceType('planned_finance')
     const newState = financeTypeFilter(previousState, action)
 
     const expectedState = {
