@@ -8,8 +8,8 @@ const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 
 const { setBudgetItems } = require('js/ducks/data/budgetItems')
 
-const { setBudgetItemsFilterVisibility } 
-= require('js/ducks/filters/budgetItems')
+const { setBudgetItemsFilterVisibility } =
+require('js/ducks/filters/budgetItems')
 
 const { setBudgetItemType } = require('js/ducks/filters/budgetItemType')
 const { updateBudgetItemFilterOptions } = require('js/actions')
@@ -30,9 +30,12 @@ const Container = React.createClass({
   propTypes: {
     value: string,
     queryValue: string,
-    dispatchBudgetItemType: func,
     location: object,
-    intl: intlShape
+    intl: intlShape,
+    setBudgetItemType: func,
+    setBudgetItems: func,
+    setBudgetItemsFilterVisibility: func,
+    updateBudgetItemFilterOptions: func
   },
 
   defaultValue: 'total',
@@ -68,7 +71,10 @@ const Container = React.createClass({
     const { value } = selected
     if (!value) return
 
-    this.props.dispatchBudgetItemType(selected)
+    this.props.setBudgetItemType(selected.value)
+    this.props.setBudgetItems([])
+    this.props.setBudgetItemsFilterVisibility(selected.value !== 'total')
+    this.props.updateBudgetItemFilterOptions()
 
     // If the value in the URL and the new value are not the same,
     // update the URL query param with the new value
@@ -106,10 +112,16 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchBudgetItemType (selected) {
-    dispatch(setBudgetItemType(selected.value))
-    dispatch(setBudgetItems([]))
-    dispatch(setBudgetItemsFilterVisibility(selected.value !== 'total'))
+  setBudgetItemType (value) {
+    dispatch(setBudgetItemType(value))
+  },
+  setBudgetItems (budgetItems) {
+    dispatch(setBudgetItems(budgetItems))
+  },
+  setBudgetItemsFilterVisibility (isVisible) {
+    dispatch(setBudgetItemsFilterVisibility(isVisible))
+  },
+  updateBudgetItemFilterOptions () {
     dispatch(updateBudgetItemFilterOptions())
   }
 })
