@@ -9,7 +9,9 @@ const {
   startLoadingBudgetItemFilter,
   finishLoadingBudgetItemFilter,
   setBudgetItemFilterOptions,
-  setSelectedBudgetItemIds
+  setSelectedBudgetItemIds,
+  hideBudgetItemsFilter,
+  showBudgetItemsFilter
 } = budgetItemsFilter
 
 describe('budget items filter reducer', () => {
@@ -59,66 +61,50 @@ describe('budget items filter reducer', () => {
     expect(newState).to.deep.equal(expectedState)
   })
 
-  it('handles SET_BUDGET_ITEM_TYPE action when not budget item type is not total', () => {
+  it('handles hideBudgetItemsFilter action', () => {
     const previousState = Object.assign(
       {},
       initialState,
       {
-        options: [
-          { id: 10, name: 'hello!' }
-        ],
-        hidden: true
+        hidden: false
       }
     )
 
-    const action = {
-      type: 'SET_BUDGET_ITEM_TYPE',
-      value: 'woooo'
-    }
-
-    const newState = budgetItemsFilter(previousState, action)
+    const action = hideBudgetItemsFilter()
+    const nextState = budgetItemsFilter(previousState, action)
 
     const expectedState = Object.assign(
       {},
       initialState,
       {
-        options: [],
-        hidden: false
+        hidden: true
       }
     )
 
-    expect(newState).to.deep.equal(expectedState)
+    expect(nextState).to.deep.equal(expectedState)
   })
 
-  it ('handles SET_BUDGET_ITEM_TYPE action when not budget item type is total', () => {
+  it('handles showBudgetItemsFilter action', () => {
     const previousState = Object.assign(
       {},
       initialState,
       {
-        options: [
-          { id: 3443, name: '2343' }
-        ],
-        hidden: false
+        hidden: true
       }
     )
 
-    const action = {
-      type: 'SET_BUDGET_ITEM_TYPE',
-      value: 'total'
-    }
-
-    const newState = budgetItemsFilter(previousState, action)
+    const action = showBudgetItemsFilter()
+    const nextState = budgetItemsFilter(previousState, action)
 
     const expectedState = Object.assign(
       {},
       initialState,
       {
-        options: [],
-        hidden: true
+        hidden: false
       }
     )
 
-    expect(newState).to.deep.equal(expectedState)
+    expect(nextState).to.deep.equal(expectedState)
   })
 
   it('handles setBudgetItemFilterOptions action', () => {

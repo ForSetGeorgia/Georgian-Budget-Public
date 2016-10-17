@@ -10,6 +10,12 @@ const SET_SELECTED_BUDGET_ITEM_IDS =
 const SET_BUDGET_ITEM_FILTER_OPTIONS =
 'georgianBudget/filters/budgetItems/SET_BUDGET_ITEM_FILTER_OPTIONS'
 
+const HIDE_BUDGET_ITEMS_FILTER =
+'georgianBudget/filters/budgetItems/HIDE_BUDGET_ITEMS_FILTER'
+
+const SHOW_BUDGET_ITEMS_FILTER =
+'georgianBudget/filters/budgetItems/SHOW_BUDGET_ITEMS_FILTER'
+
 const reducer = (state = {}, action) => {
   switch (action.type) {
     case START_LOADING_BUDGET_ITEM_FILTER:
@@ -44,22 +50,19 @@ const reducer = (state = {}, action) => {
           options: action.options
         }
       )
-    case 'SET_BUDGET_ITEM_TYPE':
-      if (action.value === 'total') {
-        return Object.assign(
-          {},
-          state,
-          {
-            options: [],
-            hidden: true
-          }
-        )
-      }
+    case HIDE_BUDGET_ITEMS_FILTER:
       return Object.assign(
         {},
         state,
         {
-          options: [],
+          hidden: true
+        }
+      )
+    case SHOW_BUDGET_ITEMS_FILTER:
+      return Object.assign(
+        {},
+        state,
+        {
           hidden: false
         }
       )
@@ -87,6 +90,18 @@ reducer.setBudgetItemFilterOptions = (options) => {
   return {
     type: SET_BUDGET_ITEM_FILTER_OPTIONS,
     options: options
+  }
+}
+
+reducer.hideBudgetItemsFilter = (options) => {
+  return {
+    type: HIDE_BUDGET_ITEMS_FILTER
+  }
+}
+
+reducer.showBudgetItemsFilter = (options) => {
+  return {
+    type: SHOW_BUDGET_ITEMS_FILTER
   }
 }
 
