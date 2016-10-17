@@ -1,6 +1,18 @@
+const START_LOADING_BUDGET_ITEM_FILTER =
+'georgianBudget/filters/budgetItems/START_LOADING_BUDGET_ITEM_FILTER'
+
+const FINISH_LOADING_BUDGET_ITEM_FILTER =
+'georgianBudget/filters/budgetItems/FINISH_LOADING_BUDGET_ITEM_FILTER'
+
+const SET_SELECTED_BUDGET_ITEM_IDS =
+'georgianBudget/filters/budgetItems/SET_SELECTED_BUDGET_ITEM_IDS'
+
+const SET_BUDGET_ITEM_FILTER_OPTIONS =
+'georgianBudget/filters/budgetItems/SET_BUDGET_ITEM_FILTER_OPTIONS'
+
 const reducer = (state = {}, action) => {
   switch (action.type) {
-    case 'START_LOADING_BUDGET_ITEM_FILTER':
+    case START_LOADING_BUDGET_ITEM_FILTER:
       return Object.assign(
         {},
         state,
@@ -8,7 +20,7 @@ const reducer = (state = {}, action) => {
           loading: true
         }
       )
-    case 'FINISH_LOADING_BUDGET_ITEM_FILTER':
+    case FINISH_LOADING_BUDGET_ITEM_FILTER:
       return Object.assign(
         {},
         state,
@@ -16,7 +28,7 @@ const reducer = (state = {}, action) => {
           loading: false
         }
       )
-    case 'SET_SELECTED_BUDGET_ITEM_IDS':
+    case SET_SELECTED_BUDGET_ITEM_IDS:
       return Object.assign(
         {},
         state,
@@ -24,7 +36,7 @@ const reducer = (state = {}, action) => {
           selectedIds: action.ids
         }
       )
-    case 'SET_BUDGET_ITEM_FILTER_OPTIONS':
+    case SET_BUDGET_ITEM_FILTER_OPTIONS:
       return Object.assign(
         {},
         state,
@@ -57,23 +69,23 @@ const reducer = (state = {}, action) => {
 }
 
 reducer.startLoadingBudgetItemFilter = () => ({
-  type: 'START_LOADING_BUDGET_ITEM_FILTER'
+  type: START_LOADING_BUDGET_ITEM_FILTER
 })
 
 reducer.finishLoadingBudgetItemFilter = () => ({
-  type: 'FINISH_LOADING_BUDGET_ITEM_FILTER'
+  type: FINISH_LOADING_BUDGET_ITEM_FILTER
 })
 
 reducer.setSelectedBudgetItemIds = function (ids) {
   return {
-    type: 'SET_SELECTED_BUDGET_ITEM_IDS',
+    type: SET_SELECTED_BUDGET_ITEM_IDS,
     ids: ids
   }
 }
 
 reducer.setBudgetItemFilterOptions = (options) => {
   return {
-    type: 'SET_BUDGET_ITEM_FILTER_OPTIONS',
+    type: SET_BUDGET_ITEM_FILTER_OPTIONS,
     options: options
   }
 }
