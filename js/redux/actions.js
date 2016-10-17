@@ -30,6 +30,7 @@ const updateBudgetItems = () => (dispatch, getState) => {
     if (requiredState[i].length === 0) return
   }
 
+  dispatch(clearBudgetItemsErrors())
   dispatch(beginLoadingBudgetItems())
 
   georgianBudgetAPI.get(locale, 'v1', {
@@ -43,8 +44,6 @@ const updateBudgetItems = () => (dispatch, getState) => {
   }).catch((error) => {
     dispatch(addBudgetItemsError(`Error communicating with API: ${error}`))
   }).then((response) => {
-    dispatch(clearBudgetItemsErrors())
-
     if (!response || !response.data || typeof response.data !== 'object') {
       dispatch(addBudgetItemsError('Error communicating with API'))
       return
