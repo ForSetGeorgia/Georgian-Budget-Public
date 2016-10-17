@@ -154,7 +154,6 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
 }
 
 module.exports = {
-  setBudgetItems,
   updateBudgetItems,
   updateBudgetItemFilterOptions
 }
