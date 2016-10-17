@@ -3,6 +3,7 @@
 
 const { expect } = require('chai')
 const budgetItems = require('js/ducks/data/budgetItems')
+const { setBudgetItems } = budgetItems
 
 describe('budget items reducer', () => {
   it('handles SET_BUDGET_ITEMS action', () => {
@@ -11,18 +12,15 @@ describe('budget items reducer', () => {
       value: '2',
     }]
 
-    const action = {
-      type: 'SET_BUDGET_ITEMS',
-      budgetItems: [
-        {
-          id: 5
-        },
-        {
-          id: 44,
-          value: 6
-        }
-      ]
-    }
+    const action = setBudgetItems([
+      {
+        id: 5
+      },
+      {
+        id: 44,
+        value: 6
+      }
+    ])
 
     const newState = budgetItems(previousState, action)
 

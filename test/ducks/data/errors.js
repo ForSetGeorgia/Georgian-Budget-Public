@@ -3,6 +3,7 @@
 
 const { expect } = require('chai')
 const errors = require('js/ducks/data/errors')
+const { addError, clearErrors } = errors
 const initialState = require('js/initialState').data.errors
 
 describe('errors reducer', () => {
@@ -15,12 +16,7 @@ describe('errors reducer', () => {
       }
     ])
 
-    const action = {
-      type: 'ADD_ERROR',
-      id: 2,
-      text: 'This is my error'
-    }
-
+    const action = addError('This is my error', 2)
     const newState = errors(previousState, action)
 
     const expectedState = previousState.concat({
@@ -41,12 +37,7 @@ describe('errors reducer', () => {
       }
     ])
 
-    const action = {
-      type: 'ADD_ERROR',
-      id: 2,
-      text: 'This is the same error'
-    }
-
+    const action = addError('This is the same error')
     const newState = errors(previousState, action)
 
     expect(newState).to.deep.equal(previousState)
@@ -66,9 +57,7 @@ describe('errors reducer', () => {
       }
     ])
 
-    const action = {
-      type: 'CLEAR_ERRORS'
-    }
+    const action = clearErrors()
 
     const newState = errors(previousState, action)
 

@@ -1,4 +1,4 @@
-const SET_BUDGET_ITEM_TYPE = 'georgianBudget/filters/SET_BUDGET_ITEM_TYPE'
+const SET_BUDGET_ITEM_TYPE = 'georgianBudget/filters/budgetItemType/SET_BUDGET_ITEM_TYPE'
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
