@@ -3,7 +3,7 @@
 
 const { expect } = require('chai')
 const errors = require('js/redux/ducks/budgetItems/errors')
-const { addBudgetItemsError, clearErrors } = errors
+const { addBudgetItemsError, clearBudgetItemsErrors } = errors
 const initialState = require('js/redux/initialState').budgetItems.errors
 
 describe('errors reducer', () => {
@@ -43,7 +43,7 @@ describe('errors reducer', () => {
     expect(newState).to.deep.equal(previousState)
   })
 
-  it('handles clearErrors action', () => {
+  it('handles clearBudgetItemsErrors action', () => {
     const previousState = initialState.concat([
       {
         text: 'This is my error',
@@ -57,7 +57,7 @@ describe('errors reducer', () => {
       }
     ])
 
-    const action = clearErrors()
+    const action = clearBudgetItemsErrors()
 
     const newState = errors(previousState, action)
 

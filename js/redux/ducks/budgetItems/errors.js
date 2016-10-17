@@ -39,7 +39,7 @@ reducer.addBudgetItemsError = function (text, id = errorIncrement++) {
 }
 
 // eslint-disable-next-line handle-callback-err
-reducer.clearErrors = function (error) {
+reducer.clearBudgetItemsErrors = function (error) {
   return {
     type: CLEAR_ERRORS
   }

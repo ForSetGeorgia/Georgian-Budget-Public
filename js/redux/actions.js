@@ -1,4 +1,4 @@
-const { addBudgetItemsError, clearErrors } = require('./ducks/budgetItems/errors')
+const { addBudgetItemsError, clearBudgetItemsErrors } = require('./ducks/budgetItems/errors')
 
 const {
   startLoadingBudgetItemFilter,
@@ -52,7 +52,7 @@ const updateBudgetItems = () => (dispatch, getState) => {
     const budgetItems = response.data.budgetItems
 
     if (errors.length === 0) {
-      dispatch(clearErrors())
+      dispatch(clearBudgetItemsErrors())
     }
 
     if (errors.length > 0) {
