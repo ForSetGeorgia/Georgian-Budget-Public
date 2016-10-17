@@ -1,4 +1,4 @@
-module.exports = (state = {}, action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
     case 'START_LOADING_BUDGET_ITEM_FILTER':
       return Object.assign(
@@ -55,3 +55,20 @@ module.exports = (state = {}, action) => {
       return state
   }
 }
+
+reducer.startLoadingBudgetItemFilter = () => ({
+  type: 'START_LOADING_BUDGET_ITEM_FILTER'
+})
+
+reducer.finishLoadingBudgetItemFilter = () => ({
+  type: 'FINISH_LOADING_BUDGET_ITEM_FILTER'
+})
+
+reducer.setSelectedBudgetItemIds = function (ids) {
+  return {
+    type: 'SET_SELECTED_BUDGET_ITEM_IDS',
+    ids: ids
+  }
+}
+
+module.exports = reducer

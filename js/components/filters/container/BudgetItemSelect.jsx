@@ -7,8 +7,9 @@ const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const BudgetItemSelect = require('../presentation/BudgetItemSelect')
 
+const { setSelectedBudgetItemIds } = require('js/ducks/filters/budgetItems')
+
 const {
-  setSelectedBudgetItemIds,
   updateBudgetItems,
   updateBudgetItemFilterOptions
 } = require('js/actions')
