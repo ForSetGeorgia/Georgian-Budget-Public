@@ -3,10 +3,11 @@ const { object, string, shape, func } = React.PropTypes
 const { addLocaleData, IntlProvider } = require('react-intl')
 const { connect } = require('react-redux')
 const {
-  setLocale,
   updateBudgetItemFilterOptions,
   updateBudgetItems
 } = require('js/actions')
+
+const { setLocale } = require('js/ducks/locale')
 
 const Layout = require('js/components/Layout')
 

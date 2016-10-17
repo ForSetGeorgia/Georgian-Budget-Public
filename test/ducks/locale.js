@@ -2,7 +2,7 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const locale = require('js/reducers/locale')
+const locale = require('js/ducks/locale')
 
 describe('locale reducer', () => {
   it('handles SET_LOCALE action', () => {
