@@ -12,11 +12,6 @@ const {
 const { beginLoadingData, finishLoadingData } = require('js/ducks/data/loading')
 const { setBudgetItems } = require('js/ducks/data/budgetItems')
 
-const setBudgetItemType = (value) => ({
-  type: 'SET_BUDGET_ITEM_TYPE',
-  value: value
-})
-
 const updateBudgetItems = () => (dispatch, getState) => {
   const state = getState()
   const locale = state.locale
@@ -160,7 +155,6 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
 
 module.exports = {
   setBudgetItems,
-  setBudgetItemType,
   updateBudgetItems,
   updateBudgetItemFilterOptions
 }

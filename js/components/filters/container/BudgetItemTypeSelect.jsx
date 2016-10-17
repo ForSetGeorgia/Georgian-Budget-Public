@@ -7,11 +7,8 @@ const BudgetItemTypeSelect = require('../presentation/BudgetItemTypeSelect')
 const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 
 const { setBudgetItems } = require('js/ducks/data/budgetItems')
-
-const {
-  setBudgetItemType,
-  updateBudgetItemFilterOptions
-} = require('js/actions')
+const { setBudgetItemType } = require('js/ducks/filters/budgetItemType')
+const { updateBudgetItemFilterOptions } = require('js/actions')
 
 const messages = defineMessages({
   label: {

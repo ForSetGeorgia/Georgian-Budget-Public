@@ -1,4 +1,4 @@
-module.exports = (state = {}, action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
     case 'SET_BUDGET_ITEM_TYPE':
       return Object.assign(
@@ -12,3 +12,10 @@ module.exports = (state = {}, action) => {
       return state
   }
 }
+
+reducer.setBudgetItemType = (value) => ({
+  type: 'SET_BUDGET_ITEM_TYPE',
+  value: value
+})
+
+module.exports = reducer
