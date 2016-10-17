@@ -6,6 +6,8 @@ const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const BudgetItemTypeSelect = require('../presentation/BudgetItemTypeSelect')
 const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 
+const { setBudgetItems } = require('js/ducks/data/budgetItems')
+
 const {
   setBudgetItemType,
   updateBudgetItemFilterOptions
@@ -105,6 +107,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
   dispatchBudgetItemType (selected) {
     dispatch(setBudgetItemType(selected.value))
+    dispatch(setBudgetItems([]))
     dispatch(updateBudgetItemFilterOptions())
   }
 })

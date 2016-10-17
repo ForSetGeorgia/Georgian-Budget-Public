@@ -38,28 +38,4 @@ describe('budget items reducer', () => {
 
     expect(newState).to.deep.equal(expectedState)
   })
-
-  it('handles SET_BUDGET_ITEM_TYPE action', () => {
-    const previousState = [
-      {
-        id: 5555,
-        value: 434
-      },
-      {
-        id: 77,
-        spent_finances: 11
-      }
-    ]
-
-    const action = {
-      type: 'SET_BUDGET_ITEM_TYPE',
-      value: 'fun'
-    }
-
-    const newState = budgetItems(previousState, action)
-
-    const expectedState = []
-
-    expect(newState).to.deep.equal(expectedState)
-  })
 })
