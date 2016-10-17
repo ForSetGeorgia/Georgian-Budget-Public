@@ -1,7 +1,9 @@
 const React = require('react')
 const { object, string, func } = React.PropTypes
 const { connect } = require('react-redux')
+
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
+const financeTypeMessages = require('js/messages/financeTypes')
 
 const { updateBudgetItems } = require('js/actions')
 const { setFinanceType } = require('js/ducks/filters/financeType')
@@ -14,16 +16,6 @@ const messages = defineMessages({
     id: 'app.filters.financeType.label',
     description: 'Label for finance type filter',
     defaultMessage: 'Select finance type'
-  },
-  spentFinance: {
-    id: 'financeType.spentFinance.other',
-    description: 'Multiple spent finances',
-    defaultMessage: 'Spent Finances'
-  },
-  plannedFinance: {
-    id: 'financeType.plannedFinance.other',
-    description: 'Multiple planned finances',
-    defaultMessage: 'Planned Finances'
   }
 })
 
@@ -46,8 +38,14 @@ const Container = React.createClass({
     const { intl } = this.props
 
     return [
-      { value: 'spent_finance', label: intl.formatMessage(messages.spentFinance) },
-      { value: 'planned_finance', label: intl.formatMessage(messages.plannedFinance) }
+      {
+        value: 'spent_finance',
+        label: intl.formatMessage(financeTypeMessages.spentFinance.other)
+      },
+      {
+        value: 'planned_finance',
+        label: intl.formatMessage(financeTypeMessages.plannedFinance.other)
+      }
     ]
   },
 
