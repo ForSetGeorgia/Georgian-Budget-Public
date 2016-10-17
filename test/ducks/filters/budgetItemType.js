@@ -3,6 +3,7 @@
 
 const { expect } = require('chai')
 const budgetItemTypeFilter = require('js/ducks/filters/budgetItemType')
+const { setBudgetItemType } = budgetItemTypeFilter
 const initialState = require('js/initialState').filters.budgetItemType
 
 describe('budget item type filter reducer', () => {
@@ -15,11 +16,7 @@ describe('budget item type filter reducer', () => {
       }
     )
 
-    const action = {
-      type: 'SET_BUDGET_ITEM_TYPE',
-      value: 'program'
-    }
-
+    const action = setBudgetItemType('program')
     const newState = budgetItemTypeFilter(previousState, action)
 
     const expectedState = Object.assign(

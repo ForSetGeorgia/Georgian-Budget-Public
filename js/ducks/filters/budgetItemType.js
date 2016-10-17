@@ -1,6 +1,8 @@
+const SET_BUDGET_ITEM_TYPE = 'georgianBudget/filters/SET_BUDGET_ITEM_TYPE'
+
 const reducer = (state = {}, action) => {
   switch (action.type) {
-    case 'SET_BUDGET_ITEM_TYPE':
+    case SET_BUDGET_ITEM_TYPE:
       return Object.assign(
         {},
         state,
@@ -14,7 +16,7 @@ const reducer = (state = {}, action) => {
 }
 
 reducer.setBudgetItemType = (value) => ({
-  type: 'SET_BUDGET_ITEM_TYPE',
+  type: SET_BUDGET_ITEM_TYPE,
   value: value
 })
 
