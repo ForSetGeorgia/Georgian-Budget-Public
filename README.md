@@ -12,4 +12,4 @@ For the first time:
 
 ## ReDUCKS
 
-Redux reducers and actions in this repo are grouped into modules, called ducks. [Learn more here](https://github.com/erikras/ducks-modular-redux).
+You may have noticed that redux reducers and actions in this repo are grouped into modules, called ducks, located in the `js/ducks` directory. [Learn more about ducks here](https://github.com/erikras/ducks-modular-redux).
