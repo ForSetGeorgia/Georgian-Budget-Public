@@ -2,6 +2,7 @@ const axios = require('axios')
 
 const { addError, clearErrors } = require('js/ducks/data/errors')
 const { beginLoadingData, finishLoadingData } = require('js/ducks/data/loading')
+const { setBudgetItems } = require('js/ducks/data/budgetItems')
 
 const startLoadingBudgetItemFilter = () => ({
   type: 'START_LOADING_BUDGET_ITEM_FILTER'
@@ -10,13 +11,6 @@ const startLoadingBudgetItemFilter = () => ({
 const finishLoadingBudgetItemFilter = () => ({
   type: 'FINISH_LOADING_BUDGET_ITEM_FILTER'
 })
-
-const setBudgetItems = function (budgetItems) {
-  return {
-    type: 'SET_BUDGET_ITEMS',
-    budgetItems: budgetItems
-  }
-}
 
 const setSelectedBudgetItemIds = function (ids) {
   return {

@@ -10,4 +10,11 @@ const reducer = (state = [], action) => {
   }
 }
 
+reducer.setBudgetItems = function (budgetItems) {
+  return {
+    type: 'SET_BUDGET_ITEMS',
+    budgetItems: budgetItems
+  }
+}
+
 module.exports = reducer
