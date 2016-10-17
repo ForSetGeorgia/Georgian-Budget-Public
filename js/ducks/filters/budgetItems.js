@@ -71,4 +71,11 @@ reducer.setSelectedBudgetItemIds = function (ids) {
   }
 }
 
+reducer.setBudgetItemFilterOptions = (options) => {
+  return {
+    type: 'SET_BUDGET_ITEM_FILTER_OPTIONS',
+    options: options
+  }
+}
+
 module.exports = reducer

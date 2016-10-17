@@ -5,7 +5,8 @@ const { addError, clearErrors } = require('js/ducks/data/errors')
 const {
   startLoadingBudgetItemFilter,
   finishLoadingBudgetItemFilter,
-  setSelectedBudgetItemIds
+  setSelectedBudgetItemIds,
+  setBudgetItemFilterOptions
 } = require('js/ducks/filters/budgetItems')
 
 const { beginLoadingData, finishLoadingData } = require('js/ducks/data/loading')
@@ -74,13 +75,6 @@ const updateBudgetItems = () => (dispatch, getState) => {
 
     dispatch(finishLoadingData())
   })
-}
-
-const setBudgetItemFilterOptions = (options) => {
-  return {
-    type: 'SET_BUDGET_ITEM_FILTER_OPTIONS',
-    options: options
-  }
 }
 
 const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
