@@ -17,14 +17,14 @@ const updateBudgetItems = () => (dispatch, getState) => {
   const locale = state.locale
   const budgetItemType = state.filters.budgetItemType.value
   const financeType = state.filters.financeType.value
-  const budgetItems = state.filters.budgetItems.selectedIds
+  const budgetItemIds = state.filters.budgetItems.selectedIds
 
-  if (state.filters.budgetItems.selectedIds.length === 0) {
+  if (budgetItemIds.length === 0) {
     dispatch(setBudgetItems([]))
     return
   }
 
-  const requiredState = [locale, budgetItemType, financeType, budgetItems]
+  const requiredState = [locale, budgetItemType, financeType, budgetItemIds]
 
   for (let i = 0; i < requiredState.length; i++) {
     if (requiredState[i].length === 0) return
@@ -38,7 +38,7 @@ const updateBudgetItems = () => (dispatch, getState) => {
         budgetItemType: budgetItemType,
         financeType: financeType
       },
-      budgetItemIds: budgetItems
+      budgetItemIds: budgetItemIds
     }
   }).catch((error) => {
     dispatch(addBudgetItemsError(`Error communicating with API: ${error}`))
