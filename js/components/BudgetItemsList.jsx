@@ -3,7 +3,7 @@ const { arrayOf, object, bool } = React.PropTypes
 const { connect } = require('react-redux')
 
 const Error = require('js/components/Error')
-const TimeSeriesChart = require('js/components/TimeSeriesChart')
+const BudgetItem = require('js/components/BudgetItem')
 const LoadingIndicator = require('js/components/LoadingIndicator')
 
 let BudgetItemsList = React.createClass({
@@ -42,14 +42,13 @@ let BudgetItemsList = React.createClass({
 
                 const uniqueId = `budget-item-${budgetItem.name}-${budgetItem.chartName}`
 
-                return <TimeSeriesChart
-                  key={uniqueId}
-                  containerId={uniqueId}
-                  title={budgetItem.chartName}
-                  subtitle={budgetItem.name}
-                  xAxisCategories={budgetItem.timePeriods}
-                  yAxisAmounts={budgetItem.amounts}
-                />
+                return (
+                  <BudgetItem
+                    key={uniqueId}
+                    id={uniqueId}
+                    {...budgetItem}
+                  />
+                )
               }
             )
           }
