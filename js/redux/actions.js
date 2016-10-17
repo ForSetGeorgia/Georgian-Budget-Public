@@ -45,24 +45,18 @@ const updateBudgetItems = () => (dispatch, getState) => {
   }).then((response) => {
     dispatch(clearBudgetItemsErrors())
 
-    if (typeof response.data !== 'object') {
+    if (!response || !response.data || typeof response.data !== 'object') {
       dispatch(addBudgetItemsError('Error communicating with API'))
       return
     }
 
-    const errors = response.data.errors
-    const budgetItems = response.data.budgetItems
+    const { errors, budgetItems } = response.data
 
-    if (errors.length > 0) {
-      errors.forEach((error) => {
-        dispatch(addBudgetItemsError(error.text))
-      })
-    }
+    errors.forEach((error) => {
+      dispatch(addBudgetItemsError(error.text))
+    })
 
-    if (budgetItems) {
-      dispatch(setBudgetItems(budgetItems))
-    }
-
+    dispatch(setBudgetItems(budgetItems))
     dispatch(finishLoadingBudgetItems())
   })
 }
