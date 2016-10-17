@@ -35,7 +35,7 @@ const Container = React.createClass({
       id: number.isRequired,
       name: string.isRequired
     })).isRequired,
-    hidden: bool,
+    visible: bool,
     loading: bool,
     dispatchNewSelectedBudgetItemIds: func,
     loadOptions: func,
@@ -102,7 +102,7 @@ const Container = React.createClass({
         budgetItemType={this.props.budgetItemType}
         selectedIds={this.props.selectedIds}
         options={this.props.options}
-        hidden={this.props.hidden}
+        visible={this.props.visible}
         loading={this.props.loading}
         handleChange={this.handleChange}
         labelText={this.labelText()}
@@ -118,7 +118,7 @@ const mapStateToProps = (state, ownProps) => {
     selectedIds: state.filters.budgetItems.selectedIds,
     querySelectedIds: typeof budgetItemIds === 'string' ? [budgetItemIds] : budgetItemIds,
     options: state.filters.budgetItems.options,
-    hidden: state.filters.budgetItems.hidden,
+    visible: state.filters.budgetItems.visible,
     loading: state.filters.budgetItems.loading,
     budgetItemType: state.filters.budgetItemType.value
   }

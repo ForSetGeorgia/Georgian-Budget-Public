@@ -3,7 +3,7 @@ const Select = require('react-select')
 
 const BudgetItemSelect = (props) => {
   let style = {}
-  if (props.hidden) style.display = 'none'
+  if (!props.visible) style.display = 'none'
 
   return (
     <div className='filter' style={style}>
