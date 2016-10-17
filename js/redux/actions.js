@@ -91,52 +91,22 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
       return
     }
 
-    const errors = response.data.errors
-    const budgetItems = response.data.budgetItems
+    const { errors, budgetItems } = response.data
 
-    if (errors && errors.length > 0) {
-      errors.forEach((error) => {
-        if (error.text) {
-          dispatch(addBudgetItemsError(error.text))
-        } else {
-          dispatch(addBudgetItemsError('Error communicating with API'))
-        }
-      })
+    errors.forEach((error) => {
+      dispatch(addBudgetItemsError(error.text))
+    })
+
+    if (!budgetItems) return
+
+    dispatch(setBudgetItemFilterOptions(budgetItems))
+
+    if (budgetItemType === 'total' && budgetItems.length > 0) {
+      dispatch(setSelectedBudgetItemIds([budgetItems[0].id]))
+      dispatch(updateBudgetItems())
     }
 
-    if (budgetItems) {
-      const budgetItemFilterOptions = budgetItems.map((budgetItem) => {
-        const option = {
-          id: budgetItem.id,
-          name: budgetItem.name
-        }
-
-        let errored = false
-
-        if (typeof option.id !== 'number') {
-          dispatch(addBudgetItemsError('Budget item does not have valid id to use as option value'))
-          errored = true
-        }
-
-        if (typeof option.name !== 'string') {
-          dispatch(addBudgetItemsError(`Budget item (id: ${option.name}) does not have valid name to use as option label`))
-          errored = true
-        }
-
-        if (errored) return null
-
-        return option
-      }).filter((option) => option !== null && option !== undefined)
-
-      dispatch(setBudgetItemFilterOptions(budgetItemFilterOptions))
-
-      if (budgetItemType === 'total' && budgetItemFilterOptions.length > 0) {
-        dispatch(setSelectedBudgetItemIds([budgetItemFilterOptions[0].id]))
-        dispatch(updateBudgetItems())
-      }
-
-      dispatch(finishLoadingBudgetItemFilter())
-    }
+    dispatch(finishLoadingBudgetItemFilter())
   })
 }
 
