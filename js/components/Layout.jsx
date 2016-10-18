@@ -19,7 +19,8 @@ const Layout = React.createClass({
           title='Home'
           titleTemplate='%s | Georgian Budget'
           link={[
-            {'rel': 'stylesheet', 'href': '/public/bundles/bundle.css'}
+            {'rel': 'stylesheet', 'href': '/public/bundles/bundle.css'},
+            {'rel': 'shortcut icon', 'type': 'image/png', 'href': '/public/favicon.ico'}
           ]}
         />
 
