@@ -9,10 +9,10 @@ const BudgetItemSelect = require('../presentation/BudgetItemSelect')
 
 const { setSelectedBudgetItemIds } = require('js/redux/ducks/filters/budgetItems')
 
-const {
-  updateBudgetItems,
-  updateBudgetItemFilterOptions
-} = require('js/redux/actions')
+const updateBudgetItemFilterOptions =
+require('js/redux/fetchers/budgetItemFilterOptions')
+
+const updateBudgetItems = require('js/redux/fetchers/budgetItems')
 
 const messages = defineMessages({
   label: {

@@ -2,10 +2,11 @@ const React = require('react')
 const { object, string, shape, func } = React.PropTypes
 const { addLocaleData, IntlProvider } = require('react-intl')
 const { connect } = require('react-redux')
-const {
-  updateBudgetItemFilterOptions,
-  updateBudgetItems
-} = require('js/redux/actions')
+
+const updateBudgetItemFilterOptions =
+require('js/redux/fetchers/budgetItemFilterOptions')
+
+const updateBudgetItems = require('js/redux/fetchers/budgetItems')
 
 const { setLocale } = require('js/redux/ducks/locale')
 

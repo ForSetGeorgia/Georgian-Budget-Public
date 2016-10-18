@@ -12,7 +12,9 @@ const { setBudgetItemsFilterVisibility } =
 require('js/redux/ducks/filters/budgetItems')
 
 const { setBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
-const { updateBudgetItemFilterOptions } = require('js/redux/actions')
+
+const updateBudgetItemFilterOptions =
+require('js/redux/fetchers/budgetItemFilterOptions')
 
 const messages = defineMessages({
   label: {
