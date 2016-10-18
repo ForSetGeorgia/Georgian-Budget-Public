@@ -5,13 +5,13 @@ const {
   setBudgetItemFilterOptions
 } = require('../ducks/filters/budgetItems')
 
-const updateBudgetItems = require('./budgetItems')
+const fetchBudgetItems = require('./budgetItems')
 
 const { addBudgetItemsError } = require('../ducks/budgetItems/errors')
 
 const georgianBudgetAPI = require('js/services/georgianBudgetAPI')
 
-const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
+const fetchBudgetItemFilterOptions = () => (dispatch, getState) => {
   const state = getState()
 
   const locale = state.locale
@@ -47,15 +47,13 @@ const updateBudgetItemFilterOptions = () => (dispatch, getState) => {
       dispatch(addBudgetItemsError(error.text))
     })
 
-    if (!budgetItems) return
-
     dispatch(setBudgetItemFilterOptions(budgetItems))
 
     if (budgetItemType === 'total' && budgetItems.length > 0) {
       dispatch(setSelectedBudgetItemIds([budgetItems[0].id]))
-      dispatch(updateBudgetItems())
+      dispatch(fetchBudgetItems())
     }
   })
 }
 
-module.exports = updateBudgetItemFilterOptions
+module.exports = fetchBudgetItemFilterOptions

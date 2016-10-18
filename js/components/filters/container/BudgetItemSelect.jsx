@@ -9,10 +9,10 @@ const BudgetItemSelect = require('../presentation/BudgetItemSelect')
 
 const { setSelectedBudgetItemIds } = require('js/redux/ducks/filters/budgetItems')
 
-const updateBudgetItemFilterOptions =
+const fetchBudgetItemFilterOptions =
 require('js/redux/fetchers/budgetItemFilterOptions')
 
-const updateBudgetItems = require('js/redux/fetchers/budgetItems')
+const fetchBudgetItems = require('js/redux/fetchers/budgetItems')
 
 const messages = defineMessages({
   label: {
@@ -127,11 +127,11 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loadOptions: function (selected) {
-      dispatch(updateBudgetItemFilterOptions())
+      dispatch(fetchBudgetItemFilterOptions())
     },
     dispatchNewSelectedBudgetItemIds: function (selectedIds) {
       dispatch(setSelectedBudgetItemIds(selectedIds))
-      dispatch(updateBudgetItems())
+      dispatch(fetchBudgetItems())
     }
   }
 }

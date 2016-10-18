@@ -6,7 +6,7 @@ const { setBudgetItems } = require('../ducks/budgetItems/data')
 
 const georgianBudgetAPI = require('js/services/georgianBudgetAPI')
 
-const updateBudgetItems = () => (dispatch, getState) => {
+const fetchBudgetItems = () => (dispatch, getState) => {
   const state = getState()
   const locale = state.locale
   const budgetItemType = state.filters.budgetItemType.value
@@ -53,4 +53,4 @@ const updateBudgetItems = () => (dispatch, getState) => {
   })
 }
 
-module.exports = updateBudgetItems
+module.exports = fetchBudgetItems

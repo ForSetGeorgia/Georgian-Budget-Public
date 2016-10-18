@@ -3,10 +3,10 @@ const { object, string, shape, func } = React.PropTypes
 const { addLocaleData, IntlProvider } = require('react-intl')
 const { connect } = require('react-redux')
 
-const updateBudgetItemFilterOptions =
+const fetchBudgetItemFilterOptions =
 require('js/redux/fetchers/budgetItemFilterOptions')
 
-const updateBudgetItems = require('js/redux/fetchers/budgetItems')
+const fetchBudgetItems = require('js/redux/fetchers/budgetItems')
 
 const { setLocale } = require('js/redux/ducks/locale')
 
@@ -96,8 +96,8 @@ const ConnectedIntlProvider = React.createClass({
 const mapDispatchToProps = (dispatch) => ({
   dispatchChangeLocale (locale) {
     dispatch(setLocale(locale))
-    dispatch(updateBudgetItemFilterOptions())
-    dispatch(updateBudgetItems())
+    dispatch(fetchBudgetItemFilterOptions())
+    dispatch(fetchBudgetItems())
   }
 })
 

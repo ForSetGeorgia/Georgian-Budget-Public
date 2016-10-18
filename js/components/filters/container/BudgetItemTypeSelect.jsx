@@ -13,7 +13,7 @@ require('js/redux/ducks/filters/budgetItems')
 
 const { setBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
 
-const updateBudgetItemFilterOptions =
+const fetchBudgetItemFilterOptions =
 require('js/redux/fetchers/budgetItemFilterOptions')
 
 const messages = defineMessages({
@@ -37,7 +37,7 @@ const Container = React.createClass({
     setBudgetItemType: func,
     setBudgetItems: func,
     setBudgetItemsFilterVisibility: func,
-    updateBudgetItemFilterOptions: func
+    fetchBudgetItemFilterOptions: func
   },
 
   defaultValue: 'total',
@@ -76,7 +76,7 @@ const Container = React.createClass({
     this.props.setBudgetItemType(value)
     this.props.setBudgetItems([])
     this.props.setBudgetItemsFilterVisibility(value !== 'total')
-    this.props.updateBudgetItemFilterOptions()
+    this.props.fetchBudgetItemFilterOptions()
 
     // If the value in the URL and the new value are not the same,
     // update the URL query param with the new value
@@ -123,8 +123,8 @@ const mapDispatchToProps = (dispatch) => ({
   setBudgetItemsFilterVisibility (isVisible) {
     dispatch(setBudgetItemsFilterVisibility(isVisible))
   },
-  updateBudgetItemFilterOptions () {
-    dispatch(updateBudgetItemFilterOptions())
+  fetchBudgetItemFilterOptions () {
+    dispatch(fetchBudgetItemFilterOptions())
   }
 })
 
