@@ -5,12 +5,11 @@ RUN mkdir $APPHOME
 WORKDIR $APPHOME
 
 RUN apt-get update && \
-    apt-get install -y nodejs npm pm2
+    apt-get install -y nodejs npm pm2 yarn
 
 COPY package.json $APPHOME/
 
-RUN npm set progress=false && \
-    npm install --loglevel http
+RUN yarn install
 
 # some packages reference node as "node". This simlink fixes
 # the naming issue for those packages. (Example: http-server)
