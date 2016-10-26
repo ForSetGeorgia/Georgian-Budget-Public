@@ -3,15 +3,9 @@ var chalk = require('chalk');
 module.exports = function (shipit) {
   require('shipit-deploy')(shipit)
   require('shipit-shared')(shipit);
-  require('shipit-npm')(shipit);
 
   shipit.initConfig({
     default: {
-      npm: {
-        remote: true,
-        triggerEvent: 'sharedEnd'
-      },
-
       shared: {
         overwrite: true,
         dirs: [
@@ -44,18 +38,30 @@ module.exports = function (shipit) {
     }
   });
 
-  shipit.on('npm_installed', function() {
+  shipit.on('sharedEnd', function() {
+    shipit.start('install_modules')
     shipit.start('build')
   })
 
-  shipit.blTask('build', function() {
-    shipit.log('Running npm build to build project')
+  shipit.blTask('install_modules', function() {
+    shipit.log('Running "yarn install" to install modules')
     return shipit.remote(
-      `node -v && cd ${shipit.releasePath} && npm run build`
+      `node -v && cd ${shipit.releasePath} && yarn install`
     ).then(function() {
-      shipit.log(chalk.green('npm build complete'));
+      shipit.log(chalk.green('modules successfully installed'))
     }).catch(function(e) {
-      shipit.log(chalk.red(e));
+      shipit.log(chalk.red(e))
+    })
+  })
+
+  shipit.blTask('build', function() {
+    shipit.log('Running "yarn run build" to build project')
+    return shipit.remote(
+      `node -v && cd ${shipit.releasePath} && yarn run build`
+    ).then(function() {
+      shipit.log(chalk.green('build successfully completed'))
+    }).catch(function(e) {
+      shipit.log(chalk.red(e))
     })
   })
 
