@@ -4,7 +4,7 @@ const LocaleLink = require('./LocaleLink')
 const Svg = require('js/components/Svg')
 const { FormattedMessage } = require('react-intl')
 
-const Navigation = (props) => {
+const Navigation = (props, { currentLocale }) => {
   let className = 'app-navigation'
   if (props.showOnSmallScreens) {
     className += ' is-shown-on-small-screens'
@@ -13,7 +13,7 @@ const Navigation = (props) => {
   return (
     <div className={className}>
       <Link
-        to='/ka/explore'
+        to={`/${currentLocale}/explore`}
         className='app-navigation-link'
       >
         <FormattedMessage
@@ -23,7 +23,7 @@ const Navigation = (props) => {
         />
       </Link>
       <Link
-        to='/ka/about'
+        to={`/${currentLocale}/about`}
         className='app-navigation-link'
       >
         <FormattedMessage
@@ -64,10 +64,14 @@ const Navigation = (props) => {
   )
 }
 
-const { bool } = React.PropTypes
+const { bool, string } = React.PropTypes
 
 Navigation.propTypes = {
   showOnSmallScreens: bool
+}
+
+Navigation.contextTypes = {
+  currentLocale: string
 }
 
 module.exports = Navigation
