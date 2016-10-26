@@ -39,8 +39,7 @@ module.exports = function (shipit) {
   });
 
   shipit.on('sharedEnd', function() {
-    shipit.start('install_modules')
-    shipit.start('build')
+    shipit.start('install_modules', 'build')
   })
 
   shipit.blTask('install_modules', function() {
