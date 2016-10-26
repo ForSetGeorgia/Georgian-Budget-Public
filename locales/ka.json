@@ -4,6 +4,7 @@
   "app.filters.budgetItemType.label": "აირჩიე სახეობა",
   "app.filters.financeType.label": "აირჩიე ფინანსები",
   "app.filters.budgetItem.label": "აირჩიე {type}",
+  "app.loading": "მონაცემები იტვირთება",
   "budgetType.wholeBudget.one": "მთლიანი ბიუჯეტი",
   "budgetType.program.one": "პროგრამა",
   "budgetType.program.other": "პროგრამები",
