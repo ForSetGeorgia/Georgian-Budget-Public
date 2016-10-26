@@ -1,4 +1,6 @@
 require('dotenv').config()
+const autoprefixer = require('autoprefixer')
+
 const paths = require('config/paths')
 
 const Env = process.env.NODE_ENV || 'development'
@@ -57,6 +59,7 @@ const loaders = [
       'style',
       [
         UGLIFY ? 'css?minimize!' : 'css',
+        'postcss',
         'sass'
       ]
     )
@@ -96,6 +99,7 @@ const config = {
     preLoaders: preloaders,
     loaders: loaders
   },
+  postcss: [ autoprefixer({ browsers: [ '> 1%' ]}) ],
   plugins: plugins
 }
 
