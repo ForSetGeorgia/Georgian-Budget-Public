@@ -2,16 +2,6 @@
   margin: 0;
 }
 
-:lang(ka) .brand {
-  min-width: 220px;
-  max-width: 220px;
-}
-
-:lang(en) .brand {
-  min-width: 180px;
-  max-width: 180px;
-}
-
   .brand-link {
     text-decoration: none;
     color: inherit;
@@ -23,5 +13,15 @@
 
       &:hover {
         color: $header-hover-color;
+      }
+
+      :lang(ka) & > svg {
+        min-width: 220px;
+        max-width: 220px;
+      }
+
+      :lang(en) & > svg {
+        min-width: 180px;
+        max-width: 180px;
       }
     }
