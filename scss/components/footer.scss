@@ -1,0 +1,18 @@
+.gb-Footer {
+  background: $primary-color;
+
+  &-content {
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: row wrap;
+    padding: 15px $content-padding;
+    margin: 0 auto;
+    max-width: $max-content-width;
+
+    &-copyright {
+      vertical-align: middle;
+    }
+  }
+}

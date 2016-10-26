@@ -4,6 +4,7 @@ const { object, string } = React.PropTypes
 const Helmet = require('react-helmet')
 const MetaContainer = require('js/components/MetaContainer')
 const Header = require('js/components/Header')
+const Footer = require('js/components/Footer')
 
 const Layout = React.createClass({
   propTypes: {
@@ -13,7 +14,7 @@ const Layout = React.createClass({
 
   render () {
     return (
-      <div>
+      <div className='gb-Layout'>
         <Helmet
           htmlAttributes={{'lang': this.props.locale}}
           title='Home'
@@ -23,13 +24,17 @@ const Layout = React.createClass({
             {'rel': 'shortcut icon', 'type': 'image/png', 'href': '/public/favicon.ico'}
           ]}
         />
-
         <MetaContainer />
-        <Header />
 
-        <main className='main-content'>
-          {this.props.children}
-        </main>
+        <div>
+          <Header />
+
+          <main className='main-content'>
+            {this.props.children}
+          </main>
+        </div>
+
+        <Footer />
       </div>
     )
   }

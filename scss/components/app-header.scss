@@ -3,7 +3,7 @@ $header-hover-color: #1c1d3c;
 $header-height: 155px;
 
 .app-header {
-  background: calc(50% + 18vw) 100%/calc(300px + 20vw) no-repeat url(/public/images/header_mountain.svg) #20cc92;
+  background: calc(50% + 18vw) 100%/calc(300px + 20vw) no-repeat url(/public/images/header_mountain.svg) $primary-color;
 }
 
   .app-header-content {
