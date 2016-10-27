@@ -2,9 +2,9 @@ const React = require('react')
 const TimeSeriesChart = require('js/components/TimeSeriesChart')
 
 const BudgetItem = (props) => (
-  <div>
+  <div className='gb-BudgetItem'>
 
-    <h3>
+    <h3 className='gb-BudgetItem-heading'>
       {props.name}
     </h3>
 
