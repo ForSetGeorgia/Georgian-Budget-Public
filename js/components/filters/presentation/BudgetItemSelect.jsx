@@ -6,7 +6,7 @@ const BudgetItemSelect = (props) => {
   if (!props.visible) style.display = 'none'
 
   return (
-    <div className='filter' style={style}>
+    <div className='gb-Filter' style={style}>
       <label htmlFor='budget-item-select'>
         {props.labelText}
       </label>

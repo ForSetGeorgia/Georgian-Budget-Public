@@ -3,7 +3,7 @@ const Select = require('react-select')
 
 const FinanceTypeSelect = (props) => {
   return (
-    <div className='filter'>
+    <div className='gb-Filter'>
       <label htmlFor='finance-type-select'>
         {props.label}
       </label>

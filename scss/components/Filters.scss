@@ -1,0 +1,16 @@
+.gb-Filters {
+  &-primary {
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: 700px) {
+      flex-direction: row;
+    }
+
+    > .gb-Filter {
+      @media (min-width: 700px) {
+        margin: 0
+      }
+    }
+  }
+}

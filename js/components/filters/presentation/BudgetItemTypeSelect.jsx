@@ -13,7 +13,7 @@ let BudgetItemTypeSelect = React.createClass({
 
   render: function () {
     return (
-      <div className='filter'>
+      <div className='gb-Filter'>
         <label htmlFor='budget-item-type-select'>
           {this.props.label}
         </label>
