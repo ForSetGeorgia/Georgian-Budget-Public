@@ -10,6 +10,8 @@ const Navigation = (props, { currentLocale }) => {
     className += ' is-shown-on-small-screens'
   }
 
+  const enableSharing = false
+
   return (
     <div className={className}>
       <Link
@@ -43,7 +45,7 @@ const Navigation = (props, { currentLocale }) => {
         className='app-navigation-link'
       />
       <a
-        href='https://www.facebook.com/sharer/sharer.php'
+        href={enableSharing ? 'https://www.facebook.com/sharer/sharer.php' : '#'}
         className='app-navigation-link'
       >
         <Svg
@@ -52,7 +54,7 @@ const Navigation = (props, { currentLocale }) => {
         />
       </a>
       <a
-        href='https://twitter.com/share'
+        href={enableSharing ? 'https://twitter.com/share' : '#'}
         className='app-navigation-link'
       >
         <Svg
