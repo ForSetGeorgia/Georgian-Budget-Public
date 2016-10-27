@@ -6,10 +6,9 @@ const Brand = (_props, { currentLocale }) => {
   const brandSvg = require(`public/images/brand_${currentLocale}`)
 
   return (
-    <h1 className='brand'>
-
-      <Link className='brand-link' to={`/${currentLocale}`}>
-        <Svg className='brand-link-img' markup={brandSvg} />
+    <h1 className='gb-Brand'>
+      <Link className='gb-Brand-link' to={`/${currentLocale}`}>
+        <Svg className='gb-Brand-link-img' markup={brandSvg} />
       </Link>
     </h1>
   )

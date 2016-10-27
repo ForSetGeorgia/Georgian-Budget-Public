@@ -1,13 +1,11 @@
-.brand {
+.gb-Brand {
   margin: 0;
-}
 
-  .brand-link {
+  &-link {
     text-decoration: none;
     color: inherit;
-  }
 
-    .brand-link-img {
+    &-img {
       color: inherit;
       fill: currentColor;
 
@@ -25,3 +23,5 @@
         max-width: 180px;
       }
     }
+  }
+}
