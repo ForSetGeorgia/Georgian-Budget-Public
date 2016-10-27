@@ -46,10 +46,11 @@ module.exports = function (shipit) {
     shipit.log('Running "yarn install" to install modules')
     return shipit.remote(
       `node -v && cd ${shipit.releasePath} && yarn install`
-    ).then(function() {
+    ).then(function(result) {
       shipit.log(chalk.green('modules successfully installed'))
     }).catch(function(e) {
       shipit.log(chalk.red(e))
+      throw e
     })
   })
 
@@ -57,10 +58,17 @@ module.exports = function (shipit) {
     shipit.log('Running "yarn run build" to build project')
     return shipit.remote(
       `node -v && cd ${shipit.releasePath} && yarn run build`
-    ).then(function() {
+    ).then(function(result) {
+      const stdout = result[0].stdout
+
+      if (stdout.indexOf('Module build failed') >= 0) {
+        throw new Error('webpack build failed')
+      }
+
       shipit.log(chalk.green('build successfully completed'))
     }).catch(function(e) {
       shipit.log(chalk.red(e))
+      throw e
     })
   })
 
