@@ -22,7 +22,7 @@ const fetchBudgetItemFilterOptions = () => (dispatch, getState) => {
   for (let i = 0; i < requiredState.length; i++) {
     if (requiredState[i].length === 0) return
   }
-
+  dispatch(setBudgetItemFilterOptions([]))
   dispatch(startLoadingBudgetItemFilter())
 
   georgianBudgetAPI.get(locale, 'v1', {
