@@ -4,10 +4,7 @@
   display: block;
 }
 
-.Select--multi .Select-multi-value-wrapper {
-  display: block;
-}
-
+.Select--multi .Select-multi-value-wrapper,
 .Select--multi .Select-value-label {
-  display: block;
+  display: initial;
 }
