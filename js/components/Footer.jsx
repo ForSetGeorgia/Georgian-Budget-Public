@@ -7,7 +7,9 @@ const Footer = () => (
         <span className='gb-Footer-content-copyright'>© </span><span>{(new Date()).getFullYear()}</span>
       </div>
 
-      <img src='/public/images/jumpstart_logo.png' alt="JumpStart's Logo" />
+      <a href='https://jumpstart.ge/' target='blank'>
+        <img src='/public/images/jumpstart_logo.png' alt="JumpStart's Logo" />
+      </a>
     </footer>
   </div>
 )
