@@ -29,7 +29,7 @@ const Layout = React.createClass({
         <div>
           <Header />
 
-          <main className='main-content'>
+          <main className='gb-Layout-mainContent'>
             {this.props.children}
           </main>
         </div>
