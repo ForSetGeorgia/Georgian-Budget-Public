@@ -1,8 +1,8 @@
 .gb-Footer {
-  background: $primary-color;
+  background: #edebf3;
 
   &-content {
-    color: white;
+    color: $dark-text-color;
     font-size: 1.2rem;
     display: flex;
     justify-content: space-between;

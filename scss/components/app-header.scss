@@ -1,5 +1,4 @@
 $width-display-full-menu: 700px;
-$header-hover-color: #1c1d3c;
 $header-height: 155px;
 
 .app-header {
@@ -49,7 +48,7 @@ $header-height: 155px;
         }
 
         &:hover {
-          color: $header-hover-color;
+          color: $dark-text-color;
         }
       }
 
