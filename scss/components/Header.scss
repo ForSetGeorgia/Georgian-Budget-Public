@@ -1,11 +1,10 @@
 $width-display-full-menu: 700px;
 $header-height: 155px;
 
-.app-header {
+.gb-Header {
   background: calc(50% + 18vw) 100%/calc(300px + 20vw) no-repeat url(/public/images/header_mountain.svg) $primary-color;
-}
 
-  .app-header-content {
+  &-content {
     margin: 0 auto;
     max-width: $max-content-width;
     padding: 0 $content-padding;
@@ -20,9 +19,8 @@ $header-height: 155px;
       flex-direction: row;
       justify-content: space-between;
     }
-  }
 
-    .app-header-content-brandAndButton {
+    &-brandAndButton {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -33,9 +31,8 @@ $header-height: 155px;
         flex-direction: row;
         justify-content: space-between;
       }
-    }
 
-      .app-header-content-brandAndButton-button {
+      &-button {
         color: inherit;
         height: 30px;
         padding: 0;
@@ -50,9 +47,8 @@ $header-height: 155px;
         &:hover {
           color: $dark-text-color;
         }
-      }
 
-        .app-header-content-brandAndButton-button-bar {
+        &-bar {
           display: block;
           width: 26px;
           height: 3px;
@@ -62,12 +58,16 @@ $header-height: 155px;
           background-color: currentColor;
           background-clip: content-box;
           box-sizing: content-box;
-        }
 
-        .app-header-content-brandAndButton-button-bar:first-child {
-          padding-top: 0;
-        }
+          &:first-child {
+            padding-top: 0;
+          }
 
-        .app-header-content-brandAndButton-button-bar:last-child {
-          padding-bottom: 0;
+          &:last-child {
+            padding-bottom: 0;
+          }
         }
+      }
+    }
+  }
+}

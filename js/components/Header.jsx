@@ -17,15 +17,15 @@ const Header = React.createClass({
 
   render () {
     return (
-      <div className='app-header'>
-        <header className='app-header-content'>
-          <div className='app-header-content-brandAndButton'>
+      <div className='gb-Header'>
+        <header className='gb-Header-content'>
+          <div className='gb-Header-content-brandAndButton'>
             <Brand />
 
-            <button type='button' className='app-header-content-brandAndButton-button' onClick={this.toggleShowMenu}>
-              <span className='app-header-content-brandAndButton-button-bar'></span>
-              <span className='app-header-content-brandAndButton-button-bar'></span>
-              <span className='app-header-content-brandAndButton-button-bar'></span>
+            <button type='button' className='gb-Header-content-brandAndButton-button' onClick={this.toggleShowMenu}>
+              <span className='gb-Header-content-brandAndButton-button-bar'></span>
+              <span className='gb-Header-content-brandAndButton-button-bar'></span>
+              <span className='gb-Header-content-brandAndButton-button-bar'></span>
             </button>
           </div>
 
