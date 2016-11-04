@@ -12,13 +12,20 @@ const fetchBudgetItems = () => (dispatch, getState) => {
   const budgetItemType = state.filters.budgetItemType.value
   const financeType = state.filters.financeType.value
   const budgetItemIds = state.filters.budgetItems.selectedIds
+  const timePeriodType = 'quarterly'
 
   if (budgetItemIds.length === 0) {
     dispatch(setBudgetItems([]))
     return
   }
 
-  const requiredState = [locale, budgetItemType, financeType, budgetItemIds]
+  const requiredState = [
+    locale,
+    budgetItemType,
+    financeType,
+    timePeriodType,
+    budgetItemIds
+  ]
 
   for (let i = 0; i < requiredState.length; i++) {
     if (requiredState[i].length === 0) return
@@ -31,7 +38,8 @@ const fetchBudgetItems = () => (dispatch, getState) => {
     params: {
       filters: {
         budgetItemType: budgetItemType,
-        financeType: financeType
+        financeType: financeType,
+        timePeriodType: timePeriodType
       },
       budgetItemIds: budgetItemIds
     }
