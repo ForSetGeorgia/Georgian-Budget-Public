@@ -2,6 +2,7 @@
   "app.header.about": "შესახებ",
   "app.header.explore": "ექსპლორი",
   "app.filters.budgetItemType.label": "აირჩიე სახეობა",
+  "app.filters.timePeriodType.label": "აირჩიე პერიოდის ტიპი",
   "app.filters.financeType.label": "აირჩიე ფინანსები",
   "app.filters.budgetItem.label": "აირჩიე {type}",
   "app.loading": "მონაცემები იტვირთება",
@@ -13,5 +14,8 @@
   "budgetType.priority.one": "პრიორიტეტი",
   "budgetType.priority.other": "პრიორიტეტები",
   "financeType.spentFinance.other": "დახარჯული ფინანსები",
-  "financeType.plannedFinance.other": "დაგეგმილი ფინანსები"
+  "financeType.plannedFinance.other": "დაგეგმილი ფინანსები",
+  "timePeriodType.monthly": "თვიური",
+  "timePeriodType.quarterly": "კვარტლური",
+  "timePeriodType.yearly": "წლიური"
 }
