@@ -9,7 +9,7 @@ const BudgetItem = (props) => (
     </h3>
 
     <TimeSeriesChart
-      containerId={`${props.id}-financesChart`}
+      containerId={`${props.id}-${props.chartName}-chart`}
       title={props.chartName}
       xAxisCategories={props.timePeriods}
       yAxisAmounts={props.amounts}

@@ -40,13 +40,13 @@ let BudgetItemsList = React.createClass({
               function (budgetItem) {
                 if (!budgetItem) return null
 
-                const uniqueId = `budget-item-${budgetItem.name}-${budgetItem.chartName}`
+                const uniqueId = `budget-item-${budgetItem.type}-${budgetItem.id}`
 
                 return (
                   <BudgetItem
+                    {...budgetItem}
                     key={uniqueId}
                     id={uniqueId}
-                    {...budgetItem}
                   />
                 )
               }
