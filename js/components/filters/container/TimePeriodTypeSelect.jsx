@@ -1,9 +1,19 @@
 const React = require('react')
+const { string, func } = React.PropTypes
 const { connect } = require('react-redux')
+
+const { setTimePeriodType } = require('js/redux/ducks/filters/timePeriodType')
+const fetchBudgetItems = require('js/redux/fetchers/budgetItems')
 
 const GBSelect = require('../GBSelect')
 
 const TimePeriodTypeSelect = React.createClass({
+  propTypes: {
+    value: string.isRequired,
+    setTimePeriodType: func.isRequired,
+    fetchBudgetItems: func.isRequired
+  },
+
   options () {
     return [
       { value: 'monthly', label: 'Monthly' },
@@ -12,8 +22,10 @@ const TimePeriodTypeSelect = React.createClass({
     ]
   },
 
-  handleChangeEvent () {
-
+  handleChangeEvent (selected) {
+    const { value } = selected
+    this.props.setTimePeriodType(value)
+    this.props.fetchBudgetItems()
   },
 
   render () {
@@ -31,7 +43,16 @@ const TimePeriodTypeSelect = React.createClass({
 })
 
 const mapStateToProps = (state) => ({
-  value: 'quarterly'
+  value: state.filters.timePeriodType.value
 })
 
-module.exports = connect(mapStateToProps)(TimePeriodTypeSelect)
+const mapDispatchToProps = (dispatch) => ({
+  setTimePeriodType: (value) => {
+    dispatch(setTimePeriodType(value))
+  },
+  fetchBudgetItems: () => {
+    dispatch(fetchBudgetItems())
+  }
+})
+
+module.exports = connect(mapStateToProps, mapDispatchToProps)(TimePeriodTypeSelect)

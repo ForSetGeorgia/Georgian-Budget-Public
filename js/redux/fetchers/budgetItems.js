@@ -12,7 +12,7 @@ const fetchBudgetItems = () => (dispatch, getState) => {
   const budgetItemType = state.filters.budgetItemType.value
   const financeType = state.filters.financeType.value
   const budgetItemIds = state.filters.budgetItems.selectedIds
-  const timePeriodType = 'quarterly'
+  const timePeriodType = state.filters.timePeriodType.value
 
   if (budgetItemIds.length === 0) {
     dispatch(setBudgetItems([]))

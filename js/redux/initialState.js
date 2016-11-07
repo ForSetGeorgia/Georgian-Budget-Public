@@ -11,6 +11,9 @@ module.exports = {
     },
     financeType: {
       value: ''
+    },
+    timePeriodType: {
+      value: ''
     }
   },
   budgetItems: {
