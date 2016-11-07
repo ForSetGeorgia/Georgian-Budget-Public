@@ -35,10 +35,16 @@ const TimePeriodTypeSelect = React.createClass({
     ]
   },
 
+  defaultValue: 'quarterly',
+
   handleChangeEvent (selected) {
     const { value } = selected
     this.props.setTimePeriodType(value)
     this.props.fetchBudgetItems()
+  },
+
+  componentDidMount () {
+    this.handleChangeEvent({ value: this.defaultValue })
   },
 
   render () {
