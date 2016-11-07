@@ -3,7 +3,7 @@ const { string, func, object } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
-const BudgetItemTypeSelect = require('../presentation/BudgetItemTypeSelect')
+const GBSelect = require('../GBSelect')
 const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 
 const { setBudgetItems } = require('js/redux/ducks/budgetItems/data')
@@ -96,8 +96,10 @@ const Container = React.createClass({
   },
 
   render () {
-    return <BudgetItemTypeSelect
-      label={this.props.intl.formatMessage(messages.label)}
+    return <GBSelect
+      id='budget-item-type-select'
+      name='budget-item-type-select'
+      labelText={this.props.intl.formatMessage(messages.label)}
       value={this.props.value}
       handleChangeEvent={this.handleChangeEvent}
       options={this.options()}

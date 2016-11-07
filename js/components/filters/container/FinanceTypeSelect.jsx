@@ -9,7 +9,7 @@ const fetchBudgetItems = require('js/redux/fetchers/budgetItems')
 const { setFinanceType } = require('js/redux/ducks/filters/financeType')
 
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
-const FinanceTypeSelect = require('../presentation/FinanceTypeSelect')
+const GBSelect = require('../GBSelect')
 
 const messages = defineMessages({
   label: {
@@ -79,11 +79,13 @@ const Container = React.createClass({
     const { intl, value } = this.props
 
     return (
-      <FinanceTypeSelect
-        handleChange={this.handleChangeEvent}
+      <GBSelect
+        id='finance-type-select'
+        name='finance-type-select'
+        handleChangeEvent={this.handleChangeEvent}
         value={value}
         options={this.options()}
-        label={intl.formatMessage(messages.label)}
+        labelText={intl.formatMessage(messages.label)}
       />
     )
   }

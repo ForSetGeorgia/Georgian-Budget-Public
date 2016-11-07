@@ -5,7 +5,7 @@ const { injectIntl, intlShape, defineMessages } = require('react-intl')
 
 const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
-const BudgetItemSelect = require('../presentation/BudgetItemSelect')
+const GBSelect = require('../GBSelect')
 
 const { setSelectedBudgetItemIds } = require('js/redux/ducks/filters/budgetItems')
 
@@ -54,7 +54,7 @@ const Container = React.createClass({
     )
   },
 
-  handleChange (selected) {
+  handleChangeEvent (selected) {
     const selectedIds = selected.length === 0 ? [] : selected.split(',').map(
       (id) => Number(id)
     )
@@ -69,7 +69,7 @@ const Container = React.createClass({
 
     if (!querySelectedIds || querySelectedIds.length === 0) return
 
-    this.handleChange(querySelectedIds.join(','))
+    this.handleChangeEvent(querySelectedIds.join(','))
   },
 
   labelText () {
@@ -98,14 +98,21 @@ const Container = React.createClass({
 
   render () {
     return (
-      <BudgetItemSelect
-        budgetItemType={this.props.budgetItemType}
-        selectedIds={this.props.selectedIds}
+      <GBSelect
+        id='budget-item-select'
+        name='budget-item-select'
+        additionalClassNames='mod-longer'
+        value={this.props.selectedIds}
         options={this.props.options}
         visible={this.props.visible}
-        loading={this.props.loading}
-        handleChange={this.handleChange}
+        isLoading={this.props.loading}
+        handleChangeEvent={this.handleChangeEvent}
         labelText={this.labelText()}
+        labelKey='name'
+        valueKey='id'
+        clearable
+        multi
+        simpleValue
       />
     )
   }
