@@ -1,7 +1,14 @@
 const React = require('react')
+const { injectIntl, intlShape } = require('react-intl')
+
 const TimeSeriesChart = require('js/components/TimeSeriesChart')
 
+const timePeriodTypeMessages = require('js/messages/timePeriodTypes')
+
 const BudgetItem = (props) => {
+  const timePeriodTypeMessage = props.intl.formatMessage(timePeriodTypeMessages[props.timePeriodType])
+  const timeSeriesChartTitle = `${props.financeType}: ${timePeriodTypeMessage}`
+
   return (
     <div className='gb-BudgetItem'>
 
@@ -12,7 +19,7 @@ const BudgetItem = (props) => {
       <TimeSeriesChart
         containerId={`${props.id}-${props.financeType}-${props.timePeriodType}-chart`}
         key={`${props.id}-${props.financeType}-${props.timePeriodType}-chart`}
-        title={`${props.financeType}: ${props.timePeriodType}`}
+        title={timeSeriesChartTitle}
         xAxisCategories={props.timePeriods}
         yAxisAmounts={props.amounts}
       />
@@ -29,7 +36,8 @@ BudgetItem.propTypes = {
   timePeriodType: string.isRequired,
   name: string.isRequired,
   timePeriods: array.isRequired,
-  amounts: array.isRequired
+  amounts: array.isRequired,
+  intl: intlShape
 }
 
-module.exports = BudgetItem
+module.exports = injectIntl(BudgetItem)
