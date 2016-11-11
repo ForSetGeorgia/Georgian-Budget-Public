@@ -77,7 +77,8 @@ app.use((req, res) => {
               body,
               link,
               bundleJSFileName,
-              url
+              url,
+              Env
             }
           )
         )
