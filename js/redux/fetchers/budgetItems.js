@@ -9,7 +9,6 @@ const georgianBudgetAPI = require('js/services/georgianBudgetAPI')
 const fetchBudgetItems = () => (dispatch, getState) => {
   const state = getState()
   const locale = state.locale
-  const budgetItemType = state.filters.budgetItemType.value
   const financeType = state.filters.financeType.value
   const budgetItemIds = state.filters.budgetItems.selectedIds
   const timePeriodType = state.filters.timePeriodType.value
@@ -21,7 +20,6 @@ const fetchBudgetItems = () => (dispatch, getState) => {
 
   const requiredState = [
     locale,
-    budgetItemType,
     financeType,
     timePeriodType,
     budgetItemIds
@@ -37,7 +35,6 @@ const fetchBudgetItems = () => (dispatch, getState) => {
   georgianBudgetAPI.get(locale, 'v1', {
     params: {
       filters: {
-        budgetItemType: budgetItemType,
         financeType: financeType,
         timePeriodType: timePeriodType
       },

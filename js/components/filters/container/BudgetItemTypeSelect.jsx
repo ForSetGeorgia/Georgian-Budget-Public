@@ -24,7 +24,7 @@ const messages = defineMessages({
   }
 })
 
-const Container = React.createClass({
+const BudgetItemTypeSelect = React.createClass({
   contextTypes: {
     router: object
   },
@@ -130,4 +130,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(Container))
+module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(BudgetItemTypeSelect))

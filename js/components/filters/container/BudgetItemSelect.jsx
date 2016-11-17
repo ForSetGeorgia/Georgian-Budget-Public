@@ -22,7 +22,7 @@ const messages = defineMessages({
   }
 })
 
-const Container = React.createClass({
+const BudgetItemSelect = React.createClass({
   contextTypes: {
     router: object
   },
@@ -32,7 +32,7 @@ const Container = React.createClass({
     selectedIds: arrayOf(number).isRequired,
     querySelectedIds: arrayOf(string),
     options: arrayOf(shape({
-      id: number.isRequired,
+      id: string.isRequired,
       name: string.isRequired
     })).isRequired,
     visible: bool,
@@ -55,9 +55,7 @@ const Container = React.createClass({
   },
 
   handleChangeEvent (selected) {
-    const selectedIds = selected.length === 0 ? [] : selected.split(',').map(
-      (id) => Number(id)
-    )
+    const selectedIds = selected.length === 0 ? [] : selected.split(',')
 
     this.props.dispatchNewSelectedBudgetItemIds(selectedIds)
     this.updateURLWithSelected(selectedIds)
@@ -143,4 +141,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(Container))
+module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(BudgetItemSelect))

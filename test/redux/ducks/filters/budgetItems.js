@@ -66,14 +66,14 @@ describe('budget items filter reducer', () => {
       initialState,
       {
         options: [
-          { id: 10, name: 'helo' }
+          { id: 'a', name: 'helo' }
         ]
       }
     )
 
     const action = setBudgetItemFilterOptions([
-      { id: 12, name: 'hello' },
-      { id: 54, name: 'fdf' }
+      { id: 'bcd', name: 'hello' },
+      { id: 'efg', name: 'fdf' }
     ])
 
     const newState = budgetItemsFilter(previousState, action)
@@ -83,8 +83,8 @@ describe('budget items filter reducer', () => {
       initialState,
       {
         options: [
-          { id: 12, name: 'hello' },
-          { id: 54, name: 'fdf' }
+          { id: 'bcd', name: 'hello' },
+          { id: 'efg', name: 'fdf' }
         ]
       }
     )
@@ -97,18 +97,18 @@ describe('budget items filter reducer', () => {
       {},
       initialState,
       {
-        selectedIds: [1]
+        selectedIds: ['a']
       }
     )
 
-    const action = setSelectedBudgetItemIds([4, 6, 1])
+    const action = setSelectedBudgetItemIds(['b', 'c', 'd'])
     const newState = budgetItemsFilter(previousState, action)
 
     const expectedState = Object.assign(
       {},
       initialState,
       {
-        selectedIds: [4, 6, 1]
+        selectedIds: ['b', 'c', 'd']
       }
     )
 
