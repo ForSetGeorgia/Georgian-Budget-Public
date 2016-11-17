@@ -1,5 +1,5 @@
 const React = require('react')
-const { object, func, number, arrayOf, shape, string, bool } = React.PropTypes
+const { object, func, arrayOf, shape, string, bool } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 
@@ -29,7 +29,7 @@ const BudgetItemSelect = React.createClass({
 
   propTypes: {
     budgetItemType: string,
-    selectedIds: arrayOf(number).isRequired,
+    selectedIds: arrayOf(string).isRequired,
     querySelectedIds: arrayOf(string),
     options: arrayOf(shape({
       id: string.isRequired,

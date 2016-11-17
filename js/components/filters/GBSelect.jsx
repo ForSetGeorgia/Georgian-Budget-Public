@@ -28,13 +28,13 @@ const GBSelect = (props) => {
   )
 }
 
-const { func, number, arrayOf, oneOfType, string, bool, object } = React.PropTypes
+const { func, arrayOf, oneOfType, string, bool, object } = React.PropTypes
 
 GBSelect.propTypes = {
   id: string.isRequired,
   name: string.isRequired,
   handleChangeEvent: func.isRequired,
-  value: oneOfType([string, arrayOf(number)]).isRequired,
+  value: oneOfType([string, arrayOf(string)]).isRequired,
   options: arrayOf(object).isRequired,
   additionalClassNames: string,
   visible: bool,
