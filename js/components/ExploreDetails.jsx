@@ -6,7 +6,7 @@ const Error = require('js/components/Error')
 const BudgetItem = require('js/components/BudgetItem')
 const LoadingIndicator = require('js/components/LoadingIndicator')
 
-let BudgetItemsList = React.createClass({
+let ExploreDetails = React.createClass({
   propTypes: {
     errors: arrayOf(object).isRequired,
     loading: bool.isRequired,
@@ -14,8 +14,10 @@ let BudgetItemsList = React.createClass({
   },
 
   render: function () {
+    let content
+
     if (this.props.errors.length > 0) {
-      return (
+      content = (
         <div>
           {
             this.props.errors.map((error) => (
@@ -27,13 +29,13 @@ let BudgetItemsList = React.createClass({
     }
 
     if (this.props.loading) {
-      return (
+      content = (
         <LoadingIndicator />
       )
     }
 
     if (this.props.data.length > 0) {
-      return (
+      content = (
         <div>
           {
             this.props.data.map(
@@ -56,7 +58,9 @@ let BudgetItemsList = React.createClass({
       )
     }
 
-    return <div></div>
+    return (<div className='gb-ExploreDetails'>
+      {content}
+    </div>)
   }
 })
 
@@ -64,6 +68,6 @@ const mapStateToProps = function (state) {
   return state.budgetItems
 }
 
-BudgetItemsList = connect(mapStateToProps)(BudgetItemsList)
+ExploreDetails = connect(mapStateToProps)(ExploreDetails)
 
-module.exports = BudgetItemsList
+module.exports = ExploreDetails

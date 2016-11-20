@@ -1,7 +1,8 @@
 const React = require('react')
 const Helmet = require('react-helmet')
 
-const BudgetItemsList = require('js/components/BudgetItemsList')
+const ExploreDetails = require('js/components/ExploreDetails')
+const ExploreList = require('js/components/ExploreList')
 const Filters = require('./filters/Filters')
 
 const Explore = React.createClass({
@@ -13,7 +14,10 @@ const Explore = React.createClass({
         />
 
         <Filters />
-        <BudgetItemsList />
+        <div className='gb-Explore-content'>
+          <ExploreList />
+          <ExploreDetails />
+        </div>
       </div>
     )
   }
