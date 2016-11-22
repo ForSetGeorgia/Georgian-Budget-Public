@@ -5,7 +5,12 @@ const { expect } = require('chai')
 const wholeState = require('js/redux/initialState')
 
 const exploreDetails = require('js/redux/ducks/exploreDetails')
-const { beginLoadingExploreDetails, finishLoadingExploreDetails } = exploreDetails
+
+const { 
+  beginLoadingExploreDetails,
+  finishLoadingExploreDetails
+} = exploreDetails
+
 const { getExploreDetailsLoading } = exploreDetails
 
 describe('explore details loading', () => {
