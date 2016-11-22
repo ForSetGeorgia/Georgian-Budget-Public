@@ -1,9 +1,10 @@
 const React = require('react')
 const Helmet = require('react-helmet')
 
+const Filters = require('./filters/Filters')
+const AppErrorsDisplay = require('./AppErrorsDisplay')
 const ExploreDetails = require('js/components/ExploreDetails')
 const ExploreList = require('js/components/ExploreList')
-const Filters = require('./filters/Filters')
 
 const Explore = React.createClass({
   render () {
@@ -14,6 +15,7 @@ const Explore = React.createClass({
         />
 
         <Filters />
+        <AppErrorsDisplay />
         <div className='gb-Explore-content'>
           <ExploreList />
           <ExploreDetails />
