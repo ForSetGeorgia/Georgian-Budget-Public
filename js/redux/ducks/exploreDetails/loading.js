@@ -1,8 +1,8 @@
 const { createSelector } = require('reselect')
 const rootSelector = require('./rootSelector')
 
-const BEGIN_LOADING_DATA = 'georgianBudget/budgetItems/loading/BEGIN_LOADING_DATA'
-const FINISH_LOADING_DATA = 'georgianBudget/budgetItems/loading/FINISH_LOADING_DATA'
+const BEGIN_LOADING_DATA = 'georgianBudget/exploreDetails/loading/BEGIN_LOADING_DATA'
+const FINISH_LOADING_DATA = 'georgianBudget/exploreDetails/loading/FINISH_LOADING_DATA'
 
 const reducer = (state = false, action) => {
   switch (action.type) {
@@ -15,15 +15,15 @@ const reducer = (state = false, action) => {
   }
 }
 
-reducer.beginLoadingBudgetItems = () => ({
+reducer.beginLoadingExploreDetails = () => ({
   type: BEGIN_LOADING_DATA
 })
 
-reducer.finishLoadingBudgetItems = () => ({
+reducer.finishLoadingExploreDetails = () => ({
   type: FINISH_LOADING_DATA
 })
 
-reducer.getBudgetItemsLoading = createSelector(
+reducer.getExploreDetailsLoading = createSelector(
   rootSelector,
   ({loading}) => loading
 )

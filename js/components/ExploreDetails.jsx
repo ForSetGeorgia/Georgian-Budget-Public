@@ -1,7 +1,7 @@
 const React = require('react')
 const { arrayOf, object, bool } = React.PropTypes
 const { connect } = require('react-redux')
-const { getBudgetItemsLoading } = require('js/redux/ducks/exploreDetails/loading')
+const { getExploreDetailsLoading } = require('js/redux/ducks/exploreDetails/loading')
 const { getBudgetItemsData } = require('js/redux/ducks/budgetItems/data')
 
 const BudgetItem = require('js/components/BudgetItem')
@@ -53,7 +53,7 @@ let ExploreDetails = React.createClass({
 })
 
 const mapStateToProps = (state) => ({
-  loading: getBudgetItemsLoading(state),
+  loading: getExploreDetailsLoading(state),
   data: getBudgetItemsData(state)
 })
 

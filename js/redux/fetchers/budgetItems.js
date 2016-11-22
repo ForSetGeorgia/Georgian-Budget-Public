@@ -1,4 +1,4 @@
-const { beginLoadingBudgetItems, finishLoadingBudgetItems } = require('../ducks/exploreDetails/loading')
+const { beginLoadingExploreDetails, finishLoadingExploreDetails } = require('../ducks/exploreDetails/loading')
 
 const { addError, clearErrors } = require('../ducks/errors')
 
@@ -32,7 +32,7 @@ const fetchBudgetItems = () => (dispatch, getState) => {
   }
 
   dispatch(clearErrors())
-  dispatch(beginLoadingBudgetItems())
+  dispatch(beginLoadingExploreDetails())
 
   georgianBudgetAPI.get(locale, 'v1', {
     params: {
@@ -43,7 +43,7 @@ const fetchBudgetItems = () => (dispatch, getState) => {
       budgetItemIds: budgetItemIds
     }
   }).then((response) => {
-    dispatch(finishLoadingBudgetItems())
+    dispatch(finishLoadingExploreDetails())
 
     if (!response || !response.data || typeof response.data !== 'object') {
       dispatch(addError('Error communicating with API'))
