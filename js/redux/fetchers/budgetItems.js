@@ -3,7 +3,7 @@ const { beginLoadingExploreDetails, finishLoadingExploreDetails } = require('../
 const { addError, clearErrors } = require('../ducks/errors')
 
 const { setBudgetItems } = require('../ducks/budgetItems')
-const { getSelectedBudgetItemIds } = require('js/redux/ducks/filters/budgetItems')
+const { getSelectedBudgetItemIds } = require('js/redux/ducks/explore')
 
 const { getLocale } = require('js/redux/ducks/locale')
 

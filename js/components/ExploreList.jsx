@@ -4,7 +4,7 @@ const { connect } = require('react-redux')
 const Griddle = require('griddle-react')
 
 const LoadingIndicator = require('./LoadingIndicator')
-const { getSelectedBudgetItemIds } = require('js/redux/ducks/filters/budgetItems')
+const { getSelectedBudgetItemIds } = require('js/redux/ducks/explore')
 
 const ExploreList = React.createClass({
   propTypes: {

@@ -9,7 +9,6 @@ const {
   startLoadingBudgetItemFilter,
   finishLoadingBudgetItemFilter,
   setBudgetItemFilterOptions,
-  setSelectedBudgetItemIds,
   setBudgetItemsFilterVisibility
 } = budgetItemsFilter
 
@@ -93,30 +92,6 @@ describe('budget items filter reducer', () => {
           { id: 'bcd', name: 'hello' },
           { id: 'efg', name: 'fdf' }
         ]
-      }
-    )
-
-    expect(newState).to.deep.equal(expectedState)
-  })
-
-  it('handles setSelectedBudgetItemIds action', () => {
-    const initialBudgetItemsFilterState = getBudgetItemsFilter(initialState)
-    const previousState = Object.assign(
-      {},
-      initialBudgetItemsFilterState,
-      {
-        selectedIds: ['a']
-      }
-    )
-
-    const action = setSelectedBudgetItemIds(['b', 'c', 'd'])
-    const newState = budgetItemsFilter(previousState, action)
-
-    const expectedState = Object.assign(
-      {},
-      initialBudgetItemsFilterState,
-      {
-        selectedIds: ['b', 'c', 'd']
       }
     )
 

@@ -7,8 +7,11 @@ const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const GBSelect = require('../GBSelect')
 
-const { setSelectedBudgetItemIds } = require('js/redux/ducks/filters/budgetItems')
-const { getSelectedBudgetItemIds } = require('js/redux/ducks/filters/budgetItems')
+const {
+  setSelectedBudgetItemIds,
+  getSelectedBudgetItemIds
+} = require('js/redux/ducks/explore')
+
 const { getBudgetItemsFilterLoading } = require('js/redux/ducks/filters/budgetItems')
 
 const fetchBudgetItemFilterOptions =

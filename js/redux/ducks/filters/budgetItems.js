@@ -7,9 +7,6 @@ const START_LOADING_BUDGET_ITEM_FILTER =
 const FINISH_LOADING_BUDGET_ITEM_FILTER =
 'georgianBudget/filters/budgetItems/FINISH_LOADING_BUDGET_ITEM_FILTER'
 
-const SET_SELECTED_BUDGET_ITEM_IDS =
-'georgianBudget/filters/budgetItems/SET_SELECTED_BUDGET_ITEM_IDS'
-
 const SET_BUDGET_ITEM_FILTER_OPTIONS =
 'georgianBudget/filters/budgetItems/SET_BUDGET_ITEM_FILTER_OPTIONS'
 
@@ -32,14 +29,6 @@ const reducer = (state = {}, action) => {
         state,
         {
           loading: false
-        }
-      )
-    case SET_SELECTED_BUDGET_ITEM_IDS:
-      return Object.assign(
-        {},
-        state,
-        {
-          selectedIds: action.ids
         }
       )
     case SET_BUDGET_ITEM_FILTER_OPTIONS:
@@ -71,13 +60,6 @@ reducer.finishLoadingBudgetItemFilter = () => ({
   type: FINISH_LOADING_BUDGET_ITEM_FILTER
 })
 
-reducer.setSelectedBudgetItemIds = function (ids) {
-  return {
-    type: SET_SELECTED_BUDGET_ITEM_IDS,
-    ids: ids
-  }
-}
-
 reducer.setBudgetItemFilterOptions = (options) => {
   return {
     type: SET_BUDGET_ITEM_FILTER_OPTIONS,
@@ -101,11 +83,6 @@ reducer.getBudgetItemsFilter = createSelector(
 reducer.getBudgetItemsFilterLoading = createSelector(
   reducer.getBudgetItemsFilter,
   ({loading}) => loading
-)
-
-reducer.getSelectedBudgetItemIds = createSelector(
-  reducer.getBudgetItemsFilter,
-  ({selectedIds}) => selectedIds
 )
 
 module.exports = reducer
