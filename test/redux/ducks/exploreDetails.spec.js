@@ -4,12 +4,13 @@
 const { expect } = require('chai')
 const wholeState = require('js/redux/initialState')
 
-const loading = require('js/redux/ducks/exploreDetails/loading')
-const { beginLoadingExploreDetails, finishLoadingExploreDetails } = loading
+const exploreDetails = require('js/redux/ducks/exploreDetails')
+const { beginLoadingExploreDetails, finishLoadingExploreDetails } = exploreDetails
+const { getExploreDetailsLoading } = exploreDetails
 
 describe('explore details loading', () => {
   it('is false by default', () => {
-    expect(loading.getExploreDetailsLoading(wholeState)).to.be.false
+    expect(getExploreDetailsLoading(wholeState)).to.be.false
   })
 
   it('reducer handles beginLoadingExploreDetails', () => {
@@ -17,7 +18,7 @@ describe('explore details loading', () => {
 
     const action = beginLoadingExploreDetails()
 
-    expect(loading(previousState, action)).to.be.true
+    expect(exploreDetails(previousState, action)).to.be.true
   })
 
   it('reducer handles finishLoadingExploreDetails', () => {
@@ -25,6 +26,6 @@ describe('explore details loading', () => {
 
     const action = finishLoadingExploreDetails()
 
-    expect(loading(previousState, action)).to.be.false
+    expect(exploreDetails(previousState, action)).to.be.false
   })
 })
