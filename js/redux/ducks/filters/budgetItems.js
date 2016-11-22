@@ -1,3 +1,6 @@
+const { createSelector } = require('reselect')
+const rootSelector = require('./rootSelector')
+
 const START_LOADING_BUDGET_ITEM_FILTER =
 'georgianBudget/filters/budgetItems/START_LOADING_BUDGET_ITEM_FILTER'
 
@@ -88,5 +91,11 @@ reducer.setBudgetItemsFilterVisibility = (isVisible) => {
     value: isVisible
   }
 }
+
+// Selectors
+reducer.getBudgetItemsFilter = createSelector(
+  rootSelector,
+  ({budgetItems}) => budgetItems
+)
 
 module.exports = reducer

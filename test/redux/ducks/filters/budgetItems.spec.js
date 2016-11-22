@@ -2,7 +2,7 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const initialState = require('js/redux/initialState').filters.budgetItems
+const initialState = require('js/redux/initialState')
 const budgetItemsFilter = require('js/redux/ducks/filters/budgetItems')
 
 const {
@@ -13,11 +13,16 @@ const {
   setBudgetItemsFilterVisibility
 } = budgetItemsFilter
 
+const {
+  getBudgetItemsFilter
+} = budgetItemsFilter
+
 describe('budget items filter reducer', () => {
   it('handles startLoadingBudgetItemFilter action', () => {
+    const initialBudgetItemsFilterState = getBudgetItemsFilter(initialState)
     const previousState = Object.assign(
       {},
-      initialState,
+      initialBudgetItemsFilterState,
       {
         loading: false
       }
@@ -28,7 +33,7 @@ describe('budget items filter reducer', () => {
 
     const expectedState = Object.assign(
       {},
-      initialState,
+      initialBudgetItemsFilterState,
       {
         loading: true
       }
@@ -38,9 +43,10 @@ describe('budget items filter reducer', () => {
   })
 
   it('handles finishLoadingBudgetItemFilter', () => {
+    const initialBudgetItemsFilterState = getBudgetItemsFilter(initialState)
     const previousState = Object.assign(
       {},
-      initialState,
+      initialBudgetItemsFilterState,
       {
         loading: true
       }
@@ -51,7 +57,7 @@ describe('budget items filter reducer', () => {
 
     const expectedState = Object.assign(
       {},
-      initialState,
+      initialBudgetItemsFilterState,
       {
         loading: false
       }
@@ -61,9 +67,10 @@ describe('budget items filter reducer', () => {
   })
 
   it('handles setBudgetItemFilterOptions action', () => {
+    const initialBudgetItemsFilterState = getBudgetItemsFilter(initialState)
     const previousState = Object.assign(
       {},
-      initialState,
+      initialBudgetItemsFilterState,
       {
         options: [
           { id: 'a', name: 'helo' }
@@ -80,7 +87,7 @@ describe('budget items filter reducer', () => {
 
     const expectedState = Object.assign(
       {},
-      initialState,
+      initialBudgetItemsFilterState,
       {
         options: [
           { id: 'bcd', name: 'hello' },
@@ -93,9 +100,10 @@ describe('budget items filter reducer', () => {
   })
 
   it('handles setSelectedBudgetItemIds action', () => {
+    const initialBudgetItemsFilterState = getBudgetItemsFilter(initialState)
     const previousState = Object.assign(
       {},
-      initialState,
+      initialBudgetItemsFilterState,
       {
         selectedIds: ['a']
       }
@@ -106,7 +114,7 @@ describe('budget items filter reducer', () => {
 
     const expectedState = Object.assign(
       {},
-      initialState,
+      initialBudgetItemsFilterState,
       {
         selectedIds: ['b', 'c', 'd']
       }
@@ -116,9 +124,10 @@ describe('budget items filter reducer', () => {
   })
 
   it('handles setBudgetItemsFilterVisibility action when isVisible is true', () => {
+    const initialBudgetItemsFilterState = getBudgetItemsFilter(initialState)
     const previousState = Object.assign(
       {},
-      initialState,
+      initialBudgetItemsFilterState,
       {
         visible: false
       }
@@ -129,7 +138,7 @@ describe('budget items filter reducer', () => {
 
     const expectedState = Object.assign(
       {},
-      initialState,
+      initialBudgetItemsFilterState,
       {
         visible: true
       }
@@ -139,9 +148,10 @@ describe('budget items filter reducer', () => {
   })
 
   it('handles setBudgetItemsFilterVisibility action when isVisible is false', () => {
+    const initialBudgetItemsFilterState = getBudgetItemsFilter(initialState)
     const previousState = Object.assign(
       {},
-      initialState,
+      initialBudgetItemsFilterState,
       {
         visible: true
       }
@@ -152,7 +162,7 @@ describe('budget items filter reducer', () => {
 
     const expectedState = Object.assign(
       {},
-      initialState,
+      initialBudgetItemsFilterState,
       {
         visible: false
       }
