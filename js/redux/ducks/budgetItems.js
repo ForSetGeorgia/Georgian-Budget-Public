@@ -1,21 +1,35 @@
 const { createSelector } = require('reselect')
 const rootSelector = require('./rootSelector')
 
-const SET_BUDGET_ITEMS = 'georgianBudget/budgetItems/data/SET_BUDGET_ITEMS'
+const MERGE_BUDGET_ITEMS = 'georgianBudget/budgetItems/MERGE_BUDGET_ITEMS'
 
-const reducer = (state = [], action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
-    case SET_BUDGET_ITEMS:
-      return action.data
+    case MERGE_BUDGET_ITEMS:
+      let newBudgetItems = {}
+
+      if (state === {}) {
+        newBudgetItems = action.data
+      } else {
+        for (let key in action.data) {
+          newBudgetItems[key] = Object.assign(
+            {},
+            state[key],
+            action.data[key]
+          )
+        }
+      }
+
+      return newBudgetItems
     default: {
       return state
     }
   }
 }
 
-reducer.setBudgetItems = function (budgetItems) {
+reducer.mergeBudgetItems = function (budgetItems) {
   return {
-    type: SET_BUDGET_ITEMS,
+    type: MERGE_BUDGET_ITEMS,
     data: budgetItems
   }
 }

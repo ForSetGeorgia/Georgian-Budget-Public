@@ -3,44 +3,44 @@
 
 const { expect } = require('chai')
 const budgetItems = require('js/redux/ducks/budgetItems')
-const { setBudgetItems } = budgetItems
+const { mergeBudgetItems } = budgetItems
 const { getBudgetItemsData } = budgetItems
 const wholeState = require('js/redux/initialState')
 
 describe('budget items reducer', () => {
-  it('handles setBudgetItems action', () => {
+  it('handles mergeBudgetItems action', () => {
     const initialState = getBudgetItemsData(wholeState)
     const previousState = Object.assign(
-      [],
+      {},
       initialState,
-      [{
-        id: '1',
-        value: '2',
-      }]
+      {
+        '1': {
+          name: '5',
+          value: '2'
+        }
+      }
     )
 
-    const action = setBudgetItems([
-      {
-        id: 5
+    const action = mergeBudgetItems({
+      '1': {
+        amount: '1'
       },
-      {
-        id: 44,
-        value: 6
+      'bla': {
+        name: 'I am Bla'
       }
-    ])
+    })
 
     const newState = budgetItems(previousState, action)
 
-    const expectedState = [
-      {
-        id: 5
+    expect(newState).to.deep.equal({
+      '1': {
+        name: '5',
+        value: '2',
+        amount: '1'
       },
-      {
-        id: 44,
-        value: 6
+      'bla': {
+        name: 'I am Bla'
       }
-    ]
-
-    expect(newState).to.deep.equal(expectedState)
+    })
   })
 })

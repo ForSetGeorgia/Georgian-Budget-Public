@@ -1,8 +1,9 @@
+const { normalize, Schema, arrayOf } = require('normalizr')
 const { beginLoadingExploreDetails, finishLoadingExploreDetails } = require('../ducks/explore/details')
 
 const { addError, clearErrors } = require('../ducks/errors')
 
-const { setBudgetItems } = require('../ducks/budgetItems')
+const { mergeBudgetItems } = require('../ducks/budgetItems')
 const { getSelectedBudgetItemIds } = require('js/redux/ducks/explore')
 
 const { getLocale } = require('js/redux/ducks/locale')
@@ -17,7 +18,7 @@ const fetchBudgetItems = () => (dispatch, getState) => {
   const timePeriodType = state.filters.timePeriodType.value
 
   if (budgetItemIds.length === 0) {
-    dispatch(setBudgetItems([]))
+    dispatch(mergeBudgetItems({}))
     return
   }
 
@@ -51,13 +52,21 @@ const fetchBudgetItems = () => (dispatch, getState) => {
       return
     }
 
-    const { errors, budgetItems } = response.data
+    const { errors } = response.data
 
     errors.forEach((error) => {
       dispatch(addError(error.text))
     })
 
-    dispatch(setBudgetItems(budgetItems))
+    const budgetItemsSchema = new Schema('budgetItems')
+
+    const normalized = normalize(response.data, {
+      budgetItems: arrayOf(budgetItemsSchema)
+    })
+
+    const budgetItems = normalized.entities.budgetItems
+
+    dispatch(mergeBudgetItems(budgetItems))
   })
 }
 
