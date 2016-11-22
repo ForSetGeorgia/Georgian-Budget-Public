@@ -3,6 +3,7 @@ const { beginLoadingExploreDetails, finishLoadingExploreDetails } = require('../
 const { addError, clearErrors } = require('../ducks/errors')
 
 const { setBudgetItems } = require('../ducks/budgetItems')
+const { getSelectedBudgetItemIds } = require('js/redux/ducks/filters/budgetItems')
 
 const { getLocale } = require('js/redux/ducks/locale')
 
@@ -12,7 +13,7 @@ const fetchBudgetItems = () => (dispatch, getState) => {
   const state = getState()
   const locale = getLocale(state)
   const financeType = state.filters.financeType.value
-  const budgetItemIds = state.filters.budgetItems.selectedIds
+  const budgetItemIds = getSelectedBudgetItemIds(state)
   const timePeriodType = state.filters.timePeriodType.value
 
   if (budgetItemIds.length === 0) {

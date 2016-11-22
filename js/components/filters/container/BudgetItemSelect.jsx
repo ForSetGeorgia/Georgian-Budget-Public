@@ -8,6 +8,7 @@ const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const GBSelect = require('../GBSelect')
 
 const { setSelectedBudgetItemIds } = require('js/redux/ducks/filters/budgetItems')
+const { getSelectedBudgetItemIds } = require('js/redux/ducks/filters/budgetItems')
 const { getBudgetItemsFilterLoading } = require('js/redux/ducks/filters/budgetItems')
 
 const fetchBudgetItemFilterOptions =
@@ -121,7 +122,7 @@ const mapStateToProps = (state, ownProps) => {
   const { budgetItemIds } = ownProps.location.query
 
   return {
-    selectedIds: state.filters.budgetItems.selectedIds,
+    selectedIds: getSelectedBudgetItemIds(state),
     querySelectedIds: typeof budgetItemIds === 'string' ? [budgetItemIds] : budgetItemIds,
     options: state.filters.budgetItems.options,
     visible: state.filters.budgetItems.visible,

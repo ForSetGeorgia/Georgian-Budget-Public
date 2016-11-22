@@ -99,8 +99,13 @@ reducer.getBudgetItemsFilter = createSelector(
 )
 
 reducer.getBudgetItemsFilterLoading = createSelector(
-  rootSelector,
+  reducer.getBudgetItemsFilter,
   ({loading}) => loading
+)
+
+reducer.getSelectedBudgetItemIds = createSelector(
+  reducer.getBudgetItemsFilter,
+  ({selectedIds}) => selectedIds
 )
 
 module.exports = reducer
