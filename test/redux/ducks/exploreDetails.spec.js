@@ -5,13 +5,17 @@ const { expect } = require('chai')
 const wholeState = require('js/redux/initialState')
 
 const exploreDetails = require('js/redux/ducks/exploreDetails')
+const initialState = require('js/redux/initialState')
 
-const { 
+const {
   beginLoadingExploreDetails,
   finishLoadingExploreDetails
 } = exploreDetails
 
-const { getExploreDetailsLoading } = exploreDetails
+const {
+  getExploreDetails,
+  getExploreDetailsLoading
+} = exploreDetails
 
 describe('explore details loading', () => {
   it('is false by default', () => {
@@ -19,18 +23,47 @@ describe('explore details loading', () => {
   })
 
   it('reducer handles beginLoadingExploreDetails', () => {
-    const previousState = false
+    const initialExploreDetailsState = getExploreDetails(initialState)
+    const previousState = Object.assign(
+      {},
+      initialExploreDetailsState,
+      {
+        loading: false
+      }
+    )
 
     const action = beginLoadingExploreDetails()
 
-    expect(exploreDetails(previousState, action)).to.be.true
+    const newState = exploreDetails(previousState, action)
+
+    expect(newState).to.deep.eq(Object.assign(
+      {},
+      initialExploreDetailsState,
+      {
+        loading: true
+      }
+    ))
   })
 
   it('reducer handles finishLoadingExploreDetails', () => {
-    const previousState = true
+    const initialExploreDetailsState = getExploreDetails(initialState)
+    const previousState = Object.assign(
+      {},
+      initialExploreDetailsState,
+      {
+        loading: true
+      }
+    )
 
     const action = finishLoadingExploreDetails()
+    const newState = exploreDetails(previousState, action)
 
-    expect(exploreDetails(previousState, action)).to.be.false
+    expect(newState).to.deep.eq(Object.assign(
+      {},
+      initialExploreDetailsState,
+      {
+        loading: false
+      }
+    ))
   })
 })
