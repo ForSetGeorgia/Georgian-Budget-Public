@@ -2,11 +2,17 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const loading = require('js/redux/ducks/budgetItems/loading')
+const wholeState = require('js/redux/initialState')
+
+const loading = require('js/redux/ducks/exploreDetails/loading')
 const { beginLoadingBudgetItems, finishLoadingBudgetItems } = loading
 
-describe('data loading reducer', () => {
-  it('handles beginLoadingBudgetItems', () => {
+describe('explore details loading', () => {
+  it('is false by default', () => {
+    expect(loading.getBudgetItemsLoading(wholeState)).to.be.false
+  })
+
+  it('reducer handles beginLoadingBudgetItems', () => {
     const previousState = false
 
     const action = beginLoadingBudgetItems()
@@ -14,7 +20,7 @@ describe('data loading reducer', () => {
     expect(loading(previousState, action)).to.be.true
   })
 
-  it('handles finishLoadingBudgetItems', () => {
+  it('reducer handles finishLoadingBudgetItems', () => {
     const previousState = true
 
     const action = finishLoadingBudgetItems()

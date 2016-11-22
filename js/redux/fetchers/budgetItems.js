@@ -1,4 +1,4 @@
-const { beginLoadingBudgetItems, finishLoadingBudgetItems } = require('../ducks/budgetItems/loading')
+const { beginLoadingBudgetItems, finishLoadingBudgetItems } = require('../ducks/exploreDetails/loading')
 
 const { addError, clearErrors } = require('../ducks/errors')
 

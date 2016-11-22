@@ -17,7 +17,9 @@ module.exports = {
     }
   },
   budgetItems: {
-    data: [],
+    data: []
+  },
+  exploreDetails: {
     loading: false
   },
   errors: [],
