@@ -1,12 +1,12 @@
 const { createSelector } = require('reselect')
 const rootSelector = require('./rootSelector')
 
-const BEGIN_LOADING_DATA = 'georgianBudget/exploreDetails/loading/BEGIN_LOADING_DATA'
-const FINISH_LOADING_DATA = 'georgianBudget/exploreDetails/loading/FINISH_LOADING_DATA'
+const BEGIN_LOADING = 'georgianBudget/exploreDetails/BEGIN_LOADING'
+const FINISH_LOADING = 'georgianBudget/exploreDetails/FINISH_LOADING'
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
-    case BEGIN_LOADING_DATA:
+    case BEGIN_LOADING:
       return Object.assign(
         {},
         state,
@@ -14,7 +14,7 @@ const reducer = (state = {}, action) => {
           loading: true
         }
       )
-    case FINISH_LOADING_DATA:
+    case FINISH_LOADING:
       return Object.assign(
         {},
         state,
@@ -28,11 +28,11 @@ const reducer = (state = {}, action) => {
 }
 
 reducer.beginLoadingExploreDetails = () => ({
-  type: BEGIN_LOADING_DATA
+  type: BEGIN_LOADING
 })
 
 reducer.finishLoadingExploreDetails = () => ({
-  type: FINISH_LOADING_DATA
+  type: FINISH_LOADING
 })
 
 reducer.getExploreDetails = createSelector(
