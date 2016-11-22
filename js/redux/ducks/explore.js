@@ -40,4 +40,10 @@ reducer.getSelectedBudgetItemIds = createSelector(
   ({selectedIds}) => selectedIds
 )
 
+reducer.getSelectedBudgetItems = (state) => {
+  return state.budgetItems.filter(budgetItem => {
+    return reducer.getSelectedBudgetItemIds(state).includes(budgetItem.id)
+  })
+}
+
 module.exports = reducer
