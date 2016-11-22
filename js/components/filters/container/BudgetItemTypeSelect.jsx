@@ -6,8 +6,6 @@ const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const GBSelect = require('../GBSelect')
 const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 
-const { setBudgetItems } = require('js/redux/ducks/budgetItems')
-
 const { setBudgetItemsFilterVisibility } =
 require('js/redux/ducks/filters/budgetItems')
 
@@ -35,7 +33,6 @@ const BudgetItemTypeSelect = React.createClass({
     location: object,
     intl: intlShape,
     setBudgetItemType: func,
-    setBudgetItems: func,
     setBudgetItemsFilterVisibility: func,
     fetchBudgetItemFilterOptions: func
   },
@@ -74,7 +71,6 @@ const BudgetItemTypeSelect = React.createClass({
     if (!value) return
 
     this.props.setBudgetItemType(value)
-    this.props.setBudgetItems([])
     this.props.setBudgetItemsFilterVisibility(value !== 'total')
     this.props.fetchBudgetItemFilterOptions()
 
@@ -118,9 +114,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
   setBudgetItemType (value) {
     dispatch(setBudgetItemType(value))
-  },
-  setBudgetItems (budgetItems) {
-    dispatch(setBudgetItems(budgetItems))
   },
   setBudgetItemsFilterVisibility (isVisible) {
     dispatch(setBudgetItemsFilterVisibility(isVisible))
