@@ -1,4 +1,9 @@
 module.exports = {
+  budgetItems: [],
+  errors: [],
+  exploreDetails: {
+    loading: false
+  },
   filters: {
     budgetItems: {
       selectedIds: [],
@@ -16,12 +21,5 @@ module.exports = {
       value: ''
     }
   },
-  budgetItems: {
-    data: []
-  },
-  exploreDetails: {
-    loading: false
-  },
-  errors: [],
   locale: ''
 }

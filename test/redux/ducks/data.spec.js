@@ -2,7 +2,7 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const budgetItems = require('js/redux/ducks/budgetItems/data')
+const budgetItems = require('js/redux/ducks/budgetItems')
 const { setBudgetItems } = budgetItems
 const { getBudgetItemsData } = budgetItems
 const wholeState = require('js/redux/initialState')

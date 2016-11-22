@@ -2,7 +2,7 @@ const { beginLoadingExploreDetails, finishLoadingExploreDetails } = require('../
 
 const { addError, clearErrors } = require('../ducks/errors')
 
-const { setBudgetItems } = require('../ducks/budgetItems/data')
+const { setBudgetItems } = require('../ducks/budgetItems')
 
 const { getLocale } = require('js/redux/ducks/locale')
 

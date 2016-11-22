@@ -6,7 +6,7 @@ const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const GBSelect = require('../GBSelect')
 const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 
-const { setBudgetItems } = require('js/redux/ducks/budgetItems/data')
+const { setBudgetItems } = require('js/redux/ducks/budgetItems')
 
 const { setBudgetItemsFilterVisibility } =
 require('js/redux/ducks/filters/budgetItems')
