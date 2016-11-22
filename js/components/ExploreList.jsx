@@ -28,7 +28,9 @@ const ExploreList = React.createClass({
   render () {
     let content
 
-    if (this.props.items.length > 0) {
+    if (this.props.items.length === 0) {
+      content = <LoadingIndicator />
+    } else {
       content = <Griddle
         results={this.props.items}
         columns={['name']}
@@ -39,9 +41,8 @@ const ExploreList = React.createClass({
         enableInfiniteScroll
         bodyHeight='400'
       />
-    } else {
-      content = <LoadingIndicator />
     }
+
     return (
       <div className='gb-ExploreList'>
         {content}
