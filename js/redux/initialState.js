@@ -2,13 +2,13 @@ module.exports = {
   budgetItems: [],
   errors: [],
   explore: {
+    selectedIds: [],
     details: {
       loading: false
     }
   },
   filters: {
     budgetItems: {
-      selectedIds: [],
       options: [],
       visible: false,
       loading: true
