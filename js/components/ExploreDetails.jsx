@@ -1,7 +1,7 @@
 const React = require('react')
 const { arrayOf, object, bool } = React.PropTypes
 const { connect } = require('react-redux')
-const { getExploreDetailsLoading } = require('js/redux/ducks/exploreDetails/loading')
+const { getExploreDetailsLoading } = require('js/redux/ducks/exploreDetails')
 const { getBudgetItemsData } = require('js/redux/ducks/budgetItems')
 
 const BudgetItem = require('js/components/BudgetItem')
