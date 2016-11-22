@@ -1,6 +1,7 @@
-const SET_LOCALE = 'georgianBudget/locale/SET_LOCALE'
 const { createSelector } = require('reselect')
 const rootSelector = require('./rootSelector')
+
+const SET_LOCALE = 'georgianBudget/locale/SET_LOCALE'
 
 const reducer = (state = 'ka', action) => {
   switch (action.type) {
