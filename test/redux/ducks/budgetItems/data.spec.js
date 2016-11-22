@@ -4,13 +4,20 @@
 const { expect } = require('chai')
 const budgetItems = require('js/redux/ducks/budgetItems/data')
 const { setBudgetItems } = budgetItems
+const { getBudgetItemsData } = budgetItems
+const wholeState = require('js/redux/initialState')
 
 describe('budget items reducer', () => {
   it('handles setBudgetItems action', () => {
-    const previousState = [{
-      id: '1',
-      value: '2',
-    }]
+    const initialState = getBudgetItemsData(wholeState)
+    const previousState = Object.assign(
+      [],
+      initialState,
+      [{
+        id: '1',
+        value: '2',
+      }]
+    )
 
     const action = setBudgetItems([
       {

@@ -1,3 +1,6 @@
+const { createSelector } = require('reselect')
+const rootSelector = require('./rootSelector')
+
 const SET_BUDGET_ITEMS = 'georgianBudget/budgetItems/data/SET_BUDGET_ITEMS'
 
 const reducer = (state = [], action) => {
@@ -16,5 +19,10 @@ reducer.setBudgetItems = function (budgetItems) {
     data: budgetItems
   }
 }
+
+reducer.getBudgetItemsData = createSelector(
+  rootSelector,
+  ({data}) => data
+)
 
 module.exports = reducer
