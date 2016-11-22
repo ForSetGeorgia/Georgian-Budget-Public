@@ -1,4 +1,4 @@
-const { beginLoadingExploreDetails, finishLoadingExploreDetails } = require('../ducks/exploreDetails')
+const { beginLoadingExploreDetails, finishLoadingExploreDetails } = require('../ducks/explore/details')
 
 const { addError, clearErrors } = require('../ducks/errors')
 

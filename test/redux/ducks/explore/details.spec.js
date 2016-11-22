@@ -4,7 +4,7 @@
 const { expect } = require('chai')
 const wholeState = require('js/redux/initialState')
 
-const exploreDetails = require('js/redux/ducks/exploreDetails')
+const exploreDetails = require('js/redux/ducks/explore/details')
 const initialState = require('js/redux/initialState')
 
 const {

@@ -1,8 +1,10 @@
 module.exports = {
   budgetItems: [],
   errors: [],
-  exploreDetails: {
-    loading: false
+  explore: {
+    details: {
+      loading: false
+    }
   },
   filters: {
     budgetItems: {

@@ -37,7 +37,7 @@ reducer.finishLoadingExploreDetails = () => ({
 
 reducer.getExploreDetails = createSelector(
   rootSelector,
-  ({exploreDetails}) => exploreDetails
+  ({details}) => details
 )
 
 reducer.getExploreDetailsLoading = createSelector(
