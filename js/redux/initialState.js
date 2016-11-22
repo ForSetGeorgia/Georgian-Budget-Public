@@ -18,8 +18,8 @@ module.exports = {
   },
   budgetItems: {
     data: [],
-    errors: [],
     loading: false
   },
+  errors: [],
   locale: ''
 }

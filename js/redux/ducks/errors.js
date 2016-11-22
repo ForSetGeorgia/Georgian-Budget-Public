@@ -1,8 +1,8 @@
 const { createSelector } = require('reselect')
 const rootSelector = require('./rootSelector')
 
-const ADD_ERROR = 'georgianBudget/budgetItems/errors/ADD_ERROR'
-const CLEAR_ERRORS = 'georgianBudget/budgetItems/errors/CLEAR_ERRORS'
+const ADD_ERROR = 'georgianBudget/errors/ADD_ERROR'
+const CLEAR_ERRORS = 'georgianBudget/errors/CLEAR_ERRORS'
 
 const reducer = (state = [], action) => {
   switch (action.type) {
@@ -33,7 +33,7 @@ const reducer = (state = [], action) => {
 }
 
 let errorIncrement = 0
-reducer.addBudgetItemsError = function (text, id = errorIncrement++) {
+reducer.addError = function (text, id = errorIncrement++) {
   return {
     type: ADD_ERROR,
     id: id,
@@ -42,7 +42,7 @@ reducer.addBudgetItemsError = function (text, id = errorIncrement++) {
 }
 
 // eslint-disable-next-line handle-callback-err
-reducer.clearBudgetItemsErrors = function (error) {
+reducer.clearErrors = function (error) {
   return {
     type: CLEAR_ERRORS
   }

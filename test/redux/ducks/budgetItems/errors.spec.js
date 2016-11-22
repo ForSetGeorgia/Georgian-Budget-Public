@@ -2,13 +2,13 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const errors = require('js/redux/ducks/budgetItems/errors')
-const { addBudgetItemsError, clearBudgetItemsErrors } = errors
+const errors = require('js/redux/ducks/errors')
+const { addError, clearErrors } = errors
 const { getErrors } = errors
 const wholeState = require('js/redux/initialState')
 
 describe('errors reducer', () => {
-  it('handles addBudgetItemsError action for new error', () => {
+  it('handles addError action for new error', () => {
     const initialState = getErrors(wholeState)
     const previousState = initialState.concat([
       {
@@ -18,7 +18,7 @@ describe('errors reducer', () => {
       }
     ])
 
-    const action = addBudgetItemsError('This is my error', 2)
+    const action = addError('This is my error', 2)
     const newState = errors(previousState, action)
 
     const expectedState = previousState.concat({
@@ -30,7 +30,7 @@ describe('errors reducer', () => {
     expect(newState).to.deep.equal(expectedState)
   })
 
-  it('handles addBudgetItemsError action for error with text that already exists', () => {
+  it('handles addError action for error with text that already exists', () => {
     const initialState = getErrors(wholeState)
     const previousState = initialState.concat([
       {
@@ -40,13 +40,13 @@ describe('errors reducer', () => {
       }
     ])
 
-    const action = addBudgetItemsError('This is the same error')
+    const action = addError('This is the same error')
     const newState = errors(previousState, action)
 
     expect(newState).to.deep.equal(previousState)
   })
 
-  it('handles clearBudgetItemsErrors action', () => {
+  it('handles clearErrors action', () => {
     const initialState = getErrors(wholeState)
     const previousState = initialState.concat([
       {
@@ -61,7 +61,7 @@ describe('errors reducer', () => {
       }
     ])
 
-    const action = clearBudgetItemsErrors()
+    const action = clearErrors()
 
     const newState = errors(previousState, action)
 

@@ -9,7 +9,7 @@ const { getLocale } = require('js/redux/ducks/locale')
 
 const fetchBudgetItems = require('./budgetItems')
 
-const { addBudgetItemsError } = require('../ducks/budgetItems/errors')
+const { addError } = require('../ducks/errors')
 
 const georgianBudgetAPI = require('js/services/georgianBudgetAPI')
 
@@ -39,14 +39,14 @@ const fetchBudgetItemFilterOptions = () => (dispatch, getState) => {
     dispatch(finishLoadingBudgetItemFilter())
 
     if (!response || !response.data || typeof response.data !== 'object') {
-      dispatch(addBudgetItemsError('Error communicating with API'))
+      dispatch(addError('Error communicating with API'))
       return
     }
 
     const { errors = [], budgetItems = [] } = response.data
 
     errors.forEach((error) => {
-      dispatch(addBudgetItemsError(error.text))
+      dispatch(addError(error.text))
     })
 
     dispatch(setBudgetItemFilterOptions(budgetItems))

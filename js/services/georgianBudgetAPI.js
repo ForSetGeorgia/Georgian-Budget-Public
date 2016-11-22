@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-const { addBudgetItemsError } = require('js/redux/ducks/budgetItems/errors')
+const { addError } = require('js/redux/ducks/errors')
 const { dispatch } = require('js/redux/store')
 
 function get (locale, version, options) {
@@ -8,7 +8,7 @@ function get (locale, version, options) {
     `${process.env.API_URL}/${locale}/${version}`,
     options
   ).catch((error) => {
-    dispatch(addBudgetItemsError(`Error communicating with API: ${error}`))
+    dispatch(addError(`Error communicating with API: ${error}`))
   })
 }
 
