@@ -1,3 +1,6 @@
+const { createSelector } = require('reselect')
+const rootSelector = require('./rootSelector')
+
 const ADD_ERROR = 'georgianBudget/budgetItems/errors/ADD_ERROR'
 const CLEAR_ERRORS = 'georgianBudget/budgetItems/errors/CLEAR_ERRORS'
 
@@ -44,5 +47,10 @@ reducer.clearBudgetItemsErrors = function (error) {
     type: CLEAR_ERRORS
   }
 }
+
+reducer.getErrors = createSelector(
+  rootSelector,
+  ({errors}) => errors
+)
 
 module.exports = reducer

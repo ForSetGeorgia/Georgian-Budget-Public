@@ -4,10 +4,14 @@
 const { expect } = require('chai')
 const errors = require('js/redux/ducks/budgetItems/errors')
 const { addBudgetItemsError, clearBudgetItemsErrors } = errors
-const initialState = require('js/redux/initialState').budgetItems.errors
+const { getErrors } = errors
+const wholeState = require('js/redux/initialState')
 
 describe('errors reducer', () => {
   it('handles addBudgetItemsError action for new error', () => {
+    console.log('getting initial state of errors')
+    const initialState = getErrors(wholeState)
+    console.log('initialState:', initialState)
     const previousState = initialState.concat([
       {
         text: 'Woo!',
@@ -29,6 +33,7 @@ describe('errors reducer', () => {
   })
 
   it('handles addBudgetItemsError action for error with text that already exists', () => {
+    const initialState = getErrors(wholeState)
     const previousState = initialState.concat([
       {
         text: 'This is the same error',
@@ -44,6 +49,7 @@ describe('errors reducer', () => {
   })
 
   it('handles clearBudgetItemsErrors action', () => {
+    const initialState = getErrors(wholeState)
     const previousState = initialState.concat([
       {
         text: 'This is my error',
