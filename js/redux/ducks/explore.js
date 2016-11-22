@@ -41,7 +41,9 @@ reducer.getSelectedBudgetItemIds = createSelector(
 )
 
 reducer.getSelectedBudgetItems = (state) => (
-  reducer.getSelectedBudgetItemIds(state).map(id => state.budgetItems[id])
+  reducer.getSelectedBudgetItemIds(state)
+  .map(id => state.budgetItems[id])
+  .filter(budgetItem => budgetItem)
 )
 
 module.exports = reducer
