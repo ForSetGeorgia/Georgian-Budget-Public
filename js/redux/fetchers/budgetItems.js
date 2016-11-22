@@ -4,11 +4,13 @@ const { addBudgetItemsError, clearBudgetItemsErrors } = require('../ducks/budget
 
 const { setBudgetItems } = require('../ducks/budgetItems/data')
 
+const { getLocale } = require('js/redux/ducks/locale')
+
 const georgianBudgetAPI = require('js/services/georgianBudgetAPI')
 
 const fetchBudgetItems = () => (dispatch, getState) => {
   const state = getState()
-  const locale = state.locale
+  const locale = getLocale(state)
   const financeType = state.filters.financeType.value
   const budgetItemIds = state.filters.budgetItems.selectedIds
   const timePeriodType = state.filters.timePeriodType.value

@@ -5,6 +5,8 @@ const {
   setBudgetItemFilterOptions
 } = require('../ducks/filters/budgetItems')
 
+const { getLocale } = require('js/redux/ducks/locale')
+
 const fetchBudgetItems = require('./budgetItems')
 
 const { addBudgetItemsError } = require('../ducks/budgetItems/errors')
@@ -14,7 +16,7 @@ const georgianBudgetAPI = require('js/services/georgianBudgetAPI')
 const fetchBudgetItemFilterOptions = () => (dispatch, getState) => {
   const state = getState()
 
-  const locale = state.locale
+  const locale = getLocale(state)
   const budgetItemType = state.filters.budgetItemType.value
 
   const requiredState = [locale, budgetItemType]
