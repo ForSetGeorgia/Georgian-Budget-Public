@@ -58,10 +58,10 @@ const fetchBudgetItems = () => (dispatch, getState) => {
       dispatch(addError(error.text))
     })
 
-    const budgetItemsSchema = new Schema('budgetItems')
+    const budgetItem = new Schema('budgetItems')
 
     const normalized = normalize(response.data, {
-      budgetItems: arrayOf(budgetItemsSchema)
+      budgetItems: arrayOf(budgetItem)
     })
 
     const budgetItems = normalized.entities.budgetItems
