@@ -9,9 +9,7 @@ const wholeState = require('js/redux/initialState')
 
 describe('errors reducer', () => {
   it('handles addBudgetItemsError action for new error', () => {
-    console.log('getting initial state of errors')
     const initialState = getErrors(wholeState)
-    console.log('initialState:', initialState)
     const previousState = initialState.concat([
       {
         text: 'Woo!',
