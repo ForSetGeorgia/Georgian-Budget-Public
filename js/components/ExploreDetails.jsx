@@ -14,33 +14,31 @@ let ExploreDetails = React.createClass({
   },
 
   render: function () {
+    const { loading, data } = this.props
     let content
-
-    if (this.props.loading) {
+    if (loading) {
       content = (
         <LoadingIndicator />
       )
     }
 
-    if (this.props.data.length > 0) {
+    if (data !== {}) {
       content = (
         <div>
           {
-            this.props.data.map(
-              function (budgetItem) {
-                if (!budgetItem) return null
+            Object.keys(data).map(id => {
+              let budgetItem = data[id]
 
-                const uniqueId = `budget-item-${budgetItem.type}-${budgetItem.id}`
+              const uniqueId = `budget-item-${budgetItem.type}-${id}`
 
-                return (
-                  <BudgetItem
-                    {...budgetItem}
-                    key={uniqueId}
-                    id={uniqueId}
-                  />
-                )
-              }
-            )
+              return (
+                <BudgetItem
+                  {...budgetItem}
+                  key={uniqueId}
+                  id={uniqueId}
+                />
+              )
+            })
           }
         </div>
       )

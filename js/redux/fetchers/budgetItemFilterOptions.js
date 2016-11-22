@@ -1,9 +1,13 @@
+const { normalize, Schema, arrayOf } = require('normalizr')
+
 const {
   startLoadingBudgetItemFilter,
   finishLoadingBudgetItemFilter,
   setSelectedBudgetItemIds,
   setBudgetItemFilterOptions
 } = require('../ducks/filters/budgetItems')
+
+const { mergeBudgetItems } = require('js/redux/ducks/budgetItems')
 
 const { getLocale } = require('js/redux/ducks/locale')
 
@@ -43,13 +47,23 @@ const fetchBudgetItemFilterOptions = () => (dispatch, getState) => {
       return
     }
 
-    const { errors = [], budgetItems = [] } = response.data
+    const { errors = [], budgetItems: budgetItemsArray = [] } = response.data
 
     errors.forEach((error) => {
       dispatch(addError(error.text))
     })
 
-    dispatch(setBudgetItemFilterOptions(budgetItems))
+    dispatch(setBudgetItemFilterOptions(budgetItemsArray))
+
+    const budgetItem = new Schema('budgetItems')
+
+    const normalized = normalize(response.data, {
+      budgetItems: arrayOf(budgetItem)
+    })
+
+    const budgetItems = normalized.entities.budgetItems
+
+    dispatch(mergeBudgetItems(budgetItems))
 
     if (budgetItemType === 'total' && budgetItems.length > 0) {
       dispatch(setSelectedBudgetItemIds([budgetItems[0].id]))
