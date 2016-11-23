@@ -1,6 +1,8 @@
 const React = require('react')
-const { arrayOf, shape, string, func } = React.PropTypes
+const { arrayOf, object, shape, string, func } = React.PropTypes
 const { connect } = require('react-redux')
+
+const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 
 const ClickableList = require('./ClickableList')
 
@@ -21,8 +23,26 @@ const ExploreList = React.createClass({
     setSelectedBudgetItemIds: func.isRequired
   },
 
+  contextTypes: {
+    router: object,
+    location: object
+  },
+
+  updateURLWithSelectedIds (selectedIds) {
+    this.context.router.push(
+      getLocationWithQuery(
+        this.context.location,
+        {
+          budgetItemIds: selectedIds
+        }
+      )
+    )
+  },
+
   handleClick (row) {
-    this.props.setSelectedBudgetItemIds([row.props.data.id])
+    const selectedIds = [row.props.data.id]
+    this.props.setSelectedBudgetItemIds(selectedIds)
+    this.updateURLWithSelectedIds(selectedIds)
   },
 
   rowClassName (row) {

@@ -4,7 +4,6 @@ const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 
 const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
-const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const GBSelect = require('./GBSelect')
 
 const {
@@ -26,10 +25,6 @@ const messages = defineMessages({
 })
 
 const BudgetItemSelect = React.createClass({
-  contextTypes: {
-    router: object
-  },
-
   propTypes: {
     budgetItemType: string,
     selectedIds: arrayOf(string).isRequired,
@@ -46,22 +41,10 @@ const BudgetItemSelect = React.createClass({
     intl: intlShape
   },
 
-  updateURLWithSelected (selectedIds) {
-    this.context.router.push(
-      getLocationWithQuery(
-        this.props.location,
-        {
-          budgetItemIds: selectedIds
-        }
-      )
-    )
-  },
-
   handleChangeEvent (selected) {
     const selectedIds = selected.length === 0 ? [] : selected.split(',')
 
     this.props.dispatchNewSelectedBudgetItemIds(selectedIds)
-    this.updateURLWithSelected(selectedIds)
   },
 
   componentDidMount () {
