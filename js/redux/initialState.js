@@ -11,11 +11,6 @@ module.exports = {
     }
   },
   filters: {
-    budgetItems: {
-      options: [],
-      visible: false,
-      loading: true
-    },
     budgetItemType: {
       value: ''
     },
