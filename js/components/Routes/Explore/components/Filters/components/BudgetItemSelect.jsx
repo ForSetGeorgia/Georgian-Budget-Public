@@ -17,8 +17,6 @@ const { getBudgetItemsFilterLoading } = require('js/redux/ducks/filters/budgetIt
 const fetchBudgetItemFilterOptions =
 require('js/redux/fetchers/budgetItemFilterOptions')
 
-const fetchBudgetItems = require('js/redux/fetchers/budgetItems')
-
 const messages = defineMessages({
   label: {
     id: 'app.filters.budgetItem.label',
@@ -141,7 +139,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatchNewSelectedBudgetItemIds: function (selectedIds) {
       dispatch(setSelectedBudgetItemIds(selectedIds))
-      dispatch(fetchBudgetItems())
     }
   }
 }

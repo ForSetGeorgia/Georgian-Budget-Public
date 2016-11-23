@@ -4,7 +4,6 @@ const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 
 const { setTimePeriodType } = require('js/redux/ducks/filters/timePeriodType')
-const fetchBudgetItems = require('js/redux/fetchers/budgetItems')
 
 const GBSelect = require('./GBSelect')
 
@@ -22,7 +21,6 @@ const TimePeriodTypeSelect = React.createClass({
   propTypes: {
     value: string.isRequired,
     setTimePeriodType: func.isRequired,
-    fetchBudgetItems: func.isRequired,
     intl: intlShape.isRequired
   },
 
@@ -40,7 +38,6 @@ const TimePeriodTypeSelect = React.createClass({
   handleChangeEvent (selected) {
     const { value } = selected
     this.props.setTimePeriodType(value)
-    this.props.fetchBudgetItems()
   },
 
   componentDidMount () {
@@ -70,9 +67,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setTimePeriodType: (value) => {
     dispatch(setTimePeriodType(value))
-  },
-  fetchBudgetItems: () => {
-    dispatch(fetchBudgetItems())
   }
 })
 

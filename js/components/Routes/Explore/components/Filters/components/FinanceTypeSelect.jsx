@@ -5,7 +5,6 @@ const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const financeTypeMessages = require('js/messages/financeTypes')
 
-const fetchBudgetItems = require('js/redux/fetchers/budgetItems')
 const { setFinanceType } = require('js/redux/ducks/filters/financeType')
 
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
@@ -101,7 +100,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
   dispatchNewFinanceType (value) {
     dispatch(setFinanceType(value))
-    dispatch(fetchBudgetItems())
   }
 })
 

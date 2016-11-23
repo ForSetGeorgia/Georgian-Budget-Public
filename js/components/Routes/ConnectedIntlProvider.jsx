@@ -6,8 +6,6 @@ const { connect } = require('react-redux')
 const fetchBudgetItemFilterOptions =
 require('js/redux/fetchers/budgetItemFilterOptions')
 
-const fetchBudgetItems = require('js/redux/fetchers/budgetItems')
-
 const { setLocale } = require('js/redux/ducks/locale')
 
 const Layout = require('js/components/Layout/index')
@@ -97,7 +95,6 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchChangeLocale (locale) {
     dispatch(setLocale(locale))
     dispatch(fetchBudgetItemFilterOptions())
-    dispatch(fetchBudgetItems())
   }
 })
 
