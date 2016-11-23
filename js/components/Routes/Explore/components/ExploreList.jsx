@@ -7,7 +7,7 @@ const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const ClickableList = require('./ClickableList')
 
 const fetchListedBudgetItems =
-require('js/redux/fetchers/budgetItemFilterOptions')
+require('js/redux/fetchers/fetchListedBudgetItems')
 
 const {
   getSelectedBudgetItemIds,

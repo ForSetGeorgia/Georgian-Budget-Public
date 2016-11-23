@@ -9,7 +9,7 @@ const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 const { setBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
 
 const fetchListedBudgetItems =
-require('js/redux/fetchers/budgetItemFilterOptions')
+require('js/redux/fetchers/fetchListedBudgetItems')
 
 const messages = defineMessages({
   label: {

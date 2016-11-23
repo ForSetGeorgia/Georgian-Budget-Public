@@ -29,7 +29,6 @@ const fetchListedBudgetItems = () => (dispatch, getState) => {
       }
     }
   }).then((response) => {
-
     if (!response || !response.data || typeof response.data !== 'object') {
       dispatch(addError('Error communicating with API'))
       return
