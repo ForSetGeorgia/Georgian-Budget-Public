@@ -1,6 +1,6 @@
 const React = require('react')
-const Brand = require('js/components/header/Brand')
-const Navigation = require('js/components/header/Navigation')
+const Brand = require('./components/Brand')
+const Navigation = require('./components/Navigation')
 
 const Header = React.createClass({
   getInitialState () {
