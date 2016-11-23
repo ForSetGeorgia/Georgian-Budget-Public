@@ -1,7 +1,7 @@
 const React = require('react')
 const { Link } = require('react-router')
 const LocaleLink = require('./LocaleLink')
-const Svg = require('js/components/Svg')
+const Svg = require('js/components/shared/Svg')
 const { FormattedMessage } = require('react-intl')
 
 const Navigation = (props, { currentLocale }) => {

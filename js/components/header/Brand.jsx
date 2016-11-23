@@ -1,6 +1,6 @@
 const React = require('react')
 const { Link } = require('react-router')
-const Svg = require('js/components/Svg')
+const Svg = require('js/components/shared/Svg')
 
 const Brand = (_props, { currentLocale }) => {
   const brandSvg = require(`public/images/brand_${currentLocale}`)
