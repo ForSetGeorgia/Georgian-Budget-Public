@@ -1,4 +1,5 @@
-const { normalize, Schema, arrayOf } = require('normalizr')
+const { normalize, arrayOf } = require('normalizr')
+const budgetItem = require('js/redux/schemas/budgetItem')
 
 const {
   startLoadingBudgetItemFilter,
@@ -51,8 +52,6 @@ const fetchBudgetItemFilterOptions = () => (dispatch, getState) => {
     })
 
     dispatch(setBudgetItemFilterOptions(budgetItemsArray))
-
-    const budgetItem = new Schema('budgetItems', { defaults: { loaded: [] } })
 
     const normalized = normalize(response.data, {
       budgetItems: arrayOf(budgetItem)

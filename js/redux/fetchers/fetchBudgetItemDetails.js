@@ -1,4 +1,5 @@
-const { normalize, Schema, arrayOf } = require('normalizr')
+const { normalize, arrayOf } = require('normalizr')
+const budgetItem = require('js/redux/schemas/budgetItem')
 const { beginLoadingExploreDetails, finishLoadingExploreDetails } = require('../ducks/explore/details')
 
 const { addError } = require('../ducks/errors')
@@ -51,16 +52,14 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
       dispatch(addError(error.text))
     })
 
-    const budgetItem = new Schema('budgetItems', { defaults: { loaded: [] } })
-
     const normalized = normalize(response.data, {
       budgetItems: arrayOf(budgetItem)
     })
 
-    const budgetItems = normalized.entities.budgetItems
-    dispatch(markBudgetItemDetailsLoaded(itemId))
+    const { budgetItems } = normalized.entities
 
     dispatch(mergeBudgetItems(budgetItems))
+    dispatch(markBudgetItemDetailsLoaded(itemId))
   })
 }
 
