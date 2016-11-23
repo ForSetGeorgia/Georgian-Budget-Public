@@ -4,7 +4,7 @@ const { IndexRedirect, Redirect, Route } = require('react-router')
 
 const ConnectedIntlProvider = require('js/components/ConnectedIntlProvider')
 // const Landing = require('js/components/Landing')
-const Explore = require('js/components/Explore')
+const Explore = require('./Explore/index')
 const About = require('js/components/About')
 
 const Routes = () => (
