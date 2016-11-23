@@ -13,7 +13,6 @@ const {
 
 const { getBudgetItemsFilterLoading } = require('js/redux/ducks/filters/budgetItems')
 
-
 const messages = defineMessages({
   label: {
     id: 'app.filters.budgetItem.label',
@@ -44,12 +43,16 @@ const BudgetItemSelect = React.createClass({
     this.props.dispatchNewSelectedBudgetItemIds(selectedIds)
   },
 
-  componentDidMount () {
+  updateSelectedIdsFromURL () {
     const { querySelectedIds } = this.props
 
     if (!querySelectedIds || querySelectedIds.length === 0) return
 
-    this.handleChangeEvent(querySelectedIds.join(','))
+    this.props.dispatchNewSelectedBudgetItemIds(querySelectedIds)
+  },
+
+  componentDidMount () {
+    this.updateSelectedIdsFromURL()
   },
 
   labelText () {
