@@ -1,10 +1,15 @@
 const React = require('react')
-const { arrayOf, shape, string } = React.PropTypes
+const { arrayOf, shape, string, func } = React.PropTypes
 const { connect } = require('react-redux')
 const Griddle = require('griddle-react')
 
 const LoadingIndicator = require('./LoadingIndicator')
-const { getSelectedBudgetItemIds } = require('js/redux/ducks/explore')
+
+const {
+  getSelectedBudgetItemIds,
+  setSelectedBudgetItemIds
+} = require('js/redux/ducks/explore')
+
 const { getListedItems } = require('js/redux/ducks/explore/list')
 
 const ExploreList = React.createClass({
@@ -13,11 +18,12 @@ const ExploreList = React.createClass({
     listedItems: arrayOf(shape({
       id: string.isRequired,
       name: string.isRequired
-    })).isRequired
+    })).isRequired,
+    setSelectedBudgetItemIds: func.isRequired
   },
 
   handleClick (row) {
-    console.log(row.props.data.id)
+    this.props.setSelectedBudgetItemIds([row.props.data.id])
   },
 
   rowClassName (row) {
@@ -61,4 +67,8 @@ const mapStateToProps = (state) => ({
   listedItems: getListedItems(state)
 })
 
-module.exports = connect(mapStateToProps)(ExploreList)
+const mapDispatchToProps = dispatch => ({
+  setSelectedBudgetItemIds: (ids) => { dispatch(setSelectedBudgetItemIds(ids)) }
+})
+
+module.exports = connect(mapStateToProps, mapDispatchToProps)(ExploreList)

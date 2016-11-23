@@ -3,16 +3,12 @@ const { createSelector } = require('reselect')
 const rootSelector = require('./rootSelector')
 
 const SET_SELECTED_BUDGET_ITEM_IDS =
-'georgianBudget/filters/budgetItems/SET_SELECTED_BUDGET_ITEM_IDS'
+'georgianBudget/explore/SET_SELECTED_BUDGET_ITEM_IDS'
 
 const selectedIdsReducer = (state = [], action) => {
   switch (action.type) {
     case SET_SELECTED_BUDGET_ITEM_IDS:
-      return Object.assign(
-        [],
-        state,
-        action.ids
-      )
+      return action.ids
     default:
       return state
   }
