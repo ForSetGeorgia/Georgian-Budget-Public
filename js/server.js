@@ -26,7 +26,7 @@ const store = require('js/redux/store.js')
 // The port we've chosen to run our app on
 const port = 8080
 
-const Routes = require('js/components/Routes.jsx')
+const Routes = require('js/components/Routes/index.jsx')
 const Helmet = require('react-helmet')
 const Meta = require('js/components/shared/Meta.jsx')
 const Html = require('js/components/Html.jsx')
