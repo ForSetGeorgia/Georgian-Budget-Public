@@ -12,12 +12,19 @@ const BudgetItem = React.createClass({
     timePeriods: array,
     amounts: array
   },
+
+  hasFinanceData () {
+    const { id, financeType, timePeriodType, timePeriods, amounts } = this.props
+
+    return (id && financeType && timePeriodType && timePeriods && amounts)
+  },
+
   render () {
     const { id, name, financeType, timePeriodType, timePeriods, amounts } = this.props
 
     let chart = ''
 
-    if (id && financeType && timePeriodType && timePeriods && amounts) {
+    if (this.hasFinanceData()) {
       chart = <FinancesTimeSeries
         id={id}
         financeType={financeType}
