@@ -8,7 +8,7 @@ const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 
 const { setBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
 
-const fetchBudgetItemFilterOptions =
+const fetchListedBudgetItems =
 require('js/redux/fetchers/budgetItemFilterOptions')
 
 const messages = defineMessages({
@@ -30,7 +30,7 @@ const BudgetItemTypeSelect = React.createClass({
     location: object,
     intl: intlShape,
     setBudgetItemType: func,
-    fetchBudgetItemFilterOptions: func
+    fetchListedBudgetItems: func
   },
 
   defaultValue: 'total',
@@ -67,7 +67,7 @@ const BudgetItemTypeSelect = React.createClass({
     if (!value) return
 
     this.props.setBudgetItemType(value)
-    this.props.fetchBudgetItemFilterOptions()
+    this.props.fetchListedBudgetItems()
 
     // If the value in the URL and the new value are not the same,
     // update the URL query param with the new value
@@ -110,8 +110,8 @@ const mapDispatchToProps = (dispatch) => ({
   setBudgetItemType (value) {
     dispatch(setBudgetItemType(value))
   },
-  fetchBudgetItemFilterOptions () {
-    dispatch(fetchBudgetItemFilterOptions())
+  fetchListedBudgetItems () {
+    dispatch(fetchListedBudgetItems())
   }
 })
 

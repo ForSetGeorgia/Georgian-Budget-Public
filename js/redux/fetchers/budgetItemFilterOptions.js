@@ -8,7 +8,7 @@ const { addError } = require('js/redux/ducks/errors')
 
 const georgianBudgetAPI = require('js/services/georgianBudgetAPI')
 
-const fetchBudgetItemFilterOptions = () => (dispatch, getState) => {
+const fetchListedBudgetItems = () => (dispatch, getState) => {
   const state = getState()
 
   const locale = getLocale(state)
@@ -52,4 +52,4 @@ const fetchBudgetItemFilterOptions = () => (dispatch, getState) => {
   })
 }
 
-module.exports = fetchBudgetItemFilterOptions
+module.exports = fetchListedBudgetItems
