@@ -1,9 +1,8 @@
 const React = require('react')
 const { arrayOf, shape, string, func } = React.PropTypes
 const { connect } = require('react-redux')
-const Griddle = require('griddle-react')
 
-const LoadingIndicator = require('./LoadingIndicator')
+const ClickableList = require('./ClickableList')
 
 const {
   getSelectedBudgetItemIds,
@@ -37,26 +36,18 @@ const ExploreList = React.createClass({
   },
 
   render () {
-    let content
-
-    if (this.props.listedItems.length === 0) {
-      content = <LoadingIndicator />
-    } else {
-      content = <Griddle
-        results={this.props.listedItems}
-        columns={['name']}
-        onRowClick={this.handleClick}
-        rowMetadata={{ bodyCssClassName: this.rowClassName }}
-        useGriddleStyles={false}
-        showFilter
-        enableInfiniteScroll
-        bodyHeight='400'
-      />
-    }
-
     return (
       <div className='gb-ExploreList'>
-        {content}
+        <ClickableList
+          listedItems={this.props.listedItems}
+          columns={['name']}
+          onRowClick={this.handleClick}
+          rowMetadata={{ bodyCssClassName: this.rowClassName }}
+          useGriddleStyles={false}
+          showFilter
+          enableInfiniteScroll
+          bodyHeight='400'
+        />
       </div>
     )
   }
