@@ -3,7 +3,7 @@ const { string, func, object } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
-const GBSelect = require('../GBSelect')
+const GBSelect = require('./GBSelect')
 const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 
 const { setBudgetItemsFilterVisibility } =

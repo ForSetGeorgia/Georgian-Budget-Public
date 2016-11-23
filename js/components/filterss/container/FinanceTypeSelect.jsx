@@ -9,7 +9,7 @@ const fetchBudgetItems = require('js/redux/fetchers/budgetItems')
 const { setFinanceType } = require('js/redux/ducks/filters/financeType')
 
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
-const GBSelect = require('../GBSelect')
+const GBSelect = require('./GBSelect')
 
 const messages = defineMessages({
   label: {

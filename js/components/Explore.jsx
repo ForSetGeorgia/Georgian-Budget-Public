@@ -1,7 +1,7 @@
 const React = require('react')
 const Helmet = require('react-helmet')
 
-const Filters = require('./filters/Filters')
+const Filters = require('./filters/index')
 const AppErrorsDisplay = require('./AppErrorsDisplay')
 const ExploreDetails = require('js/components/ExploreDetails')
 const ExploreList = require('js/components/ExploreList')

@@ -6,7 +6,7 @@ const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const { setTimePeriodType } = require('js/redux/ducks/filters/timePeriodType')
 const fetchBudgetItems = require('js/redux/fetchers/budgetItems')
 
-const GBSelect = require('../GBSelect')
+const GBSelect = require('./GBSelect')
 
 const timePeriodTypeMessages = require('js/messages/timePeriodTypes')
 

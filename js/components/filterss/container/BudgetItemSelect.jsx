@@ -5,7 +5,7 @@ const { injectIntl, intlShape, defineMessages } = require('react-intl')
 
 const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
-const GBSelect = require('../GBSelect')
+const GBSelect = require('./GBSelect')
 
 const {
   setSelectedBudgetItemIds,
