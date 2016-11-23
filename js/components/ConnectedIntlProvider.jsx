@@ -10,7 +10,7 @@ const fetchBudgetItems = require('js/redux/fetchers/budgetItems')
 
 const { setLocale } = require('js/redux/ducks/locale')
 
-const Layout = require('js/components/Layout')
+const Layout = require('js/components/Layout/index')
 
 addLocaleData(require('node_modules/react-intl/locale-data/ka'))
 
