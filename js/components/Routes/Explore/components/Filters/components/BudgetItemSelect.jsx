@@ -43,18 +43,6 @@ const BudgetItemSelect = React.createClass({
     this.props.dispatchNewSelectedBudgetItemIds(selectedIds)
   },
 
-  updateSelectedIdsFromURL () {
-    const { querySelectedIds } = this.props
-
-    if (!querySelectedIds || querySelectedIds.length === 0) return
-
-    this.props.dispatchNewSelectedBudgetItemIds(querySelectedIds)
-  },
-
-  componentDidMount () {
-    this.updateSelectedIdsFromURL()
-  },
-
   labelText () {
     let type
 

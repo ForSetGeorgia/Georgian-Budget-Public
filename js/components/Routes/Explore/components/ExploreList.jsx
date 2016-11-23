@@ -43,8 +43,22 @@ const ExploreList = React.createClass({
     )
   },
 
+  getQuerySelectedIds () {
+    const ids = this.context.location.query.budgetItemIds
+    return typeof ids === 'string' ? [ids] : ids
+  },
+
+  updateSelectedIdsFromURL () {
+    const querySelectedIds = this.getQuerySelectedIds()
+
+    if (!querySelectedIds || querySelectedIds.length === 0) return
+
+    this.props.setSelectedBudgetItemIds(querySelectedIds)
+  },
+
   componentDidMount () {
     this.props.fetchBudgetItemFilterOptions()
+    this.updateSelectedIdsFromURL()
   },
 
   handleClick (row) {
