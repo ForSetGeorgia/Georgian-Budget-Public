@@ -3,7 +3,7 @@ const { object, string } = React.PropTypes
 
 const Helmet = require('react-helmet')
 const MetaContainer = require('js/components/MetaContainer')
-const Header = require('js/components/Header')
+const Header = require('./Header/index.jsx')
 const Footer = require('js/components/Footer')
 
 const Layout = React.createClass({
