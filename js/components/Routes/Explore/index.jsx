@@ -3,7 +3,7 @@ const Helmet = require('react-helmet')
 
 const Filters = require('./components/Filters/index')
 const AppErrorsDisplay = require('./components/AppErrorsDisplay')
-const ExploreDetails = require('./components/ExploreDetails')
+const ExploreDetails = require('./components/Details/index')
 const ExploreList = require('./components/ExploreList')
 
 const Explore = React.createClass({

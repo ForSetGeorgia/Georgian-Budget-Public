@@ -4,7 +4,7 @@ const { connect } = require('react-redux')
 const { getExploreDetailsLoading } = require('js/redux/ducks/explore/details')
 const { getSelectedBudgetItems } = require('js/redux/ducks/explore')
 
-const BudgetItem = require('js/components/BudgetItem')
+const BudgetItem = require('./components/BudgetItem/index')
 const LoadingIndicator = require('js/components/shared/LoadingIndicator')
 
 let ExploreDetails = React.createClass({

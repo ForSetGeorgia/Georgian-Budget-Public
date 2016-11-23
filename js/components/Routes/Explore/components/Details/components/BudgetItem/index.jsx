@@ -1,7 +1,7 @@
 const React = require('react')
 const { injectIntl, intlShape } = require('react-intl')
 
-const TimeSeriesChart = require('js/components/TimeSeriesChart')
+const TimeSeriesChart = require('./components/TimeSeriesChart')
 
 const timePeriodTypeMessages = require('js/messages/timePeriodTypes')
 
