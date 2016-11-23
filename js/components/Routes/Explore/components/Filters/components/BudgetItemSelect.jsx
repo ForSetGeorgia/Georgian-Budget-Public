@@ -13,8 +13,6 @@ const {
 
 const { getBudgetItemsFilterLoading } = require('js/redux/ducks/filters/budgetItems')
 
-const fetchBudgetItemFilterOptions =
-require('js/redux/fetchers/budgetItemFilterOptions')
 
 const messages = defineMessages({
   label: {
@@ -36,7 +34,6 @@ const BudgetItemSelect = React.createClass({
     visible: bool,
     loading: bool,
     dispatchNewSelectedBudgetItemIds: func,
-    loadOptions: func,
     location: object,
     intl: intlShape
   },
@@ -48,8 +45,7 @@ const BudgetItemSelect = React.createClass({
   },
 
   componentDidMount () {
-    const { loadOptions, querySelectedIds } = this.props
-    loadOptions()
+    const { querySelectedIds } = this.props
 
     if (!querySelectedIds || querySelectedIds.length === 0) return
 
@@ -117,9 +113,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadOptions: function (selected) {
-      dispatch(fetchBudgetItemFilterOptions())
-    },
+
     dispatchNewSelectedBudgetItemIds: function (selectedIds) {
       dispatch(setSelectedBudgetItemIds(selectedIds))
     }

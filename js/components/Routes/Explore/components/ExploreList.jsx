@@ -6,6 +6,9 @@ const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 
 const ClickableList = require('./ClickableList')
 
+const fetchBudgetItemFilterOptions =
+require('js/redux/fetchers/budgetItemFilterOptions')
+
 const {
   getSelectedBudgetItemIds,
   setSelectedBudgetItemIds
@@ -20,7 +23,8 @@ const ExploreList = React.createClass({
       id: string.isRequired,
       name: string.isRequired
     })).isRequired,
-    setSelectedBudgetItemIds: func.isRequired
+    setSelectedBudgetItemIds: func.isRequired,
+    fetchBudgetItemFilterOptions: func.isRequired
   },
 
   contextTypes: {
@@ -37,6 +41,10 @@ const ExploreList = React.createClass({
         }
       )
     )
+  },
+
+  componentDidMount () {
+    this.props.fetchBudgetItemFilterOptions()
   },
 
   handleClick (row) {
@@ -79,6 +87,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+  fetchBudgetItemFilterOptions: () => {
+    dispatch(fetchBudgetItemFilterOptions())
+  },
   setSelectedBudgetItemIds: (ids) => { dispatch(setSelectedBudgetItemIds(ids)) }
 })
 
