@@ -5,7 +5,7 @@ const { getExploreDetailsLoading } = require('js/redux/ducks/explore/details')
 const { getSelectedBudgetItems } = require('js/redux/ducks/explore')
 
 const BudgetItem = require('js/components/BudgetItem')
-const LoadingIndicator = require('js/components/LoadingIndicator')
+const LoadingIndicator = require('js/components/shared/LoadingIndicator')
 
 let ExploreDetails = React.createClass({
   propTypes: {

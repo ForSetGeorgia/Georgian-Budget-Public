@@ -1,7 +1,7 @@
 const React = require('react')
 const { arrayOf, object } = React.PropTypes
 const Griddle = require('griddle-react')
-const LoadingIndicator = require('./LoadingIndicator')
+const LoadingIndicator = require('js/components/shared/LoadingIndicator')
 
 const ClickableList = (props) => {
   const { listedItems } = props
