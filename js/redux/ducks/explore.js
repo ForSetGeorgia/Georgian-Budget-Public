@@ -37,10 +37,15 @@ reducer.getSelectedBudgetItemIds = createSelector(
   ({selectedIds}) => selectedIds
 )
 
-reducer.getSelectedBudgetItems = (state) => (
-  reducer.getSelectedBudgetItemIds(state)
-  .map(id => state.budgetItems[id])
-  .filter(budgetItem => budgetItem)
-)
+reducer.getSelectedBudgetItems = (state) => {
+  const selectedIds = reducer.getSelectedBudgetItemIds(state)
+  const selectedItems = {}
+
+  Object.keys(state.budgetItems).forEach((id) => {
+    if (selectedIds.includes(id)) selectedItems[id] = state.budgetItems[id]
+  })
+
+  return selectedItems
+}
 
 module.exports = reducer

@@ -1,7 +1,10 @@
 const React = require('react')
-const { array, string } = React.PropTypes
+const { array, string, func } = React.PropTypes
+const { connect } = require('react-redux')
 
 const FinancesTimeSeries = require('./components/FinancesTimeSeries')
+
+const fetchBudgetItemDetails = require('js/redux/fetchers/fetchBudgetItemDetails')
 
 const BudgetItem = React.createClass({
   propTypes: {
@@ -10,13 +13,20 @@ const BudgetItem = React.createClass({
     financeType: string,
     timePeriodType: string,
     timePeriods: array,
-    amounts: array
+    amounts: array,
+    fetchBudgetItemDetails: func
   },
 
   hasFinanceData () {
     const { id, financeType, timePeriodType, timePeriods, amounts } = this.props
 
     return (id && financeType && timePeriodType && timePeriods && amounts)
+  },
+
+  componentDidMount () {
+    if (this.hasFinanceData()) return
+
+    this.props.fetchBudgetItemDetails(this.props.id)
   },
 
   render () {
@@ -48,4 +58,8 @@ const BudgetItem = React.createClass({
   }
 })
 
-module.exports = BudgetItem
+const mapDispatchToProps = (dispatch) => ({
+  fetchBudgetItemDetails: itemId => dispatch(fetchBudgetItemDetails(itemId))
+})
+
+module.exports = connect(null, mapDispatchToProps)(BudgetItem)

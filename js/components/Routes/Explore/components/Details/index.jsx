@@ -1,5 +1,5 @@
 const React = require('react')
-const { arrayOf, object, bool } = React.PropTypes
+const { object, bool } = React.PropTypes
 const { connect } = require('react-redux')
 const { getExploreDetailsLoading } = require('js/redux/ducks/explore/details')
 const { getSelectedBudgetItems } = require('js/redux/ducks/explore')
@@ -10,7 +10,7 @@ const LoadingIndicator = require('js/components/shared/LoadingIndicator')
 let ExploreDetails = React.createClass({
   propTypes: {
     loading: bool.isRequired,
-    data: arrayOf(object).isRequired
+    data: object.isRequired
   },
 
   render: function () {
@@ -27,15 +27,15 @@ let ExploreDetails = React.createClass({
         <div>
           {
             Object.keys(data).map(id => {
-              let budgetItem = data[id]
-
-              const uniqueId = `budget-item-${budgetItem.type}-${id}`
+              const budgetItem = data[id]
+              const { loaded } = budgetItem
+              const uniqueKey = `budget-item-${id}-${loaded.join(',')}`
 
               return (
                 <BudgetItem
                   {...budgetItem}
-                  key={uniqueId}
-                  id={uniqueId}
+                  key={uniqueKey}
+                  id={id}
                 />
               )
             })
