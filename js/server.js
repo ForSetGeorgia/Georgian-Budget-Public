@@ -28,7 +28,7 @@ const port = 8080
 
 const Routes = require('js/components/Routes.jsx')
 const Helmet = require('react-helmet')
-const Meta = require('js/components/Meta.jsx')
+const Meta = require('js/components/shared/Meta.jsx')
 const Html = require('js/components/Html.jsx')
 
 const app = express()

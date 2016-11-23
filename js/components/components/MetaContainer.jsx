@@ -1,6 +1,6 @@
 const React = require('react')
 const { string } = React.PropTypes
-const Meta = require('js/components/Meta')
+const Meta = require('js/components/shared/Meta')
 const { connect } = require('react-redux')
 
 const Container = React.createClass({

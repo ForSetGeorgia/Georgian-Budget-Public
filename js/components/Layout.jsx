@@ -2,9 +2,9 @@ const React = require('react')
 const { object, string } = React.PropTypes
 
 const Helmet = require('react-helmet')
-const MetaContainer = require('js/components/MetaContainer')
-const Header = require('./Header/index.jsx')
-const Footer = require('js/components/Footer')
+const MetaContainer = require('./components/MetaContainer')
+const Header = require('./components/Header/index')
+const Footer = require('./components/Footer')
 
 const Layout = React.createClass({
   propTypes: {
