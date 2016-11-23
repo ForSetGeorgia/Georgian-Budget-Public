@@ -1,10 +1,10 @@
 const React = require('react')
 const { object } = React.PropTypes
 
-const BudgetItemTypeSelect = require('./container/BudgetItemTypeSelect')
-const BudgetItemSelect = require('./container/BudgetItemSelect')
-const FinanceTypeSelect = require('./container/FinanceTypeSelect')
-const TimePeriodTypeSelect = require('./container/TimePeriodTypeSelect')
+const BudgetItemTypeSelect = require('./components/BudgetItemTypeSelect')
+const BudgetItemSelect = require('./components/BudgetItemSelect')
+const FinanceTypeSelect = require('./components/FinanceTypeSelect')
+const TimePeriodTypeSelect = require('./components/TimePeriodTypeSelect')
 
 const Filters = React.createClass({
   contextTypes: {
