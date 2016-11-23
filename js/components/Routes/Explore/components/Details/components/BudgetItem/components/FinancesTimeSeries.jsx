@@ -1,4 +1,5 @@
 const React = require('react')
+const { string, array } = React.PropTypes
 const { injectIntl, intlShape } = require('react-intl')
 
 const TimeSeriesChart = require('./TimeSeriesChart')
@@ -6,7 +7,12 @@ const timePeriodTypeMessages = require('js/messages/timePeriodTypes')
 
 const FinancesTimeSeries = React.createClass({
   propTypes: {
-    intl: intlShape
+    intl: intlShape,
+    id: string,
+    financeType: string,
+    timePeriodType: string,
+    timePeriods: array,
+    amounts: array
   },
 
   render () {
