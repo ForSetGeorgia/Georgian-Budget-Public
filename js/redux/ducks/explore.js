@@ -20,7 +20,8 @@ const selectedIdsReducer = (state = [], action) => {
 
 const reducer = combineReducers({
   selectedIds: selectedIdsReducer,
-  details: require('./explore/details')
+  details: require('./explore/details'),
+  list: require('./explore/list')
 })
 
 reducer.setSelectedBudgetItemIds = function (ids) {

@@ -6,18 +6,18 @@ const MERGE_BUDGET_ITEMS = 'georgianBudget/budgetItems/MERGE_BUDGET_ITEMS'
 const reducer = (state = {}, action) => {
   switch (action.type) {
     case MERGE_BUDGET_ITEMS:
-      let newBudgetItems = {}
+      if (Object.keys(state).length === 0) {
+        return Object.assign({}, action.data)
+      }
 
-      if (state === {}) {
-        newBudgetItems = action.data
-      } else {
-        for (let key in action.data) {
-          newBudgetItems[key] = Object.assign(
-            {},
-            state[key],
-            action.data[key]
-          )
-        }
+      let newBudgetItems = state
+
+      for (let key in action.data) {
+        newBudgetItems[key] = Object.assign(
+          {},
+          state[key],
+          action.data[key]
+        )
       }
 
       return newBudgetItems

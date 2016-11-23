@@ -5,7 +5,9 @@ const {
   finishLoadingBudgetItemFilter,
   setSelectedBudgetItemIds,
   setBudgetItemFilterOptions
-} = require('../ducks/filters/budgetItems')
+} = require('js/redux/ducks/filters/budgetItems')
+
+const { setListedItemIds } = require('js/redux/ducks/explore/list')
 
 const { mergeBudgetItems } = require('js/redux/ducks/budgetItems')
 
@@ -13,7 +15,7 @@ const { getLocale } = require('js/redux/ducks/locale')
 
 const fetchBudgetItems = require('./budgetItems')
 
-const { addError } = require('../ducks/errors')
+const { addError } = require('js/redux/ducks/errors')
 
 const georgianBudgetAPI = require('js/services/georgianBudgetAPI')
 
@@ -61,9 +63,10 @@ const fetchBudgetItemFilterOptions = () => (dispatch, getState) => {
       budgetItems: arrayOf(budgetItem)
     })
 
-    const budgetItems = normalized.entities.budgetItems
+    const { budgetItems } = normalized.entities
 
     dispatch(mergeBudgetItems(budgetItems))
+    dispatch(setListedItemIds(Object.keys(budgetItems)))
 
     if (budgetItemType === 'total' && budgetItems.length > 0) {
       dispatch(setSelectedBudgetItemIds([budgetItems[0].id]))
