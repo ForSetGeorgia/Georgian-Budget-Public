@@ -1,10 +1,10 @@
 const React = require('react')
 const Helmet = require('react-helmet')
 
-const Filters = require('./Filters/index')
-const AppErrorsDisplay = require('./AppErrorsDisplay')
-const ExploreDetails = require('js/components/ExploreDetails')
-const ExploreList = require('js/components/ExploreList')
+const Filters = require('./components/Filters/index')
+const AppErrorsDisplay = require('./components/AppErrorsDisplay')
+const ExploreDetails = require('./components/ExploreDetails')
+const ExploreList = require('./components/ExploreList')
 
 const Explore = React.createClass({
   render () {
