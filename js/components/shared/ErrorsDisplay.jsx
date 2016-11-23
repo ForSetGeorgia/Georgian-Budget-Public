@@ -1,5 +1,5 @@
 const React = require('react')
-const { arrayOf, shape, string } = React.PropTypes
+const { arrayOf, shape, number, string } = React.PropTypes
 const Error = require('./Error')
 
 const ErrorsDisplay = (props) => {
@@ -16,7 +16,7 @@ const ErrorsDisplay = (props) => {
 
 ErrorsDisplay.propTypes = {
   errors: arrayOf(shape({
-    id: string.isRequired,
+    id: number.isRequired,
     text: string.isRequired
   })).isRequired
 }
