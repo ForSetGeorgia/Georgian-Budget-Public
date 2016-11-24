@@ -6,9 +6,7 @@ const { injectIntl, intlShape } = require('react-intl')
 const TimeSeriesChart = require('./TimeSeriesChart')
 const timePeriodTypeMessages = require('js/messages/timePeriodTypes')
 const { getItemSpentFinances } = require('js/redux/entities/budgetItem')
-const filterFinancesByPeriodType = (finances, type) => finances.filter(
-  f => f.timePeriodType === type
-)
+const { filterFinancesByPeriodType } = require('js/redux/entities/finance')
 
 const FinancesTimeSeries = React.createClass({
   propTypes: {
