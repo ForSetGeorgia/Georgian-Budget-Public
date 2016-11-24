@@ -41,14 +41,9 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
   }).then((response) => {
     dispatch(finishLoadingExploreDetails())
 
-    if (!response || !response.data || typeof response.data !== 'object') {
-      dispatch(addError('Error communicating with API'))
-      return
-    }
+    if (!response || !response.data || typeof response.data !== 'object') return
 
-    const { errors } = response.data
-
-    errors.forEach((error) => {
+    response.data.errors.forEach((error) => {
       dispatch(addError(error.text))
     })
 

@@ -2,7 +2,7 @@ const React = require('react')
 
 const Error = (props) => (
   <p>
-    Error!!! {props.text}
+    {props.text}
   </p>
 )
 
