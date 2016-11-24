@@ -1,18 +1,18 @@
 const { defineMessages } = require('react-intl')
 
 module.exports = defineMessages({
-  monthly: {
-    id: 'timePeriodType.monthly',
+  month: {
+    id: 'timePeriodType.month',
     description: 'Translation of month time period type',
     defaultMessage: 'Monthly'
   },
-  quarterly: {
-    id: 'timePeriodType.quarterly',
+  quarter: {
+    id: 'timePeriodType.quarter',
     description: 'Translation of quarter time period type',
     defaultMessage: 'Quarterly'
   },
-  yearly: {
-    id: 'timePeriodType.yearly',
+  year: {
+    id: 'timePeriodType.year',
     description: 'Translation of year time period type',
     defaultMessage: 'Yearly'
   }

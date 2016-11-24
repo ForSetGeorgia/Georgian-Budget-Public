@@ -6,6 +6,9 @@ const { injectIntl, intlShape } = require('react-intl')
 const TimeSeriesChart = require('./TimeSeriesChart')
 const timePeriodTypeMessages = require('js/messages/timePeriodTypes')
 const { getItemSpentFinances } = require('js/redux/entities/budgetItem')
+const filterFinancesByPeriodType = (finances, type) => finances.filter(
+  f => f.timePeriodType === type
+)
 
 const FinancesTimeSeries = React.createClass({
   propTypes: {
@@ -61,12 +64,14 @@ const FinancesTimeSeries = React.createClass({
 })
 
 const mapStateToProps = (state, ownProps) => {
-  const { itemIds, showSpentFinances } = ownProps
+  const { itemIds, showSpentFinances, timePeriodType } = ownProps
   const props = {}
 
   if (showSpentFinances) {
     props.spentFinances = itemIds.map(
-      itemId => getItemSpentFinances(state, itemId)
+      itemId => filterFinancesByPeriodType(
+        getItemSpentFinances(state, itemId), timePeriodType
+      )
     )
   }
 

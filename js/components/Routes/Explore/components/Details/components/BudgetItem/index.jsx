@@ -33,7 +33,7 @@ const BudgetItem = React.createClass({
     if (this.hasFinanceData()) {
       chart = <FinancesTimeSeries
         itemIds={[id]}
-        timePeriodType='quarterly'
+        timePeriodType='quarter'
         showSpentFinances
         showPlannedFinances={false}
       />

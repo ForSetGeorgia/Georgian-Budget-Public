@@ -27,9 +27,9 @@ const TimePeriodTypeSelect = React.createClass({
   options () {
     const { formatMessage } = this.props.intl
     return [
-      { value: 'monthly', label: formatMessage(timePeriodTypeMessages.monthly) },
-      { value: 'quarterly', label: formatMessage(timePeriodTypeMessages.quarterly) },
-      { value: 'yearly', label: formatMessage(timePeriodTypeMessages.yearly) }
+      { value: 'monthly', label: formatMessage(timePeriodTypeMessages.month) },
+      { value: 'quarterly', label: formatMessage(timePeriodTypeMessages.quarter) },
+      { value: 'yearly', label: formatMessage(timePeriodTypeMessages.year) }
     ]
   },
 
