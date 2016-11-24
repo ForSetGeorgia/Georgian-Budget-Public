@@ -7,7 +7,8 @@ const reducer = combineReducers({
   errors: require('./ducks/errors'),
   explore: require('./ducks/explore'),
   locale: require('./ducks/locale'),
-  routing: routerReducer
+  routing: routerReducer,
+  spentFinances: require('./ducks/spentFinances')
 })
 
 module.exports = reducer

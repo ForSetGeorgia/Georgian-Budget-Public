@@ -55,6 +55,8 @@ reducer.markBudgetItemDetailsLoaded = (itemId) => ({
   itemId: itemId
 })
 
+// Selectors
+
 reducer.getBudgetItemsData = createSelector(
   rootSelector,
   ({budgetItems}) => budgetItems

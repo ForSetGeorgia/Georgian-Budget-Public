@@ -5,6 +5,7 @@ const { beginLoadingExploreDetails, finishLoadingExploreDetails } = require('../
 const { addError } = require('../ducks/errors')
 
 const { mergeBudgetItems } = require('../ducks/budgetItems')
+const { mergeSpentFinances } = require('js/redux/ducks/spentFinances')
 
 const { getLocale } = require('js/redux/ducks/locale')
 
@@ -32,10 +33,7 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
 
   georgianBudgetAPI.get(locale, 'v1', {
     params: {
-      filters: {
-        financeType: financeType,
-        timePeriodType: timePeriodType
-      },
+      budgetItemFields: 'id,code,name,spent_finances,planned_finances',
       budgetItemIds: [itemId]
     }
   }).then((response) => {
@@ -51,9 +49,10 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
       budgetItems: arrayOf(budgetItem)
     })
 
-    const { budgetItems } = normalized.entities
+    const { budgetItems, spentFinances } = normalized.entities
 
     dispatch(mergeBudgetItems(budgetItems))
+    dispatch(mergeSpentFinances(spentFinances))
     dispatch(markBudgetItemDetailsLoaded(itemId))
   })
 }
