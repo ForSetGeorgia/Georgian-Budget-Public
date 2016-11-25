@@ -8,29 +8,29 @@ const TimeSeriesChart = React.createClass({
     xAxisCategories: array.isRequired,
     yAxisDataArrays: array.isRequired,
     title: string.isRequired,
+    currencyName: string.isRequired,
     subtitle: string
   },
 
   // When the DOM is ready, create the chart.
   componentDidMount: function () {
     const Highcharts = require('js/highcharts')
+    const { currencyName } = this.props
 
     // Set container which the chart should render to.
     const options = {
       title: {
-        text: this.props.title,
-        x: -20 // center
+        text: this.props.title
       },
       subtitle: {
-        text: this.props.subtitle,
-        x: -20
+        text: this.props.subtitle
       },
       legend: {
         enabled: false
       },
       tooltip: {
         pointFormat: '{point.y}',
-        valueSuffix: ' ლარი'
+        valueSuffix: ` ${currencyName}`
       },
       xAxis: {
         categories: this.props.xAxisCategories

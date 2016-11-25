@@ -86,6 +86,7 @@ const FinancesTimeSeries = React.createClass({
         title={this.title()}
         xAxisCategories={this.timePeriods()}
         yAxisDataArrays={this.amountArrays()}
+        currencyName={'lari'}
       />
     )
   }
