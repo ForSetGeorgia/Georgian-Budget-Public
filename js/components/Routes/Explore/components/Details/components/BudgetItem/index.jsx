@@ -3,6 +3,7 @@ const { arrayOf, func, number, string } = React.PropTypes
 const { connect } = require('react-redux')
 
 const FinancesTimeSeries = require('./components/FinancesTimeSeries')
+const LoadingIndicator = require('js/components/shared/LoadingIndicator')
 
 const fetchBudgetItemDetails = require('js/redux/fetchers/fetchBudgetItemDetails')
 
@@ -53,6 +54,8 @@ const BudgetItem = React.createClass({
           />
         </div>
       )
+    } else {
+      chart = <LoadingIndicator />
     }
 
     return (
