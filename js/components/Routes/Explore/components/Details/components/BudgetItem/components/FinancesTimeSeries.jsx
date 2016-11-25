@@ -5,6 +5,7 @@ const { injectIntl, intlShape } = require('react-intl')
 
 const TimeSeriesChart = require('./TimeSeriesChart')
 const timePeriodTypeMessages = require('js/messages/timePeriodTypes')
+const financeTypeMessages = require('js/messages/financeTypes')
 const { getItemSpentFinances } = require('js/redux/entities/budgetItem')
 const { getItemPlannedFinances } = require('js/redux/entities/budgetItem')
 const { filterFinancesByPeriodType } = require('js/redux/entities/finance')
@@ -49,21 +50,21 @@ const FinancesTimeSeries = React.createClass({
   },
 
   series () {
-    const { items } = this.props
+    const { intl, items } = this.props
 
     let series = []
 
     items.forEach(item => {
       if (item.spentFinances && item.spentFinances.length > 0) {
         series = series.concat({
-          name: 'spent',
+          name: intl.formatMessage(financeTypeMessages.spentFinance.other),
           data: item.spentFinances.map(f => f.amount)
         })
       }
 
       if (item.plannedFinances && item.plannedFinances.length > 0) {
         series = series.concat({
-          name: 'planned',
+          name: intl.formatMessage(financeTypeMessages.plannedFinance.other),
           data: item.plannedFinances.map(f => f.amount)
         })
       }
@@ -88,11 +89,11 @@ const FinancesTimeSeries = React.createClass({
 
 const getFinanceType = ({ showSpentFinances, showPlannedFinances }) => {
   if (showSpentFinances && showPlannedFinances) {
-    return 'all_finances'
+    return 'allFinance'
   } else if (showSpentFinances) {
-    return 'spent_finance'
+    return 'spentFinance'
   } else if (showPlannedFinances) {
-    return 'planned_finance'
+    return 'plannedFinance'
   }
 }
 
