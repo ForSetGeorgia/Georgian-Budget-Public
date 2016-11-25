@@ -35,19 +35,33 @@ const FinancesTimeSeries = React.createClass({
     }
   },
 
+  timePeriodTypeMessage () {
+    const { intl, timePeriodType } = this.props
+    return intl.formatMessage(timePeriodTypeMessages[timePeriodType])
+  },
+
+  title () {
+    return this.timePeriodTypeMessage()
+  },
+
+  uniqueChartId () {
+    const { itemIds, timePeriodType } = this.props
+
+    const financeType = this.getFinanceType()
+
+    return `${itemIds.join(',')}-${financeType}-${timePeriodType}-chart`
+  },
+
+  timePeriods () {
+    const { spentFinanceArrays } = this.props
+    return spentFinanceArrays[0].map(f => f.timePeriod)
+  },
+
   render () {
     const {
-      itemIds,
-      intl,
-      timePeriodType,
       spentFinanceArrays,
       plannedFinanceArrays
     } = this.props
-
-    const id = itemIds[0]
-    const financeType = this.getFinanceType()
-
-    const timePeriods = spentFinanceArrays[0].map(f => f.timePeriod)
 
     let financeArrays = []
 
@@ -63,18 +77,12 @@ const FinancesTimeSeries = React.createClass({
       finances => finances.map(f => f.amount)
     )
 
-    const timePeriodTypeMessage = intl.formatMessage(
-      timePeriodTypeMessages[timePeriodType]
-    )
-
-    const timeSeriesChartTitle = `${timePeriodTypeMessage}`
-
     return (
       <TimeSeriesChart
-        containerId={`${id}-${financeType}-${timePeriodType}-chart`}
-        key={`${id}-${financeType}-${timePeriodType}-chart`}
-        title={timeSeriesChartTitle}
-        xAxisCategories={timePeriods}
+        containerId={this.uniqueChartId()}
+        key={this.uniqueChartId()}
+        title={this.title()}
+        xAxisCategories={this.timePeriods()}
         yAxisDataArrays={amountArrays}
       />
     )
