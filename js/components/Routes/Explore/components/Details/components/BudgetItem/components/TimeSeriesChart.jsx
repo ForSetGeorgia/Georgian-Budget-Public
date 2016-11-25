@@ -15,40 +15,51 @@ const TimeSeriesChart = React.createClass({
   // When the DOM is ready, create the chart.
   componentDidMount: function () {
     const Highcharts = require('js/highcharts')
-    const { currencyName } = this.props
+    const {
+      containerId,
+      title,
+      subtitle,
+      xAxisCategories,
+      yAxisDataArrays,
+      currencyName
+    } = this.props
 
     // Set container which the chart should render to.
     const options = {
+      chart: {
+        type: 'line'
+      },
       title: {
-        text: this.props.title
+        text: title
       },
       subtitle: {
-        text: this.props.subtitle
+        text: subtitle
       },
       legend: {
-        enabled: false
+        enabled: true
       },
       tooltip: {
         pointFormat: '{point.y}',
         valueSuffix: ` ${currencyName}`
       },
       xAxis: {
-        categories: this.props.xAxisCategories
+        categories: xAxisCategories
       },
       yAxis: {
         title: {
-          text: this.props.title
+          text: title
         }
       },
-      series: this.props.yAxisDataArrays.map(
+      series: yAxisDataArrays.map(
         yAxisDataArray => ({
+          name: 'craziness!',
           data: yAxisDataArray
         })
       )
     }
 
     this.chart = new Highcharts.Chart(
-      this.props.containerId,
+      containerId,
       options
     )
   },
