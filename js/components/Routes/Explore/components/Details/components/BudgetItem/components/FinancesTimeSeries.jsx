@@ -57,7 +57,7 @@ const FinancesTimeSeries = React.createClass({
     return spentFinanceArrays[0].map(f => f.timePeriod)
   },
 
-  render () {
+  amountArrays () {
     const {
       spentFinanceArrays,
       plannedFinanceArrays
@@ -73,17 +73,19 @@ const FinancesTimeSeries = React.createClass({
       financeArrays = financeArrays.concat(plannedFinanceArrays)
     }
 
-    const amountArrays = financeArrays.map(
+    return financeArrays.map(
       finances => finances.map(f => f.amount)
     )
+  },
 
+  render () {
     return (
       <TimeSeriesChart
         containerId={this.uniqueChartId()}
         key={this.uniqueChartId()}
         title={this.title()}
         xAxisCategories={this.timePeriods()}
-        yAxisDataArrays={amountArrays}
+        yAxisDataArrays={this.amountArrays()}
       />
     )
   }
