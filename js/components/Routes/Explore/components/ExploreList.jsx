@@ -1,5 +1,6 @@
 const React = require('react')
 const { arrayOf, object, shape, string, func } = React.PropTypes
+const { FormattedMessage } = require('react-intl')
 const { connect } = require('react-redux')
 
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
@@ -85,7 +86,12 @@ const ExploreList = React.createClass({
     if (this.isLoading()) return ''
     return (
       <p>
-        Showing {this.props.listedItems.length} items.
+        <FormattedMessage
+          id='app.explore.list.count'
+          description='Displays the number of items in the explore list'
+          defaultMessage='Showing {count} items.'
+          values={{count: this.props.listedItems.length}}
+        />
       </p>
     )
   },
