@@ -1,11 +1,11 @@
 const React = require('react')
 const { arrayOf, object, shape, string, func } = React.PropTypes
-const { FormattedMessage } = require('react-intl')
 const { connect } = require('react-redux')
 
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 
 const ClickableList = require('./components/ClickableList')
+const CountDisplay = require('./components/CountDisplay')
 
 const fetchListedBudgetItems =
 require('js/redux/fetchers/fetchListedBudgetItems')
@@ -82,24 +82,13 @@ const ExploreList = React.createClass({
     return this.props.listedItems.length === 0
   },
 
-  renderCountText () {
-    if (this.isLoading()) return ''
-    return (
-      <p>
-        <FormattedMessage
-          id='app.explore.list.count'
-          description='Displays the number of items in the explore list'
-          defaultMessage='Showing {count} items.'
-          values={{count: this.props.listedItems.length}}
-        />
-      </p>
-    )
-  },
-
   render () {
     return (
       <div className='gb-ExploreList'>
-        {this.renderCountText()}
+        <CountDisplay
+          show={!this.isLoading()}
+          items={this.props.listedItems}
+        />
         <ClickableList
           listedItems={this.props.listedItems}
           loading={this.isLoading()}
