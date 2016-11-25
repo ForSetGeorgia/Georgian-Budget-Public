@@ -18,12 +18,10 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
   const state = getState()
   const locale = getLocale(state)
   const financeType = state.filters.financeType.value
-  const timePeriodType = state.filters.timePeriodType.value
 
   const requiredState = [
     locale,
-    financeType,
-    timePeriodType
+    financeType
   ]
 
   for (let i = 0; i < requiredState.length; i++) {

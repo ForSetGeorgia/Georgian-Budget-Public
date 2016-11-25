@@ -16,9 +16,6 @@ module.exports = {
     },
     financeType: {
       value: ''
-    },
-    timePeriodType: {
-      value: ''
     }
   },
   locale: '',

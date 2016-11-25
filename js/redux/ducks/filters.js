@@ -2,6 +2,5 @@ const { combineReducers } = require('redux')
 
 module.exports = combineReducers({
   budgetItemType: require('./filters/budgetItemType'),
-  financeType: require('./filters/financeType'),
-  timePeriodType: require('./filters/timePeriodType')
+  financeType: require('./filters/financeType')
 })
