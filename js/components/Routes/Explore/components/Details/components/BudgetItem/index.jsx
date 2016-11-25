@@ -35,13 +35,19 @@ const BudgetItem = React.createClass({
         <div>
           <FinancesTimeSeries
             itemIds={[id]}
+            timePeriodType='year'
+            showSpentFinances
+            showPlannedFinances
+          />
+          <FinancesTimeSeries
+            itemIds={[id]}
             timePeriodType='quarter'
             showSpentFinances
             showPlannedFinances
           />
           <FinancesTimeSeries
             itemIds={[id]}
-            timePeriodType='year'
+            timePeriodType='month'
             showSpentFinances
             showPlannedFinances
           />
