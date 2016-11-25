@@ -11,28 +11,20 @@ const { filterFinancesByPeriodType } = require('js/redux/entities/finance')
 
 const FinancesTimeSeries = React.createClass({
   propTypes: {
-    itemIds: arrayOf(string).isRequired,
     intl: intlShape.isRequired,
     timePeriodType: string.isRequired,
-    spentFinanceArrays: arrayOf(arrayOf(shape({
-      timePeriod: string.isRequired,
-      amount: number.isRequired
-    }))),
-    plannedFinanceArrays: arrayOf(arrayOf(shape({
-      timePeriod: string.isRequired,
-      amount: number.isRequired
-    })))
-  },
-
-  getFinanceType () {
-    const { spentFinanceArrays, plannedFinanceArrays } = this.props
-    if (spentFinanceArrays && plannedFinanceArrays) {
-      return 'all_finances'
-    } else if (spentFinanceArrays) {
-      return 'spent_finance'
-    } else if (plannedFinanceArrays) {
-      return 'planned_finance'
-    }
+    financeType: string.isRequired,
+    items: arrayOf(shape({
+      id: string.isRequired,
+      spentFinances: arrayOf(shape({
+        timePeriod: string.isRequired,
+        amount: number.isRequired
+      })),
+      plannedFinances: arrayOf(shape({
+        timePeriod: string.isRequired,
+        amount: number.isRequired
+      }))
+    }))
   },
 
   timePeriodTypeMessage () {
@@ -45,37 +37,39 @@ const FinancesTimeSeries = React.createClass({
   },
 
   uniqueChartId () {
-    const { itemIds, timePeriodType } = this.props
-
-    const financeType = this.getFinanceType()
+    const { items, timePeriodType, financeType } = this.props
+    const itemIds = items.map(item => item.id)
 
     return `${itemIds.join(',')}-${financeType}-${timePeriodType}-chart`
   },
 
   timePeriods () {
-    const { spentFinanceArrays } = this.props
-    return spentFinanceArrays[0].map(f => f.timePeriod)
+    const { items } = this.props
+    return items[0].spentFinances.map(f => f.timePeriod)
   },
 
-  amountArrays () {
-    const {
-      spentFinanceArrays,
-      plannedFinanceArrays
-    } = this.props
+  series () {
+    const { items } = this.props
 
-    let financeArrays = []
+    let series = []
 
-    if (spentFinanceArrays !== undefined && spentFinanceArrays.length > 0) {
-      financeArrays = financeArrays.concat(spentFinanceArrays)
-    }
+    items.forEach(item => {
+      if (item.spentFinances && item.spentFinances.length > 0) {
+        series = series.concat({
+          name: 'spent',
+          data: item.spentFinances.map(f => f.amount)
+        })
+      }
 
-    if (plannedFinanceArrays !== undefined && plannedFinanceArrays.length > 0) {
-      financeArrays = financeArrays.concat(plannedFinanceArrays)
-    }
+      if (item.plannedFinances && item.plannedFinances.length > 0) {
+        series = series.concat({
+          name: 'planned',
+          data: item.plannedFinances.map(f => f.amount)
+        })
+      }
+    })
 
-    return financeArrays.map(
-      finances => finances.map(f => f.amount)
-    )
+    return series
   },
 
   render () {
@@ -85,14 +79,24 @@ const FinancesTimeSeries = React.createClass({
         key={this.uniqueChartId()}
         title={this.title()}
         xAxisCategories={this.timePeriods()}
-        yAxisDataArrays={this.amountArrays()}
+        series={this.series()}
         currencyName={'lari'}
       />
     )
   }
 })
 
-const mapStateToProps = (state, ownProps) => {
+const getFinanceType = ({ showSpentFinances, showPlannedFinances }) => {
+  if (showSpentFinances && showPlannedFinances) {
+    return 'all_finances'
+  } else if (showSpentFinances) {
+    return 'spent_finance'
+  } else if (showPlannedFinances) {
+    return 'planned_finance'
+  }
+}
+
+const getItems = (state, ownProps) => {
   const {
     itemIds,
     showSpentFinances,
@@ -100,25 +104,30 @@ const mapStateToProps = (state, ownProps) => {
     timePeriodType
   } = ownProps
 
-  const props = {}
+  return itemIds.map(itemId => {
+    const obj = {
+      id: itemId
+    }
 
-  if (showSpentFinances) {
-    props.spentFinanceArrays = itemIds.map(
-      itemId => filterFinancesByPeriodType(
+    if (showSpentFinances) {
+      obj.spentFinances = filterFinancesByPeriodType(
         getItemSpentFinances(state, itemId), timePeriodType
       )
-    )
-  }
+    }
 
-  if (showPlannedFinances) {
-    props.plannedFinanceArrays = itemIds.map(
-      itemId => filterFinancesByPeriodType(
+    if (showPlannedFinances) {
+      obj.plannedFinances = filterFinancesByPeriodType(
         getItemPlannedFinances(state, itemId), timePeriodType
       )
-    )
-  }
+    }
 
-  return props
+    return obj
+  })
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  financeType: getFinanceType(ownProps),
+  items: getItems(state, ownProps)
+})
 
 module.exports = injectIntl(connect(mapStateToProps)(FinancesTimeSeries))

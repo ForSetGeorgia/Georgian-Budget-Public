@@ -6,7 +6,7 @@ const TimeSeriesChart = React.createClass({
   propTypes: {
     containerId: string.isRequired,
     xAxisCategories: array.isRequired,
-    yAxisDataArrays: array.isRequired,
+    series: array.isRequired,
     title: string.isRequired,
     currencyName: string.isRequired,
     subtitle: string
@@ -20,7 +20,7 @@ const TimeSeriesChart = React.createClass({
       title,
       subtitle,
       xAxisCategories,
-      yAxisDataArrays,
+      series,
       currencyName
     } = this.props
 
@@ -50,12 +50,7 @@ const TimeSeriesChart = React.createClass({
           text: title
         }
       },
-      series: yAxisDataArrays.map(
-        yAxisDataArray => ({
-          name: 'craziness!',
-          data: yAxisDataArray
-        })
-      )
+      series: series
     }
 
     this.chart = new Highcharts.Chart(
