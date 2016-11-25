@@ -3,9 +3,6 @@ module.exports = {
   errors: [],
   explore: {
     selectedIds: [],
-    details: {
-      loading: false
-    },
     list: {
       listedItemIds: []
     }

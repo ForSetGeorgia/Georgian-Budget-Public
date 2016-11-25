@@ -1,7 +1,6 @@
 const React = require('react')
-const { object, bool } = React.PropTypes
+const { object } = React.PropTypes
 const { connect } = require('react-redux')
-const { getExploreDetailsLoading } = require('js/redux/ducks/explore/details')
 const { getSelectedBudgetItems } = require('js/redux/ducks/explore')
 
 const BudgetItem = require('./components/BudgetItem/index')
@@ -9,20 +8,21 @@ const LoadingIndicator = require('js/components/shared/LoadingIndicator')
 
 let ExploreDetails = React.createClass({
   propTypes: {
-    loading: bool.isRequired,
     data: object.isRequired
   },
 
-  render: function () {
-    const { loading, data } = this.props
+  isLoading () {
+    return Object.keys(this.props.data).length === 0
+  },
+
+  render () {
+    const { data } = this.props
     let content
-    if (loading) {
+    if (this.isLoading()) {
       content = (
         <LoadingIndicator />
       )
-    }
-
-    if (data !== {}) {
+    } else {
       content = (
         <div>
           {
@@ -51,7 +51,6 @@ let ExploreDetails = React.createClass({
 })
 
 const mapStateToProps = (state) => ({
-  loading: getExploreDetailsLoading(state),
   data: getSelectedBudgetItems(state)
 })
 

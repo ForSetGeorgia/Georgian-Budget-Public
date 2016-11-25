@@ -1,6 +1,5 @@
 const { normalize, arrayOf } = require('normalizr')
 const budgetItem = require('js/redux/schemas/budgetItem')
-const { beginLoadingExploreDetails, finishLoadingExploreDetails } = require('../ducks/explore/details')
 
 const { addError } = require('../ducks/errors')
 
@@ -28,16 +27,12 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
     if (requiredState[i].length === 0) return
   }
 
-  dispatch(beginLoadingExploreDetails())
-
   georgianBudgetAPI.get(locale, 'v1', {
     params: {
       budgetItemFields: 'id,code,name,spent_finances,planned_finances',
       budgetItemIds: [itemId]
     }
   }).then((response) => {
-    dispatch(finishLoadingExploreDetails())
-
     if (!response || !response.data || typeof response.data !== 'object') return
 
     response.data.errors.forEach((error) => {
