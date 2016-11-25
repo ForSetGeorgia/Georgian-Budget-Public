@@ -5,7 +5,7 @@ const { connect } = require('react-redux')
 
 const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 
-const ClickableList = require('./ClickableList')
+const ClickableList = require('./components/ClickableList')
 
 const fetchListedBudgetItems =
 require('js/redux/fetchers/fetchListedBudgetItems')
