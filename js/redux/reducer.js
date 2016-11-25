@@ -8,6 +8,7 @@ const reducer = combineReducers({
   explore: require('./ducks/explore'),
   locale: require('./ducks/locale'),
   routing: routerReducer,
+  plannedFinances: require('./ducks/plannedFinances'),
   spentFinances: require('./ducks/spentFinances')
 })
 

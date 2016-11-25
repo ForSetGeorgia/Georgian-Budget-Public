@@ -1,5 +1,6 @@
 const { getBudgetItemsData } = require('js/redux/ducks/budgetItems')
 const { getSpentFinance } = require('js/redux/entities/spentFinance')
+const { getPlannedFinance } = require('js/redux/entities/plannedFinance')
 
 const getBudgetItem = (state, itemId) => (getBudgetItemsData(state)[itemId])
 
@@ -13,8 +14,20 @@ const getItemSpentFinances = (state, itemId) => (
   ))
 )
 
+const getItemPlannedFinanceIds = (state, itemId) => (
+  getBudgetItem(state, itemId).plannedFinances
+)
+
+const getItemPlannedFinances = (state, itemId) => (
+  getItemPlannedFinanceIds(state, itemId).map(financeId => (
+    getPlannedFinance(state, financeId)
+  ))
+)
+
 module.exports = {
   getBudgetItem,
   getItemSpentFinanceIds,
-  getItemSpentFinances
+  getItemSpentFinances,
+  getItemPlannedFinanceIds,
+  getItemPlannedFinances
 }

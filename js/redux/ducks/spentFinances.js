@@ -7,10 +7,10 @@ const reducer = (state = {}, action) => {
   switch (action.type) {
     case MERGE_SPENT_FINANCES:
       if (Object.keys(state).length === 0) {
-        return Object.assign({}, action.data)
+        return Object.assign(state, action.data)
       }
 
-      let newSpentFinances = state
+      let newSpentFinances = Object.assign({}, state)
 
       for (let key in action.data) {
         newSpentFinances[key] = Object.assign(

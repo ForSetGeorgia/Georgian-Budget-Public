@@ -6,6 +6,7 @@ const { addError } = require('../ducks/errors')
 
 const { mergeBudgetItems } = require('../ducks/budgetItems')
 const { mergeSpentFinances } = require('js/redux/ducks/spentFinances')
+const { mergePlannedFinances } = require('js/redux/ducks/plannedFinances')
 
 const { getLocale } = require('js/redux/ducks/locale')
 
@@ -49,10 +50,11 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
       budgetItems: arrayOf(budgetItem)
     })
 
-    const { budgetItems, spentFinances } = normalized.entities
+    const { budgetItems, spentFinances, plannedFinances } = normalized.entities
 
     dispatch(mergeBudgetItems(budgetItems))
     dispatch(mergeSpentFinances(spentFinances))
+    dispatch(mergePlannedFinances(plannedFinances))
     dispatch(markBudgetItemDetailsLoaded(itemId))
   })
 }

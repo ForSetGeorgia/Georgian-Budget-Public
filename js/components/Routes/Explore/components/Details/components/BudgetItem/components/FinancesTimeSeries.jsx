@@ -6,6 +6,7 @@ const { injectIntl, intlShape } = require('react-intl')
 const TimeSeriesChart = require('./TimeSeriesChart')
 const timePeriodTypeMessages = require('js/messages/timePeriodTypes')
 const { getItemSpentFinances } = require('js/redux/entities/budgetItem')
+const { getItemPlannedFinances } = require('js/redux/entities/budgetItem')
 const { filterFinancesByPeriodType } = require('js/redux/entities/finance')
 
 const FinancesTimeSeries = React.createClass({
@@ -13,37 +14,54 @@ const FinancesTimeSeries = React.createClass({
     itemIds: arrayOf(string).isRequired,
     intl: intlShape.isRequired,
     timePeriodType: string.isRequired,
-    spentFinances: arrayOf(arrayOf(shape({
+    spentFinanceArrays: arrayOf(arrayOf(shape({
       timePeriod: string.isRequired,
       amount: number.isRequired
     }))),
-    plannedFinances: arrayOf(arrayOf(shape({
+    plannedFinanceArrays: arrayOf(arrayOf(shape({
       timePeriod: string.isRequired,
       amount: number.isRequired
     })))
   },
 
   getFinanceType () {
-    const { spentFinances, plannedFinances } = this.props
-    if (spentFinances && plannedFinances) {
+    const { spentFinanceArrays, plannedFinanceArrays } = this.props
+    if (spentFinanceArrays && plannedFinanceArrays) {
       return 'all_finances'
-    } else if (spentFinances) {
+    } else if (spentFinanceArrays) {
       return 'spent_finance'
-    } else if (plannedFinances) {
+    } else if (plannedFinanceArrays) {
       return 'planned_finance'
     }
   },
 
   render () {
-    const { itemIds, intl, timePeriodType, spentFinances } = this.props
+    const {
+      itemIds,
+      intl,
+      timePeriodType,
+      spentFinanceArrays,
+      plannedFinanceArrays
+    } = this.props
 
     const id = itemIds[0]
     const financeType = this.getFinanceType()
 
-    let finances = spentFinances[0]
+    const timePeriods = spentFinanceArrays[0].map(f => f.timePeriod)
 
-    const timePeriods = finances.map(f => f.timePeriod)
-    const amounts = finances.map(f => f.amount)
+    let financeArrays = []
+
+    if (spentFinanceArrays !== undefined && spentFinanceArrays.length > 0) {
+      financeArrays = financeArrays.concat(spentFinanceArrays)
+    }
+
+    if (plannedFinanceArrays !== undefined && plannedFinanceArrays.length > 0) {
+      financeArrays = financeArrays.concat(plannedFinanceArrays)
+    }
+
+    const amountArrays = financeArrays.map(
+      finances => finances.map(f => f.amount)
+    )
 
     const timePeriodTypeMessage = intl.formatMessage(
       timePeriodTypeMessages[timePeriodType]
@@ -51,24 +69,40 @@ const FinancesTimeSeries = React.createClass({
 
     const timeSeriesChartTitle = `${timePeriodTypeMessage}`
 
-    return (<TimeSeriesChart
-      containerId={`${id}-${financeType}-${timePeriodType}-chart`}
-      key={`${id}-${financeType}-${timePeriodType}-chart`}
-      title={timeSeriesChartTitle}
-      xAxisCategories={timePeriods}
-      yAxisAmounts={amounts}
-    />)
+    return (
+      <TimeSeriesChart
+        containerId={`${id}-${financeType}-${timePeriodType}-chart`}
+        key={`${id}-${financeType}-${timePeriodType}-chart`}
+        title={timeSeriesChartTitle}
+        xAxisCategories={timePeriods}
+        yAxisDataArrays={amountArrays}
+      />
+    )
   }
 })
 
 const mapStateToProps = (state, ownProps) => {
-  const { itemIds, showSpentFinances, timePeriodType } = ownProps
+  const {
+    itemIds,
+    showSpentFinances,
+    showPlannedFinances,
+    timePeriodType
+  } = ownProps
+
   const props = {}
 
   if (showSpentFinances) {
-    props.spentFinances = itemIds.map(
+    props.spentFinanceArrays = itemIds.map(
       itemId => filterFinancesByPeriodType(
         getItemSpentFinances(state, itemId), timePeriodType
+      )
+    )
+  }
+
+  if (showPlannedFinances) {
+    props.plannedFinanceArrays = itemIds.map(
+      itemId => filterFinancesByPeriodType(
+        getItemPlannedFinances(state, itemId), timePeriodType
       )
     )
   }

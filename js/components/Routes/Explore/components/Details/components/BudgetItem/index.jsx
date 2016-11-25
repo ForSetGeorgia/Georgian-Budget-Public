@@ -31,12 +31,22 @@ const BudgetItem = React.createClass({
     let chart = ''
 
     if (this.hasFinanceData()) {
-      chart = <FinancesTimeSeries
-        itemIds={[id]}
-        timePeriodType='quarter'
-        showSpentFinances
-        showPlannedFinances={false}
-      />
+      chart = (
+        <div>
+          <FinancesTimeSeries
+            itemIds={[id]}
+            timePeriodType='quarter'
+            showSpentFinances
+            showPlannedFinances
+          />
+          <FinancesTimeSeries
+            itemIds={[id]}
+            timePeriodType='year'
+            showSpentFinances
+            showPlannedFinances
+          />
+        </div>
+      )
     }
 
     return (
