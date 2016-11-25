@@ -2,7 +2,11 @@ const { getBudgetItemsData } = require('js/redux/ducks/budgetItems')
 const { getSpentFinance } = require('js/redux/entities/spentFinance')
 const { getPlannedFinance } = require('js/redux/entities/plannedFinance')
 
-const getBudgetItem = (state, itemId) => (getBudgetItemsData(state)[itemId])
+const getBudgetItem = (state, itemId) => {
+  const budgetItem = getBudgetItemsData(state)[itemId]
+  if (!budgetItem) throw new Error(`Budget item with id ${itemId} could not be found in state`)
+  return budgetItem
+}
 
 const getItemSpentFinanceIds = (state, itemId) => (
   getBudgetItem(state, itemId).spentFinances
