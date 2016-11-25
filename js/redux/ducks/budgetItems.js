@@ -1,27 +1,15 @@
 const { createSelector } = require('reselect')
 const rootSelector = require('./rootSelector')
 
+const deepMergeEntities = require('js/deepMergeEntities')
+
 const MERGE_BUDGET_ITEMS = 'georgianBudget/budgetItems/MERGE_BUDGET_ITEMS'
 const MARK_DETAILS_LOADED = 'georgianBudget/budgetItems/MARK_DETAILS_LOADED'
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
     case MERGE_BUDGET_ITEMS:
-      if (Object.keys(state).length === 0) {
-        return Object.assign({}, action.data)
-      }
-
-      let newBudgetItems = state
-
-      for (let key in action.data) {
-        newBudgetItems[key] = Object.assign(
-          {},
-          state[key],
-          action.data[key]
-        )
-      }
-
-      return newBudgetItems
+      return deepMergeEntities(state, action.data)
     case MARK_DETAILS_LOADED:
       const newState = Object.assign({}, state)
       const budgetItem = newState[action.itemId]
