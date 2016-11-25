@@ -20,6 +20,8 @@ const fetchListedBudgetItems = () => (dispatch, getState) => {
     if (requiredState[i].length === 0) return
   }
 
+  dispatch(setListedItemIds([]))
+
   georgianBudgetAPI.get(locale, 'v1', {
     params: {
       budgetItemFields: 'id,name',
