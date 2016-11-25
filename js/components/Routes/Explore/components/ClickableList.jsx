@@ -1,11 +1,11 @@
 const React = require('react')
-const { arrayOf, object } = React.PropTypes
+const { arrayOf, bool, object } = React.PropTypes
 const Griddle = require('griddle-react')
 const LoadingIndicator = require('js/components/shared/LoadingIndicator')
 
 const ClickableList = (props) => {
-  const { listedItems } = props
-  if (listedItems.length === 0) {
+  const { listedItems, loading } = props
+  if (loading) {
     return <LoadingIndicator />
   }
 
@@ -18,7 +18,8 @@ const ClickableList = (props) => {
 }
 
 ClickableList.propTypes = {
-  listedItems: arrayOf(object)
+  listedItems: arrayOf(object),
+  loading: bool
 }
 
 module.exports = ClickableList

@@ -77,11 +77,26 @@ const ExploreList = React.createClass({
     return className
   },
 
+  isLoading () {
+    return this.props.listedItems.length === 0
+  },
+
+  renderCountText () {
+    if (this.isLoading()) return ''
+    return (
+      <p>
+        Showing {this.props.listedItems.length} items.
+      </p>
+    )
+  },
+
   render () {
     return (
       <div className='gb-ExploreList'>
+        {this.renderCountText()}
         <ClickableList
           listedItems={this.props.listedItems}
+          loading={this.isLoading()}
           columns={['name']}
           onRowClick={this.handleClick}
           rowMetadata={{ bodyCssClassName: this.rowClassName }}
