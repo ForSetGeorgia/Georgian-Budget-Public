@@ -1,9 +1,9 @@
 const deepMergeEntities = (oldEntities, newEntities) => {
   if (Object.keys(oldEntities).length === 0) {
-    return Object.assign(oldEntities, newEntities)
+    return Object.assign({}, oldEntities, newEntities)
   }
 
-  const combined = Object.assign(oldEntities)
+  const combined = Object.assign({}, oldEntities)
 
   for (let key in newEntities) {
     combined[key] = Object.assign(

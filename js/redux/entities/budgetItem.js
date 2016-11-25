@@ -2,11 +2,9 @@ const { getBudgetItemsData } = require('js/redux/ducks/budgetItems')
 const { getSpentFinance } = require('js/redux/entities/spentFinance')
 const { getPlannedFinance } = require('js/redux/entities/plannedFinance')
 
-const getBudgetItem = (state, itemId) => {
-  const budgetItem = getBudgetItemsData(state)[itemId]
-  if (!budgetItem) throw new Error(`Budget item with id ${itemId} could not be found in state`)
-  return budgetItem
-}
+const getBudgetItem = (state, itemId) => (
+  getBudgetItemsData(state)[itemId]
+)
 
 const getItemSpentFinanceIds = (state, itemId) => (
   getBudgetItem(state, itemId).spentFinances
@@ -15,7 +13,7 @@ const getItemSpentFinanceIds = (state, itemId) => (
 const getItemSpentFinances = (state, itemId) => (
   getItemSpentFinanceIds(state, itemId).map(financeId => (
     getSpentFinance(state, financeId)
-  ))
+  )).filter(finance => finance)
 )
 
 const getItemPlannedFinanceIds = (state, itemId) => (
@@ -25,7 +23,7 @@ const getItemPlannedFinanceIds = (state, itemId) => (
 const getItemPlannedFinances = (state, itemId) => (
   getItemPlannedFinanceIds(state, itemId).map(financeId => (
     getPlannedFinance(state, financeId)
-  ))
+  )).filter(finance => finance)
 )
 
 module.exports = {
