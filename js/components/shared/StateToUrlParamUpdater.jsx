@@ -9,7 +9,8 @@ const UpdateUrlParam = require('js/components/shared/UpdateUrlParam')
 const StateToUrlParamUpdater = React.createClass({
   propTypes: {
     budgetItemType: string.isRequired,
-    budgetItemIds: arrayOf(string).isRequired
+    budgetItemIds: arrayOf(string).isRequired,
+    financeType: string.isRequired
   },
 
   createKey (param, value) {
@@ -27,12 +28,13 @@ const StateToUrlParamUpdater = React.createClass({
   },
 
   render () {
-    const { budgetItemIds, budgetItemType } = this.props
+    const { budgetItemIds, budgetItemType, financeType } = this.props
 
     return (
       <div>
         {this.renderUpdateUrlParam('budgetItemType', budgetItemType)}
         {this.renderUpdateUrlParam('budgetItemIds', budgetItemIds)}
+        {this.renderUpdateUrlParam('financeType', financeType)}
       </div>
     )
   }
@@ -40,7 +42,8 @@ const StateToUrlParamUpdater = React.createClass({
 
 const mapStateToProps = (state) => ({
   budgetItemType: state.filters.budgetItemType.value,
-  budgetItemIds: getSelectedBudgetItemIds(state)
+  budgetItemIds: getSelectedBudgetItemIds(state),
+  financeType: state.filters.financeType.value
 })
 
 module.exports = connect(mapStateToProps)(StateToUrlParamUpdater)

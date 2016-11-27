@@ -7,7 +7,6 @@ const financeTypeMessages = require('js/messages/financeTypes')
 
 const { setFinanceType } = require('js/redux/ducks/filters/financeType')
 
-const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const GBSelect = require('./GBSelect')
 
 const messages = defineMessages({
@@ -55,13 +54,6 @@ const FinanceTypeSelect = React.createClass({
   handleChangeEvent (selected) {
     const { value } = selected
     this.props.dispatchNewFinanceType(value)
-
-    this.context.router.push(
-      getLocationWithQuery(
-        this.props.location,
-        { financeType: value }
-      )
-    )
   },
 
   componentDidMount () {
