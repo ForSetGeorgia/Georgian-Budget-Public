@@ -55,8 +55,7 @@ const BudgetItemTypeSelect = React.createClass({
       getLocationWithQuery(
         this.context.location,
         {
-          budgetItemType: value,
-          budgetItemIds: []
+          budgetItemType: value
         }
       )
     )
