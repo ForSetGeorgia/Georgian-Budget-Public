@@ -68,25 +68,29 @@ const BudgetItemTypeSelect = React.createClass({
     return location.query.budgetItemType
   },
 
-  handleChangeEvent (selected) {
-    const { value } = selected
-    if (!value) return
-
-    this.props.setBudgetItemType(value)
+  updateWithNewValue (newValue) {
+    this.props.setBudgetItemType(newValue)
     this.props.fetchListedBudgetItems()
 
     // If the value in the URL and the new value are not the same,
     // update the URL query param with the new value
-    if (this.queryValue() === value) return
+    if (this.queryValue() === newValue) return
 
-    this.updateQueryWithNewType(value)
+    this.updateQueryWithNewType(newValue)
+  },
+
+  handleChangeEvent (selected) {
+    const { value: newValue } = selected
+    if (!newValue) return
+
+    this.updateWithNewValue(newValue)
   },
 
   componentDidMount () {
     if (this.optionValues().includes(this.queryValue())) {
-      this.handleChangeEvent({ value: this.queryValue() })
+      this.updateWithNewValue(this.queryValue())
     } else {
-      this.handleChangeEvent({ value: this.defaultValue })
+      this.updateWithNewValue(this.defaultValue)
     }
   },
 
