@@ -16,19 +16,23 @@ const StateToUrlParamUpdater = React.createClass({
     return `update-url-param-${param}-${value}`
   },
 
+  renderUpdateUrlParam (param, value) {
+    return (
+      <UpdateUrlParam
+        param={param}
+        value={value}
+        key={this.createKey(param, value)}
+      />
+    )
+  },
+
   render () {
+    const { budgetItemIds, budgetItemType } = this.props
+
     return (
       <div>
-        <UpdateUrlParam
-          param='budgetItemType'
-          value={this.props.budgetItemType}
-          key={this.createKey('budgetItemType', this.props.budgetItemType)}
-        />
-        <UpdateUrlParam
-          param='budgetItemIds'
-          value={this.props.budgetItemIds}
-          key={this.createKey('budgetItemIds', this.props.budgetItemIds.join(','))}
-        />
+        {this.renderUpdateUrlParam('budgetItemType', budgetItemType)}
+        {this.renderUpdateUrlParam('budgetItemIds', budgetItemIds)}
       </div>
     )
   }
