@@ -1,8 +1,6 @@
 const React = require('react')
 const { arrayOf, object, oneOf, oneOfType, string } = React.PropTypes
 
-const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
-
 const UrlParamUpdater = React.createClass({
   contextTypes: {
     location: object,
