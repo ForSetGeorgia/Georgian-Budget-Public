@@ -1,7 +1,7 @@
 const React = require('react')
 const { arrayOf, object, oneOf, oneOfType, string } = React.PropTypes
 
-const UrlParamUpdater = React.createClass({
+const UpdateUrlParam = React.createClass({
   contextTypes: {
     location: object,
     router: object
@@ -43,4 +43,4 @@ const UrlParamUpdater = React.createClass({
   }
 })
 
-module.exports = UrlParamUpdater
+module.exports = UpdateUrlParam
