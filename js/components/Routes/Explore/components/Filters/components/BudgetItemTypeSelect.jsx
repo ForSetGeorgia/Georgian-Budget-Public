@@ -10,8 +10,6 @@ const { setBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
 const fetchListedBudgetItems =
 require('js/redux/fetchers/fetchListedBudgetItems')
 
-const UpdateUrlParam = require('js/components/shared/UpdateUrlParam')
-
 const messages = defineMessages({
   label: {
     id: 'app.filters.budgetItemType.label',
@@ -87,11 +85,6 @@ const BudgetItemTypeSelect = React.createClass({
           value={this.props.value}
           handleChangeEvent={this.handleChangeEvent}
           options={this.options()}
-        />
-        <UpdateUrlParam
-          param='budgetItemType'
-          value={this.props.value}
-          key={this.props.value}
         />
       </div>
     )
