@@ -16,11 +16,9 @@ const { markBudgetItemDetailsLoaded } = require('js/redux/ducks/budgetItems')
 const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
   const state = getState()
   const locale = getLocale(state)
-  const financeType = state.filters.financeType.value
 
   const requiredState = [
-    locale,
-    financeType
+    locale
   ]
 
   for (let i = 0; i < requiredState.length; i++) {
