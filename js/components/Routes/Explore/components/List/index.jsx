@@ -2,9 +2,6 @@ const React = require('react')
 const { arrayOf, object, shape, string, func } = React.PropTypes
 const { connect } = require('react-redux')
 
-const StateToUrlParamUpdater =
-require('js/components/shared/StateToUrlParamUpdater')
-
 const ClickableList = require('./components/ClickableList')
 const CountDisplay = require('./components/CountDisplay')
 
@@ -89,7 +86,6 @@ const ExploreList = React.createClass({
           enableInfiniteScroll
           bodyHeight='400'
         />
-        <StateToUrlParamUpdater />
       </div>
     )
   }
