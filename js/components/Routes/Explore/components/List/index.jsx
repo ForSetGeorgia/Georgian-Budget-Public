@@ -2,7 +2,7 @@ const React = require('react')
 const { arrayOf, object, shape, string, func } = React.PropTypes
 const { connect } = require('react-redux')
 
-const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
+const UpdateUrlParam = require('js/components/shared/UpdateUrlParam')
 
 const ClickableList = require('./components/ClickableList')
 const CountDisplay = require('./components/CountDisplay')
@@ -33,17 +33,6 @@ const ExploreList = React.createClass({
     location: object
   },
 
-  updateURLWithSelectedIds (selectedIds) {
-    this.context.router.push(
-      getLocationWithQuery(
-        this.context.location,
-        {
-          budgetItemIds: selectedIds
-        }
-      )
-    )
-  },
-
   getQuerySelectedIds () {
     const ids = this.context.location.query.budgetItemIds
     return typeof ids === 'string' ? [ids] : ids
@@ -65,7 +54,6 @@ const ExploreList = React.createClass({
   handleClick (row) {
     const selectedIds = [row.props.data.id]
     this.props.setSelectedBudgetItemIds(selectedIds)
-    this.updateURLWithSelectedIds(selectedIds)
   },
 
   rowClassName (row) {
@@ -99,6 +87,11 @@ const ExploreList = React.createClass({
           showFilter
           enableInfiniteScroll
           bodyHeight='400'
+        />
+        <UpdateUrlParam
+          param='budgetItemIds'
+          value={this.props.selectedIds}
+          key={this.props.selectedIds}
         />
       </div>
     )
