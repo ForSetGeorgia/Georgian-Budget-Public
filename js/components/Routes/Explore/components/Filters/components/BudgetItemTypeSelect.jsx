@@ -21,13 +21,13 @@ const messages = defineMessages({
 
 const BudgetItemTypeSelect = React.createClass({
   contextTypes: {
-    router: object
+    router: object,
+    location: object
   },
 
   propTypes: {
     value: string,
     queryValue: string,
-    location: object,
     intl: intlShape,
     setBudgetItemType: func,
     fetchListedBudgetItems: func
@@ -53,13 +53,19 @@ const BudgetItemTypeSelect = React.createClass({
   updateQueryWithNewType (value) {
     this.context.router.push(
       getLocationWithQuery(
-        this.props.location,
+        this.context.location,
         {
           budgetItemType: value,
           budgetItemIds: []
         }
       )
     )
+  },
+
+  queryValue () {
+    const { location } = this.context
+
+    return location.query.budgetItemType
   },
 
   handleChangeEvent (selected) {
@@ -71,16 +77,14 @@ const BudgetItemTypeSelect = React.createClass({
 
     // If the value in the URL and the new value are not the same,
     // update the URL query param with the new value
-    if (this.props.queryValue === value) return
+    if (this.queryValue() === value) return
 
     this.updateQueryWithNewType(value)
   },
 
   componentDidMount () {
-    const { queryValue } = this.props
-
-    if (this.optionValues().includes(queryValue)) {
-      this.handleChangeEvent({ value: queryValue })
+    if (this.optionValues().includes(this.queryValue())) {
+      this.handleChangeEvent({ value: this.queryValue() })
     } else {
       this.handleChangeEvent({ value: this.defaultValue })
     }
@@ -99,10 +103,9 @@ const BudgetItemTypeSelect = React.createClass({
 
 })
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
-    value: state.filters.budgetItemType.value,
-    queryValue: ownProps.location.query.budgetItemType
+    value: state.filters.budgetItemType.value
   }
 }
 

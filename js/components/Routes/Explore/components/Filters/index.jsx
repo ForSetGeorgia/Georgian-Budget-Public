@@ -13,7 +13,7 @@ const Filters = React.createClass({
     return (
       <div className='gb-Filters'>
         <div className='gb-Filters-primary'>
-          <BudgetItemTypeSelect location={this.context.location} />
+          <BudgetItemTypeSelect />
           <FinanceTypeSelect location={this.context.location} />
         </div>
       </div>
