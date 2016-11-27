@@ -22,9 +22,16 @@ const UrlParamUpdater = React.createClass({
     newParamObject[param] = value
 
     router.push(
-      getLocationWithQuery(
+      Object.assign(
+        {},
         location,
-        newParamObject
+        {
+          query: Object.assign(
+            {},
+            location.query,
+            newParamObject
+          )
+        }
       )
     )
   },
