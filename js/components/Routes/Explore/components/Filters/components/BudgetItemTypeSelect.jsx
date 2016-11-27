@@ -2,7 +2,6 @@ const React = require('react')
 const { string, func, object } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
-const getLocationWithQuery = require('js/helpers/getLocationWithQuery')
 const GBSelect = require('./GBSelect')
 const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 
@@ -10,6 +9,8 @@ const { setBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
 
 const fetchListedBudgetItems =
 require('js/redux/fetchers/fetchListedBudgetItems')
+
+const UrlParamUpdater = require('js/components/shared/UrlParamUpdater')
 
 const messages = defineMessages({
   label: {
@@ -50,17 +51,6 @@ const BudgetItemTypeSelect = React.createClass({
     return this.options().map((option) => option.value)
   },
 
-  updateQueryWithNewType (value) {
-    this.context.router.push(
-      getLocationWithQuery(
-        this.context.location,
-        {
-          budgetItemType: value
-        }
-      )
-    )
-  },
-
   queryValue () {
     const { location } = this.context
 
@@ -70,12 +60,6 @@ const BudgetItemTypeSelect = React.createClass({
   updateWithNewValue (newValue) {
     this.props.setBudgetItemType(newValue)
     this.props.fetchListedBudgetItems()
-
-    // If the value in the URL and the new value are not the same,
-    // update the URL query param with the new value
-    if (this.queryValue() === newValue) return
-
-    this.updateQueryWithNewType(newValue)
   },
 
   handleChangeEvent (selected) {
@@ -94,14 +78,23 @@ const BudgetItemTypeSelect = React.createClass({
   },
 
   render () {
-    return <GBSelect
-      id='budget-item-type-select'
-      name='budget-item-type-select'
-      labelText={this.props.intl.formatMessage(messages.label)}
-      value={this.props.value}
-      handleChangeEvent={this.handleChangeEvent}
-      options={this.options()}
-    />
+    return (
+      <div>
+        <GBSelect
+          id='budget-item-type-select'
+          name='budget-item-type-select'
+          labelText={this.props.intl.formatMessage(messages.label)}
+          value={this.props.value}
+          handleChangeEvent={this.handleChangeEvent}
+          options={this.options()}
+        />
+        <UrlParamUpdater
+          param='budgetItemType'
+          value={this.props.value}
+          key={this.props.value}
+        />
+      </div>
+    )
   }
 
 })
