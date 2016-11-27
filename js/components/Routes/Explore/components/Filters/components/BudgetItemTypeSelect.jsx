@@ -77,16 +77,14 @@ const BudgetItemTypeSelect = React.createClass({
 
   render () {
     return (
-      <div>
-        <GBSelect
-          id='budget-item-type-select'
-          name='budget-item-type-select'
-          labelText={this.props.intl.formatMessage(messages.label)}
-          value={this.props.value}
-          handleChangeEvent={this.handleChangeEvent}
-          options={this.options()}
-        />
-      </div>
+      <GBSelect
+        id='budget-item-type-select'
+        name='budget-item-type-select'
+        labelText={this.props.intl.formatMessage(messages.label)}
+        value={this.props.value}
+        handleChangeEvent={this.handleChangeEvent}
+        options={this.options()}
+      />
     )
   }
 
