@@ -8,8 +8,12 @@ const UpdateUrlParam = require('js/components/shared/UpdateUrlParam')
 
 const StateToUrlParamUpdater = React.createClass({
   propTypes: {
-    budgetItemTypeValue: string.isRequired,
-    selectedIds: arrayOf(string).isRequired
+    budgetItemType: string.isRequired,
+    budgetItemIds: arrayOf(string).isRequired
+  },
+
+  createKey (param, value) {
+    return `update-url-param-${param}-${value}`
   },
 
   render () {
@@ -17,13 +21,13 @@ const StateToUrlParamUpdater = React.createClass({
       <div>
         <UpdateUrlParam
           param='budgetItemType'
-          value={this.props.budgetItemTypeValue}
-          key={this.props.budgetItemTypeValue}
+          value={this.props.budgetItemType}
+          key={this.createKey('budgetItemType', this.props.budgetItemType)}
         />
         <UpdateUrlParam
           param='budgetItemIds'
-          value={this.props.selectedIds}
-          key={this.props.selectedIds}
+          value={this.props.budgetItemIds}
+          key={this.createKey('budgetItemIds', this.props.budgetItemIds.join(','))}
         />
       </div>
     )
@@ -31,8 +35,8 @@ const StateToUrlParamUpdater = React.createClass({
 })
 
 const mapStateToProps = (state) => ({
-  budgetItemTypeValue: state.filters.budgetItemType.value,
-  selectedIds: getSelectedBudgetItemIds(state)
+  budgetItemType: state.filters.budgetItemType.value,
+  budgetItemIds: getSelectedBudgetItemIds(state)
 })
 
 module.exports = connect(mapStateToProps)(StateToUrlParamUpdater)
