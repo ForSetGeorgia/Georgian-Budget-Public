@@ -5,7 +5,10 @@ const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const financeTypeMessages = require('js/messages/financeTypes')
 
-const { setFinanceType } = require('js/redux/ducks/filters/financeType')
+const {
+  setFinanceType,
+  getSelectedFinanceType
+} = require('js/redux/ducks/filters/financeType')
 
 const GBSelect = require('./GBSelect')
 
@@ -84,7 +87,7 @@ const FinanceTypeSelect = React.createClass({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    value: state.filters.financeType.value,
+    value: getSelectedFinanceType(state),
     queryValue: ownProps.location.query.financeType
   }
 }

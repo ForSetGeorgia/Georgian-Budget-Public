@@ -1,3 +1,6 @@
+const { createSelector } = require('reselect')
+const rootSelector = require('./rootSelector')
+
 const SET_FINANCE_TYPE = 'georgianBudget/filters/SET_FINANCE_TYPE'
 
 const reducer = (state = {}, action) => {
@@ -21,5 +24,15 @@ reducer.setFinanceType = function (value) {
     value: value
   }
 }
+
+const getFinanceTypeFilter = createSelector(
+  rootSelector,
+  ({financeType}) => financeType
+)
+
+reducer.getSelectedFinanceType = createSelector(
+  getFinanceTypeFilter,
+  ({value}) => value
+)
 
 module.exports = reducer
