@@ -17,7 +17,7 @@ const UpdateUrlParam = React.createClass({
     const { location, router } = this.context
 
     if (value === [] || value === '') return
-    
+
     const newParamObject = {}
     newParamObject[param] = value
 
