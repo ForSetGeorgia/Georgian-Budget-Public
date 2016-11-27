@@ -6,6 +6,7 @@ const GBSelect = require('./GBSelect')
 const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 
 const { setBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
+const { getSelectedBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
 
 const fetchListedBudgetItems =
 require('js/redux/fetchers/fetchListedBudgetItems')
@@ -92,7 +93,7 @@ const BudgetItemTypeSelect = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    value: state.filters.budgetItemType.value
+    value: getSelectedBudgetItemType(state)
   }
 }
 

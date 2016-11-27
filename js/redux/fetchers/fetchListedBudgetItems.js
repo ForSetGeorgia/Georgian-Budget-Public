@@ -6,13 +6,15 @@ const { mergeBudgetItems } = require('js/redux/ducks/budgetItems')
 const { getLocale } = require('js/redux/ducks/locale')
 const { addError } = require('js/redux/ducks/errors')
 
+const { getSelectedBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
+
 const georgianBudgetAPI = require('js/services/georgianBudgetAPI')
 
 const fetchListedBudgetItems = () => (dispatch, getState) => {
   const state = getState()
 
   const locale = getLocale(state)
-  const budgetItemType = state.filters.budgetItemType.value
+  const budgetItemType = getSelectedBudgetItemType(state)
 
   const requiredState = [locale, budgetItemType]
 

@@ -3,6 +3,7 @@ const { arrayOf, object, string } = React.PropTypes
 const { connect } = require('react-redux')
 
 const { getSelectedBudgetItemIds } = require('js/redux/ducks/explore')
+const { getSelectedBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
 
 const UrlParamsUpdater = React.createClass({
   contextTypes: {
@@ -59,7 +60,7 @@ const UrlParamsUpdater = React.createClass({
 })
 
 const mapStateToProps = (state) => ({
-  budgetItemType: state.filters.budgetItemType.value,
+  budgetItemType: getSelectedBudgetItemType(state),
   budgetItemIds: getSelectedBudgetItemIds(state),
   financeType: state.filters.financeType.value
 })
