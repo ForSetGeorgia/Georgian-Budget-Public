@@ -1,5 +1,5 @@
 const React = require('react')
-const { arrayOf, object, shape, string, func } = React.PropTypes
+const { arrayOf, shape, string, func } = React.PropTypes
 const { connect } = require('react-redux')
 
 const ClickableList = require('./components/ClickableList')
