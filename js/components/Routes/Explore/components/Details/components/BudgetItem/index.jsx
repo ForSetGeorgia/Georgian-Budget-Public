@@ -72,8 +72,10 @@ const BudgetItem = React.createClass({
   }
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchBudgetItemDetails: itemId => dispatch(fetchBudgetItemDetails(itemId))
+const mapDispatchToProps = dispatch => ({
+  fetchBudgetItemDetails: itemId => {
+    dispatch(fetchBudgetItemDetails(itemId))
+  }
 })
 
 module.exports = connect(null, mapDispatchToProps)(BudgetItem)
