@@ -1,5 +1,5 @@
 const React = require('react')
-const { string, func, object } = React.PropTypes
+const { string, func } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const GBSelect = require('./GBSelect')
@@ -20,20 +20,12 @@ const messages = defineMessages({
 })
 
 const BudgetItemTypeSelect = React.createClass({
-  contextTypes: {
-    router: object,
-    location: object
-  },
-
   propTypes: {
     value: string,
-    queryValue: string,
     intl: intlShape,
     setBudgetItemType: func,
     fetchListedBudgetItems: func
   },
-
-  defaultValue: 'total',
 
   options () {
     const { intl } = this.props
@@ -46,34 +38,9 @@ const BudgetItemTypeSelect = React.createClass({
     ]
   },
 
-  optionValues () {
-    return this.options().map((option) => option.value)
-  },
-
-  queryValue () {
-    const { location } = this.context
-
-    return location.query.budgetItemType
-  },
-
-  updateWithNewValue (newValue) {
-    this.props.setBudgetItemType(newValue)
+  handleChangeEvent ({ value }) {
+    this.props.setBudgetItemType(value)
     this.props.fetchListedBudgetItems()
-  },
-
-  handleChangeEvent (selected) {
-    const { value: newValue } = selected
-    if (!newValue) return
-
-    this.updateWithNewValue(newValue)
-  },
-
-  componentDidMount () {
-    if (this.optionValues().includes(this.queryValue())) {
-      this.updateWithNewValue(this.queryValue())
-    } else {
-      this.updateWithNewValue(this.defaultValue)
-    }
   },
 
   render () {
