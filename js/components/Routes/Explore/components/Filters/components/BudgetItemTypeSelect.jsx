@@ -2,14 +2,17 @@ const React = require('react')
 const { string, func } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
-const GBSelect = require('./GBSelect')
 const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
+const { snakeToCamel } = require('js/helpers/utilities')
+const { budgetItemTypes } = require('js/redux/entities/budgetItem')
 
 const { setBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
 const { getSelectedBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
 
 const fetchListedBudgetItems =
 require('js/redux/fetchers/fetchListedBudgetItems')
+
+const GBSelect = require('./GBSelect')
 
 const messages = defineMessages({
   label: {
@@ -30,11 +33,10 @@ const BudgetItemTypeSelect = React.createClass({
   options () {
     const { intl } = this.props
 
-    return [
-      { value: 'priority', label: intl.formatMessage(budgetItemTypeMessages.priority.other) },
-      { value: 'spending_agency', label: intl.formatMessage(budgetItemTypeMessages.spendingAgency.other) },
-      { value: 'program', label: intl.formatMessage(budgetItemTypeMessages.program.other) }
-    ]
+    return budgetItemTypes.map(budgetItemType => ({
+      value: budgetItemType,
+      label: intl.formatMessage(budgetItemTypeMessages[snakeToCamel(budgetItemType)].other)
+    }))
   },
 
   handleChangeEvent ({ value }) {

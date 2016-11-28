@@ -1,6 +1,7 @@
 const React = require('react')
 const { connect } = require('react-redux')
 const { func, object, string } = React.PropTypes
+const { budgetItemTypes } = require('js/redux/entities/budgetItem')
 
 const { setBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
 const { getSelectedBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
@@ -19,8 +20,6 @@ const BudgetItemTypeInitializer = React.createClass({
 
   initializeBudgetItemType () {
     const { budgetItemType: queryBudgetItemType } = this.context.location.query
-
-    const budgetItemTypes = ['priority', 'spending_agency', 'program']
 
     if (budgetItemTypes.includes(queryBudgetItemType)) {
       this.props.setBudgetItemType(queryBudgetItemType)
