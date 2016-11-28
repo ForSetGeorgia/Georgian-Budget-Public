@@ -5,6 +5,10 @@ const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const financeTypeMessages = require('js/messages/financeTypes')
 
+const { financeTypes } = require('js/redux/entities/finance')
+
+const { snakeToCamel } = require('js/helpers/utilities')
+
 const {
   setFinanceType,
   getSelectedFinanceType
@@ -30,16 +34,10 @@ const FinanceTypeSelect = React.createClass({
   options () {
     const { intl } = this.props
 
-    return [
-      {
-        value: 'spent_finance',
-        label: intl.formatMessage(financeTypeMessages.spentFinance.other)
-      },
-      {
-        value: 'planned_finance',
-        label: intl.formatMessage(financeTypeMessages.plannedFinance.other)
-      }
-    ]
+    return financeTypes.map(financeType => ({
+      value: financeType,
+      label: intl.formatMessage(financeTypeMessages[snakeToCamel(financeType)].other)
+    }))
   },
 
   handleChangeEvent ({ value }) {

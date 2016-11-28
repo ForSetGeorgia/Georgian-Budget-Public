@@ -2,6 +2,8 @@ const React = require('react')
 const { connect } = require('react-redux')
 const { func, object, string } = React.PropTypes
 
+const { financeTypes } = require('js/redux/entities/finance')
+
 const {
   getSelectedFinanceType,
   setFinanceType
@@ -23,7 +25,7 @@ const StateInitializer = React.createClass({
     const { setFinanceType } = this.props
     const { financeType: queryFinanceType } = this.context.location.query
 
-    if (['spent_finance', 'planned_finance'].includes(queryFinanceType)) {
+    if (financeTypes.includes(queryFinanceType)) {
       setFinanceType(queryFinanceType)
     } else {
       setFinanceType(this.defaultFinanceType)
