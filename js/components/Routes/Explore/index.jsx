@@ -6,14 +6,16 @@ const AppErrorsDisplay = require('./components/AppErrorsDisplay')
 const ExploreDetails = require('./components/Details/index')
 const ExploreList = require('./components/List/index')
 const UrlQueryUpdater = require('./components/UrlQueryUpdater')
-const StateInitializer = require('./components/StateInitializer')
+const BudgetItemTypeInitializer = require('./components/BudgetItemTypeInitializer')
+const FinanceTypeInitializer = require('./components/FinanceTypeInitializer')
 
 const Explore = React.createClass({
   render () {
     return (
       <div>
         <Helmet title='Explore' />
-        <StateInitializer />
+        <BudgetItemTypeInitializer />
+        <FinanceTypeInitializer />
         <UrlQueryUpdater />
 
         <Filters />

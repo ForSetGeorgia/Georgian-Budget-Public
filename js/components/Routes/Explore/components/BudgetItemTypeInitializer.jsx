@@ -8,14 +8,7 @@ const { getSelectedBudgetItemType } = require('js/redux/ducks/filters/budgetItem
 const fetchListedBudgetItems =
 require('js/redux/fetchers/fetchListedBudgetItems')
 
-const { financeTypes } = require('js/redux/entities/finance')
-
-const {
-  getSelectedFinanceType,
-  setFinanceType
-} = require('js/redux/ducks/filters/financeType')
-
-const StateInitializer = React.createClass({
+const BudgetItemTypeInitializer = React.createClass({
   contextTypes: {
     location: object.isRequired
   },
@@ -23,13 +16,10 @@ const StateInitializer = React.createClass({
   propTypes: {
     budgetItemType: string.isRequired,
     setBudgetItemType: func.isRequired,
-    financeType: string.isRequired,
-    setFinanceType: func.isRequired,
     fetchListedBudgetItems: func.isRequired
   },
 
   defaultBudgetItemType: 'priority',
-  defaultFinanceType: 'spent_finance',
 
   initializeBudgetItemType () {
     const { budgetItemType: queryBudgetItemType } = this.context.location.query
@@ -45,22 +35,10 @@ const StateInitializer = React.createClass({
     this.props.fetchListedBudgetItems()
   },
 
-  initializeFinanceType () {
-    const { setFinanceType } = this.props
-    const { financeType: queryFinanceType } = this.context.location.query
-
-    if (financeTypes.includes(queryFinanceType)) {
-      setFinanceType(queryFinanceType)
-    } else {
-      setFinanceType(this.defaultFinanceType)
-    }
-  },
-
   componentDidMount () {
-    const { budgetItemType, financeType } = this.props
+    const { budgetItemType } = this.props
 
     if (!budgetItemType) this.initializeBudgetItemType()
-    if (!financeType) this.initializeFinanceType()
   },
 
   render () {
@@ -69,20 +47,16 @@ const StateInitializer = React.createClass({
 })
 
 const mapStateToProps = state => ({
-  budgetItemType: getSelectedBudgetItemType(state),
-  financeType: getSelectedFinanceType(state)
+  budgetItemType: getSelectedBudgetItemType(state)
 })
 
 const mapDispatchToProps = dispatch => ({
   setBudgetItemType (value) {
     dispatch(setBudgetItemType(value))
   },
-  setFinanceType (value) {
-    dispatch(setFinanceType(value))
-  },
   fetchListedBudgetItems () {
     dispatch(fetchListedBudgetItems())
   }
 })
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(StateInitializer)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(BudgetItemTypeInitializer)
