@@ -17,6 +17,8 @@ const StateInitializer = React.createClass({
     setFinanceType: func.isRequired
   },
 
+  defaultFinanceType: 'spent_finance',
+
   initializeFinanceType () {
     const { setFinanceType } = this.props
     const { financeType: queryFinanceType } = this.context.location.query
@@ -24,7 +26,7 @@ const StateInitializer = React.createClass({
     if (['spent_finance', 'planned_finance'].includes(queryFinanceType)) {
       setFinanceType(queryFinanceType)
     } else {
-      setFinanceType('spent_finance')
+      setFinanceType(this.defaultFinanceType)
     }
   },
 
