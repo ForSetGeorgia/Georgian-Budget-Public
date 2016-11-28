@@ -5,9 +5,6 @@ const { func, object, string } = React.PropTypes
 const { setBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
 const { getSelectedBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
 
-const fetchListedBudgetItems =
-require('js/redux/fetchers/fetchListedBudgetItems')
-
 const BudgetItemTypeInitializer = React.createClass({
   contextTypes: {
     location: object.isRequired
@@ -15,8 +12,7 @@ const BudgetItemTypeInitializer = React.createClass({
 
   propTypes: {
     budgetItemType: string.isRequired,
-    setBudgetItemType: func.isRequired,
-    fetchListedBudgetItems: func.isRequired
+    setBudgetItemType: func.isRequired
   },
 
   defaultBudgetItemType: 'priority',
@@ -31,8 +27,6 @@ const BudgetItemTypeInitializer = React.createClass({
     } else {
       this.props.setBudgetItemType(this.defaultBudgetItemType)
     }
-
-    this.props.fetchListedBudgetItems()
   },
 
   componentDidMount () {
@@ -53,9 +47,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setBudgetItemType (value) {
     dispatch(setBudgetItemType(value))
-  },
-  fetchListedBudgetItems () {
-    dispatch(fetchListedBudgetItems())
   }
 })
 
