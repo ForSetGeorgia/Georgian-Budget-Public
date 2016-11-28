@@ -31,22 +31,8 @@ const ExploreList = React.createClass({
     location: object
   },
 
-  getQuerySelectedIds () {
-    const ids = this.context.location.query.budgetItemIds
-    return typeof ids === 'string' ? [ids] : ids
-  },
-
-  updateSelectedIdsFromURL () {
-    const querySelectedIds = this.getQuerySelectedIds()
-
-    if (!querySelectedIds || querySelectedIds.length === 0) return
-
-    this.props.setSelectedBudgetItemIds(querySelectedIds)
-  },
-
   componentDidMount () {
     this.props.fetchListedBudgetItems()
-    this.updateSelectedIdsFromURL()
   },
 
   handleClick (row) {
@@ -91,7 +77,7 @@ const ExploreList = React.createClass({
   }
 })
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   selectedIds: getSelectedBudgetItemIds(state),
   listedItems: getListedItems(state)
 })
@@ -100,7 +86,7 @@ const mapDispatchToProps = dispatch => ({
   fetchListedBudgetItems: () => {
     dispatch(fetchListedBudgetItems())
   },
-  setSelectedBudgetItemIds: (ids) => { dispatch(setSelectedBudgetItemIds(ids)) }
+  setSelectedBudgetItemIds: ids => { dispatch(setSelectedBudgetItemIds(ids)) }
 })
 
 module.exports = connect(mapStateToProps, mapDispatchToProps)(ExploreList)

@@ -8,6 +8,7 @@ const ExploreList = require('./components/List/index')
 const UrlQueryUpdater = require('./components/UrlQueryUpdater')
 const BudgetItemTypeInitializer = require('./components/BudgetItemTypeInitializer')
 const FinanceTypeInitializer = require('./components/FinanceTypeInitializer')
+const SelectedIdsInitializer = require('./components/SelectedIdsInitializer')
 
 const Explore = React.createClass({
   render () {
@@ -16,6 +17,7 @@ const Explore = React.createClass({
         <Helmet title='Explore' />
         <BudgetItemTypeInitializer />
         <FinanceTypeInitializer />
+        <SelectedIdsInitializer />
         <UrlQueryUpdater />
 
         <Filters />
