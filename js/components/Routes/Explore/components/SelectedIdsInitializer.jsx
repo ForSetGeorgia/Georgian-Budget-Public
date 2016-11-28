@@ -22,17 +22,19 @@ const SelectedIdsInitializer = React.createClass({
     return typeof ids === 'string' ? [ids] : ids
   },
 
-  updateSelectedIdsFromURL () {
+  initializeSelectedIds () {
     const querySelectedIds = this.getQuerySelectedIds()
 
-    if (!querySelectedIds || querySelectedIds.length === 0) return
-
-    this.props.setSelectedBudgetItemIds(querySelectedIds)
+    if (querySelectedIds && querySelectedIds.length > 0) {
+      this.props.setSelectedBudgetItemIds(querySelectedIds)
+    } else {
+      this.props.setSelectedBudgetItemIds(['8b03adb43773622088d7291c38fbf87b82cbe626'])
+    }
   },
 
   componentDidMount () {
     if (this.props.selectedIds && this.props.selectedIds.length > 0) return
-    this.updateSelectedIdsFromURL()
+    this.initializeSelectedIds()
   },
 
   render () {

@@ -1,22 +1,55 @@
 const React = require('react')
-const { object } = React.PropTypes
+const { arrayOf, func, object, string } = React.PropTypes
 const { connect } = require('react-redux')
-const { getSelectedBudgetItems } = require('js/redux/ducks/explore')
+
+const {
+  getSelectedBudgetItemIds,
+  getSelectedBudgetItems
+} = require('js/redux/ducks/explore')
+
+const fetchBudgetItemDetails = require('js/redux/fetchers/fetchBudgetItemDetails')
 
 const BudgetItem = require('./components/BudgetItem/index')
 const LoadingIndicator = require('js/components/shared/LoadingIndicator')
 
 let ExploreDetails = React.createClass({
   propTypes: {
-    data: object.isRequired
+    fetchBudgetItemDetails: func.isRequired,
+    selectedIds: arrayOf(string).isRequired,
+    selectedItems: object.isRequired
   },
 
   isLoading () {
-    return Object.keys(this.props.data).length === 0
+    return this.loadedSelectedItemIds().length === 0
+  },
+
+  loadedSelectedItemIds () {
+    return Object.keys(this.props.selectedItems)
+  },
+
+  itemIdIsLoaded (id) {
+    return this.loadedSelectedItemIds().includes(id)
+  },
+
+  loadUnloadedItems () {
+    const { selectedIds, fetchBudgetItemDetails } = this.props
+
+    selectedIds
+    .filter(selectedId => !this.itemIdIsLoaded(selectedId))
+    .forEach(unloadedId => { fetchBudgetItemDetails(unloadedId) })
+  },
+
+  componentDidUpdate () {
+    if (!window) return
+    this.loadUnloadedItems()
+  },
+
+  componentDidMount () {
+    this.loadUnloadedItems()
   },
 
   render () {
-    const { data } = this.props
+    const { selectedItems } = this.props
     let content
     if (this.isLoading()) {
       content = (
@@ -26,8 +59,8 @@ let ExploreDetails = React.createClass({
       content = (
         <div>
           {
-            Object.keys(data).map(id => {
-              const budgetItem = data[id]
+            this.loadedSelectedItemIds().map(id => {
+              const budgetItem = selectedItems[id]
               const { loaded } = budgetItem
               const uniqueKey = `budget-item-${id}-${loaded.join(',')}`
 
@@ -50,10 +83,15 @@ let ExploreDetails = React.createClass({
   }
 })
 
-const mapStateToProps = (state) => ({
-  data: getSelectedBudgetItems(state)
+const mapStateToProps = state => ({
+  selectedIds: getSelectedBudgetItemIds(state),
+  selectedItems: getSelectedBudgetItems(state)
 })
 
-ExploreDetails = connect(mapStateToProps)(ExploreDetails)
+const mapDispatchToProps = dispatch => ({
+  fetchBudgetItemDetails: itemId => dispatch(fetchBudgetItemDetails(itemId))
+})
+
+ExploreDetails = connect(mapStateToProps, mapDispatchToProps)(ExploreDetails)
 
 module.exports = ExploreDetails
