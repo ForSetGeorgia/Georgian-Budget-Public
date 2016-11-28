@@ -48,36 +48,4 @@ describe('budget items reducer', () => {
       }
     })
   })
-
-  it('handles markBudgetItemDetailsLoaded action', () => {
-    const initialState = getBudgetItemsData(wholeState)
-    const previousState = Object.assign(
-      {},
-      initialState,
-      {
-        '1': {
-          loaded: []
-        },
-        '2': {
-          loaded: []
-        }
-      }
-    )
-
-    const action = markBudgetItemDetailsLoaded('1')
-    const newState = budgetItems(previousState, action)
-
-    expect(newState).to.deep.equal(Object.assign(
-      {},
-      initialState,
-      {
-        '1': {
-          loaded: ['details']
-        },
-        '2': {
-          loaded: []
-        }
-      }
-    ))
-  })
 })

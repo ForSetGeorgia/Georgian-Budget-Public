@@ -11,8 +11,6 @@ const { getLocale } = require('js/redux/ducks/locale')
 
 const georgianBudgetAPI = require('js/services/georgianBudgetAPI')
 
-const { markBudgetItemDetailsLoaded } = require('js/redux/ducks/budgetItems')
-
 const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
   const state = getState()
   const locale = getLocale(state)
@@ -43,10 +41,14 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
 
     const { budgetItems, spentFinances, plannedFinances } = normalized.entities
 
-    dispatch(mergeBudgetItems(budgetItems))
     dispatch(mergeSpentFinances(spentFinances))
     dispatch(mergePlannedFinances(plannedFinances))
-    dispatch(markBudgetItemDetailsLoaded(itemId))
+
+    Object.keys(budgetItems).forEach(budgetItemId => {
+      budgetItems[budgetItemId].loaded = budgetItems[budgetItemId].loaded.concat('details')
+    })
+
+    dispatch(mergeBudgetItems(budgetItems))
   })
 }
 

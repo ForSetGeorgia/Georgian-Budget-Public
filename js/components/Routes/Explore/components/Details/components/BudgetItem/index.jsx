@@ -11,17 +11,18 @@ const BudgetItem = React.createClass({
   propTypes: {
     id: string.isRequired,
     name: string.isRequired,
+    loaded: arrayOf(string).isRequired,
     spentFinances: arrayOf(number),
     plannedFinances: arrayOf(number),
     fetchBudgetItemDetails: func
   },
 
-  hasFinanceData () {
-    return (this.props.spentFinances && this.props.plannedFinances)
+  detailsLoaded () {
+    return this.props.loaded.includes('details')
   },
 
   componentDidMount () {
-    if (this.hasFinanceData()) return
+    if (this.detailsLoaded()) return
 
     this.props.fetchBudgetItemDetails(this.props.id)
   },
@@ -31,7 +32,7 @@ const BudgetItem = React.createClass({
 
     let chart = ''
 
-    if (this.hasFinanceData()) {
+    if (this.detailsLoaded()) {
       chart = (
         <div>
           <FinancesTimeSeries
