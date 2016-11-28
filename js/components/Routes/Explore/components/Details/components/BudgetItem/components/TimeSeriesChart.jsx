@@ -39,11 +39,12 @@ const TimeSeriesChart = React.createClass({
         enabled: true
       },
       tooltip: {
-        pointFormat: '{point.y}',
+        shared: true,
         valueSuffix: ` ${currencyName}`
       },
       xAxis: {
-        categories: xAxisCategories
+        categories: xAxisCategories,
+        crosshair: true
       },
       yAxis: {
         title: {
