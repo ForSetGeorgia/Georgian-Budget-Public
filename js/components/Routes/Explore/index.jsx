@@ -5,16 +5,15 @@ const Filters = require('./components/Filters/index')
 const AppErrorsDisplay = require('./components/AppErrorsDisplay')
 const ExploreDetails = require('./components/Details/index')
 const ExploreList = require('./components/List/index')
-const UrlParamsUpdater =
-require('js/components/shared/UrlParamsUpdater')
+const UrlParamsUpdater = require('./components/UrlParamsUpdater')
+const StateInitializer = require('./components/StateInitializer')
 
 const Explore = React.createClass({
   render () {
     return (
       <div>
-        <Helmet
-          title='Explore'
-        />
+        <Helmet title='Explore' />
+        <StateInitializer />
         <UrlParamsUpdater />
 
         <Filters />

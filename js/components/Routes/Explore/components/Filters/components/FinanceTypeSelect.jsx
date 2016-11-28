@@ -1,5 +1,5 @@
 const React = require('react')
-const { object, string, func } = React.PropTypes
+const { func, string } = React.PropTypes
 const { connect } = require('react-redux')
 
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
@@ -21,19 +21,11 @@ const messages = defineMessages({
 })
 
 const FinanceTypeSelect = React.createClass({
-  contextTypes: {
-    router: object,
-    location: object
-  },
-
   propTypes: {
-    dispatchNewFinanceType: func.isRequired,
+    setFinanceType: func.isRequired,
     value: string.isRequired,
-    location: object,
     intl: intlShape
   },
-
-  defaultValue: 'spent_finance',
 
   options () {
     const { intl } = this.props
@@ -50,25 +42,8 @@ const FinanceTypeSelect = React.createClass({
     ]
   },
 
-  optionValues () {
-    return this.options().map((option) => option.value)
-  },
-
-  handleChangeEvent (selected) {
-    const { value } = selected
-    this.props.dispatchNewFinanceType(value)
-  },
-
-  queryValue () {
-    return this.context.location.query.financeType
-  },
-
-  componentDidMount () {
-    if (this.optionValues().includes(this.queryValue())) {
-      this.handleChangeEvent({ value: this.queryValue() })
-    } else {
-      this.handleChangeEvent({ value: this.defaultValue })
-    }
+  handleChangeEvent ({ value }) {
+    this.props.setFinanceType(value)
   },
 
   render () {
@@ -92,7 +67,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchNewFinanceType (value) {
+  setFinanceType (value) {
     dispatch(setFinanceType(value))
   }
 })
