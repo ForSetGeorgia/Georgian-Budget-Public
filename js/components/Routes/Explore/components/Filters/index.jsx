@@ -14,7 +14,7 @@ const Filters = React.createClass({
       <div className='gb-Filters'>
         <div className='gb-Filters-primary'>
           <BudgetItemTypeSelect />
-          <FinanceTypeSelect location={this.context.location} />
+          <FinanceTypeSelect />
         </div>
       </div>
     )

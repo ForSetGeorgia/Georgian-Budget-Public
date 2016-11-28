@@ -22,13 +22,13 @@ const messages = defineMessages({
 
 const FinanceTypeSelect = React.createClass({
   contextTypes: {
-    router: object
+    router: object,
+    location: object
   },
 
   propTypes: {
     dispatchNewFinanceType: func.isRequired,
     value: string.isRequired,
-    queryValue: string,
     location: object,
     intl: intlShape
   },
@@ -59,11 +59,13 @@ const FinanceTypeSelect = React.createClass({
     this.props.dispatchNewFinanceType(value)
   },
 
-  componentDidMount () {
-    const { queryValue } = this.props
+  queryValue () {
+    return this.context.location.query.financeType
+  },
 
-    if (this.optionValues().includes(queryValue)) {
-      this.handleChangeEvent({ value: queryValue })
+  componentDidMount () {
+    if (this.optionValues().includes(this.queryValue())) {
+      this.handleChangeEvent({ value: this.queryValue() })
     } else {
       this.handleChangeEvent({ value: this.defaultValue })
     }
@@ -85,12 +87,9 @@ const FinanceTypeSelect = React.createClass({
   }
 })
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    value: getSelectedFinanceType(state),
-    queryValue: ownProps.location.query.financeType
-  }
-}
+const mapStateToProps = state => ({
+  value: getSelectedFinanceType(state)
+})
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchNewFinanceType (value) {
