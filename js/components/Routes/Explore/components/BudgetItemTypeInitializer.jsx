@@ -20,7 +20,7 @@ const BudgetItemTypeInitializer = React.createClass({
   initializeBudgetItemType () {
     const { budgetItemType: queryBudgetItemType } = this.context.location.query
 
-    const budgetItemTypes = ['total', 'priority', 'spending_agency', 'program']
+    const budgetItemTypes = ['priority', 'spending_agency', 'program']
 
     if (budgetItemTypes.includes(queryBudgetItemType)) {
       this.props.setBudgetItemType(queryBudgetItemType)

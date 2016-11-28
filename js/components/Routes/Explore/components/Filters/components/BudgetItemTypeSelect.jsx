@@ -31,7 +31,6 @@ const BudgetItemTypeSelect = React.createClass({
     const { intl } = this.props
 
     return [
-      { value: 'total', label: intl.formatMessage(budgetItemTypeMessages.wholeBudget.one) },
       { value: 'priority', label: intl.formatMessage(budgetItemTypeMessages.priority.other) },
       { value: 'spending_agency', label: intl.formatMessage(budgetItemTypeMessages.spendingAgency.other) },
       { value: 'program', label: intl.formatMessage(budgetItemTypeMessages.program.other) }
