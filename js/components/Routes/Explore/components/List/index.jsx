@@ -26,11 +26,6 @@ const ExploreList = React.createClass({
     fetchListedBudgetItems: func.isRequired
   },
 
-  contextTypes: {
-    router: object,
-    location: object
-  },
-
   componentDidMount () {
     this.props.fetchListedBudgetItems()
   },
