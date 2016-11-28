@@ -17,11 +17,8 @@ const StateInitializer = React.createClass({
     setFinanceType: func.isRequired
   },
 
-  componentDidMount () {
-    const { financeType, setFinanceType } = this.props
-
-    if (financeType) return
-
+  initializeFinanceType () {
+    const { setFinanceType } = this.props
     const { financeType: queryFinanceType } = this.context.location.query
 
     if (['spent_finance', 'planned_finance'].includes(queryFinanceType)) {
@@ -29,6 +26,11 @@ const StateInitializer = React.createClass({
     } else {
       setFinanceType('spent_finance')
     }
+  },
+
+  componentDidMount () {
+    const { financeType } = this.props
+    if (!financeType) this.initializeFinanceType()
   },
 
   render () {
