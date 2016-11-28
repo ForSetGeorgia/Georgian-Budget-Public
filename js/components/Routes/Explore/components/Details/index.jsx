@@ -1,5 +1,5 @@
 const React = require('react')
-const { arrayOf, object, string } = React.PropTypes
+const { object } = React.PropTypes
 const { connect } = require('react-redux')
 
 const {
@@ -11,7 +11,6 @@ const LoadingIndicator = require('js/components/shared/LoadingIndicator')
 
 let ExploreDetails = React.createClass({
   propTypes: {
-    selectedIds: arrayOf(string).isRequired,
     selectedItems: object.isRequired
   },
 
