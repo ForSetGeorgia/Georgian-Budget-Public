@@ -55,6 +55,10 @@ const UrlQueryUpdater = React.createClass({
     this.updateQuery()
   },
 
+  componentDidMount () {
+    this.updateQuery()
+  },
+
   render () {
     return null
   }
