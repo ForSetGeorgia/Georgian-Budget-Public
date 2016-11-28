@@ -25,11 +25,16 @@ const UrlQueryUpdater = React.createClass({
       financeType
     } = this.props
 
-    return {
-      budgetItemType: budgetItemType,
-      budgetItemIds: budgetItemIds,
-      financeType: financeType
+    const newQueryObject = {}
+
+    if (budgetItemIds && budgetItemIds.length > 0) {
+      newQueryObject.budgetItemIds = budgetItemIds
     }
+
+    if (budgetItemType) newQueryObject.budgetItemType = budgetItemType
+    if (financeType) newQueryObject.financeType = financeType
+
+    return newQueryObject
   },
 
   updateQuery () {
