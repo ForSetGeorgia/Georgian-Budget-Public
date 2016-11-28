@@ -17,6 +17,9 @@ const SelectedIdsInitializer = React.createClass({
     setSelectedBudgetItemIds: func.isRequired
   },
 
+  // By default, show the complete budget
+  defaultSelectedIds: ['8b03adb43773622088d7291c38fbf87b82cbe626'],
+
   getQuerySelectedIds () {
     const ids = this.context.location.query.budgetItemIds
     return typeof ids === 'string' ? [ids] : ids
@@ -28,7 +31,7 @@ const SelectedIdsInitializer = React.createClass({
     if (querySelectedIds && querySelectedIds.length > 0) {
       this.props.setSelectedBudgetItemIds(querySelectedIds)
     } else {
-      this.props.setSelectedBudgetItemIds(['8b03adb43773622088d7291c38fbf87b82cbe626'])
+      this.props.setSelectedBudgetItemIds(this.defaultSelectedIds)
     }
   },
 
