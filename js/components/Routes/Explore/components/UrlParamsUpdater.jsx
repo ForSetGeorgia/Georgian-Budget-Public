@@ -6,7 +6,7 @@ const { getSelectedBudgetItemIds } = require('js/redux/ducks/explore')
 const { getSelectedBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
 const { getSelectedFinanceType } = require('js/redux/ducks/filters/financeType')
 
-const UrlParamsUpdater = React.createClass({
+const UrlQueryUpdater = React.createClass({
   contextTypes: {
     location: object,
     router: object
@@ -66,4 +66,4 @@ const mapStateToProps = (state) => ({
   financeType: getSelectedFinanceType(state)
 })
 
-module.exports = connect(mapStateToProps)(UrlParamsUpdater)
+module.exports = connect(mapStateToProps)(UrlQueryUpdater)
