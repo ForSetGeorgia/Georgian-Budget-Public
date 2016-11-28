@@ -3,6 +3,7 @@ const { object, string } = React.PropTypes
 
 const Helmet = require('react-helmet')
 const MetaContainer = require('./components/MetaContainer')
+const LocaleInitializer = require('./components/LocaleInitializer')
 const Header = require('./components/Header/index')
 const Footer = require('./components/Footer')
 
@@ -25,6 +26,7 @@ const Layout = React.createClass({
           ]}
         />
         <MetaContainer />
+        <LocaleInitializer />
 
         <div>
           <Header />

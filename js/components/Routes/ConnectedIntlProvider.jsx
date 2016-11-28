@@ -16,7 +16,7 @@ const ConnectedIntlProvider = React.createClass({
   propTypes: {
     children: object.isRequired,
     params: shape({ locale: string.isRequired }),
-    dispatchChangeLocale: func.isRequired,
+    setLocale: func.isRequired,
     location: object.isRequired
   },
 
@@ -60,15 +60,11 @@ const ConnectedIntlProvider = React.createClass({
   },
 
   changeLocale (newLocale) {
-    const { params, dispatchChangeLocale } = this.props
+    const { params, setLocale } = this.props
     if (params.locale === newLocale) return
 
     this.changeLocaleInURL(newLocale)
-    dispatchChangeLocale(newLocale)
-  },
-
-  componentDidMount () {
-    this.props.dispatchChangeLocale(this.props.params.locale)
+    setLocale(newLocale)
   },
 
   handleChangeLocaleEvent (e) {
@@ -92,7 +88,7 @@ const ConnectedIntlProvider = React.createClass({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchChangeLocale (locale) {
+  setLocale (locale) {
     dispatch(setLocale(locale))
     dispatch(fetchListedBudgetItems())
   }
