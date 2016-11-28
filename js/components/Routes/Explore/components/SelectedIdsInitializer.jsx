@@ -7,12 +7,15 @@ const {
   setSelectedBudgetItemIds
 } = require('js/redux/ducks/explore')
 
+const fetchBudgetItemDetails = require('js/redux/fetchers/fetchBudgetItemDetails')
+
 const SelectedIdsInitializer = React.createClass({
   contextTypes: {
     location: object
   },
 
   propTypes: {
+    fetchBudgetItemDetails: func.isRequired,
     selectedIds: arrayOf(string).isRequired,
     setSelectedBudgetItemIds: func.isRequired
   },
@@ -28,16 +31,22 @@ const SelectedIdsInitializer = React.createClass({
   initializeSelectedIds () {
     const querySelectedIds = this.getQuerySelectedIds()
 
+    let newIds
+
     if (querySelectedIds && querySelectedIds.length > 0) {
-      this.props.setSelectedBudgetItemIds(querySelectedIds)
+      newIds = querySelectedIds
     } else {
-      this.props.setSelectedBudgetItemIds(this.defaultSelectedIds)
+      newIds = this.defaultSelectedIds
     }
+
+    this.props.setSelectedBudgetItemIds(newIds)
+    return newIds
   },
 
   componentDidMount () {
     if (this.props.selectedIds && this.props.selectedIds.length > 0) return
-    this.initializeSelectedIds()
+    const newIds = this.initializeSelectedIds()
+    newIds.forEach(newId => this.props.fetchBudgetItemDetails(newId))
   },
 
   render () {
@@ -50,6 +59,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+  fetchBudgetItemDetails: itemId => {
+    dispatch(fetchBudgetItemDetails(itemId))
+  },
   setSelectedBudgetItemIds: ids => { dispatch(setSelectedBudgetItemIds(ids)) }
 })
 
