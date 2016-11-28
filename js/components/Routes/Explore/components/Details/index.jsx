@@ -1,5 +1,5 @@
 const React = require('react')
-const { object } = React.PropTypes
+const { object, string } = React.PropTypes
 const { connect } = require('react-redux')
 
 const {
@@ -10,6 +10,10 @@ const BudgetItem = require('./components/BudgetItem/index')
 const LoadingIndicator = require('js/components/shared/LoadingIndicator')
 
 let ExploreDetails = React.createClass({
+  contextTypes: {
+    currentLocale: string
+  },
+
   propTypes: {
     selectedItems: object.isRequired
   },
@@ -24,6 +28,7 @@ let ExploreDetails = React.createClass({
 
   render () {
     const { selectedItems } = this.props
+    const { currentLocale } = this.context
     let content
     if (this.isLoading()) {
       content = (
@@ -36,7 +41,7 @@ let ExploreDetails = React.createClass({
             this.loadedSelectedItemIds().map(id => {
               const budgetItem = selectedItems[id]
               const { loaded } = budgetItem
-              const uniqueKey = `budget-item-${id}-${loaded.join(',')}`
+              const uniqueKey = `budget-item-${id}-${loaded.join(',')}-${currentLocale}`
 
               return (
                 <BudgetItem
