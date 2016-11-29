@@ -3,6 +3,7 @@ const { object } = React.PropTypes
 
 const BudgetItemTypeSelect = require('./components/BudgetItemTypeSelect')
 const FinanceTypeSelect = require('./components/FinanceTypeSelect')
+const TimePeriodSelect = require('./components/TimePeriodSelect')
 
 const Filters = React.createClass({
   contextTypes: {
@@ -16,6 +17,7 @@ const Filters = React.createClass({
           <BudgetItemTypeSelect />
           <FinanceTypeSelect />
         </div>
+        <TimePeriodSelect />
       </div>
     )
   }
