@@ -15,9 +15,11 @@ const Explore = React.createClass({
     return (
       <div>
         <Helmet title='Explore' />
+
         <BudgetItemTypeInitializer />
         <FinanceTypeInitializer />
         <SelectedIdsInitializer />
+
         <UrlQueryUpdater />
 
         <TimePeriodSelect />
