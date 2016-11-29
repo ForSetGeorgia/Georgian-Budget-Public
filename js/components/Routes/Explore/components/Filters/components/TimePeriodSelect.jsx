@@ -7,7 +7,7 @@ const {
   setTimePeriod
  } = require('js/redux/ducks/filters')
 
-const GBSelect = require('./GBSelect')
+const ButtonSelector = require('js/components/shared/ButtonSelector')
 
 const TimePeriodSelect = React.createClass({
   propTypes: {
@@ -35,7 +35,7 @@ const TimePeriodSelect = React.createClass({
     return this.allYearsOption().concat(this.selectableYears())
   },
 
-  handleChangeEvent ({ value }) {
+  handleChangeEvent (value) {
     this.props.setTimePeriod(value)
   },
 
@@ -43,12 +43,11 @@ const TimePeriodSelect = React.createClass({
     const { selectedTimePeriod } = this.props
 
     return (
-      <GBSelect
-        id='time-period-select'
-        name='time-period-select'
+      <ButtonSelector
         handleChangeEvent={this.handleChangeEvent}
-        value={selectedTimePeriod}
         options={this.options()}
+        selectedValue={selectedTimePeriod}
+        labelText='Year'
       />
     )
   }
