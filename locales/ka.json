@@ -4,6 +4,7 @@
   "app.filters.budgetItemType.label": "აირჩიე სახეობა",
   "app.filters.financeType.label": "აირჩიე ფინანსები",
   "app.filters.timePeriod.label": "წელი",
+  "app.filters.timePeriod.allOption": "ყველა",
   "app.loading": "მონაცემები იტვირთება",
   "app.explore.list.count": "ნაჩვენებია {count} ერთეული.",
   "budgetType.wholeBudget.one": "მთლიანი ბიუჯეტი",

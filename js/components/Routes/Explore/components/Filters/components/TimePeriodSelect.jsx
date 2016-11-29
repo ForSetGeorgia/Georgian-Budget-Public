@@ -15,6 +15,11 @@ const messages = defineMessages({
     id: 'app.filters.timePeriod.label',
     description: 'Label for time period select',
     defaultMessage: 'Year'
+  },
+  allOption: {
+    id: 'app.filters.timePeriod.allOption',
+    description: 'Text for button that selects all time periods',
+    defaultMessage: 'All'
   }
 })
 
@@ -26,9 +31,11 @@ const TimePeriodSelect = React.createClass({
   },
 
   allYearsOption () {
+    const { intl } = this.props
+
     return [{
       value: 'all',
-      label: 'All'
+      label: intl.formatMessage(messages.allOption)
     }]
   },
 
