@@ -1,7 +1,6 @@
 const React = require('react')
 const Helmet = require('react-helmet')
 
-const FinanceTypeSelect = require('./components/FinanceTypeSelect')
 const TimePeriodSelect = require('./components/TimePeriodSelect')
 const AppErrorsDisplay = require('./components/AppErrorsDisplay')
 const ExploreDetails = require('./components/Details/index')
@@ -21,7 +20,6 @@ const Explore = React.createClass({
         <SelectedIdsInitializer />
         <UrlQueryUpdater />
 
-        <FinanceTypeSelect />
         <TimePeriodSelect />
 
         <AppErrorsDisplay />
