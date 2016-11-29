@@ -2,6 +2,7 @@ const React = require('react')
 const { arrayOf, shape, string, func } = React.PropTypes
 const { connect } = require('react-redux')
 
+const BudgetItemTypeSelect = require('./components/BudgetItemTypeSelect')
 const ClickableList = require('./components/ClickableList')
 const CountDisplay = require('./components/CountDisplay')
 
@@ -52,6 +53,7 @@ const ExploreList = React.createClass({
   render () {
     return (
       <div className='gb-ExploreList'>
+        <BudgetItemTypeSelect />
         <CountDisplay
           show={!this.isLoading()}
           items={this.props.listedItems}

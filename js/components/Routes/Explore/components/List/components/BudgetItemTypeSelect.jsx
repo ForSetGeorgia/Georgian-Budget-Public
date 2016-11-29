@@ -12,7 +12,7 @@ const { getSelectedBudgetItemType } = require('js/redux/ducks/filters')
 const fetchListedBudgetItems =
 require('js/redux/fetchers/fetchListedBudgetItems')
 
-const GBSelect = require('./GBSelect')
+const ButtonSelector = require('js/components/shared/ButtonSelector')
 
 const messages = defineMessages({
   label: {
@@ -24,7 +24,7 @@ const messages = defineMessages({
 
 const BudgetItemTypeSelect = React.createClass({
   propTypes: {
-    value: string,
+    selectedBudgetItemType: string,
     intl: intlShape,
     setBudgetItemType: func,
     fetchListedBudgetItems: func
@@ -39,20 +39,20 @@ const BudgetItemTypeSelect = React.createClass({
     }))
   },
 
-  handleChangeEvent ({ value }) {
-    this.props.setBudgetItemType(value)
+  handleChangeEvent (selectedBudgetItemType) {
+    this.props.setBudgetItemType(selectedBudgetItemType)
     this.props.fetchListedBudgetItems()
   },
 
   render () {
+    const { selectedBudgetItemType, intl } = this.props
+
     return (
-      <GBSelect
-        id='budget-item-type-select'
-        name='budget-item-type-select'
-        labelText={this.props.intl.formatMessage(messages.label)}
-        value={this.props.value}
+      <ButtonSelector
         handleChangeEvent={this.handleChangeEvent}
         options={this.options()}
+        selectedValue={selectedBudgetItemType}
+        labelText={intl.formatMessage(messages.label)}
       />
     )
   }
@@ -61,13 +61,13 @@ const BudgetItemTypeSelect = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    value: getSelectedBudgetItemType(state)
+    selectedBudgetItemType: getSelectedBudgetItemType(state)
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  setBudgetItemType (value) {
-    dispatch(setBudgetItemType(value))
+  setBudgetItemType (selectedBudgetItemType) {
+    dispatch(setBudgetItemType(selectedBudgetItemType))
   },
   fetchListedBudgetItems () {
     dispatch(fetchListedBudgetItems())
