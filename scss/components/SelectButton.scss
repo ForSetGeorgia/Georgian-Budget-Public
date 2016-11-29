@@ -1,0 +1,9 @@
+.gb-SelectButton {
+  color: blue;
+  text-decoration: underline;
+
+  &.is-disabled {
+    color: initial;
+    text-decoration: none;
+  }
+}

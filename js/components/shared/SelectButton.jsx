@@ -15,14 +15,20 @@ const SelectButton = React.createClass({
     handleChangeEvent(value)
   },
 
+  className () {
+    let className = 'gb-SelectButton'
+    if (this.props.disabled) className += ' is-disabled'
+    return className
+  },
+
   render () {
     const { disabled, text } = this.props
 
     if (disabled) {
-      return <p>{text}</p>
+      return <p className={this.className()}>{text}</p>
     } else {
       return (
-        <button type='button' onClick={this.selectValue}>
+        <button className={this.className()} type='button' onClick={this.selectValue}>
           {text}
         </button>
       )

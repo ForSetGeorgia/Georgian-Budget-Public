@@ -39,7 +39,7 @@ const ButtonSelector = React.createClass({
   render () {
     const { options } = this.props
     return (
-      <div>
+      <div className='gb-ButtonSelector'>
         {this.renderLabel()}
         {options.map(option => this.renderOption(option))}
       </div>
