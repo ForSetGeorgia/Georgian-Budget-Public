@@ -1,5 +1,6 @@
 const React = require('react')
 const { func, string } = React.PropTypes
+const { injectIntl, defineMessages, intlShape } = require('react-intl')
 const { connect } = require('react-redux')
 
 const {
@@ -9,10 +10,19 @@ const {
 
 const ButtonSelector = require('js/components/shared/ButtonSelector')
 
+const messages = defineMessages({
+  label: {
+    id: 'app.filters.timePeriod.label',
+    description: 'Label for time period select',
+    defaultMessage: 'Year'
+  }
+})
+
 const TimePeriodSelect = React.createClass({
   propTypes: {
     selectedTimePeriod: string,
-    setTimePeriod: func
+    setTimePeriod: func,
+    intl: intlShape
   },
 
   allYearsOption () {
@@ -40,14 +50,14 @@ const TimePeriodSelect = React.createClass({
   },
 
   render () {
-    const { selectedTimePeriod } = this.props
+    const { intl, selectedTimePeriod } = this.props
 
     return (
       <ButtonSelector
         handleChangeEvent={this.handleChangeEvent}
         options={this.options()}
         selectedValue={selectedTimePeriod}
-        labelText='Year'
+        labelText={intl.formatMessage(messages.label)}
       />
     )
   }
@@ -61,4 +71,4 @@ const mapDispatchToProps = dispatch => ({
   setTimePeriod: value => { dispatch(setTimePeriod(value)) }
 })
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(TimePeriodSelect)
+module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(TimePeriodSelect))
