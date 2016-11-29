@@ -16,5 +16,9 @@
   "financeType.plannedFinance.other": "დაგეგმილი ფინანსები",
   "timePeriodType.month": "თვიური",
   "timePeriodType.quarter": "კვარტლური",
-  "timePeriodType.year": "წლიური"
+  "timePeriodType.year": "წლიური",
+  "timePeriod.quarter.1": "პირველი კვარტალი, {year}",
+  "timePeriod.quarter.2": "მეორე კვარტალი, {year}",
+  "timePeriod.quarter.3": "მესამე კვარტალი, {year}",
+  "timePeriod.quarter.4": "მეოთხე კვარტალი, {year}"
 }

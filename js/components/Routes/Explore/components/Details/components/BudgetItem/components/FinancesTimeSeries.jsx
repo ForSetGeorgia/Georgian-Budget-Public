@@ -9,6 +9,7 @@ const financeTypeMessages = require('js/messages/financeTypes')
 const { getItemSpentFinances } = require('js/redux/entities/budgetItem')
 const { getItemPlannedFinances } = require('js/redux/entities/budgetItem')
 const { filterFinancesByPeriodType } = require('js/redux/entities/finance')
+const { translateTimePeriod } = require('js/redux/entities/timePeriod')
 
 const FinancesTimeSeries = React.createClass({
   propTypes: {
@@ -45,8 +46,8 @@ const FinancesTimeSeries = React.createClass({
   },
 
   timePeriods () {
-    const { items } = this.props
-    return items[0].spentFinances.map(f => f.timePeriod)
+    const { items, intl } = this.props
+    return items[0].spentFinances.map(f => translateTimePeriod(f.timePeriod, f.timePeriodType, intl))
   },
 
   series () {
