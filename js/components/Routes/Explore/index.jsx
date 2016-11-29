@@ -1,7 +1,9 @@
 const React = require('react')
 const Helmet = require('react-helmet')
 
-const Filters = require('./components/Filters/index')
+const BudgetItemTypeSelect = require('./components/BudgetItemTypeSelect')
+const FinanceTypeSelect = require('./components/FinanceTypeSelect')
+const TimePeriodSelect = require('./components/TimePeriodSelect')
 const AppErrorsDisplay = require('./components/AppErrorsDisplay')
 const ExploreDetails = require('./components/Details/index')
 const ExploreList = require('./components/List/index')
@@ -20,8 +22,12 @@ const Explore = React.createClass({
         <SelectedIdsInitializer />
         <UrlQueryUpdater />
 
-        <Filters />
+        <BudgetItemTypeSelect />
+        <FinanceTypeSelect />
+        <TimePeriodSelect />
+
         <AppErrorsDisplay />
+
         <div className='gb-Explore-content'>
           <ExploreList />
           <ExploreDetails />
