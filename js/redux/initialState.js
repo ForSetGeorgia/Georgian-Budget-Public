@@ -10,7 +10,7 @@ module.exports = {
   filters: {
     budgetItemType: '',
     financeType: '',
-    timePeriod: ''
+    timePeriods: []
   },
   locale: '',
   plannedFinances: {},

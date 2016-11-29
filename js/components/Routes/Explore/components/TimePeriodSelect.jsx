@@ -4,8 +4,8 @@ const { injectIntl, defineMessages, intlShape } = require('react-intl')
 const { connect } = require('react-redux')
 
 const {
-  getSelectedTimePeriod,
-  setTimePeriod
+  getSelectedTimePeriods,
+  setTimePeriods
  } = require('js/redux/ducks/filters')
 
 const ButtonSelector = require('js/components/shared/ButtonSelector')
@@ -26,7 +26,7 @@ const messages = defineMessages({
 const TimePeriodSelect = React.createClass({
   propTypes: {
     selectedTimePeriod: string,
-    setTimePeriod: func,
+    setTimePeriods: func,
     intl: intlShape
   },
 
@@ -53,7 +53,7 @@ const TimePeriodSelect = React.createClass({
   },
 
   handleChangeEvent (value) {
-    this.props.setTimePeriod(value)
+    this.props.setTimePeriods([value])
   },
 
   render () {
@@ -71,11 +71,11 @@ const TimePeriodSelect = React.createClass({
 })
 
 const mapStateToProps = state => ({
-  selectedTimePeriod: getSelectedTimePeriod(state)
+  selectedTimePeriod: getSelectedTimePeriods(state).length > 0 ? getSelectedTimePeriods(state)[0] : ''
 })
 
 const mapDispatchToProps = dispatch => ({
-  setTimePeriod: value => { dispatch(setTimePeriod(value)) }
+  setTimePeriods: value => { dispatch(setTimePeriods(value)) }
 })
 
 module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(TimePeriodSelect))

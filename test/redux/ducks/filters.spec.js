@@ -3,7 +3,7 @@
 
 const { expect } = require('chai')
 const filters = require('js/redux/ducks/filters')
-const { setFinanceType, setBudgetItemType, setTimePeriod } = filters
+const { setFinanceType, setBudgetItemType, setTimePeriods } = filters
 const initialState = require('js/redux/initialState').filters
 
 describe('filters reducer', () => {
@@ -53,23 +53,23 @@ describe('filters reducer', () => {
     expect(newState).to.deep.equal(expectedState)
   })
 
-  it('handles setTimePeriod', () => {
+  it('handles setTimePeriods', () => {
     const previousState = Object.assign(
       {},
       initialState,
       {
-        timePeriod: 'y2015'
+        timePeriods: ['y2015']
       }
     )
 
-    const action = setTimePeriod('y2014')
+    const action = setTimePeriods(['y2014'])
     const newState = filters(previousState, action)
 
     expect(newState).to.deep.equal(Object.assign(
       {},
       initialState,
       {
-        timePeriod: 'y2014'
+        timePeriods: ['y2014']
       }
     ))
   })
