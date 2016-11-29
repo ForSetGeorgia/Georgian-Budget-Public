@@ -4,6 +4,7 @@ const Helmet = require('react-helmet')
 const Initializers = require('./components/Initializers/index')
 const UrlQueryUpdater = require('./components/UrlQueryUpdater')
 
+const ExploreDisplaySelect = require('./components/ExploreDisplaySelect')
 const TimePeriodSelect = require('./components/TimePeriodSelect')
 const AppErrorsDisplay = require('./components/AppErrorsDisplay')
 const ExploreList = require('./components/List/index')
@@ -17,6 +18,7 @@ const Explore = React.createClass({
         <Initializers />
         <UrlQueryUpdater />
 
+        <ExploreDisplaySelect />
         <TimePeriodSelect />
         <AppErrorsDisplay />
 

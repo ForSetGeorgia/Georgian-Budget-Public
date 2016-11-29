@@ -2,10 +2,9 @@ module.exports = {
   budgetItems: {},
   errors: [],
   explore: {
+    display: '',
     selectedIds: [],
-    list: {
-      listedItemIds: []
-    }
+    listedItemIds: []
   },
   filters: {
     budgetItemType: '',

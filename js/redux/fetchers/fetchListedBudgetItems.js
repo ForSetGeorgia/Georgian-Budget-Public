@@ -1,7 +1,7 @@
 const { normalize, arrayOf } = require('normalizr')
 const budgetItem = require('js/redux/schemas/budgetItem')
 
-const { setListedItemIds } = require('js/redux/ducks/explore/list')
+const { setListedItemIds } = require('js/redux/ducks/explore')
 const { mergeBudgetItems } = require('js/redux/ducks/budgetItems')
 const { getLocale } = require('js/redux/ducks/locale')
 const { addError } = require('js/redux/ducks/errors')

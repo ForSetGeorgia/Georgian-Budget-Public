@@ -1,34 +1,68 @@
-const { combineReducers } = require('redux')
 const { createSelector } = require('reselect')
 const rootSelector = require('./rootSelector')
 
-const SET_SELECTED_BUDGET_ITEM_IDS =
-'georgianBudget/explore/SET_SELECTED_BUDGET_ITEM_IDS'
+const { getBudgetItemsData } = require('js/redux/ducks/budgetItems')
 
-const selectedIdsReducer = (state = [], action) => {
+const SET_EXPLORE_DISPLAY = 'georgianBudget/explore/SET_EXPLORE_DISPLAY'
+const SET_SELECTED_IDS = 'georgianBudget/explore/SET_SELECTED_IDS'
+const SET_LISTED_ITEM_IDS = 'georgianBudget/explore/list/SET_LISTED_ITEM_IDS'
+
+const reducer = (state = {}, action) => {
   switch (action.type) {
-    case SET_SELECTED_BUDGET_ITEM_IDS:
-      return action.ids
+    case SET_EXPLORE_DISPLAY:
+      return Object.assign(
+        {},
+        state,
+        {
+          display: action.display
+        }
+      )
+    case SET_SELECTED_IDS:
+      return Object.assign(
+        {},
+        state,
+        {
+          selectedIds: action.ids
+        }
+      )
+    case SET_LISTED_ITEM_IDS:
+      return Object.assign(
+        {},
+        state,
+        {
+          listedItemIds: action.ids
+        }
+      )
     default:
       return state
   }
 }
 
-const reducer = combineReducers({
-  selectedIds: selectedIdsReducer,
-  list: require('./explore/list')
+reducer.setExploreDisplay = newDisplay => ({
+  type: SET_EXPLORE_DISPLAY,
+  display: newDisplay
 })
 
 reducer.setSelectedBudgetItemIds = function (ids) {
   return {
-    type: SET_SELECTED_BUDGET_ITEM_IDS,
+    type: SET_SELECTED_IDS,
     ids: ids
   }
 }
 
+reducer.setListedItemIds = (ids) => ({
+  type: SET_LISTED_ITEM_IDS,
+  ids: ids
+})
+
 reducer.getExploreState = createSelector(
   rootSelector,
   ({explore}) => explore
+)
+
+reducer.getSelectedExploreDisplay = createSelector(
+  reducer.getExploreState,
+  ({display}) => display
 )
 
 reducer.getSelectedBudgetItemIds = createSelector(
@@ -46,5 +80,16 @@ reducer.getSelectedBudgetItems = (state) => {
 
   return selectedItems
 }
+
+reducer.getListedItemIds = createSelector(
+  reducer.getExploreState,
+  ({listedItemIds}) => listedItemIds
+)
+
+reducer.getListedItems = state => (
+  reducer.getListedItemIds(state)
+  .map(id => getBudgetItemsData(state)[id])
+  .filter(budgetItem => budgetItem)
+)
 
 module.exports = reducer

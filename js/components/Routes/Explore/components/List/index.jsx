@@ -15,7 +15,7 @@ const {
   setSelectedBudgetItemIds
 } = require('js/redux/ducks/explore')
 
-const { getListedItems } = require('js/redux/ducks/explore/list')
+const { getListedItems } = require('js/redux/ducks/explore')
 
 const ExploreList = React.createClass({
   propTypes: {

@@ -5,17 +5,18 @@ const SelectButton = require('./SelectButton')
 
 const ButtonSelector = React.createClass({
   propTypes: {
-    handleChangeEvent: func,
-    selectedValue: string,
+    handleChangeEvent: func.isRequired,
+    selectedValue: string.isRequired,
     labelText: string,
     options: arrayOf(shape({
-      label: string,
-      value: string
-    }))
+      label: string.isRequired,
+      value: string.isRequired
+    })).isRequired
   },
 
   renderLabel () {
     const { labelText } = this.props
+    if (!labelText) return null
 
     return (
       <p>{labelText}:</p>
