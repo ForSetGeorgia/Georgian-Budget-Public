@@ -14,7 +14,7 @@ const {
   getSelectedFinanceType
 } = require('js/redux/ducks/filters')
 
-const GBSelect = require('./GBSelect')
+const ButtonSelector = require('js/components/shared/ButtonSelector')
 
 const messages = defineMessages({
   label: {
@@ -27,7 +27,7 @@ const messages = defineMessages({
 const FinanceTypeSelect = React.createClass({
   propTypes: {
     setFinanceType: func.isRequired,
-    value: string.isRequired,
+    selectedFinanceType: string.isRequired,
     intl: intlShape
   },
 
@@ -40,20 +40,18 @@ const FinanceTypeSelect = React.createClass({
     }))
   },
 
-  handleChangeEvent ({ value }) {
-    this.props.setFinanceType(value)
+  handleChangeEvent (selectedFinanceType) {
+    this.props.setFinanceType(selectedFinanceType)
   },
 
   render () {
-    const { intl, value } = this.props
+    const { intl, selectedFinanceType } = this.props
 
     return (
-      <GBSelect
-        id='finance-type-select'
-        name='finance-type-select'
+      <ButtonSelector
         handleChangeEvent={this.handleChangeEvent}
-        value={value}
         options={this.options()}
+        selectedValue={selectedFinanceType}
         labelText={intl.formatMessage(messages.label)}
       />
     )
@@ -61,12 +59,12 @@ const FinanceTypeSelect = React.createClass({
 })
 
 const mapStateToProps = state => ({
-  value: getSelectedFinanceType(state)
+  selectedFinanceType: getSelectedFinanceType(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setFinanceType (value) {
-    dispatch(setFinanceType(value))
+  setFinanceType (selectedFinanceType) {
+    dispatch(setFinanceType(selectedFinanceType))
   }
 })
 
