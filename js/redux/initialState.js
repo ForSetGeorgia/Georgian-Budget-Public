@@ -8,12 +8,8 @@ module.exports = {
     }
   },
   filters: {
-    budgetItemType: {
-      value: ''
-    },
-    financeType: {
-      value: ''
-    }
+    budgetItemType: '',
+    financeType: ''
   },
   locale: '',
   plannedFinances: {},

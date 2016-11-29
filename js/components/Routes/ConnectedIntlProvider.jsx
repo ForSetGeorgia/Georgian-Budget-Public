@@ -10,8 +10,6 @@ const { setLocale } = require('js/redux/ducks/locale')
 
 const Layout = require('js/components/Layout/index')
 
-addLocaleData(require('node_modules/react-intl/locale-data/ka'))
-
 const ConnectedIntlProvider = React.createClass({
   propTypes: {
     children: object.isRequired,
@@ -72,7 +70,12 @@ const ConnectedIntlProvider = React.createClass({
   },
 
   messages () {
-    return require(`locales/${this.props.params.locale}.json`)
+    const { locale } = this.props.params
+    const localeData = require(`node_modules/react-intl/locale-data/${locale}`)
+
+    addLocaleData(localeData)
+
+    return require(`locales/${locale}.json`)
   },
 
   render () {

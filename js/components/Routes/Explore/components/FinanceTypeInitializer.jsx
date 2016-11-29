@@ -7,7 +7,7 @@ const { financeTypes } = require('js/redux/entities/finance')
 const {
   getSelectedFinanceType,
   setFinanceType
-} = require('js/redux/ducks/filters/financeType')
+} = require('js/redux/ducks/filters')
 
 const StateInitializer = React.createClass({
   contextTypes: {

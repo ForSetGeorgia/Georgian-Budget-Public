@@ -12,7 +12,7 @@ const { snakeToCamel } = require('js/helpers/utilities')
 const {
   setFinanceType,
   getSelectedFinanceType
-} = require('js/redux/ducks/filters/financeType')
+} = require('js/redux/ducks/filters')
 
 const GBSelect = require('./GBSelect')
 

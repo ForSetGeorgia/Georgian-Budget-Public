@@ -3,8 +3,8 @@ const { arrayOf, object, string } = React.PropTypes
 const { connect } = require('react-redux')
 
 const { getSelectedBudgetItemIds } = require('js/redux/ducks/explore')
-const { getSelectedBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
-const { getSelectedFinanceType } = require('js/redux/ducks/filters/financeType')
+const { getSelectedBudgetItemType } = require('js/redux/ducks/filters')
+const { getSelectedFinanceType } = require('js/redux/ducks/filters')
 
 const UrlQueryUpdater = React.createClass({
   contextTypes: {

@@ -6,7 +6,7 @@ const { mergeBudgetItems } = require('js/redux/ducks/budgetItems')
 const { getLocale } = require('js/redux/ducks/locale')
 const { addError } = require('js/redux/ducks/errors')
 
-const { getSelectedBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
+const { getSelectedBudgetItemType } = require('js/redux/ducks/filters')
 
 const georgianBudgetAPI = require('js/services/georgianBudgetAPI')
 

@@ -6,8 +6,8 @@ const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 const { snakeToCamel } = require('js/helpers/utilities')
 const { budgetItemTypes } = require('js/redux/entities/budgetItem')
 
-const { setBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
-const { getSelectedBudgetItemType } = require('js/redux/ducks/filters/budgetItemType')
+const { setBudgetItemType } = require('js/redux/ducks/filters')
+const { getSelectedBudgetItemType } = require('js/redux/ducks/filters')
 
 const fetchListedBudgetItems =
 require('js/redux/fetchers/fetchListedBudgetItems')
