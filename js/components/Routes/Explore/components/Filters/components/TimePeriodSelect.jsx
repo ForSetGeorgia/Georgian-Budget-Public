@@ -15,17 +15,24 @@ const TimePeriodSelect = React.createClass({
     setTimePeriod: func
   },
 
+  allYearsOption () {
+    return [{
+      value: 'all',
+      label: 'All'
+    }]
+  },
+
+  selectableYears () {
+    const selectableYears = ['2012', '2013', '2014', '2015', '2016']
+
+    return selectableYears.map(year => ({
+      value: `y${year}`,
+      label: year
+    }))
+  },
+
   options () {
-    return [
-      {
-        value: 'y2014',
-        label: '2014'
-      },
-      {
-        value: 'y2015',
-        label: '2015'
-      }
-    ]
+    return this.allYearsOption().concat(this.selectableYears())
   },
 
   handleChangeEvent ({ value }) {
