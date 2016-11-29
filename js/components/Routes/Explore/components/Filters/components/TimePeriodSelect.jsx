@@ -23,7 +23,7 @@ const TimePeriodSelect = React.createClass({
   },
 
   selectableYears () {
-    const selectableYears = ['2012', '2013', '2014', '2015', '2016']
+    const selectableYears = ['2016', '2015', '2014', '2013', '2012']
 
     return selectableYears.map(year => ({
       value: `y${year}`,
