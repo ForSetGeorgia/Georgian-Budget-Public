@@ -12,7 +12,8 @@ require('js/redux/fetchers/fetchListedBudgetItems')
 
 const {
   getSelectedBudgetItemIds,
-  setSelectedBudgetItemIds
+  setSelectedBudgetItemIds,
+  setExploreDisplay
 } = require('js/redux/ducks/explore')
 
 const { getListedItems } = require('js/redux/ducks/explore')
@@ -25,7 +26,8 @@ const ExploreList = React.createClass({
       name: string.isRequired
     })).isRequired,
     setSelectedBudgetItemIds: func.isRequired,
-    fetchListedBudgetItems: func.isRequired
+    fetchListedBudgetItems: func.isRequired,
+    setExploreDisplay: func.isRequired
   },
 
   componentDidMount () {
@@ -35,6 +37,7 @@ const ExploreList = React.createClass({
   handleClick (row) {
     const selectedIds = [row.props.data.id]
     this.props.setSelectedBudgetItemIds(selectedIds)
+    this.props.setExploreDisplay('details')
   },
 
   rowClassName (row) {
@@ -82,10 +85,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchListedBudgetItems: () => {
-    dispatch(fetchListedBudgetItems())
-  },
-  setSelectedBudgetItemIds: ids => { dispatch(setSelectedBudgetItemIds(ids)) }
+  fetchListedBudgetItems: () => { dispatch(fetchListedBudgetItems()) },
+  setSelectedBudgetItemIds: ids => { dispatch(setSelectedBudgetItemIds(ids)) },
+  setExploreDisplay: display => { dispatch(setExploreDisplay(display)) }
 })
 
 module.exports = connect(mapStateToProps, mapDispatchToProps)(ExploreList)
