@@ -1,28 +1,36 @@
 const React = require('react')
+const { intlShape, injectIntl } = require('react-intl')
 const { string } = React.PropTypes
 
 const FinancesTimeSeries = require('./FinancesTimeSeries')
+const timePeriodTypeMessages = require('js/messages/timePeriodTypes')
 
 const BudgetItemCharts = React.createClass({
   propTypes: {
     id: string,
-    selectedTimePeriod: string
+    selectedTimePeriod: string,
+    intl: intlShape
   },
 
   renderChart (timePeriodType) {
-    const { id, selectedTimePeriod } = this.props
+    const { id, selectedTimePeriod, intl } = this.props
 
     const surroundingTimePeriod = timePeriodType === 'year' ? 'all' : selectedTimePeriod
 
     return (
-      <FinancesTimeSeries
-        key={`${timePeriodType}-${selectedTimePeriod}`}
-        itemIds={[id]}
-        timePeriodType={timePeriodType}
-        showSpentFinances
-        showPlannedFinances
-        inTimePeriod={surroundingTimePeriod}
-      />
+      <div>
+        <h3>
+          {intl.formatMessage(timePeriodTypeMessages[timePeriodType])}
+        </h3>
+        <FinancesTimeSeries
+          key={`${timePeriodType}-${selectedTimePeriod}`}
+          itemIds={[id]}
+          timePeriodType={timePeriodType}
+          showSpentFinances
+          showPlannedFinances
+          inTimePeriod={surroundingTimePeriod}
+        />
+      </div>
     )
   },
 
@@ -37,4 +45,4 @@ const BudgetItemCharts = React.createClass({
   }
 })
 
-module.exports = BudgetItemCharts
+module.exports = injectIntl(BudgetItemCharts)
