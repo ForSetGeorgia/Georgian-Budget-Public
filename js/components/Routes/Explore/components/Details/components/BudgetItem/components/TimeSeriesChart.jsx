@@ -27,7 +27,7 @@ const TimeSeriesChart = React.createClass({
     // Set container which the chart should render to.
     const options = {
       chart: {
-        type: 'line'
+        type: 'column'
       },
       title: {
         text: title
