@@ -28,7 +28,6 @@ const BudgetItemCharts = React.createClass({
 
     return (
       <div>
-        {this.renderChartTitle(timePeriodType)}
         <FinancesTimeSeries
           key={`${timePeriodType}-${selectedTimePeriod}`}
           itemIds={[id]}
@@ -41,12 +40,26 @@ const BudgetItemCharts = React.createClass({
     )
   },
 
+  getTimePeriodTypes () {
+    return ['year', 'quarter', 'month']
+  },
+
+  getChartGroups () {
+    return this.getTimePeriodTypes().map(timePeriodType => ({
+      title: this.renderChartTitle(timePeriodType),
+      chart: this.renderChart(timePeriodType)
+    }))
+  },
+
   render () {
     return (
       <div>
-        {this.renderChart('year')}
-        {this.renderChart('quarter')}
-        {this.renderChart('month')}
+        {this.getChartGroups().map(chartGroup => (
+          <div>
+            {chartGroup.title}
+            {chartGroup.chart}
+          </div>
+        ))}
       </div>
     )
   }
