@@ -1,6 +1,7 @@
 const React = require('react')
-const { intlShape, injectIntl } = require('react-intl')
 const { string } = React.PropTypes
+const { intlShape, injectIntl } = require('react-intl')
+const { Tab, Tabs, TabList, TabPanel } = require('react-tabs')
 
 const FinancesTimeSeries = require('./FinancesTimeSeries')
 const timePeriodTypeMessages = require('js/messages/timePeriodTypes')
@@ -10,6 +11,12 @@ const BudgetItemCharts = React.createClass({
     id: string,
     selectedTimePeriod: string,
     intl: intlShape
+  },
+
+  getInitialState () {
+    return {
+      visibleTimePeriodType: 'month'
+    }
   },
 
   renderChartTitle (timePeriodType) {
@@ -27,16 +34,14 @@ const BudgetItemCharts = React.createClass({
     const surroundingTimePeriod = timePeriodType === 'year' ? 'all' : selectedTimePeriod
 
     return (
-      <div>
-        <FinancesTimeSeries
-          key={`${timePeriodType}-${selectedTimePeriod}`}
-          itemIds={[id]}
-          timePeriodType={timePeriodType}
-          showSpentFinances
-          showPlannedFinances
-          inTimePeriod={surroundingTimePeriod}
-        />
-      </div>
+      <FinancesTimeSeries
+        key={`${timePeriodType}-${selectedTimePeriod}`}
+        itemIds={[id]}
+        timePeriodType={timePeriodType}
+        showSpentFinances
+        showPlannedFinances
+        inTimePeriod={surroundingTimePeriod}
+      />
     )
   },
 
@@ -51,16 +56,35 @@ const BudgetItemCharts = React.createClass({
     }))
   },
 
+  defaultTabIndex () {
+    return this.getTimePeriodTypes().indexOf(this.state.visibleTimePeriodType)
+  },
+
+  handleSelectTabEvent (index) {
+    this.setState({
+      visibleTimePeriodType: this.getTimePeriodTypes()[index]
+    })
+  },
+
   render () {
+    const chartGroups = this.getChartGroups()
     return (
-      <div>
-        {this.getChartGroups().map(chartGroup => (
-          <div>
-            {chartGroup.title}
-            {chartGroup.chart}
-          </div>
+      <Tabs
+        selectedIndex={this.defaultTabIndex()}
+        onSelect={this.handleSelectTabEvent}
+      >
+
+        <TabList>
+          {chartGroups.map((chartGroup, index) => (
+            <Tab key={index}>{chartGroup.title}</Tab>
+          ))}
+        </TabList>
+
+        {chartGroups.map((chartGroup, index) => (
+          <TabPanel key={index}>{chartGroup.chart}</TabPanel>
         ))}
-      </div>
+
+      </Tabs>
     )
   }
 })
