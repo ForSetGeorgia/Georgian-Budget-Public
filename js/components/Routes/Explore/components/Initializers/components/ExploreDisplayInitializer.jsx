@@ -3,7 +3,7 @@ const { connect } = require('react-redux')
 const {
   setExploreDisplay,
   getSelectedExploreDisplay
- } = require('js/redux/ducks/explore')
+} = require('js/redux/ducks/explore')
 
 const StateInitializer = require('js/components/shared/StateInitializer')
 
