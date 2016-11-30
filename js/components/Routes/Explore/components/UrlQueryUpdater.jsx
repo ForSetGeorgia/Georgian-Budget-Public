@@ -2,7 +2,10 @@ const React = require('react')
 const { arrayOf, object, string } = React.PropTypes
 const { connect } = require('react-redux')
 
-const { getSelectedBudgetItemIds } = require('js/redux/ducks/explore')
+const {
+  getSelectedBudgetItemIds,
+  getSelectedExploreDisplay
+} = require('js/redux/ducks/explore')
 
 const {
   getSelectedBudgetItemType,
@@ -20,7 +23,8 @@ const UrlQueryUpdater = React.createClass({
     budgetItemType: string.isRequired,
     budgetItemIds: arrayOf(string).isRequired,
     financeType: string.isRequired,
-    timePeriods: arrayOf(string).isRequired
+    timePeriods: arrayOf(string).isRequired,
+    exploreDisplay: string.isRequired
   },
 
   newQueryObject () {
@@ -28,7 +32,8 @@ const UrlQueryUpdater = React.createClass({
       budgetItemIds,
       budgetItemType,
       financeType,
-      timePeriods
+      timePeriods,
+      exploreDisplay
     } = this.props
 
     const newQueryObject = {}
@@ -43,6 +48,7 @@ const UrlQueryUpdater = React.createClass({
 
     if (budgetItemType) newQueryObject.budgetItemType = budgetItemType
     if (financeType) newQueryObject.financeType = financeType
+    if (exploreDisplay) newQueryObject.exploreDisplay = exploreDisplay
 
     return newQueryObject
   },
@@ -83,7 +89,8 @@ const mapStateToProps = (state) => ({
   budgetItemType: getSelectedBudgetItemType(state),
   budgetItemIds: getSelectedBudgetItemIds(state),
   financeType: getSelectedFinanceType(state),
-  timePeriods: getSelectedTimePeriods(state)
+  timePeriods: getSelectedTimePeriods(state),
+  exploreDisplay: getSelectedExploreDisplay(state)
 })
 
 module.exports = connect(mapStateToProps)(UrlQueryUpdater)
