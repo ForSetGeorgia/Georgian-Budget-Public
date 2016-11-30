@@ -1,4 +1,5 @@
 const React = require('react')
+const { injectIntl } = require('react-intl')
 const { string } = React.PropTypes
 const { connect } = require('react-redux')
 
@@ -42,4 +43,4 @@ const mapStateToProps = state => ({
   selectedExploreDisplay: getSelectedExploreDisplay(state)
 })
 
-module.exports = connect(mapStateToProps)(ExploreDisplay)
+module.exports = injectIntl(connect(mapStateToProps)(ExploreDisplay))

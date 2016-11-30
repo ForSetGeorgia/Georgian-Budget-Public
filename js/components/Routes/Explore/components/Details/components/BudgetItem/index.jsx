@@ -1,4 +1,5 @@
 const React = require('react')
+const { injectIntl } = require('react-intl')
 const { arrayOf, func, string } = React.PropTypes
 const { connect } = require('react-redux')
 
@@ -70,4 +71,4 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(BudgetItem)
+module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(BudgetItem))

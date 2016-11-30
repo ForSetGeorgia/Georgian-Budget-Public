@@ -1,4 +1,5 @@
 const React = require('react')
+const { injectIntl } = require('react-intl')
 const { object, string } = React.PropTypes
 const { connect } = require('react-redux')
 
@@ -56,6 +57,6 @@ const mapStateToProps = state => ({
   selectedItems: getSelectedBudgetItems(state)
 })
 
-ExploreDetails = connect(mapStateToProps)(ExploreDetails)
+ExploreDetails = injectIntl(connect(mapStateToProps)(ExploreDetails))
 
 module.exports = ExploreDetails

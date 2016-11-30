@@ -45,10 +45,10 @@ const FinancesTimeSeries = React.createClass({
   },
 
   uniqueChartId () {
-    const { items, timePeriodType, financeType } = this.props
+    const { items, timePeriodType, financeType, intl } = this.props
     const itemIds = items.map(item => item.id)
 
-    return `${itemIds.join(',')}-${financeType}-${timePeriodType}-chart`
+    return `${itemIds.join(',')}-${financeType}-${timePeriodType}-${intl.locale}`
   },
 
   timePeriods () {
