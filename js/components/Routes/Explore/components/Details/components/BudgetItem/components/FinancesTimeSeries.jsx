@@ -36,6 +36,7 @@ const FinancesTimeSeries = React.createClass({
 
   timePeriodTypeMessage () {
     const { intl, timePeriodType } = this.props
+
     return intl.formatMessage(timePeriodTypeMessages[timePeriodType])
   },
 
@@ -52,6 +53,7 @@ const FinancesTimeSeries = React.createClass({
 
   timePeriods () {
     const { items, intl } = this.props
+
     return items[0].spentFinances.map(f => translateTimePeriod(f.timePeriod, f.timePeriodType, intl))
   },
 

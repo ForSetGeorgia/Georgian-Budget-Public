@@ -49,7 +49,7 @@ const translateQuarter = (timePeriod, intl) => (
 const createDateFromMonthTimePeriod = timePeriod => (
   new Date(
     parseInt(extractYear(timePeriod)),
-    parseInt(extractMonthNum(timePeriod))
+    parseInt(extractMonthNum(timePeriod)) - 1
   )
 )
 
