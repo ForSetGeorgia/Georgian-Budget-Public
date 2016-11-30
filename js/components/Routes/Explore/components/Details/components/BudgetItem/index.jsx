@@ -27,36 +27,39 @@ const BudgetItem = React.createClass({
     this.props.fetchBudgetItemDetails(this.props.id)
   },
 
-  render () {
-    const { id, name } = this.props
+  renderChart (timePeriodType) {
+    if (!this.detailsLoaded()) return
+    const { id } = this.props
 
-    let chart = ''
+    return (
+      <FinancesTimeSeries
+        itemIds={[id]}
+        timePeriodType={timePeriodType}
+        showSpentFinances
+        showPlannedFinances
+      />
+    )
+  },
+
+  renderDetails () {
+    return (
+      <div>
+        {this.renderChart('year')}
+        {this.renderChart('quarter')}
+        {this.renderChart('month')}
+      </div>
+    )
+  },
+
+  render () {
+    const { name } = this.props
+
+    let details = ''
 
     if (this.detailsLoaded()) {
-      chart = (
-        <div>
-          <FinancesTimeSeries
-            itemIds={[id]}
-            timePeriodType='year'
-            showSpentFinances
-            showPlannedFinances
-          />
-          <FinancesTimeSeries
-            itemIds={[id]}
-            timePeriodType='quarter'
-            showSpentFinances
-            showPlannedFinances
-          />
-          <FinancesTimeSeries
-            itemIds={[id]}
-            timePeriodType='month'
-            showSpentFinances
-            showPlannedFinances
-          />
-        </div>
-      )
+      details = this.renderDetails()
     } else {
-      chart = <LoadingIndicator />
+      details = <LoadingIndicator />
     }
 
     return (
@@ -66,7 +69,7 @@ const BudgetItem = React.createClass({
           {name}
         </h3>
 
-        {chart}
+        {details}
 
       </div>
     )
