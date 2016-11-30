@@ -63,8 +63,27 @@ const translateMonth = (timePeriod, intl) => (
   )
 )
 
-const translateTimePeriod = (timePeriod, timePeriodType, intl) => {
-  switch (timePeriodType) {
+const timePeriodIsMonth = (timePeriod) => (
+  /y.*m/.test(timePeriod)
+)
+
+const timePeriodIsQuarter = (timePeriod) => (
+  /y.*q/.test(timePeriod)
+)
+
+const timePeriodIsYear = (timePeriod) => (
+  /y/.test(timePeriod)
+)
+
+const getTimePeriodType = (timePeriod) => {
+  if (timePeriodIsMonth(timePeriod)) return 'month'
+  if (timePeriodIsQuarter(timePeriod)) return 'quarter'
+  if (timePeriodIsYear(timePeriod)) return 'year'
+  throw new Error(`Time period type for time period "${timePeriod}" could not be detected`)
+}
+
+const translateTimePeriod = (timePeriod, intl) => {
+  switch (getTimePeriodType(timePeriod)) {
     case 'year':
       return translateYear(timePeriod)
     case 'quarter':

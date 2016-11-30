@@ -2,6 +2,7 @@ const React = require('react')
 const { arrayOf, func, string } = React.PropTypes
 const { connect } = require('react-redux')
 
+const BudgetItemHeading = require('./components/BudgetItemHeading')
 const FinancesTimeSeries = require('./components/FinancesTimeSeries')
 const LoadingIndicator = require('js/components/shared/LoadingIndicator')
 
@@ -56,7 +57,7 @@ const BudgetItem = React.createClass({
   },
 
   render () {
-    const { name } = this.props
+    const { name, selectedTimePeriod } = this.props
 
     let details = ''
 
@@ -68,10 +69,7 @@ const BudgetItem = React.createClass({
 
     return (
       <div className='gb-BudgetItem'>
-
-        <h3 className='gb-BudgetItem-heading'>
-          {name}
-        </h3>
+        <BudgetItemHeading name={name} timePeriod={selectedTimePeriod} />
 
         {details}
 
