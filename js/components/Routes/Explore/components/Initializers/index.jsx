@@ -4,6 +4,7 @@ const BudgetItemTypeInitializer = require('./components/BudgetItemTypeInitialize
 const FinanceTypeInitializer = require('./components/FinanceTypeInitializer')
 const TimePeriodsInitializer = require('./components/TimePeriodsInitializer')
 const SelectedIdsInitializer = require('./components/SelectedIdsInitializer')
+const ExploreDisplayInitializer = require('./components/ExploreDisplayInitializer')
 
 const Initializers = () => (
   <div>
@@ -11,6 +12,7 @@ const Initializers = () => (
     <FinanceTypeInitializer />
     <TimePeriodsInitializer />
     <SelectedIdsInitializer />
+    <ExploreDisplayInitializer />
   </div>
 )
 
