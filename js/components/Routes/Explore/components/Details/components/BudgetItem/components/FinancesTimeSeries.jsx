@@ -98,6 +98,18 @@ const getFinanceType = ({ showSpentFinances, showPlannedFinances }) => {
   }
 }
 
+const getSpentFinances = (state, itemId, timePeriodType) => {
+  return filterFinancesByPeriodType(
+    getItemSpentFinances(state, itemId), timePeriodType
+  )
+}
+
+const getPlannedFinances = (state, itemId, timePeriodType) => {
+  return filterFinancesByPeriodType(
+    getItemPlannedFinances(state, itemId), timePeriodType
+  )
+}
+
 const getItems = (state, ownProps) => {
   const {
     itemIds,
@@ -112,15 +124,11 @@ const getItems = (state, ownProps) => {
     }
 
     if (showSpentFinances) {
-      obj.spentFinances = filterFinancesByPeriodType(
-        getItemSpentFinances(state, itemId), timePeriodType
-      )
+      obj.spentFinances = getSpentFinances(state, itemId, timePeriodType)
     }
 
     if (showPlannedFinances) {
-      obj.plannedFinances = filterFinancesByPeriodType(
-        getItemPlannedFinances(state, itemId), timePeriodType
-      )
+      obj.plannedFinances = getPlannedFinances(state, itemId, timePeriodType)
     }
 
     return obj
