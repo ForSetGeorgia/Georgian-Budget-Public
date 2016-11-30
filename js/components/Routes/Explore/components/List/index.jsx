@@ -1,5 +1,6 @@
 const React = require('react')
 const { arrayOf, shape, string, func } = React.PropTypes
+const { injectIntl } = require('react-intl')
 const { connect } = require('react-redux')
 
 const BudgetItemTypeSelect = require('./components/BudgetItemTypeSelect')
@@ -90,4 +91,4 @@ const mapDispatchToProps = dispatch => ({
   setExploreDisplay: display => { dispatch(setExploreDisplay(display)) }
 })
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(ExploreList)
+module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ExploreList))
