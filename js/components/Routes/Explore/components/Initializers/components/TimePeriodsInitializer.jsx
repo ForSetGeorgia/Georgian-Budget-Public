@@ -17,7 +17,7 @@ const TimePeriodsInitializer = React.createClass({
     selectedTimePeriods: arrayOf(string).isRequired
   },
 
-  defaultTimePeriods: 'all',
+  defaultTimePeriods: ['all'],
 
   getQueryTimePeriods () {
     const timePeriods = this.context.location.query.timePeriods
