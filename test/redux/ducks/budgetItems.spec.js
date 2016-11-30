@@ -19,16 +19,22 @@ describe('budget items reducer', () => {
       {},
       initialState,
       {
+        'fun': {
+          woo: 'hoo'
+        },
         '1': {
+          ex: null,
           name: '5',
-          value: '2'
+          value: '2',
+          loaded: ['list']
         }
       }
     )
 
     const action = mergeBudgetItems({
       '1': {
-        amount: '1'
+        amount: '1',
+        loaded: ['details']
       },
       'bla': {
         name: 'I am Bla'
@@ -38,10 +44,15 @@ describe('budget items reducer', () => {
     const newState = budgetItems(previousState, action)
 
     expect(newState).to.deep.equal({
+      'fun': {
+        woo: 'hoo'
+      },
       '1': {
+        ex: null,
         name: '5',
         value: '2',
-        amount: '1'
+        amount: '1',
+        loaded: ['list', 'details']
       },
       'bla': {
         name: 'I am Bla'
