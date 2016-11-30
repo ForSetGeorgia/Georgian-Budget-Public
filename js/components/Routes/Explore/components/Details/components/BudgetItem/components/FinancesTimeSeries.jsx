@@ -110,29 +110,30 @@ const getPlannedFinances = (state, itemId, timePeriodType) => {
   )
 }
 
-const getItems = (state, ownProps) => {
+const getItemFinancesObject = (state, ownProps, itemId) => {
   const {
-    itemIds,
     showSpentFinances,
     showPlannedFinances,
     timePeriodType
   } = ownProps
 
-  return itemIds.map(itemId => {
-    const obj = {
-      id: itemId
-    }
+  const obj = { id: itemId }
 
-    if (showSpentFinances) {
-      obj.spentFinances = getSpentFinances(state, itemId, timePeriodType)
-    }
+  if (showSpentFinances) {
+    obj.spentFinances = getSpentFinances(state, itemId, timePeriodType)
+  }
 
-    if (showPlannedFinances) {
-      obj.plannedFinances = getPlannedFinances(state, itemId, timePeriodType)
-    }
+  if (showPlannedFinances) {
+    obj.plannedFinances = getPlannedFinances(state, itemId, timePeriodType)
+  }
 
-    return obj
-  })
+  return obj
+}
+
+const getItems = (state, ownProps) => {
+  const { itemIds } = ownProps
+
+  return itemIds.map(itemId => getItemFinancesObject(state, ownProps, itemId))
 }
 
 const mapStateToProps = (state, ownProps) => ({
