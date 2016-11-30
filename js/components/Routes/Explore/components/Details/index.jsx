@@ -28,31 +28,21 @@ let ExploreDetails = React.createClass({
 
   render () {
     const { selectedItems } = this.props
-    const { currentLocale } = this.context
+
     let content
     if (this.isLoading()) {
       content = (
         <LoadingIndicator />
       )
     } else {
-      content = (
-        <div>
-          {
-            this.loadedSelectedItemIds().map(id => {
-              const budgetItem = selectedItems[id]
-              const { loaded } = budgetItem
-              const uniqueKey = `budget-item-${id}-${loaded.join(',')}-${currentLocale}`
+      const id = this.loadedSelectedItemIds()[0]
+      const budgetItem = selectedItems[id]
 
-              return (
-                <BudgetItem
-                  {...budgetItem}
-                  key={uniqueKey}
-                  id={id}
-                />
-              )
-            })
-          }
-        </div>
+      content = (
+        <BudgetItem
+          {...budgetItem}
+          id={id}
+        />
       )
     }
 
