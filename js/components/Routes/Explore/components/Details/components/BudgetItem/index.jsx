@@ -3,7 +3,7 @@ const { arrayOf, func, string } = React.PropTypes
 const { connect } = require('react-redux')
 
 const BudgetItemHeading = require('./components/BudgetItemHeading')
-const FinancesTimeSeries = require('./components/FinancesTimeSeries')
+const BudgetItemCharts = require('./components/BudgetItemCharts')
 const LoadingIndicator = require('js/components/shared/LoadingIndicator')
 
 const fetchBudgetItemDetails = require('js/redux/fetchers/fetchBudgetItemDetails')
@@ -28,30 +28,12 @@ const BudgetItem = React.createClass({
     this.props.fetchBudgetItemDetails(this.props.id)
   },
 
-  renderChart (timePeriodType) {
-    if (!this.detailsLoaded()) return
+  renderDetails () {
     const { id, selectedTimePeriod } = this.props
 
-    const surroundingTimePeriod = timePeriodType === 'year' ? 'all' : selectedTimePeriod
-
-    return (
-      <FinancesTimeSeries
-        key={`${timePeriodType}-${selectedTimePeriod}`}
-        itemIds={[id]}
-        timePeriodType={timePeriodType}
-        showSpentFinances
-        showPlannedFinances
-        inTimePeriod={surroundingTimePeriod}
-      />
-    )
-  },
-
-  renderDetails () {
     return (
       <div>
-        {this.renderChart('year')}
-        {this.renderChart('quarter')}
-        {this.renderChart('month')}
+        <BudgetItemCharts {...{ id, selectedTimePeriod }} />
       </div>
     )
   },
