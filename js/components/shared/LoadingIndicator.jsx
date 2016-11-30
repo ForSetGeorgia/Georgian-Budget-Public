@@ -1,23 +1,7 @@
 const React = require('react')
-const { FormattedMessage } = require('react-intl')
+const Svg = require('js/components/shared/Svg')
+const svg = require('public/images/loading_indicator')
 
-const LoadingIndicator = (props) => {
-  let style = {}
-  if (props.hidden) style.display = 'none'
-  return (
-    <div style={style}>
-      <FormattedMessage
-        id='app.loading'
-        description='The message seen when data is loading'
-        defaultMessage='Data is Loading' />
-    </div>
-  )
-}
-
-const { bool } = React.PropTypes
-
-LoadingIndicator.propTypes = {
-  hidden: bool
-}
+const LoadingIndicator = () => <Svg markup={svg} />
 
 module.exports = LoadingIndicator
