@@ -1,6 +1,4 @@
-const React = require('react')
 const { connect } = require('react-redux')
-const { func, object, string } = React.PropTypes
 
 const { financeTypes } = require('js/redux/entities/finance')
 
@@ -9,46 +7,17 @@ const {
   setFinanceType
 } = require('js/redux/ducks/filters')
 
-const StateInitializer = React.createClass({
-  contextTypes: {
-    location: object.isRequired
-  },
-
-  propTypes: {
-    financeType: string.isRequired,
-    setFinanceType: func.isRequired
-  },
-
-  defaultFinanceType: 'spent_finance',
-
-  initializeFinanceType () {
-    const { setFinanceType } = this.props
-    const { financeType: queryFinanceType } = this.context.location.query
-
-    if (financeTypes.includes(queryFinanceType)) {
-      setFinanceType(queryFinanceType)
-    } else {
-      setFinanceType(this.defaultFinanceType)
-    }
-  },
-
-  componentDidMount () {
-    const { financeType } = this.props
-
-    if (!financeType) this.initializeFinanceType()
-  },
-
-  render () {
-    return null
-  }
-})
+const StateInitializer = require('js/components/shared/StateInitializer')
 
 const mapStateToProps = state => ({
-  financeType: getSelectedFinanceType(state)
+  selectedTargetValue: getSelectedFinanceType(state),
+  queryTargetName: 'financeType',
+  defaultTargetValue: 'spent_finance',
+  permittedTargetValues: financeTypes
 })
 
 const mapDispatchToProps = dispatch => ({
-  setFinanceType (value) {
+  setTargetValue (value) {
     dispatch(setFinanceType(value))
   }
 })

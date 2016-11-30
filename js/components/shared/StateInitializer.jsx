@@ -1,5 +1,5 @@
 const React = require('react')
-const { func, object, string } = React.PropTypes
+const { arrayOf, func, object, string } = React.PropTypes
 
 const StateInitializer = React.createClass({
   contextTypes: {
@@ -10,11 +10,24 @@ const StateInitializer = React.createClass({
     queryTargetName: string.isRequired,
     setTargetValue: func.isRequired,
     selectedTargetValue: string.isRequired,
-    defaultTargetValue: string
+    defaultTargetValue: string,
+    permittedTargetValues: arrayOf(string)
   },
 
   getQueryTargetValue () {
     return this.context.location.query[this.props.queryTargetName]
+  },
+
+  queryTargetValuePermitted () {
+    const { permittedTargetValues } = this.props
+
+    if (!permittedTargetValues) return true
+
+    return permittedTargetValues.includes(this.getQueryTargetValue())
+  },
+
+  validQueryTargetValue () {
+    return this.getQueryTargetValue() && this.queryTargetValuePermitted()
   },
 
   initializeTargetValue () {
@@ -23,10 +36,8 @@ const StateInitializer = React.createClass({
       defaultTargetValue
     } = this.props
 
-    const queryTargetValue = this.getQueryTargetValue()
-
-    if (queryTargetValue) {
-      setTargetValue(queryTargetValue)
+    if (this.validQueryTargetValue()) {
+      setTargetValue(this.getQueryTargetValue())
     } else if (defaultTargetValue) {
       setTargetValue(defaultTargetValue)
     }
