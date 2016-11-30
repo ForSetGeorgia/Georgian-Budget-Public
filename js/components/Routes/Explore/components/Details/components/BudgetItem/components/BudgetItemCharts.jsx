@@ -12,16 +12,23 @@ const BudgetItemCharts = React.createClass({
     intl: intlShape
   },
 
+  renderChartTitle (timePeriodType) {
+    const { intl } = this.props
+    return (
+      <h3>
+        {intl.formatMessage(timePeriodTypeMessages[timePeriodType])}
+      </h3>
+    )
+  },
+
   renderChart (timePeriodType) {
-    const { id, selectedTimePeriod, intl } = this.props
+    const { id, selectedTimePeriod } = this.props
 
     const surroundingTimePeriod = timePeriodType === 'year' ? 'all' : selectedTimePeriod
 
     return (
       <div>
-        <h3>
-          {intl.formatMessage(timePeriodTypeMessages[timePeriodType])}
-        </h3>
+        {this.renderChartTitle(timePeriodType)}
         <FinancesTimeSeries
           key={`${timePeriodType}-${selectedTimePeriod}`}
           itemIds={[id]}
