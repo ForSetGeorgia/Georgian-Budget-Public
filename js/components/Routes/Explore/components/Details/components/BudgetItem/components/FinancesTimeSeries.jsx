@@ -8,7 +8,12 @@ const timePeriodTypeMessages = require('js/messages/timePeriodTypes')
 const financeTypeMessages = require('js/messages/financeTypes')
 const { getItemSpentFinances } = require('js/redux/entities/budgetItem')
 const { getItemPlannedFinances } = require('js/redux/entities/budgetItem')
-const { filterFinancesByPeriodType } = require('js/redux/entities/finance')
+
+const {
+  filterFinancesByPeriodType,
+  selectInTimePeriod
+} = require('js/redux/entities/finance')
+
 const { translateTimePeriod } = require('js/redux/entities/timePeriod')
 
 const FinancesTimeSeries = React.createClass({
@@ -98,33 +103,34 @@ const getFinanceType = ({ showSpentFinances, showPlannedFinances }) => {
   }
 }
 
-const getSpentFinances = (state, itemId, timePeriodType) => {
-  return filterFinancesByPeriodType(
-    getItemSpentFinances(state, itemId), timePeriodType
-  )
-}
+const getFinances = (state, ownProps, financeGetter, itemId) => {
+  const { timePeriodType, inTimePeriod } = ownProps
 
-const getPlannedFinances = (state, itemId, timePeriodType) => {
-  return filterFinancesByPeriodType(
-    getItemPlannedFinances(state, itemId), timePeriodType
+  let typeFiltered = filterFinancesByPeriodType(
+    financeGetter(state, itemId), timePeriodType
   )
+
+  if (inTimePeriod && inTimePeriod !== 'all') {
+    typeFiltered = selectInTimePeriod(typeFiltered, inTimePeriod)
+  }
+
+  return typeFiltered
 }
 
 const getItemFinancesObject = (state, ownProps, itemId) => {
   const {
     showSpentFinances,
-    showPlannedFinances,
-    timePeriodType
+    showPlannedFinances
   } = ownProps
 
   const obj = { id: itemId }
 
   if (showSpentFinances) {
-    obj.spentFinances = getSpentFinances(state, itemId, timePeriodType)
+    obj.spentFinances = getFinances(state, ownProps, getItemSpentFinances, itemId)
   }
 
   if (showPlannedFinances) {
-    obj.plannedFinances = getPlannedFinances(state, itemId, timePeriodType)
+    obj.plannedFinances = getFinances(state, ownProps, getItemPlannedFinances, itemId)
   }
 
   return obj

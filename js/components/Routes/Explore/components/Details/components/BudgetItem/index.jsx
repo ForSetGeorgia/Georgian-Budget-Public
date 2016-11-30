@@ -27,7 +27,7 @@ const BudgetItem = React.createClass({
     this.props.fetchBudgetItemDetails(this.props.id)
   },
 
-  renderChart (timePeriodType) {
+  renderChart (timePeriodType, options) {
     if (!this.detailsLoaded()) return
     const { id } = this.props
 
@@ -37,6 +37,7 @@ const BudgetItem = React.createClass({
         timePeriodType={timePeriodType}
         showSpentFinances
         showPlannedFinances
+        {...options}
       />
     )
   },
@@ -45,8 +46,8 @@ const BudgetItem = React.createClass({
     return (
       <div>
         {this.renderChart('year')}
-        {this.renderChart('quarter')}
-        {this.renderChart('month')}
+        {this.renderChart('quarter', { inTimePeriod: 'y2014' })}
+        {this.renderChart('month', { inTimePeriod: 'y2014' })}
       </div>
     )
   },
