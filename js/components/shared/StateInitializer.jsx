@@ -1,7 +1,7 @@
 const React = require('react')
 const { func, object, string } = React.PropTypes
 
-const Initializer = React.createClass({
+const StateInitializer = React.createClass({
   contextTypes: {
     location: object
   },
@@ -43,4 +43,4 @@ const Initializer = React.createClass({
   }
 })
 
-module.exports = Initializer
+module.exports = StateInitializer

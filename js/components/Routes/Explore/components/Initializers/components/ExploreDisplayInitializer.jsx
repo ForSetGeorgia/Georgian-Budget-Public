@@ -5,7 +5,7 @@ const {
   getSelectedExploreDisplay
  } = require('js/redux/ducks/explore')
 
-const Initializer = require('js/components/shared/Initializer')
+const StateInitializer = require('js/components/shared/StateInitializer')
 
 const mapStateToProps = state => ({
   queryTargetName: 'exploreDisplay',
@@ -17,4 +17,4 @@ const mapDispatchToProps = dispatch => ({
   setTargetValue: value => { dispatch(setExploreDisplay(value)) }
 })
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(Initializer)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(StateInitializer)
