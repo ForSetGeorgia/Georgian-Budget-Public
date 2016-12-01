@@ -3,10 +3,14 @@ const { func, string } = React.PropTypes
 const { injectIntl, defineMessages, intlShape } = require('react-intl')
 const { connect } = require('react-redux')
 
+const { getYearsWithData } = require('js/redux/modules/year')
+
 const {
   getSelectedTimePeriods,
   setTimePeriods
  } = require('js/redux/ducks/filters')
+
+const { translateTimePeriod } = require('js/redux/entities/timePeriod')
 
 const ButtonSelector = require('js/components/shared/ButtonSelector')
 
@@ -40,11 +44,9 @@ const TimePeriodSelect = React.createClass({
   },
 
   selectableYears () {
-    const selectableYears = ['2016', '2015', '2014', '2013', '2012']
-
-    return selectableYears.map(year => ({
-      value: `y${year}`,
-      label: year
+    return getYearsWithData().map(year => ({
+      value: year,
+      label: translateTimePeriod(year)
     }))
   },
 

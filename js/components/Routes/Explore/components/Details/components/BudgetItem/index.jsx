@@ -6,6 +6,7 @@ const { connect } = require('react-redux')
 const BudgetItemHeading = require('./components/BudgetItemHeading')
 const BudgetItemCharts = require('./components/BudgetItemCharts')
 const LoadingIndicator = require('js/components/shared/LoadingIndicator')
+const BudgetItemYearlyTable = require('./components/BudgetItemYearlyTable')
 
 const { getSelectedTimePeriods } = require('js/redux/ducks/filters')
 
@@ -31,6 +32,7 @@ const BudgetItem = React.createClass({
     return (
       <div>
         <BudgetItemCharts {...{ id, selectedTimePeriod }} />
+        <BudgetItemYearlyTable itemId={id} />
       </div>
     )
   },
