@@ -2,6 +2,7 @@ module.exports = {
   budgetItems: {},
   errors: [],
   explore: {
+    listLoaded: [],
     display: '',
     selectedIds: [],
     listedItemIds: []

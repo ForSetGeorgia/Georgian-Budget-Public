@@ -10,7 +10,8 @@ const {
   getListedItemIds,
   setExploreDisplay,
   setSelectedBudgetItemIds,
-  setListedItemIds
+  setListedItemIds,
+  markListLoaded
 } = explore
 
 describe('explore reducer', () => {
@@ -78,6 +79,28 @@ describe('explore reducer', () => {
       initialExploreState,
       {
         listedItemIds: ['5', '678']
+      }
+    ))
+  })
+
+  it('handles markListLoaded action', () => {
+    const initialExploreState = getExploreState(initialState)
+    const previousState = Object.assign(
+      {},
+      initialExploreState,
+      {
+        listLoaded: ['program']
+      }
+    )
+
+    const action = markListLoaded('priority')
+    const newState = explore(previousState, action)
+
+    expect(newState).to.deep.eq(Object.assign(
+      {},
+      initialExploreState,
+      {
+        listLoaded: ['program', 'priority']
       }
     ))
   })

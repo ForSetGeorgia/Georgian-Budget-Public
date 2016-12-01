@@ -5,7 +5,8 @@ const { getBudgetItemsData } = require('js/redux/ducks/budgetItems')
 
 const SET_EXPLORE_DISPLAY = 'georgianBudget/explore/SET_EXPLORE_DISPLAY'
 const SET_SELECTED_IDS = 'georgianBudget/explore/SET_SELECTED_IDS'
-const SET_LISTED_ITEM_IDS = 'georgianBudget/explore/list/SET_LISTED_ITEM_IDS'
+const SET_LISTED_ITEM_IDS = 'georgianBudget/explore/SET_LISTED_ITEM_IDS'
+const MARK_LIST_LOADED = 'georgianBudget/explore/MARK_LIST_LOADED'
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -33,6 +34,14 @@ const reducer = (state = {}, action) => {
           listedItemIds: action.ids
         }
       )
+    case MARK_LIST_LOADED:
+      return Object.assign(
+        {},
+        state,
+        {
+          listLoaded: state.listLoaded.concat(action.listLoaded)
+        }
+      )
     default:
       return state
   }
@@ -53,6 +62,11 @@ reducer.setSelectedBudgetItemIds = function (ids) {
 reducer.setListedItemIds = (ids) => ({
   type: SET_LISTED_ITEM_IDS,
   ids: ids
+})
+
+reducer.markListLoaded = (listLoaded) => ({
+  type: MARK_LIST_LOADED,
+  listLoaded: listLoaded
 })
 
 reducer.getExploreState = createSelector(
@@ -90,6 +104,11 @@ reducer.getListedItems = state => (
   reducer.getListedItemIds(state)
   .map(id => getBudgetItemsData(state)[id])
   .filter(budgetItem => budgetItem)
+)
+
+reducer.getExploreListLoaded = createSelector(
+  reducer.getExploreState,
+  ({listLoaded}) => listLoaded
 )
 
 module.exports = reducer
