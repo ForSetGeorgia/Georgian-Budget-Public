@@ -7,9 +7,7 @@ const BudgetItemTypeSelect = require('./components/BudgetItemTypeSelect')
 const FinanceTypeSelect = require('./components/FinanceTypeSelect')
 const ClickableList = require('./components/ClickableList')
 const CountDisplay = require('./components/CountDisplay')
-
-const fetchListedBudgetItems =
-require('js/redux/fetchers/fetchListedBudgetItems')
+const BudgetItemListFetcher = require('./components/BudgetItemListFetcher')
 
 const {
   getSelectedBudgetItemIds,
@@ -27,12 +25,7 @@ const ExploreList = React.createClass({
       name: string.isRequired
     })).isRequired,
     setSelectedBudgetItemIds: func.isRequired,
-    fetchListedBudgetItems: func.isRequired,
     setExploreDisplay: func.isRequired
-  },
-
-  componentDidMount () {
-    this.props.fetchListedBudgetItems()
   },
 
   handleClick (row) {
@@ -58,6 +51,7 @@ const ExploreList = React.createClass({
   render () {
     return (
       <div className='gb-ExploreList'>
+        <BudgetItemListFetcher />
         <BudgetItemTypeSelect />
         <FinanceTypeSelect />
         <CountDisplay
@@ -86,7 +80,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchListedBudgetItems: () => { dispatch(fetchListedBudgetItems()) },
   setSelectedBudgetItemIds: ids => { dispatch(setSelectedBudgetItemIds(ids)) },
   setExploreDisplay: display => { dispatch(setExploreDisplay(display)) }
 })

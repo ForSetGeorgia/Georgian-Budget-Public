@@ -3,9 +3,6 @@ const { object, string, shape, func } = React.PropTypes
 const { addLocaleData, IntlProvider } = require('react-intl')
 const { connect } = require('react-redux')
 
-const fetchListedBudgetItems =
-require('js/redux/fetchers/fetchListedBudgetItems')
-
 const { setLocale } = require('js/redux/ducks/locale')
 
 const Layout = require('js/components/Layout/index')
@@ -93,7 +90,6 @@ const ConnectedIntlProvider = React.createClass({
 const mapDispatchToProps = (dispatch) => ({
   setLocale (locale) {
     dispatch(setLocale(locale))
-    dispatch(fetchListedBudgetItems())
   }
 })
 
