@@ -7,24 +7,11 @@ const { getItemSpentFinances } = require('js/redux/entities/budgetItem')
 const { getItemPlannedFinances } = require('js/redux/entities/budgetItem')
 const { translateTimePeriod } = require('js/redux/entities/timePeriod')
 const { getSelectedTimePeriods } = require('js/redux/ducks/filters')
+const { getFinanceDifference } = require('js/redux/modules/finance/difference')
 
 const getColumns = () => (
   ['year', 'spent_finance', 'planned_finance', 'difference']
 )
-
-const maxTwoDecimal = num => {
-  if (Math.round(num) === num) {
-    return num
-  } else {
-    return num.toFixed(2)
-  }
-}
-
-const getDifference = (finance1, finance2) => {
-  if (!finance1 || !finance2) return ''
-
-  return maxTwoDecimal(finance1.amount - finance2.amount)
-}
 
 const getDataForYear = (year, spentFinances, plannedFinances) => {
   const spentFinance = spentFinances.filter(f => f.timePeriod === year)[0]
@@ -34,7 +21,7 @@ const getDataForYear = (year, spentFinances, plannedFinances) => {
     year: translateTimePeriod(year),
     spent_finance: spentFinance ? spentFinance.amount : null,
     planned_finance: plannedFinance ? plannedFinance.amount : null,
-    difference: getDifference(plannedFinance, spentFinance)
+    difference: getFinanceDifference(plannedFinance, spentFinance)
   }
 }
 
