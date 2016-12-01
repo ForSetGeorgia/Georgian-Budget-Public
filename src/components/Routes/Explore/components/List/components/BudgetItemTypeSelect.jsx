@@ -3,7 +3,7 @@ const { string, func } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const budgetItemTypeMessages = require('src/messages/budgetItemTypes')
-const { snakeToCamel } = require('src/helpers/utilities')
+const snakeToCamel = require('src/utilities/snakeToCamel')
 const { budgetItemTypes } = require('src/data/modules/entities/budgetItem')
 
 const { setBudgetItemType } = require('src/data/ducks/filters')

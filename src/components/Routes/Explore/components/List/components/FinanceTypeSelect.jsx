@@ -7,7 +7,7 @@ const financeTypeMessages = require('src/messages/financeTypes')
 
 const { financeTypes } = require('src/data/modules/entities/finance')
 
-const { snakeToCamel } = require('src/helpers/utilities')
+const snakeToCamel = require('src/utilities/snakeToCamel')
 
 const {
   setFinanceType,
