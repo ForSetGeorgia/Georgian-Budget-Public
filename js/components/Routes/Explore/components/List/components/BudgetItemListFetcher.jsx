@@ -33,10 +33,6 @@ const BudgetItemListFetcher = React.createClass({
     this.fetchList()
   },
 
-  componentDidMount () {
-    this.fetchList()
-  },
-
   render () {
     return null
   }
