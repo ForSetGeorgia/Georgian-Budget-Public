@@ -7,6 +7,7 @@ const {
   getSelectedBudgetItems
 } = require('js/redux/ducks/explore')
 
+const BudgetItemDetailsFetcher = require('./components/BudgetItemDetailsFetcher')
 const BudgetItem = require('./components/BudgetItem/index')
 const LoadingIndicator = require('js/components/shared/LoadingIndicator')
 
@@ -47,9 +48,12 @@ let ExploreDetails = React.createClass({
       )
     }
 
-    return (<div className='gb-ExploreDetails'>
-      {content}
-    </div>)
+    return (
+      <div className='gb-ExploreDetails'>
+        <BudgetItemDetailsFetcher />
+        {content}
+      </div>
+    )
   }
 })
 

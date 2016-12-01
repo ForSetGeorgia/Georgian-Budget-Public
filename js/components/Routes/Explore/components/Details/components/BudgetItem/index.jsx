@@ -1,13 +1,12 @@
 const React = require('react')
 const { injectIntl } = require('react-intl')
-const { arrayOf, func, string } = React.PropTypes
+const { arrayOf, string } = React.PropTypes
 const { connect } = require('react-redux')
 
 const BudgetItemHeading = require('./components/BudgetItemHeading')
 const BudgetItemCharts = require('./components/BudgetItemCharts')
 const LoadingIndicator = require('js/components/shared/LoadingIndicator')
 
-const fetchBudgetItemDetails = require('js/redux/fetchers/fetchBudgetItemDetails')
 const { getSelectedTimePeriods } = require('js/redux/ducks/filters')
 
 const BudgetItem = React.createClass({
@@ -15,8 +14,7 @@ const BudgetItem = React.createClass({
     id: string.isRequired,
     name: string.isRequired,
     loaded: arrayOf(string).isRequired,
-    selectedTimePeriod: string,
-    fetchBudgetItemDetails: func
+    selectedTimePeriod: string
   },
 
   detailsLoaded () {
@@ -25,8 +23,6 @@ const BudgetItem = React.createClass({
 
   componentDidMount () {
     if (this.detailsLoaded()) return
-
-    this.props.fetchBudgetItemDetails(this.props.id)
   },
 
   renderDetails () {
@@ -65,10 +61,4 @@ const mapStateToProps = state => ({
   selectedTimePeriod: getSelectedTimePeriods(state)[0]
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchBudgetItemDetails: itemId => {
-    dispatch(fetchBudgetItemDetails(itemId))
-  }
-})
-
-module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(BudgetItem))
+module.exports = injectIntl(connect(mapStateToProps, null)(BudgetItem))
