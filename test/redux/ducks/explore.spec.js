@@ -7,10 +7,8 @@ const explore = require('js/redux/ducks/explore')
 
 const {
   getExploreState,
-  getListedItemIds,
   setExploreDisplay,
   setSelectedBudgetItemIds,
-  setListedItemIds,
   markListLoaded
 } = explore
 
@@ -57,28 +55,6 @@ describe('explore reducer', () => {
       initialExploreState,
       {
         display: 'list'
-      }
-    ))
-  })
-
-  it('handles setListedItemIds', () => {
-    const initialExploreState = getExploreState(initialState)
-    const previousState = Object.assign(
-      {},
-      initialExploreState,
-      {
-        listedItemIds: ['123', '4']
-      }
-    )
-
-    const action = setListedItemIds(['5', '678'])
-    const newState = explore(previousState, action)
-
-    expect(newState).to.deep.eq(Object.assign(
-      {},
-      initialExploreState,
-      {
-        listedItemIds: ['5', '678']
       }
     ))
   })
