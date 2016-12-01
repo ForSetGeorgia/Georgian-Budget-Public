@@ -1,5 +1,5 @@
 const React = require('react')
-const { arrayOf, shape, string } = React.PropTypes
+const { array, arrayOf, shape, string } = React.PropTypes
 const { injectIntl } = require('react-intl')
 const { connect } = require('react-redux')
 
@@ -12,40 +12,55 @@ const BudgetItemSelectList = require('./BudgetItemSelectList')
 
 const BudgetItemSelectLists = React.createClass({
   propTypes: {
-    listedItems: arrayOf(shape({
-      id: string.isRequired,
-      name: string.isRequired
-    })).isRequired
+    lists: arrayOf(shape({
+      type: string,
+      items: array
+    }))
   },
 
   isLoading () {
-    return this.props.listedItems.length === 0
+    return this.props.lists.length === 0
+  },
+
+  renderList (list) {
+    return (
+      <BudgetItemSelectList
+        type={list.type}
+        items={list.items}
+        key={list.type}
+      />
+    )
   },
 
   render () {
     if (this.isLoading()) return <LoadingIndicator />
 
     return (
-      <BudgetItemSelectList
-        items={this.props.listedItems}
-      />
+      <div>
+        {this.props.lists.map(list => this.renderList(list))}
+      </div>
     )
   }
 })
 
-const getListedItems = state => {
-  const budgetItemType = getSelectedBudgetItemType(state)
-
-  if (!budgetItemType) return []
-
+const getListedItems = (state, budgetItemType) => {
   const budgetItems = getBudgetItemsData(state)
   const budgetItemsArray = Object.keys(budgetItems).map(id => budgetItems[id])
 
   return filterArrayByType(budgetItemsArray, budgetItemType)
 }
 
+const getLists = state => {
+  const budgetItemType = getSelectedBudgetItemType(state)
+
+  return [{
+    type: budgetItemType,
+    items: getListedItems(state, budgetItemType)
+  }]
+}
+
 const mapStateToProps = state => ({
-  listedItems: getListedItems(state)
+  lists: getLists(state)
 })
 
 module.exports = injectIntl(connect(mapStateToProps, null)(BudgetItemSelectLists))

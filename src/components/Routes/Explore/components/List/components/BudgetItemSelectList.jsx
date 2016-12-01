@@ -1,5 +1,5 @@
 const React = require('react')
-const { arrayOf, func, object, string } = React.PropTypes
+const { arrayOf, func, shape, string } = React.PropTypes
 const { injectIntl } = require('react-intl')
 const { connect } = require('react-redux')
 
@@ -9,13 +9,17 @@ const {
   setExploreDisplay
 } = require('src/data/ducks/explore')
 
+const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const CountDisplay = require('./CountDisplay')
 const Griddle = require('griddle-react')
 
 const BudgetItemSelectList = React.createClass({
   propTypes: {
     selectedIds: arrayOf(string).isRequired,
-    items: arrayOf(object),
+    items: arrayOf(shape({
+      id: string.isRequired,
+      name: string.isRequired
+    })).isRequired,
     setSelectedBudgetItemIds: func.isRequired,
     setExploreDisplay: func.isRequired
   },
@@ -36,8 +40,14 @@ const BudgetItemSelectList = React.createClass({
     return className
   },
 
+  isLoading () {
+    return this.props.items.length === 0
+  },
+
   render () {
     const { items } = this.props
+
+    if (this.isLoading()) return <LoadingIndicator />
 
     return (
       <div>
