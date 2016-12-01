@@ -50,6 +50,7 @@ const BudgetItemSelectList = React.createClass({
           bodyHeight='400'
           useGriddleStyles={false}
           columns={['name']}
+          rowMetadata={{ bodyCssClassName: this.rowClassName }}
           {...this.props}
         />
       </div>

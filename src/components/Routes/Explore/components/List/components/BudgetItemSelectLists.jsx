@@ -28,7 +28,6 @@ const BudgetItemSelectLists = React.createClass({
     return (
       <BudgetItemSelectList
         items={this.props.listedItems}
-        rowMetadata={{ bodyCssClassName: this.rowClassName }}
       />
     )
   }
