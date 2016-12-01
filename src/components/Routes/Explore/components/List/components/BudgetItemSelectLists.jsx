@@ -1,14 +1,9 @@
 const React = require('react')
-const { arrayOf, shape, string, func } = React.PropTypes
+const { arrayOf, shape, string } = React.PropTypes
 const { injectIntl } = require('react-intl')
 const { connect } = require('react-redux')
 
-const {
-  getSelectedBudgetItemIds,
-  setSelectedBudgetItemIds,
-  setExploreDisplay
-} = require('src/data/ducks/explore')
-
+const { getSelectedBudgetItemIds } = require('src/data/ducks/explore')
 const { getBudgetItemsData } = require('src/data/ducks/budgetItems')
 const { getSelectedBudgetItemType } = require('src/data/ducks/filters')
 const { filterArrayByType } = require('src/data/modules/entities/budgetItem')
@@ -22,15 +17,7 @@ const BudgetItemSelectLists = React.createClass({
     listedItems: arrayOf(shape({
       id: string.isRequired,
       name: string.isRequired
-    })).isRequired,
-    setSelectedBudgetItemIds: func.isRequired,
-    setExploreDisplay: func.isRequired
-  },
-
-  handleClick (row) {
-    const selectedIds = [row.props.data.id]
-    this.props.setSelectedBudgetItemIds(selectedIds)
-    this.props.setExploreDisplay('details')
+    })).isRequired
   },
 
   rowClassName (row) {
@@ -53,7 +40,6 @@ const BudgetItemSelectLists = React.createClass({
     return (
       <BudgetItemSelectList
         items={this.props.listedItems}
-        onRowClick={this.handleClick}
         rowMetadata={{ bodyCssClassName: this.rowClassName }}
       />
     )
@@ -76,9 +62,4 @@ const mapStateToProps = state => ({
   listedItems: getListedItems(state)
 })
 
-const mapDispatchToProps = dispatch => ({
-  setSelectedBudgetItemIds: ids => { dispatch(setSelectedBudgetItemIds(ids)) },
-  setExploreDisplay: display => { dispatch(setExploreDisplay(display)) }
-})
-
-module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(BudgetItemSelectLists))
+module.exports = injectIntl(connect(mapStateToProps, null)(BudgetItemSelectLists))
