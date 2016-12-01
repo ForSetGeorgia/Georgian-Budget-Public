@@ -25,9 +25,8 @@ const BudgetItemSelectLists = React.createClass({
   renderList (list) {
     return (
       <BudgetItemSelectList
-        type={list.type}
-        items={list.items}
         key={list.type}
+        {...list}
       />
     )
   },
