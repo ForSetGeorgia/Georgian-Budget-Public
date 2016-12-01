@@ -15,7 +15,9 @@ const {
   setExploreDisplay
 } = require('js/redux/ducks/explore')
 
-const { getListedItems } = require('js/redux/ducks/explore')
+const { getBudgetItemsData } = require('js/redux/ducks/budgetItems')
+const { getSelectedBudgetItemType } = require('js/redux/ducks/filters')
+const { filterArrayByType } = require('js/redux/entities/budgetItem')
 
 const ExploreList = React.createClass({
   propTypes: {
@@ -73,6 +75,17 @@ const ExploreList = React.createClass({
     )
   }
 })
+
+const getListedItems = state => {
+  const budgetItemType = getSelectedBudgetItemType(state)
+
+  if (!budgetItemType) return []
+
+  const budgetItems = getBudgetItemsData(state)
+  const budgetItemsArray = Object.keys(budgetItems).map(id => budgetItems[id])
+
+  return filterArrayByType(budgetItemsArray, budgetItemType)
+}
 
 const mapStateToProps = state => ({
   selectedIds: getSelectedBudgetItemIds(state),
