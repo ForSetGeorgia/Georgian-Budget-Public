@@ -7,7 +7,7 @@ const {
   getBudgetItem,
   getItemSpentFinanceIds,
   getItemSpentFinances
-} = require('js/redux/entities/budgetItem')
+} = require('js/redux/modules/entities/budgetItem')
 
 describe('getBudgetItem', () => {
   it('gets item data', () => {

@@ -6,15 +6,15 @@ const { injectIntl, intlShape } = require('react-intl')
 const TimeSeriesChart = require('./TimeSeriesChart')
 const timePeriodTypeMessages = require('js/messages/timePeriodTypes')
 const financeTypeMessages = require('js/messages/financeTypes')
-const { getItemSpentFinances } = require('js/redux/entities/budgetItem')
-const { getItemPlannedFinances } = require('js/redux/entities/budgetItem')
+const { getItemSpentFinances } = require('js/redux/modules/entities/budgetItem')
+const { getItemPlannedFinances } = require('js/redux/modules/entities/budgetItem')
 
 const {
   filterFinancesByPeriodType,
   selectInTimePeriod
-} = require('js/redux/entities/finance')
+} = require('js/redux/modules/entities/finance')
 
-const { translateTimePeriod } = require('js/redux/entities/timePeriod')
+const { translateTimePeriod } = require('js/redux/modules/timePeriod/translate')
 
 const FinancesTimeSeries = React.createClass({
   propTypes: {

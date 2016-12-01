@@ -17,7 +17,7 @@ const {
 
 const { getBudgetItemsData } = require('js/redux/ducks/budgetItems')
 const { getSelectedBudgetItemType } = require('js/redux/ducks/filters')
-const { filterArrayByType } = require('js/redux/entities/budgetItem')
+const { filterArrayByType } = require('js/redux/modules/entities/budgetItem')
 
 const ExploreList = React.createClass({
   propTypes: {

@@ -5,7 +5,7 @@ const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const financeTypeMessages = require('js/messages/financeTypes')
 
-const { financeTypes } = require('js/redux/entities/finance')
+const { financeTypes } = require('js/redux/modules/entities/finance')
 
 const { snakeToCamel } = require('js/helpers/utilities')
 

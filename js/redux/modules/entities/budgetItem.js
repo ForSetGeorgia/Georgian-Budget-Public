@@ -1,6 +1,6 @@
 const { getBudgetItemsData } = require('js/redux/ducks/budgetItems')
-const { getSpentFinance } = require('js/redux/entities/spentFinance')
-const { getPlannedFinance } = require('js/redux/entities/plannedFinance')
+const { getSpentFinance } = require('js/redux/modules/entities/spentFinance')
+const { getPlannedFinance } = require('js/redux/modules/entities/plannedFinance')
 
 const budgetItemTypes = ['priority', 'spending_agency', 'program']
 

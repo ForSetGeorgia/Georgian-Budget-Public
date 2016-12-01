@@ -2,7 +2,7 @@ const React = require('react')
 const { string } = React.PropTypes
 const { injectIntl, intlShape } = require('react-intl')
 
-const { translateTimePeriod } = require('js/redux/entities/timePeriod')
+const { translateTimePeriod } = require('js/redux/modules/timePeriod/translate')
 
 const BudgetItemHeading = ({ name, timePeriod, intl }) => {
   let title = ''

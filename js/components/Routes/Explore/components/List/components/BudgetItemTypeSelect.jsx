@@ -4,7 +4,7 @@ const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 const { snakeToCamel } = require('js/helpers/utilities')
-const { budgetItemTypes } = require('js/redux/entities/budgetItem')
+const { budgetItemTypes } = require('js/redux/modules/entities/budgetItem')
 
 const { setBudgetItemType } = require('js/redux/ducks/filters')
 const { getSelectedBudgetItemType } = require('js/redux/ducks/filters')

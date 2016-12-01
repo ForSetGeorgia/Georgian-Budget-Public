@@ -1,6 +1,6 @@
 const { connect } = require('react-redux')
 
-const { financeTypes } = require('js/redux/entities/finance')
+const { financeTypes } = require('js/redux/modules/entities/finance')
 
 const {
   getSelectedFinanceType,
