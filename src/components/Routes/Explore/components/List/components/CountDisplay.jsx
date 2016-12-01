@@ -1,23 +1,29 @@
 const React = require('react')
-const { number } = React.PropTypes
+const { number, object } = React.PropTypes
+const { FormattedMessage, injectIntl, intlShape } = require('react-intl')
 
-const { FormattedMessage } = require('react-intl')
-
-const CountDisplay = (props) => {
-  const { count } = props
-
+const CountDisplay = ({ count, itemTranslations, intl }) => {
   return (
     <FormattedMessage
       id='app.explore.list.count'
       description='Displays the number of items in the explore list'
-      defaultMessage='Showing {count} items.'
-      values={{count: count}}
+      defaultMessage='Showing {count} {count, plural,
+        one {{one}}
+        other {{other}}
+      }.'
+      values={{
+        count: count,
+        one: intl.formatMessage(itemTranslations.one),
+        other: intl.formatMessage(itemTranslations.other)
+      }}
     />
   )
 }
 
 CountDisplay.propTypes = {
-  count: number
+  count: number,
+  itemTranslations: object,
+  intl: intlShape
 }
 
-module.exports = CountDisplay
+module.exports = injectIntl(CountDisplay)

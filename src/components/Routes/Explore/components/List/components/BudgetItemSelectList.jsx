@@ -2,6 +2,9 @@ const React = require('react')
 const { arrayOf, func, shape, string } = React.PropTypes
 const { injectIntl } = require('react-intl')
 const { connect } = require('react-redux')
+const snakeToCamel = require('src/utilities/snakeToCamel')
+
+const budgetItemTypeMessages = require('src/messages/budgetItemTypes')
 
 const {
   getSelectedBudgetItemIds,
@@ -46,13 +49,16 @@ const BudgetItemSelectList = React.createClass({
   },
 
   render () {
-    const { items } = this.props
+    const { items, typeOfItems } = this.props
 
     if (this.isLoading()) return <LoadingIndicator />
 
     return (
       <div>
-        <CountDisplay count={items.length} />
+        <CountDisplay
+          count={items.length}
+          itemTranslations={budgetItemTypeMessages[snakeToCamel(typeOfItems)]}
+        />
         <Griddle
           results={items}
           onRowClick={this.handleClick}

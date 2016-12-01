@@ -6,7 +6,7 @@
   "app.filters.timePeriod.label": "წელი",
   "app.filters.timePeriod.allOption": "ყველა",
   "app.loading": "მონაცემები იტვირთება",
-  "app.explore.list.count": "ნაჩვენებია {count} ერთეული.",
+  "app.explore.list.count": "ნაჩვენებია {count} {count, plural, one {{one}} other {{other}}}.",
   "budgetType.wholeBudget.one": "მთლიანი ბიუჯეტი",
   "budgetType.program.one": "პროგრამა",
   "budgetType.program.other": "პროგრამები",
