@@ -1,7 +1,7 @@
 const { normalize, arrayOf } = require('normalizr')
 const budgetItem = require('js/redux/schemas/budgetItem')
 
-const { setListedItemIds } = require('js/redux/ducks/explore')
+const { setListedItemIds, markListLoaded } = require('js/redux/ducks/explore')
 const { mergeBudgetItems } = require('js/redux/ducks/budgetItems')
 const { getLocale } = require('js/redux/ducks/locale')
 const { addError } = require('js/redux/ducks/errors')
@@ -26,7 +26,7 @@ const fetchListedBudgetItems = () => (dispatch, getState) => {
 
   georgianBudgetAPI.get(locale, 'v1', {
     params: {
-      budgetItemFields: 'id,name',
+      budgetItemFields: 'id,name,type',
 
       filters: {
         budgetItemType: budgetItemType
@@ -47,6 +47,7 @@ const fetchListedBudgetItems = () => (dispatch, getState) => {
 
     dispatch(mergeBudgetItems(budgetItems))
     dispatch(setListedItemIds(Object.keys(budgetItems)))
+    dispatch(markListLoaded(budgetItemType))
   })
 }
 
