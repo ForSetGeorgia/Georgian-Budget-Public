@@ -1,9 +1,10 @@
 const React = require('react')
-const { func, string } = React.PropTypes
+const { arrayOf, func, string } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl } = require('react-intl')
 
 const { getSelectedBudgetItemType } = require('js/redux/ducks/filters')
+const { getExploreListLoaded } = require('js/redux/ducks/explore')
 
 const fetchListedBudgetItems =
 require('js/redux/fetchers/fetchListedBudgetItems')
@@ -11,6 +12,7 @@ require('js/redux/fetchers/fetchListedBudgetItems')
 const BudgetItemListFetcher = React.createClass({
   propTypes: {
     budgetItemType: string.isRequired,
+    listLoaded: arrayOf(string).isRequired,
     fetchListedBudgetItems: func.isRequired
   },
 
@@ -19,9 +21,12 @@ const BudgetItemListFetcher = React.createClass({
   },
 
   fetchList () {
-    if (!this.listIsLoaded()) {
-      this.props.fetchListedBudgetItems()
-    }
+    const { listLoaded, budgetItemType, fetchListedBudgetItems } = this.props
+
+    if (this.listIsLoaded()) return
+    if (listLoaded.includes(budgetItemType)) return
+
+    fetchListedBudgetItems()
   },
 
   componentDidUpdate () {
@@ -38,6 +43,7 @@ const BudgetItemListFetcher = React.createClass({
 })
 
 const mapStateToProps = state => ({
+  listLoaded: getExploreListLoaded(state),
   budgetItemType: getSelectedBudgetItemType(state)
 })
 
