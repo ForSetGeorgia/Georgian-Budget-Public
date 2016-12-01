@@ -80,7 +80,7 @@ const loaders = [
 
 const config = {
   context: paths.ROOT,
-  entry: 'js/browser.jsx',
+  entry: 'src/browser.jsx',
   output: {
     path: paths.BUNDLES,
     filename: UGLIFY ? 'bundle.min.js' : 'bundle.js'
