@@ -1,29 +1,32 @@
 const React = require('react')
-const { arrayOf, bool, object } = React.PropTypes
+const { arrayOf, object } = React.PropTypes
 
-const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const CountDisplay = require('./CountDisplay')
 const Griddle = require('griddle-react')
 
-const BudgetItemSelectList = (props) => {
-  const { listedItems, loading } = props
+const BudgetItemSelectList = React.createClass({
+  propTypes: {
+    items: arrayOf(object)
+  },
 
-  if (loading) return <LoadingIndicator />
+  render () {
+    const { items } = this.props
 
-  return (
-    <div>
-      <CountDisplay items={listedItems} />
-      <Griddle
-        results={listedItems}
-        {...props}
-      />
-    </div>
-  )
-}
-
-BudgetItemSelectList.propTypes = {
-  listedItems: arrayOf(object),
-  loading: bool
-}
+    return (
+      <div>
+        <CountDisplay items={items} />
+        <Griddle
+          results={items}
+          showFilter
+          enableInfiniteScroll
+          bodyHeight='400'
+          useGriddleStyles={false}
+          columns={['name']}
+          {...this.props}
+        />
+      </div>
+    )
+  }
+})
 
 module.exports = BudgetItemSelectList

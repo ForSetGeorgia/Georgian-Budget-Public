@@ -13,6 +13,7 @@ const { getBudgetItemsData } = require('src/data/ducks/budgetItems')
 const { getSelectedBudgetItemType } = require('src/data/ducks/filters')
 const { filterArrayByType } = require('src/data/modules/entities/budgetItem')
 
+const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const BudgetItemSelectList = require('./BudgetItemSelectList')
 
 const BudgetItemSelectLists = React.createClass({
@@ -47,17 +48,13 @@ const BudgetItemSelectLists = React.createClass({
   },
 
   render () {
+    if (this.isLoading()) return <LoadingIndicator />
+
     return (
       <BudgetItemSelectList
-        listedItems={this.props.listedItems}
-        loading={this.isLoading()}
-        columns={['name']}
+        items={this.props.listedItems}
         onRowClick={this.handleClick}
         rowMetadata={{ bodyCssClassName: this.rowClassName }}
-        useGriddleStyles={false}
-        showFilter
-        enableInfiniteScroll
-        bodyHeight='400'
       />
     )
   }
