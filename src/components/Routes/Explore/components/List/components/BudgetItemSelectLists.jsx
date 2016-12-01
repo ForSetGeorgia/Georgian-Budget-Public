@@ -13,7 +13,7 @@ const BudgetItemSelectList = require('./BudgetItemSelectList')
 const BudgetItemSelectLists = React.createClass({
   propTypes: {
     lists: arrayOf(shape({
-      type: string,
+      typeOfItems: string,
       items: array
     }))
   },
@@ -25,7 +25,7 @@ const BudgetItemSelectLists = React.createClass({
   renderList (list) {
     return (
       <BudgetItemSelectList
-        key={list.type}
+        key={list.typeOfItems}
         {...list}
       />
     )
@@ -53,7 +53,7 @@ const getLists = state => {
   const budgetItemType = getSelectedBudgetItemType(state)
 
   return [{
-    type: budgetItemType,
+    typeOfItems: budgetItemType,
     items: getListedItems(state, budgetItemType)
   }]
 }

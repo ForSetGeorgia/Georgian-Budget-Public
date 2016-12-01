@@ -16,6 +16,7 @@ const Griddle = require('griddle-react')
 const BudgetItemSelectList = React.createClass({
   propTypes: {
     selectedIds: arrayOf(string).isRequired,
+    typeOfItems: string.isRequired,
     items: arrayOf(shape({
       id: string.isRequired,
       name: string.isRequired
