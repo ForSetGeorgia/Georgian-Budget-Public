@@ -52,7 +52,7 @@ const BudgetItemSelectList = React.createClass({
 
     return (
       <div>
-        <CountDisplay items={items} />
+        <CountDisplay count={items.length} />
         <Griddle
           results={items}
           onRowClick={this.handleClick}
