@@ -16,6 +16,6 @@ global.webpack_isomorphic_tools = new Webpack_isomorphic_tools(
 global.webpack_isomorphic_tools.server(
   paths.ROOT,
   function() {
-    require('js/server.js')
+    require('src/server.js')
   }
 )

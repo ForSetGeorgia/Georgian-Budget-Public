@@ -3,12 +3,12 @@
 
 const { expect } = require('chai')
 
-const initialState = require('js/data/initialState')
+const initialState = require('src/data/initialState')
 
-const spentFinancesReducer = require('js/data/ducks/spentFinances')
+const spentFinancesReducer = require('src/data/ducks/spentFinances')
 const { mergeSpentFinances } = spentFinancesReducer
 
-const { getSpentFinance } = require('js/data/modules/entities/spentFinance')
+const { getSpentFinance } = require('src/data/modules/entities/spentFinance')
 
 describe('getSpentFinance', () => {
   it('gets the spent finance data for the provided id', () => {

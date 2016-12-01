@@ -2,7 +2,7 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const budgetItems = require('js/data/ducks/budgetItems')
+const budgetItems = require('src/data/ducks/budgetItems')
 
 const {
   mergeBudgetItems,
@@ -10,7 +10,7 @@ const {
   getBudgetItemsData
 } = budgetItems
 
-const wholeState = require('js/data/initialState')
+const wholeState = require('src/data/initialState')
 
 describe('budget items reducer', () => {
   it('handles mergeBudgetItems action', () => {

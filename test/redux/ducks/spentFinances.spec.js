@@ -2,8 +2,8 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const initialState = require('js/data/initialState')
-const spentFinances = require('js/data/ducks/spentFinances')
+const initialState = require('src/data/initialState')
+const spentFinances = require('src/data/ducks/spentFinances')
 const { getSpentFinances, mergeSpentFinances } = spentFinances
 
 describe('spentFinances reducer', () => {

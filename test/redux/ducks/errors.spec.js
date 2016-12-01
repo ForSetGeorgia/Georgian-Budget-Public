@@ -2,10 +2,10 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const errors = require('js/data/ducks/errors')
+const errors = require('src/data/ducks/errors')
 const { addError, clearErrors } = errors
 const { getErrors } = errors
-const wholeState = require('js/data/initialState')
+const wholeState = require('src/data/initialState')
 
 describe('errors reducer', () => {
   it('handles addError action for new error', () => {
