@@ -1,7 +1,7 @@
 const { createSelector } = require('reselect')
 const rootSelector = require('./rootSelector')
 
-const deepMergeEntities = require('src/deepMergeEntities')
+const deepMergeEntities = require('src/data/deepMergeEntities')
 
 const MERGE_SPENT_FINANCES = 'georgianBudget/spentFinances/MERGE_SPENT_FINANCES'
 
