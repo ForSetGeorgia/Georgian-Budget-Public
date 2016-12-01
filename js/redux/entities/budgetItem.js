@@ -28,11 +28,16 @@ const getItemPlannedFinances = (state, itemId) => (
   )).filter(finance => finance)
 )
 
+const filterArrayByType = (budgetItems, type) => (
+  budgetItems.filter(budgetItem => budgetItem.type === type)
+)
+
 module.exports = {
   budgetItemTypes,
   getBudgetItem,
   getItemSpentFinanceIds,
   getItemSpentFinances,
   getItemPlannedFinanceIds,
-  getItemPlannedFinances
+  getItemPlannedFinances,
+  filterArrayByType
 }
