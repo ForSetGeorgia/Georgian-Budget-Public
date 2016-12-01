@@ -3,7 +3,6 @@ const { arrayOf, shape, string } = React.PropTypes
 const { injectIntl } = require('react-intl')
 const { connect } = require('react-redux')
 
-const { getSelectedBudgetItemIds } = require('src/data/ducks/explore')
 const { getBudgetItemsData } = require('src/data/ducks/budgetItems')
 const { getSelectedBudgetItemType } = require('src/data/ducks/filters')
 const { filterArrayByType } = require('src/data/modules/entities/budgetItem')
@@ -13,21 +12,10 @@ const BudgetItemSelectList = require('./BudgetItemSelectList')
 
 const BudgetItemSelectLists = React.createClass({
   propTypes: {
-    selectedIds: arrayOf(string).isRequired,
     listedItems: arrayOf(shape({
       id: string.isRequired,
       name: string.isRequired
     })).isRequired
-  },
-
-  rowClassName (row) {
-    let className = 'gb-ExploreList-row'
-
-    if (this.props.selectedIds.includes(row.id)) {
-      className += ' is-selected'
-    }
-
-    return className
   },
 
   isLoading () {
@@ -58,7 +46,6 @@ const getListedItems = state => {
 }
 
 const mapStateToProps = state => ({
-  selectedIds: getSelectedBudgetItemIds(state),
   listedItems: getListedItems(state)
 })
 

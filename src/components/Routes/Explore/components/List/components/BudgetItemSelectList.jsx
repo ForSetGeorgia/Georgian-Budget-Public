@@ -1,9 +1,10 @@
 const React = require('react')
-const { arrayOf, object, func } = React.PropTypes
+const { arrayOf, func, object, string } = React.PropTypes
 const { injectIntl } = require('react-intl')
 const { connect } = require('react-redux')
 
 const {
+  getSelectedBudgetItemIds,
   setSelectedBudgetItemIds,
   setExploreDisplay
 } = require('src/data/ducks/explore')
@@ -13,6 +14,7 @@ const Griddle = require('griddle-react')
 
 const BudgetItemSelectList = React.createClass({
   propTypes: {
+    selectedIds: arrayOf(string).isRequired,
     items: arrayOf(object),
     setSelectedBudgetItemIds: func.isRequired,
     setExploreDisplay: func.isRequired
@@ -22,6 +24,16 @@ const BudgetItemSelectList = React.createClass({
     const selectedIds = [row.props.data.id]
     this.props.setSelectedBudgetItemIds(selectedIds)
     this.props.setExploreDisplay('details')
+  },
+
+  rowClassName (row) {
+    let className = 'gb-ExploreList-row'
+
+    if (this.props.selectedIds.includes(row.id)) {
+      className += ' is-selected'
+    }
+
+    return className
   },
 
   render () {
@@ -45,9 +57,13 @@ const BudgetItemSelectList = React.createClass({
   }
 })
 
+const mapStateToProps = state => ({
+  selectedIds: getSelectedBudgetItemIds(state)
+})
+
 const mapDispatchToProps = dispatch => ({
   setSelectedBudgetItemIds: ids => { dispatch(setSelectedBudgetItemIds(ids)) },
   setExploreDisplay: display => { dispatch(setExploreDisplay(display)) }
 })
 
-module.exports = injectIntl(connect(null, mapDispatchToProps)(BudgetItemSelectList))
+module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(BudgetItemSelectList))
