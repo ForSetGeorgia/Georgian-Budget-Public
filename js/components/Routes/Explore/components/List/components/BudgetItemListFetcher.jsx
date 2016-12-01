@@ -7,7 +7,7 @@ const { getSelectedBudgetItemType } = require('js/redux/ducks/filters')
 const { getExploreListLoaded } = require('js/redux/ducks/explore')
 
 const fetchListedBudgetItems =
-require('js/redux/fetchers/fetchListedBudgetItems')
+require('js/redux/modules/fetchers/fetchListedBudgetItems')
 
 const BudgetItemListFetcher = React.createClass({
   propTypes: {

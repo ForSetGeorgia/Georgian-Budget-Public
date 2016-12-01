@@ -4,7 +4,7 @@ const { connect } = require('react-redux')
 const { injectIntl } = require('react-intl')
 
 const { getLocale } = require('js/redux/ducks/locale')
-const fetchBudgetItemDetails = require('js/redux/fetchers/fetchBudgetItemDetails')
+const fetchBudgetItemDetails = require('js/redux/modules/fetchers/fetchBudgetItemDetails')
 const { getBudgetItemsData } = require('js/redux/ducks/budgetItems')
 const { getSelectedBudgetItemIds } = require('js/redux/ducks/explore')
 

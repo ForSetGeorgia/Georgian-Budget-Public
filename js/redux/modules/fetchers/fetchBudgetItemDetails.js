@@ -1,9 +1,9 @@
 const { normalize, arrayOf } = require('normalizr')
 const budgetItem = require('js/redux/schemas/budgetItem')
 
-const { addError } = require('../ducks/errors')
+const { addError } = require('js/redux/ducks/errors')
 
-const { mergeBudgetItems } = require('../ducks/budgetItems')
+const { mergeBudgetItems } = require('js/redux/ducks/budgetItems')
 const { mergeSpentFinances } = require('js/redux/ducks/spentFinances')
 const { mergePlannedFinances } = require('js/redux/ducks/plannedFinances')
 
