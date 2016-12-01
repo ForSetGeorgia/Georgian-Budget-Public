@@ -14,7 +14,7 @@ const TimeSeriesChart = React.createClass({
 
   // When the DOM is ready, create the chart.
   componentDidMount: function () {
-    const Highcharts = require('js/highcharts')
+    const Highcharts = require('src/highcharts')
     const {
       containerId,
       title,
