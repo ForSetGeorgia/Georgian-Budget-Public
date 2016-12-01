@@ -5,13 +5,13 @@ const { connect } = require('react-redux')
 const {
   getSelectedBudgetItemIds,
   getSelectedExploreDisplay
-} = require('js/redux/ducks/explore')
+} = require('js/data/ducks/explore')
 
 const {
   getSelectedBudgetItemType,
   getSelectedFinanceType,
   getSelectedTimePeriods
- } = require('js/redux/ducks/filters')
+ } = require('js/data/ducks/filters')
 
 const UrlQueryUpdater = React.createClass({
   contextTypes: {

@@ -5,7 +5,7 @@ const { connect } = require('react-redux')
 
 const {
   getSelectedBudgetItems
-} = require('js/redux/ducks/explore')
+} = require('js/data/ducks/explore')
 
 const BudgetItemDetailsFetcher = require('./components/BudgetItemDetailsFetcher')
 const BudgetItem = require('./components/BudgetItem/index')

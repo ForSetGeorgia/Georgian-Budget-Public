@@ -4,10 +4,10 @@ const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const budgetItemTypeMessages = require('js/messages/budgetItemTypes')
 const { snakeToCamel } = require('js/helpers/utilities')
-const { budgetItemTypes } = require('js/redux/modules/entities/budgetItem')
+const { budgetItemTypes } = require('js/data/modules/entities/budgetItem')
 
-const { setBudgetItemType } = require('js/redux/ducks/filters')
-const { getSelectedBudgetItemType } = require('js/redux/ducks/filters')
+const { setBudgetItemType } = require('js/data/ducks/filters')
+const { getSelectedBudgetItemType } = require('js/data/ducks/filters')
 
 const ButtonSelector = require('js/components/shared/ButtonSelector')
 

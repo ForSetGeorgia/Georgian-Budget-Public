@@ -3,10 +3,10 @@ const { arrayOf, func, object, string } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl } = require('react-intl')
 
-const { getLocale } = require('js/redux/ducks/locale')
-const fetchBudgetItemDetails = require('js/redux/modules/fetchers/fetchBudgetItemDetails')
-const { getBudgetItemsData } = require('js/redux/ducks/budgetItems')
-const { getSelectedBudgetItemIds } = require('js/redux/ducks/explore')
+const { getLocale } = require('js/data/ducks/locale')
+const fetchBudgetItemDetails = require('js/data/modules/fetchers/fetchBudgetItemDetails')
+const { getBudgetItemsData } = require('js/data/ducks/budgetItems')
+const { getSelectedBudgetItemIds } = require('js/data/ducks/explore')
 
 const BudgetItemDetailsFetcher = React.createClass({
   propTypes: {

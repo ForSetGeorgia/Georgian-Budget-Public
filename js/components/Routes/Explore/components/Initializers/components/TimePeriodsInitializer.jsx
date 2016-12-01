@@ -5,7 +5,7 @@ const { connect } = require('react-redux')
 const {
   getSelectedTimePeriods,
   setTimePeriods
- } = require('js/redux/ducks/filters')
+ } = require('js/data/ducks/filters')
 
 const TimePeriodsInitializer = React.createClass({
   contextTypes: {

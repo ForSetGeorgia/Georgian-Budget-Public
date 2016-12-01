@@ -5,7 +5,7 @@ const { connect } = require('react-redux')
 const {
   getSelectedBudgetItemIds,
   setSelectedBudgetItemIds
-} = require('js/redux/ducks/explore')
+} = require('js/data/ducks/explore')
 
 const SelectedIdsInitializer = React.createClass({
   contextTypes: {

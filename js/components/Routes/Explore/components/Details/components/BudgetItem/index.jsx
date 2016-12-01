@@ -8,7 +8,7 @@ const BudgetItemCharts = require('./components/BudgetItemCharts')
 const LoadingIndicator = require('js/components/shared/LoadingIndicator')
 const BudgetItemYearlyTable = require('./components/BudgetItemYearlyTable')
 
-const { getSelectedTimePeriods } = require('js/redux/ducks/filters')
+const { getSelectedTimePeriods } = require('js/data/ducks/filters')
 
 const BudgetItem = React.createClass({
   propTypes: {

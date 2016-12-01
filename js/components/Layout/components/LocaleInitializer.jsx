@@ -2,7 +2,7 @@ const React = require('react')
 const { func, string } = React.PropTypes
 const { connect } = require('react-redux')
 
-const { setLocale } = require('js/redux/ducks/locale')
+const { setLocale } = require('js/data/ducks/locale')
 
 const LocaleInitializer = React.createClass({
   contextTypes: {

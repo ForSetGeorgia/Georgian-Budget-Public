@@ -2,12 +2,12 @@ const { connect } = require('react-redux')
 const { injectIntl } = require('react-intl')
 const Griddle = require('griddle-react')
 
-const { getYearsWithData } = require('js/redux/modules/timePeriod/type/year')
-const { getItemSpentFinances } = require('js/redux/modules/entities/budgetItem')
-const { getItemPlannedFinances } = require('js/redux/modules/entities/budgetItem')
-const { translateTimePeriod } = require('js/redux/modules/timePeriod/translate')
-const { getSelectedTimePeriods } = require('js/redux/ducks/filters')
-const { getFinanceDifference } = require('js/redux/modules/finance/difference')
+const { getYearsWithData } = require('js/data/modules/timePeriod/type/year')
+const { getItemSpentFinances } = require('js/data/modules/entities/budgetItem')
+const { getItemPlannedFinances } = require('js/data/modules/entities/budgetItem')
+const { translateTimePeriod } = require('js/data/modules/timePeriod/translate')
+const { getSelectedTimePeriods } = require('js/data/ducks/filters')
+const { getFinanceDifference } = require('js/data/modules/finance/difference')
 
 const getColumns = () => (
   ['year', 'spent_finance', 'planned_finance', 'difference']

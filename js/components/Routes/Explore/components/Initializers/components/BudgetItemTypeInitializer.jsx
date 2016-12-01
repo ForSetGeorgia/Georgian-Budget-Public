@@ -1,10 +1,10 @@
 const React = require('react')
 const { connect } = require('react-redux')
 const { func, object, string } = React.PropTypes
-const { budgetItemTypes } = require('js/redux/modules/entities/budgetItem')
+const { budgetItemTypes } = require('js/data/modules/entities/budgetItem')
 
-const { setBudgetItemType } = require('js/redux/ducks/filters')
-const { getSelectedBudgetItemType } = require('js/redux/ducks/filters')
+const { setBudgetItemType } = require('js/data/ducks/filters')
+const { getSelectedBudgetItemType } = require('js/data/ducks/filters')
 
 const BudgetItemTypeInitializer = React.createClass({
   contextTypes: {

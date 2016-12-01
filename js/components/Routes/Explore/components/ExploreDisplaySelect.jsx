@@ -6,7 +6,7 @@ const ButtonSelector = require('js/components/shared/ButtonSelector')
 const {
   setExploreDisplay,
   getSelectedExploreDisplay
- } = require('js/redux/ducks/explore')
+ } = require('js/data/ducks/explore')
 
 const ExploreDisplaySelect = React.createClass({
   propTypes: {

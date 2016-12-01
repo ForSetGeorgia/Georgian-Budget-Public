@@ -3,7 +3,7 @@ const { object, string, shape, func } = React.PropTypes
 const { addLocaleData, IntlProvider } = require('react-intl')
 const { connect } = require('react-redux')
 
-const { setLocale } = require('js/redux/ducks/locale')
+const { setLocale } = require('js/data/ducks/locale')
 
 const Layout = require('js/components/Layout/index')
 

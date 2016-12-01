@@ -1,11 +1,11 @@
 const { connect } = require('react-redux')
 
-const { financeTypes } = require('js/redux/modules/entities/finance')
+const { financeTypes } = require('js/data/modules/entities/finance')
 
 const {
   getSelectedFinanceType,
   setFinanceType
-} = require('js/redux/ducks/filters')
+} = require('js/data/ducks/filters')
 
 const StateInitializer = require('js/components/shared/StateInitializer')
 

@@ -3,7 +3,7 @@ const { injectIntl } = require('react-intl')
 const { string } = React.PropTypes
 const { connect } = require('react-redux')
 
-const { getSelectedExploreDisplay } = require('js/redux/ducks/explore')
+const { getSelectedExploreDisplay } = require('js/data/ducks/explore')
 
 const LoadingIndicator = require('js/components/shared/LoadingIndicator')
 const ExploreList = require('./List/index')

@@ -21,7 +21,7 @@ const ReactRedux = require('react-redux')
 const Provider = ReactRedux.Provider
 
 // Must specify .js because node does not use webpack
-const store = require('js/redux/store.js')
+const store = require('js/data/store.js')
 
 // The port we've chosen to run our app on
 const port = 8080

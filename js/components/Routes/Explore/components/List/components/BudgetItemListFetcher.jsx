@@ -3,11 +3,11 @@ const { arrayOf, func, string } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl } = require('react-intl')
 
-const { getSelectedBudgetItemType } = require('js/redux/ducks/filters')
-const { getExploreListLoaded } = require('js/redux/ducks/explore')
+const { getSelectedBudgetItemType } = require('js/data/ducks/filters')
+const { getExploreListLoaded } = require('js/data/ducks/explore')
 
 const fetchListedBudgetItems =
-require('js/redux/modules/fetchers/fetchListedBudgetItems')
+require('js/data/modules/fetchers/fetchListedBudgetItems')
 
 const BudgetItemListFetcher = React.createClass({
   propTypes: {

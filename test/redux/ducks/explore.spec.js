@@ -2,8 +2,8 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const initialState = require('js/redux/initialState')
-const explore = require('js/redux/ducks/explore')
+const initialState = require('js/data/initialState')
+const explore = require('js/data/ducks/explore')
 
 const {
   getExploreState,

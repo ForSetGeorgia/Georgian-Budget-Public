@@ -1,7 +1,7 @@
 const axios = require('axios')
 
-const { addError } = require('js/redux/ducks/errors')
-const { dispatch } = require('js/redux/store')
+const { addError } = require('js/data/ducks/errors')
+const { dispatch } = require('js/data/store')
 
 function get (locale, version, options) {
   return axios.get(

@@ -1,4 +1,4 @@
-const { getPlannedFinances } = require('js/redux/ducks/plannedFinances')
+const { getPlannedFinances } = require('js/data/ducks/plannedFinances')
 
 const getPlannedFinance = (state, financeId) => (
   getPlannedFinances(state)[financeId]

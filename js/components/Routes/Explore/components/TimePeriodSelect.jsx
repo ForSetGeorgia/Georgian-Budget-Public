@@ -3,14 +3,14 @@ const { func, string } = React.PropTypes
 const { injectIntl, defineMessages, intlShape } = require('react-intl')
 const { connect } = require('react-redux')
 
-const { getYearsWithData } = require('js/redux/modules/timePeriod/type/year')
+const { getYearsWithData } = require('js/data/modules/timePeriod/type/year')
 
 const {
   getSelectedTimePeriods,
   setTimePeriods
- } = require('js/redux/ducks/filters')
+ } = require('js/data/ducks/filters')
 
-const { translateTimePeriod } = require('js/redux/modules/timePeriod/translate')
+const { translateTimePeriod } = require('js/data/modules/timePeriod/translate')
 
 const ButtonSelector = require('js/components/shared/ButtonSelector')
 

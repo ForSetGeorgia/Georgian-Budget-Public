@@ -3,8 +3,8 @@ const { Provider } = require('react-redux')
 const { Router } = require('react-router')
 
 const Routes = require('js/components/Routes')
-const store = require('js/redux/store')
-const history = require('js/redux/history')
+const store = require('js/data/store')
+const history = require('js/data/history')
 
 const App = function () {
   return (

@@ -2,9 +2,9 @@
 /* eslint-env mocha */
 
 const { expect } = require('chai')
-const filters = require('js/redux/ducks/filters')
+const filters = require('js/data/ducks/filters')
 const { setFinanceType, setBudgetItemType, setTimePeriods } = filters
-const initialState = require('js/redux/initialState').filters
+const initialState = require('js/data/initialState').filters
 
 describe('filters reducer', () => {
   it('handles setFinanceType action', () => {

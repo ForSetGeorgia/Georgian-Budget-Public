@@ -5,14 +5,14 @@ const { connect } = require('react-redux')
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const financeTypeMessages = require('js/messages/financeTypes')
 
-const { financeTypes } = require('js/redux/modules/entities/finance')
+const { financeTypes } = require('js/data/modules/entities/finance')
 
 const { snakeToCamel } = require('js/helpers/utilities')
 
 const {
   setFinanceType,
   getSelectedFinanceType
-} = require('js/redux/ducks/filters')
+} = require('js/data/ducks/filters')
 
 const ButtonSelector = require('js/components/shared/ButtonSelector')
 

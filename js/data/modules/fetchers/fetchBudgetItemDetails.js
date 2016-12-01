@@ -1,13 +1,13 @@
 const { normalize, arrayOf } = require('normalizr')
-const budgetItem = require('js/redux/schemas/budgetItem')
+const budgetItem = require('js/data/schemas/budgetItem')
 
-const { addError } = require('js/redux/ducks/errors')
+const { addError } = require('js/data/ducks/errors')
 
-const { mergeBudgetItems } = require('js/redux/ducks/budgetItems')
-const { mergeSpentFinances } = require('js/redux/ducks/spentFinances')
-const { mergePlannedFinances } = require('js/redux/ducks/plannedFinances')
+const { mergeBudgetItems } = require('js/data/ducks/budgetItems')
+const { mergeSpentFinances } = require('js/data/ducks/spentFinances')
+const { mergePlannedFinances } = require('js/data/ducks/plannedFinances')
 
-const { getLocale } = require('js/redux/ducks/locale')
+const { getLocale } = require('js/data/ducks/locale')
 
 const georgianBudgetAPI = require('js/services/georgianBudgetAPI')
 

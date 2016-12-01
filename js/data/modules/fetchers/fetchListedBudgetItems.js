@@ -1,12 +1,12 @@
 const { normalize, arrayOf } = require('normalizr')
-const budgetItem = require('js/redux/schemas/budgetItem')
+const budgetItem = require('js/data/schemas/budgetItem')
 
-const { markListLoaded } = require('js/redux/ducks/explore')
-const { mergeBudgetItems } = require('js/redux/ducks/budgetItems')
-const { getLocale } = require('js/redux/ducks/locale')
-const { addError } = require('js/redux/ducks/errors')
+const { markListLoaded } = require('js/data/ducks/explore')
+const { mergeBudgetItems } = require('js/data/ducks/budgetItems')
+const { getLocale } = require('js/data/ducks/locale')
+const { addError } = require('js/data/ducks/errors')
 
-const { getSelectedBudgetItemType } = require('js/redux/ducks/filters')
+const { getSelectedBudgetItemType } = require('js/data/ducks/filters')
 
 const georgianBudgetAPI = require('js/services/georgianBudgetAPI')
 

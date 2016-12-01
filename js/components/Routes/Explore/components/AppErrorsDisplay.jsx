@@ -1,7 +1,7 @@
 const React = require('react')
 const { array } = React.PropTypes
 const ErrorsDisplay = require('js/components/shared/ErrorsDisplay')
-const { getErrors } = require('js/redux/ducks/errors')
+const { getErrors } = require('js/data/ducks/errors')
 const { connect } = require('react-redux')
 
 const AppErrorsDisplay = (props) => {
