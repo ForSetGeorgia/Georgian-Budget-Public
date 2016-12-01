@@ -6,7 +6,6 @@ const { connect } = require('react-redux')
 const BudgetItemTypeSelect = require('./components/BudgetItemTypeSelect')
 const FinanceTypeSelect = require('./components/FinanceTypeSelect')
 const BudgetItemSelectList = require('./components/BudgetItemSelectList')
-const CountDisplay = require('./components/CountDisplay')
 const BudgetItemListFetcher = require('./components/BudgetItemListFetcher')
 
 const {
@@ -56,10 +55,6 @@ const ExploreList = React.createClass({
         <BudgetItemListFetcher />
         <BudgetItemTypeSelect />
         <FinanceTypeSelect />
-        <CountDisplay
-          show={!this.isLoading()}
-          items={this.props.listedItems}
-        />
         <BudgetItemSelectList
           listedItems={this.props.listedItems}
           loading={this.isLoading()}
