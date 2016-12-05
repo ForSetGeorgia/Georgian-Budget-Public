@@ -1,5 +1,13 @@
 const { Schema } = require('normalizr')
 
-const spentFinance = new Schema('spentFinances')
+const assignEntity = (output, key, value, input) => {
+  if (key === 'amount') {
+    output.amount = Number(value)
+  }
+}
+
+const spentFinance = new Schema('spentFinances', {
+  assignEntity: assignEntity
+})
 
 module.exports = spentFinance
