@@ -8,13 +8,7 @@ function get (locale, version, options) {
     `${process.env.API_URL}/${locale}/${version}`,
     Object.assign(
       {},
-      options,
-      {
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          'X-Key-Inflection': 'camel'
-        }
-      }
+      options
     )
   ).catch((error) => {
     dispatch(addError(`Error communicating with API: ${error}`))
