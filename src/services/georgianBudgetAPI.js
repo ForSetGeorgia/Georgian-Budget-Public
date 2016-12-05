@@ -6,7 +6,15 @@ const { dispatch } = require('src/data/store')
 function get (locale, version, options) {
   return axios.get(
     `${process.env.API_URL}/${locale}/${version}`,
-    options
+    Object.assign(
+      {},
+      options,
+      {
+        headers: {
+          'X-Key-Inflection': 'camel'
+        }
+      }
+    )
   ).catch((error) => {
     dispatch(addError(`Error communicating with API: ${error}`))
   })
