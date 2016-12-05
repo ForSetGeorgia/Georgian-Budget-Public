@@ -7,6 +7,7 @@ const Env = process.env.NODE_ENV || 'development'
 const DEV = Env === 'development'
 const STAGING = Env === 'staging'
 const PROD = Env === 'production'
+const UGLIFY = STAGING || PROD
 
 console.log('Running webpack in ' + Env + ' environment')
 
@@ -39,44 +40,12 @@ const plugins = [
   webpack_isomorphic_tools_plugin
 ]
 
-const UGLIFY = STAGING || PROD
-
 if (UGLIFY) {
   plugins.push(new webpack.optimize.UglifyJsPlugin({
     mangle: true,
     sourceMap: true
   }))
 }
-
-const loaders = [
-  {
-    test: /\.jsx?$/,
-    loader: 'babel'
-  },
-  {
-    test: /\.scss$/,
-    loader: ExtractTextPlugin.extract(
-      'style',
-      [
-        UGLIFY ? 'css?minimize!' : 'css',
-        'postcss',
-        'sass'
-      ]
-    )
-  },
-  {
-    test: /\.svg$/,
-    loader: 'svg-inline'
-  },
-  {
-    test: /\.ttf$/,
-    loader: 'url?limit=10000'
-  },
-  {
-    test: /\.json$/,
-    loader: 'json'
-  }
-]
 
 const config = {
   context: paths.ROOT,
@@ -97,7 +66,35 @@ const config = {
   },
   module: {
     preLoaders: preloaders,
-    loaders: loaders
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        loader: 'babel'
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract(
+          'style',
+          [
+            UGLIFY ? 'css?minimize!' : 'css',
+            'postcss',
+            'sass'
+          ]
+        )
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline'
+      },
+      {
+        test: /\.ttf$/,
+        loader: 'url?limit=10000'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
+      }
+    ]
   },
   postcss: [ autoprefixer({ browsers: [ '> 1%' ]}) ],
   plugins: plugins
