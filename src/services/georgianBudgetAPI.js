@@ -11,6 +11,7 @@ function get (locale, version, options) {
       options,
       {
         headers: {
+          'X-Requested-With': 'XMLHttpRequest',
           'X-Key-Inflection': 'camel'
         }
       }
