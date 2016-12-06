@@ -6,6 +6,8 @@ const snakeToCamel = require('src/utilities/snakeToCamel')
 
 const budgetItemTypeMessages = require('src/messages/budgetItemTypes')
 
+const { getBudgetItemName } = require('src/data/modules/entities/budgetItem')
+
 const {
   getSelectedBudgetItemIds,
   setSelectedBudgetItemIds,
@@ -74,8 +76,16 @@ const BudgetItemSelectList = React.createClass({
   }
 })
 
-const mapStateToProps = state => ({
-  selectedIds: getSelectedBudgetItemIds(state)
+const getItems = (state, itemIds) => (
+  itemIds.map(itemId => ({
+    id: itemId,
+    name: getBudgetItemName(state, itemId)
+  }))
+)
+
+const mapStateToProps = (state, ownProps) => ({
+  selectedIds: getSelectedBudgetItemIds(state),
+  items: getItems(state, ownProps.itemIds)
 })
 
 const mapDispatchToProps = dispatch => ({

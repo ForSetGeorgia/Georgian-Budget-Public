@@ -14,7 +14,7 @@ const BudgetItemSelectLists = React.createClass({
   propTypes: {
     lists: arrayOf(shape({
       typeOfItems: string,
-      items: array
+      itemIds: array
     }))
   },
 
@@ -42,11 +42,11 @@ const BudgetItemSelectLists = React.createClass({
   }
 })
 
-const getListedItems = (state, budgetItemType) => {
+const getListedItemIds = (state, budgetItemType) => {
   const budgetItems = getBudgetItemsData(state)
   const budgetItemsArray = Object.keys(budgetItems).map(id => budgetItems[id])
 
-  return filterArrayByType(budgetItemsArray, budgetItemType)
+  return filterArrayByType(budgetItemsArray, budgetItemType).map(item => item.id)
 }
 
 const getLists = state => {
@@ -54,7 +54,7 @@ const getLists = state => {
 
   return [{
     typeOfItems: budgetItemType,
-    items: getListedItems(state, budgetItemType)
+    itemIds: getListedItemIds(state, budgetItemType)
   }]
 }
 
