@@ -44,7 +44,7 @@ const fetchListedBudgetItems = () => (dispatch, getState) => {
     const { budgetItems } = normalized.entities
 
     dispatch(mergeBudgetItems(budgetItems))
-    dispatch(markListLoaded(budgetItemType))
+    dispatch(markListLoaded(`${budgetItemType}_${locale}`))
   })
 }
 

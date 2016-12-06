@@ -1,5 +1,5 @@
 const React = require('react')
-const { arrayOf, func, string } = React.PropTypes
+const { bool, func } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl } = require('react-intl')
 
@@ -12,21 +12,14 @@ require('src/data/modules/fetchers/fetchListedBudgetItems')
 
 const BudgetItemListFetcher = React.createClass({
   propTypes: {
-    budgetItemType: string.isRequired,
-    listLoaded: arrayOf(string).isRequired,
+    alreadyFetched: bool.isRequired,
     fetchListedBudgetItems: func.isRequired
   },
 
-  listIsLoaded () {
-    const { listLoaded, budgetItemType } = this.props
-
-    return listLoaded.includes(budgetItemType)
-  },
-
   componentDidMount () {
-    const { fetchListedBudgetItems } = this.props
+    const { alreadyFetched, fetchListedBudgetItems } = this.props
 
-    if (this.listIsLoaded()) return
+    if (alreadyFetched) return
     fetchListedBudgetItems()
   },
 
@@ -35,10 +28,17 @@ const BudgetItemListFetcher = React.createClass({
   }
 })
 
+const getLoadedId = state => (
+  `${getSelectedBudgetItemType(state)}_${getLocale(state)}`
+)
+
+const getAlreadyFetched = state => (
+  getExploreListLoaded(state).includes(getLoadedId(state))
+)
+
 const mapStateToProps = state => ({
-  listLoaded: getExploreListLoaded(state),
-  budgetItemType: getSelectedBudgetItemType(state),
-  key: `${getSelectedBudgetItemType(state)}-${getLocale(state)}`
+  alreadyFetched: getAlreadyFetched(state),
+  key: getLoadedId(state)
 })
 
 const mapDispatchToProps = dispatch => ({
