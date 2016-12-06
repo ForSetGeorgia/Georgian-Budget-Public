@@ -17,20 +17,16 @@ const BudgetItemListFetcher = React.createClass({
   },
 
   listIsLoaded () {
-    return false
-  },
+    const { listLoaded, budgetItemType } = this.props
 
-  fetchList () {
-    const { listLoaded, budgetItemType, fetchListedBudgetItems } = this.props
-
-    if (this.listIsLoaded()) return
-    if (listLoaded.includes(budgetItemType)) return
-
-    fetchListedBudgetItems()
+    return listLoaded.includes(budgetItemType)
   },
 
   componentDidUpdate () {
-    this.fetchList()
+    const { fetchListedBudgetItems } = this.props
+
+    if (this.listIsLoaded()) return
+    fetchListedBudgetItems()
   },
 
   render () {
