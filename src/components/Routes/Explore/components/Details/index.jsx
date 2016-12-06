@@ -29,8 +29,6 @@ let ExploreDetails = React.createClass({
   },
 
   render () {
-    const { selectedItems } = this.props
-
     let content
     if (this.isLoading()) {
       content = (
@@ -38,13 +36,9 @@ let ExploreDetails = React.createClass({
       )
     } else {
       const id = this.loadedSelectedItemIds()[0]
-      const budgetItem = selectedItems[id]
 
       content = (
-        <BudgetItem
-          {...budgetItem}
-          id={id}
-        />
+        <BudgetItem id={id} />
       )
     }
 

@@ -10,6 +10,11 @@ const BudgetItemYearlyTable = require('./components/BudgetItemYearlyTable')
 
 const { getSelectedTimePeriods } = require('src/data/ducks/filters')
 
+const {
+  getBudgetItemName,
+  getBudgetItemLoaded
+} = require('src/data/modules/entities/budgetItem')
+
 const BudgetItem = React.createClass({
   propTypes: {
     id: string.isRequired,
@@ -59,7 +64,9 @@ const BudgetItem = React.createClass({
   }
 })
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
+  name: getBudgetItemName(state, ownProps.id),
+  loaded: getBudgetItemLoaded(state, ownProps.id),
   selectedTimePeriod: getSelectedTimePeriods(state)[0]
 })
 
