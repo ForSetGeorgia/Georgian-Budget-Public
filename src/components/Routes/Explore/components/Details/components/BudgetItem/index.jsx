@@ -1,6 +1,6 @@
 const React = require('react')
 const { injectIntl } = require('react-intl')
-const { arrayOf, string } = React.PropTypes
+const { string, bool } = React.PropTypes
 const { connect } = require('react-redux')
 
 const BudgetItemHeading = require('./components/BudgetItemHeading')
@@ -17,22 +17,16 @@ const {
 
 const BudgetItem = React.createClass({
   propTypes: {
+    detailsLoaded: bool.isRequired,
     id: string.isRequired,
     name: string.isRequired,
-    loaded: arrayOf(string).isRequired,
     selectedTimePeriod: string
   },
 
-  detailsLoaded () {
-    return this.props.loaded.includes('details')
-  },
-
-  componentDidMount () {
-    if (this.detailsLoaded()) return
-  },
-
   renderDetails () {
-    const { id, selectedTimePeriod } = this.props
+    const { id, selectedTimePeriod, detailsLoaded } = this.props
+
+    if (!detailsLoaded) return <LoadingIndicator />
 
     return (
       <div>
@@ -45,28 +39,22 @@ const BudgetItem = React.createClass({
   render () {
     const { name, selectedTimePeriod } = this.props
 
-    let details = ''
-
-    if (this.detailsLoaded()) {
-      details = this.renderDetails()
-    } else {
-      details = <LoadingIndicator />
-    }
-
     return (
       <div className='gb-BudgetItem'>
         <BudgetItemHeading name={name} timePeriod={selectedTimePeriod} />
-
-        {details}
-
+        {this.renderDetails()}
       </div>
     )
   }
 })
 
+const getDetailsLoaded = (state, itemId) => (
+  getBudgetItemLoaded(state, itemId).includes('details')
+)
+
 const mapStateToProps = (state, ownProps) => ({
+  detailsLoaded: getDetailsLoaded(state, ownProps.id),
   name: getBudgetItemName(state, ownProps.id) || '',
-  loaded: getBudgetItemLoaded(state, ownProps.id),
   selectedTimePeriod: getSelectedTimePeriods(state)[0]
 })
 
