@@ -5,6 +5,7 @@ const { injectIntl } = require('react-intl')
 
 const { getSelectedBudgetItemType } = require('src/data/ducks/filters')
 const { getExploreListLoaded } = require('src/data/ducks/explore')
+const { getLocale } = require('src/data/ducks/locale')
 
 const fetchListedBudgetItems =
 require('src/data/modules/fetchers/fetchListedBudgetItems')
@@ -22,7 +23,7 @@ const BudgetItemListFetcher = React.createClass({
     return listLoaded.includes(budgetItemType)
   },
 
-  componentDidUpdate () {
+  componentDidMount () {
     const { fetchListedBudgetItems } = this.props
 
     if (this.listIsLoaded()) return
@@ -36,7 +37,8 @@ const BudgetItemListFetcher = React.createClass({
 
 const mapStateToProps = state => ({
   listLoaded: getExploreListLoaded(state),
-  budgetItemType: getSelectedBudgetItemType(state)
+  budgetItemType: getSelectedBudgetItemType(state),
+  key: `${getSelectedBudgetItemType(state)}-${getLocale(state)}`
 })
 
 const mapDispatchToProps = dispatch => ({
