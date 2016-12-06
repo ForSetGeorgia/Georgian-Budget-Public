@@ -65,7 +65,7 @@ const BudgetItem = React.createClass({
 })
 
 const mapStateToProps = (state, ownProps) => ({
-  name: getBudgetItemName(state, ownProps.id),
+  name: getBudgetItemName(state, ownProps.id) || '',
   loaded: getBudgetItemLoaded(state, ownProps.id),
   selectedTimePeriod: getSelectedTimePeriods(state)[0]
 })
