@@ -1,5 +1,5 @@
 const { normalize, arrayOf } = require('normalizr')
-const budgetItemSchemaForLocale = require('src/data/schemas/budgetItem')
+const budgetItemSchemaForLocale = require('src/data/schemas/budgetItemForLocale')
 
 const { addError } = require('src/data/ducks/errors')
 

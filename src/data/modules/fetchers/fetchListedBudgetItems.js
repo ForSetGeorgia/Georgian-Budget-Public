@@ -1,5 +1,5 @@
 const { normalize, arrayOf } = require('normalizr')
-const budgetItemSchemaForLocale = require('src/data/schemas/budgetItem')
+const budgetItemSchemaForLocale = require('src/data/schemas/budgetItemForLocale')
 
 const { markListLoaded } = require('src/data/ducks/explore')
 const { mergeBudgetItems } = require('src/data/ducks/budgetItems')
