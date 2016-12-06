@@ -1,3 +1,4 @@
+const { getLocale } = require('src/data/ducks/locale')
 const { getBudgetItemsData } = require('src/data/ducks/budgetItems')
 const { getSpentFinance } = require('src/data/modules/entities/spentFinance')
 const { getPlannedFinance } = require('src/data/modules/entities/plannedFinance')
@@ -33,7 +34,7 @@ const filterArrayByType = (budgetItems, type) => (
 )
 
 const getBudgetItemName = (state, itemId) => (
-  getBudgetItem(state, itemId).name
+  getBudgetItem(state, itemId).name[getLocale(state)]
 )
 
 const getBudgetItemLoaded = (state, itemId) => (

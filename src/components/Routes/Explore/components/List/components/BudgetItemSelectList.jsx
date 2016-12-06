@@ -77,10 +77,12 @@ const BudgetItemSelectList = React.createClass({
 })
 
 const getItems = (state, itemIds) => (
-  itemIds.map(itemId => ({
+  itemIds
+  .map(itemId => ({
     id: itemId,
     name: getBudgetItemName(state, itemId)
   }))
+  .filter(listItem => listItem.name)
 )
 
 const mapStateToProps = (state, ownProps) => ({

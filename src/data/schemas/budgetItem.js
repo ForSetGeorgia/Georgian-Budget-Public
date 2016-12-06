@@ -2,11 +2,25 @@ const { Schema, arrayOf } = require('normalizr')
 const spentFinance = require('./spentFinance')
 const plannedFinance = require('./plannedFinance')
 
-const budgetItem = new Schema('budgetItems', { defaults: { loaded: [] } })
+const makeAssignEntity = locale => (output, key, value, input) => {
+  if (key === 'name') {
+    output.name = {}
+    output.name[locale] = value
+  }
+}
 
-budgetItem.define({
-  spentFinances: arrayOf(spentFinance),
-  plannedFinances: arrayOf(plannedFinance)
-})
+const createLocalizedSchema = locale => {
+  const budgetItem = new Schema('budgetItems', {
+    defaults: { loaded: [] },
+    assignEntity: makeAssignEntity(locale)
+  })
 
-module.exports = budgetItem
+  budgetItem.define({
+    spentFinances: arrayOf(spentFinance),
+    plannedFinances: arrayOf(plannedFinance)
+  })
+
+  return budgetItem
+}
+
+module.exports = createLocalizedSchema
