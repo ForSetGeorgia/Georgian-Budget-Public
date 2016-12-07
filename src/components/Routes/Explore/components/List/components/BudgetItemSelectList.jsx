@@ -6,8 +6,10 @@ const snakeToCamel = require('src/utilities/snakeToCamel')
 
 const budgetItemTypeMessages = require('src/messages/budgetItemTypes')
 
+const { getSelectedFinanceType } = require('src/data/ducks/filters')
 const { getBudgetItemName } = require('src/data/modules/entities/budgetItem')
 const { getItemSpentFinances } = require('src/data/modules/entities/budgetItem')
+const { getItemPlannedFinances } = require('src/data/modules/entities/budgetItem')
 
 const { getSelectedYears } = require('src/data/modules/timePeriod/type/year')
 
@@ -83,8 +85,8 @@ const getColumns = state => (
   ['name'].concat(getSelectedYears(state))
 )
 
-const getYearsAndAmounts = (state, itemId, selectedYears) => {
-  const itemFinances = getItemSpentFinances(state, itemId)
+const getYearsAndAmounts = (state, itemId, selectedYears, financeSelector) => {
+  const itemFinances = financeSelector(state, itemId)
 
   return selectedYears.reduce(
     (yearsAndAmounts, selectedYear) => {
@@ -103,7 +105,12 @@ const getItemValues = (state, itemId, selectedYears) => (
       id: itemId,
       name: getBudgetItemName(state, itemId)
     },
-    getYearsAndAmounts(state, itemId, selectedYears)
+    getYearsAndAmounts(
+      state,
+      itemId,
+      selectedYears,
+      getSelectedFinanceType(state) === 'planned_finance' ? getItemPlannedFinances : getItemSpentFinances
+    )
   )
 )
 
