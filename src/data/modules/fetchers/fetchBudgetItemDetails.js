@@ -1,4 +1,4 @@
-const { normalize, arrayOf } = require('normalizr')
+const { normalize } = require('normalizr')
 const budgetItemSchemaForLocale = require('src/data/schemas/budgetItemForLocale')
 
 const { addError } = require('src/data/ducks/errors')
@@ -36,7 +36,7 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
     })
 
     const normalized = normalize(response.data, {
-      budgetItems: arrayOf(budgetItemSchemaForLocale(locale))
+      budgetItem: budgetItemSchemaForLocale(locale)
     })
 
     const { budgetItems, spentFinances, plannedFinances } = normalized.entities
