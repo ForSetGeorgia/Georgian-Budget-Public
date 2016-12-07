@@ -5,13 +5,14 @@ const { connect } = require('react-redux')
 const snakeToCamel = require('src/utilities/snakeToCamel')
 
 const budgetItemTypeMessages = require('src/messages/budgetItemTypes')
+const budgetItemMessages = require('src/messages/budgetItem')
 
 const { getSelectedFinanceType } = require('src/data/ducks/filters')
 const { getBudgetItemName } = require('src/data/modules/entities/budgetItem')
 const { getItemSpentFinances } = require('src/data/modules/entities/budgetItem')
 const { getItemPlannedFinances } = require('src/data/modules/entities/budgetItem')
-
 const { getSelectedYears } = require('src/data/modules/timePeriod/type/year')
+const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
 
 const {
   getSelectedBudgetItemIds,
@@ -84,11 +85,13 @@ const BudgetItemSelectList = React.createClass({
   }
 })
 
-const getColumnMetadata = state => (
+const getColumnMetadata = (state, intl) => (
   [{
-    columnName: 'name'
-  }].concat(getSelectedYears(state).map(columnName => ({
-    columnName: columnName,
+    columnName: 'name',
+    displayName: intl.formatMessage(budgetItemMessages.name)
+  }].concat(getSelectedYears(state).map(year => ({
+    columnName: year,
+    displayName: translateTimePeriod(year, intl),
     customComponent: FormattedAmount
   })))
 )
@@ -135,8 +138,8 @@ const getItems = (state, itemIds) => {
 const mapStateToProps = (state, ownProps) => ({
   selectedIds: getSelectedBudgetItemIds(state),
   items: getItems(state, ownProps.itemIds),
-  columns: getColumnMetadata(state).map(column => column.columnName),
-  columnMetadata: getColumnMetadata(state)
+  columns: getColumnMetadata(state, ownProps.intl).map(column => column.columnName),
+  columnMetadata: getColumnMetadata(state, ownProps.intl)
 })
 
 const mapDispatchToProps = dispatch => ({
