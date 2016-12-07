@@ -7,6 +7,7 @@ const snakeToCamel = require('src/utilities/snakeToCamel')
 const budgetItemTypeMessages = require('src/messages/budgetItemTypes')
 
 const { getBudgetItemName } = require('src/data/modules/entities/budgetItem')
+const { getItemSpentFinances } = require('src/data/modules/entities/budgetItem')
 
 const { getSelectedYears } = require('src/data/modules/timePeriod/type/year')
 
@@ -82,14 +83,39 @@ const getColumns = state => (
   ['name'].concat(getSelectedYears(state))
 )
 
-const getItems = (state, itemIds) => (
-  itemIds
-  .map(itemId => ({
-    id: itemId,
-    name: getBudgetItemName(state, itemId)
-  }))
-  .filter(listItem => listItem.name)
+const getYearsAndAmounts = (state, itemId, selectedYears) => {
+  const itemFinances = getItemSpentFinances(state, itemId)
+
+  return selectedYears.reduce(
+    (yearsAndAmounts, selectedYear) => {
+      const finance = itemFinances.filter(f => f.timePeriod === selectedYear)[0]
+      yearsAndAmounts[selectedYear] = finance ? finance.amount : ''
+      return yearsAndAmounts
+    },
+    {}
+  )
+}
+
+const getItemValues = (state, itemId, selectedYears) => (
+  Object.assign(
+    {},
+    {
+      id: itemId,
+      name: getBudgetItemName(state, itemId)
+    },
+    getYearsAndAmounts(state, itemId, selectedYears)
+  )
 )
+
+const getItems = (state, itemIds) => {
+  const selectedYears = getSelectedYears(state)
+
+  return (
+    itemIds
+    .map(itemId => getItemValues(state, itemId, selectedYears))
+    .filter(listItem => listItem.name)
+  )
+}
 
 const mapStateToProps = (state, ownProps) => ({
   selectedIds: getSelectedBudgetItemIds(state),

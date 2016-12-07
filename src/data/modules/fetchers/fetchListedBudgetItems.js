@@ -2,6 +2,8 @@ const { normalize, arrayOf } = require('normalizr')
 const budgetItemSchemaForLocale = require('src/data/schemas/budgetItemForLocale')
 
 const { markListLoaded } = require('src/data/ducks/explore')
+const { mergeSpentFinances } = require('src/data/ducks/spentFinances')
+const { mergePlannedFinances } = require('src/data/ducks/plannedFinances')
 const { mergeBudgetItems } = require('src/data/ducks/budgetItems')
 const { getLocale } = require('src/data/ducks/locale')
 const { addError } = require('src/data/ducks/errors')
@@ -41,8 +43,10 @@ const fetchListedBudgetItems = () => (dispatch, getState) => {
       budgetItems: arrayOf(budgetItemSchemaForLocale(locale))
     })
 
-    const { budgetItems } = normalized.entities
+    const { budgetItems, spentFinances, plannedFinances } = normalized.entities
 
+    dispatch(mergeSpentFinances(spentFinances))
+    dispatch(mergePlannedFinances(plannedFinances))
     dispatch(mergeBudgetItems(budgetItems))
     dispatch(markListLoaded(`${budgetItemType}_${locale}`))
   })
