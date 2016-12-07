@@ -12,7 +12,7 @@ const { getSelectedTimePeriods } = require('src/data/ducks/filters')
 
 const {
   getBudgetItemName,
-  getBudgetItemLoaded
+  getDetailsLoadedForItem
 } = require('src/data/modules/entities/budgetItem')
 
 const BudgetItem = React.createClass({
@@ -48,12 +48,8 @@ const BudgetItem = React.createClass({
   }
 })
 
-const getDetailsLoaded = (state, itemId) => (
-  getBudgetItemLoaded(state, itemId).includes('details')
-)
-
 const mapStateToProps = (state, ownProps) => ({
-  detailsLoaded: getDetailsLoaded(state, ownProps.id),
+  detailsLoaded: getDetailsLoadedForItem(state, ownProps.id),
   name: getBudgetItemName(state, ownProps.id) || '',
   selectedTimePeriod: getSelectedTimePeriods(state)[0]
 })

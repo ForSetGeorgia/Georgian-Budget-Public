@@ -1,37 +1,27 @@
 const React = require('react')
-const { arrayOf, func, object, string } = React.PropTypes
+const { arrayOf, func, string } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl } = require('react-intl')
 
 const { getLocale } = require('src/data/ducks/locale')
 const fetchBudgetItemDetails = require('src/data/modules/fetchers/fetchBudgetItemDetails')
-const { getBudgetItemsData } = require('src/data/ducks/budgetItems')
 const { getSelectedBudgetItemIds } = require('src/data/ducks/explore')
+
+const {
+  getItemIsLoaded,
+  getDetailsLoadedForItemCurrentLocale
+} = require('src/data/modules/entities/budgetItem')
 
 const BudgetItemDetailsFetcher = React.createClass({
   propTypes: {
-    budgetItems: object.isRequired,
-    selectedIds: arrayOf(string).isRequired,
-    fetchBudgetItemDetails: func.isRequired,
-    locale: string.isRequired
-  },
-
-  detailsLoaded (itemId) {
-    const { budgetItems } = this.props
-    if (!budgetItems[itemId]) return false
-    if (!budgetItems[itemId].loaded.includes('details')) return false
-
-    return true
+    idsToLoad: arrayOf(string).isRequired,
+    fetchBudgetItemDetails: func.isRequired
   },
 
   fetchDetails () {
-    const { selectedIds, fetchBudgetItemDetails } = this.props
+    const { idsToLoad, fetchBudgetItemDetails } = this.props
 
-    selectedIds.forEach(selectedId => {
-      if (!this.detailsLoaded(selectedId)) {
-        fetchBudgetItemDetails(selectedId)
-      }
-    })
+    idsToLoad.forEach(id => fetchBudgetItemDetails(id))
   },
 
   componentDidMount () {
@@ -43,10 +33,18 @@ const BudgetItemDetailsFetcher = React.createClass({
   }
 })
 
+const getIdsToLoad = state => (
+  getSelectedBudgetItemIds(state).filter(
+    itemId => (
+      !getItemIsLoaded(state, itemId) ||
+      !getDetailsLoadedForItemCurrentLocale(state, itemId)
+    )
+  )
+)
+
 const mapStateToProps = state => ({
-  selectedIds: getSelectedBudgetItemIds(state),
-  budgetItems: getBudgetItemsData(state),
-  locale: getLocale(state)
+  idsToLoad: getIdsToLoad(state),
+  key: `${getIdsToLoad(state).join(',')}_${getLocale(state)}`
 })
 
 const mapDispatchToProps = dispatch => ({

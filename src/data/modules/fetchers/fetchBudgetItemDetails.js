@@ -45,7 +45,7 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
     dispatch(mergePlannedFinances(plannedFinances))
 
     Object.keys(budgetItems).forEach(budgetItemId => {
-      budgetItems[budgetItemId].loaded = budgetItems[budgetItemId].loaded.concat('details')
+      budgetItems[budgetItemId].loaded = budgetItems[budgetItemId].loaded.concat(`details_${locale}`)
     })
 
     dispatch(mergeBudgetItems(budgetItems))
