@@ -17,10 +17,10 @@ const FormattedAmount = require('src/components/shared/FormattedAmount')
 const getNumberColumnMetadata = intl => (
   [{
     columnName: 'spent_finance',
-    displayName: intl.formatMessage(financeTypeMessages.spentFinance.other)
+    displayName: intl.formatMessage(financeTypeMessages.spentFinance.adjective)
   }, {
     columnName: 'planned_finance',
-    displayName: intl.formatMessage(financeTypeMessages.plannedFinance.other)
+    displayName: intl.formatMessage(financeTypeMessages.plannedFinance.adjective)
   }, {
     columnName: 'difference',
     displayName: intl.formatMessage(financeTypeMessages.difference)
