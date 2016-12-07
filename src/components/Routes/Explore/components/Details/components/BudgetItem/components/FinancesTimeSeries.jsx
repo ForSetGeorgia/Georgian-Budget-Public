@@ -37,7 +37,7 @@ const FinancesTimeSeries = React.createClass({
   timePeriodTypeMessage () {
     const { intl, timePeriodType } = this.props
 
-    return intl.formatMessage(timePeriodTypeMessages[timePeriodType])
+    return intl.formatMessage(timePeriodTypeMessages[timePeriodType].adjective)
   },
 
   title () {

@@ -23,7 +23,7 @@ const BudgetItemCharts = React.createClass({
     const { intl } = this.props
     return (
       <h3>
-        {intl.formatMessage(timePeriodTypeMessages[timePeriodType])}
+        {intl.formatMessage(timePeriodTypeMessages[timePeriodType].adjective)}
       </h3>
     )
   },

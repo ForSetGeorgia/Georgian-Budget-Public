@@ -13,7 +13,8 @@ const FormattedAmount = require('src/components/shared/FormattedAmount')
 
 const getColumnMetadata = () => (
   [{
-    columnName: 'year'
+    columnName: 'year',
+    displayName: 'Year'
   }].concat(['spent_finance', 'planned_finance', 'difference'].map(numberColumnName => ({
     columnName: numberColumnName,
     customComponent: FormattedAmount
