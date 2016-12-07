@@ -24,10 +24,10 @@ const fetchListedBudgetItems = () => (dispatch, getState) => {
 
   georgianBudgetAPI.get(locale, 'v1', {
     params: {
-      budgetItemFields: 'id,name,type',
-
+      budgetItemFields: 'id,name,type,spent_finances,planned_finances',
       filters: {
-        budgetItemType: budgetItemType
+        budgetItemType: budgetItemType,
+        timePeriodType: 'year'
       }
     }
   }).then((response) => {

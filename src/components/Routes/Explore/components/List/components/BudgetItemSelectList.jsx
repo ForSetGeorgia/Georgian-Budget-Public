@@ -8,6 +8,8 @@ const budgetItemTypeMessages = require('src/messages/budgetItemTypes')
 
 const { getBudgetItemName } = require('src/data/modules/entities/budgetItem')
 
+const { getSelectedYears } = require('src/data/modules/timePeriod/type/year')
+
 const {
   getSelectedBudgetItemIds,
   setSelectedBudgetItemIds,
@@ -27,7 +29,8 @@ const BudgetItemSelectList = React.createClass({
       name: string.isRequired
     })).isRequired,
     setSelectedBudgetItemIds: func.isRequired,
-    setExploreDisplay: func.isRequired
+    setExploreDisplay: func.isRequired,
+    columns: arrayOf(string)
   },
 
   handleClick (row) {
@@ -51,7 +54,7 @@ const BudgetItemSelectList = React.createClass({
   },
 
   render () {
-    const { items, typeOfItems } = this.props
+    const { items, typeOfItems, columns } = this.props
 
     if (this.isLoading()) return <LoadingIndicator />
 
@@ -67,14 +70,17 @@ const BudgetItemSelectList = React.createClass({
           showFilter
           enableInfiniteScroll
           bodyHeight='400'
-          useGriddleStyles={false}
-          columns={['name']}
+          columns={columns}
           rowMetadata={{ bodyCssClassName: this.rowClassName }}
         />
       </div>
     )
   }
 })
+
+const getColumns = state => (
+  ['name'].concat(getSelectedYears(state))
+)
 
 const getItems = (state, itemIds) => (
   itemIds
@@ -87,7 +93,8 @@ const getItems = (state, itemIds) => (
 
 const mapStateToProps = (state, ownProps) => ({
   selectedIds: getSelectedBudgetItemIds(state),
-  items: getItems(state, ownProps.itemIds)
+  items: getItems(state, ownProps.itemIds),
+  columns: getColumns(state)
 })
 
 const mapDispatchToProps = dispatch => ({
