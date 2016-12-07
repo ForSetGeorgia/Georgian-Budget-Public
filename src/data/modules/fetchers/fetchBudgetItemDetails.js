@@ -26,7 +26,7 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
   georgianBudgetAPI.get(locale, 'v1', {
     params: {
       budgetItemFields: 'id,code,name,spent_finances,planned_finances',
-      budgetItemIds: [itemId]
+      budgetItemId: itemId
     }
   }).then((response) => {
     if (!response || !response.data || typeof response.data !== 'object') return
