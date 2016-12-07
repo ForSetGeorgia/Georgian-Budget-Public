@@ -36,7 +36,7 @@ const FinanceTypeSelect = React.createClass({
 
     return financeTypes.map(financeType => ({
       value: financeType,
-      label: intl.formatMessage(financeTypeMessages[snakeToCamel(financeType)].other)
+      label: intl.formatMessage(financeTypeMessages[snakeToCamel(financeType)].adjective)
     }))
   },
 
