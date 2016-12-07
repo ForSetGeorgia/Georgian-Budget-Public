@@ -14,5 +14,9 @@ module.exports = defineMessages({
       description: 'Multiple planned finances',
       defaultMessage: 'Planned Finances'
     }
+  },
+  difference: {
+    id: 'financeType.difference',
+    defaultMessage: 'Difference'
   }
 })

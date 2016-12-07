@@ -15,6 +15,7 @@
   "budgetType.priority.other": "პრიორიტეტები",
   "financeType.spentFinance.other": "დახარჯული ფინანსები",
   "financeType.plannedFinance.other": "დაგეგმილი ფინანსები",
+  "financeType.difference": "სხვაობა",
   "timePeriodType.month.adjective": "თვიური",
   "timePeriodType.quarter.adjective": "კვარტლური",
   "timePeriodType.year.noun": "წელი",
