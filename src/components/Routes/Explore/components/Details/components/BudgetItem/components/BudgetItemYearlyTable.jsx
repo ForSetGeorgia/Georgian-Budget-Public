@@ -8,13 +8,15 @@ const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
 const { getSelectedTimePeriods } = require('src/data/ducks/filters')
 const { getFinanceDifference } = require('src/data/modules/finance/difference')
 
+const timePeriodTypeMessages = require('src/messages/timePeriodTypes')
+
 const Griddle = require('griddle-react')
 const FormattedAmount = require('src/components/shared/FormattedAmount')
 
-const getColumnMetadata = () => (
+const getColumnMetadata = intl => (
   [{
     columnName: 'year',
-    displayName: 'Year'
+    displayName: intl.formatMessage(timePeriodTypeMessages.year.noun)
   }].concat(['spent_finance', 'planned_finance', 'difference'].map(numberColumnName => ({
     columnName: numberColumnName,
     customComponent: FormattedAmount
@@ -52,8 +54,8 @@ const getResults = (state, itemId) => {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  columns: getColumnMetadata().map(column => column.columnName),
-  columnMetadata: getColumnMetadata(),
+  columns: getColumnMetadata(ownProps.intl).map(column => column.columnName),
+  columnMetadata: getColumnMetadata(ownProps.intl),
   results: getResults(state, ownProps.itemId),
   showPager: false
 })
