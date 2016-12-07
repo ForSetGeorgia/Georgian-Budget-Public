@@ -1,6 +1,6 @@
 const mergeAttributes = (newAttribute, oldAttribute) => {
   if (Array.isArray(newAttribute)) {
-    return [].concat(oldAttribute).concat(newAttribute)
+    return [...new Set([].concat(oldAttribute).concat(newAttribute))]
   } else if (newAttribute !== null && typeof newAttribute === 'object') {
     return Object.assign(
       {},
