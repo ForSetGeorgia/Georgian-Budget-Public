@@ -10,7 +10,7 @@ const getBudgetItem = (state, itemId) => (
 )
 
 const getItemSpentFinanceIds = (state, itemId) => (
-  getBudgetItem(state, itemId).spentFinances
+  getBudgetItem(state, itemId).spentFinances || []
 )
 
 const getItemSpentFinances = (state, itemId) => (
@@ -20,7 +20,7 @@ const getItemSpentFinances = (state, itemId) => (
 )
 
 const getItemPlannedFinanceIds = (state, itemId) => (
-  getBudgetItem(state, itemId).plannedFinances
+  getBudgetItem(state, itemId).plannedFinances || []
 )
 
 const getItemPlannedFinances = (state, itemId) => (
