@@ -1,5 +1,5 @@
 const React = require('react')
-const { arrayOf, func, shape, string } = React.PropTypes
+const { arrayOf, func, object, shape, string } = React.PropTypes
 const { injectIntl } = require('react-intl')
 const { connect } = require('react-redux')
 const snakeToCamel = require('src/utilities/snakeToCamel')
@@ -22,6 +22,7 @@ const {
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const CountDisplay = require('./CountDisplay')
 const Griddle = require('griddle-react')
+const FormattedAmount = require('src/components/shared/FormattedAmount')
 
 const BudgetItemSelectList = React.createClass({
   propTypes: {
@@ -33,7 +34,8 @@ const BudgetItemSelectList = React.createClass({
     })).isRequired,
     setSelectedBudgetItemIds: func.isRequired,
     setExploreDisplay: func.isRequired,
-    columns: arrayOf(string)
+    columns: arrayOf(string).isRequired,
+    columnMetadata: arrayOf(object).isRequired
   },
 
   handleClick (row) {
@@ -57,7 +59,7 @@ const BudgetItemSelectList = React.createClass({
   },
 
   render () {
-    const { items, typeOfItems, columns } = this.props
+    const { items, typeOfItems, columns, columnMetadata } = this.props
 
     if (this.isLoading()) return <LoadingIndicator />
 
@@ -75,14 +77,20 @@ const BudgetItemSelectList = React.createClass({
           bodyHeight='400'
           columns={columns}
           rowMetadata={{ bodyCssClassName: this.rowClassName }}
+          columnMetadata={columnMetadata}
         />
       </div>
     )
   }
 })
 
-const getColumns = state => (
-  ['name'].concat(getSelectedYears(state))
+const getColumnMetadata = state => (
+  [{
+    columnName: 'name'
+  }].concat(getSelectedYears(state).map(columnName => ({
+    columnName: columnName,
+    customComponent: FormattedAmount
+  })))
 )
 
 const getYearsAndAmounts = (state, itemId, selectedYears, financeSelector) => {
@@ -127,7 +135,8 @@ const getItems = (state, itemIds) => {
 const mapStateToProps = (state, ownProps) => ({
   selectedIds: getSelectedBudgetItemIds(state),
   items: getItems(state, ownProps.itemIds),
-  columns: getColumns(state)
+  columns: getColumnMetadata(state).map(column => column.columnName),
+  columnMetadata: getColumnMetadata(state)
 })
 
 const mapDispatchToProps = dispatch => ({
