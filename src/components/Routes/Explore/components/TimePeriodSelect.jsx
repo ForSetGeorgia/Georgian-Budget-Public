@@ -4,6 +4,7 @@ const { injectIntl, defineMessages, intlShape } = require('react-intl')
 const { connect } = require('react-redux')
 
 const { getYearsWithData } = require('src/data/modules/timePeriod/type/year')
+const timePeriodTypeMessages = require('src/messages/timePeriodTypes')
 
 const {
   getSelectedTimePeriods,
@@ -15,11 +16,6 @@ const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
 const ButtonSelector = require('src/components/shared/ButtonSelector')
 
 const messages = defineMessages({
-  label: {
-    id: 'app.filters.timePeriod.label',
-    description: 'Label for time period select',
-    defaultMessage: 'Year'
-  },
   allOption: {
     id: 'app.filters.timePeriod.allOption',
     description: 'Text for button that selects all time periods',
@@ -66,7 +62,7 @@ const TimePeriodSelect = React.createClass({
         handleChangeEvent={this.handleChangeEvent}
         options={this.options()}
         selectedValue={selectedTimePeriod}
-        labelText={intl.formatMessage(messages.label)}
+        labelText={intl.formatMessage(timePeriodTypeMessages.year.noun)}
       />
     )
   }
