@@ -1,6 +1,5 @@
 const { connect } = require('react-redux')
 const { injectIntl } = require('react-intl')
-const Griddle = require('griddle-react')
 
 const { getYearsWithData } = require('src/data/modules/timePeriod/type/year')
 const { getItemSpentFinances } = require('src/data/modules/entities/budgetItem')
@@ -9,8 +8,16 @@ const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
 const { getSelectedTimePeriods } = require('src/data/ducks/filters')
 const { getFinanceDifference } = require('src/data/modules/finance/difference')
 
-const getColumns = () => (
-  ['year', 'spent_finance', 'planned_finance', 'difference']
+const Griddle = require('griddle-react')
+const FormattedAmount = require('src/components/shared/FormattedAmount')
+
+const getColumnMetadata = () => (
+  [{
+    columnName: 'year'
+  }].concat(['spent_finance', 'planned_finance', 'difference'].map(numberColumnName => ({
+    columnName: numberColumnName,
+    customComponent: FormattedAmount
+  })))
 )
 
 const getDataForYear = (year, spentFinances, plannedFinances) => {
@@ -44,7 +51,8 @@ const getResults = (state, itemId) => {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  columns: getColumns(),
+  columns: getColumnMetadata().map(column => column.columnName),
+  columnMetadata: getColumnMetadata(),
   results: getResults(state, ownProps.itemId),
   showPager: false
 })
