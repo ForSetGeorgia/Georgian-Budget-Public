@@ -5,7 +5,7 @@ module.exports = {
     listLoaded: [],
     display: '',
     detailsItemId: '',
-    listedItemIds: []
+    parentItemId: ''
   },
   filters: {
     budgetItemType: '',

@@ -5,7 +5,7 @@ const { connect } = require('react-redux')
 const { setBudgetItemType } = require('src/data/ducks/filters')
 const {
   setExploreDisplay,
-  setParentBudgetItemId
+  setParentItemId
 } = require('src/data/ducks/explore')
 
 const ParentListLink = React.createClass({
@@ -45,7 +45,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   setBudgetItemType: value => dispatch(setBudgetItemType(value)),
   setExploreDisplay: value => dispatch(setExploreDisplay(value)),
-  selectParent: () => dispatch(setParentBudgetItemId(ownProps.parentItemId))
+  selectParent: () => dispatch(setParentItemId(ownProps.parentItemId))
 })
 
 module.exports = connect(mapStateToProps, mapDispatchToProps)(ParentListLink)

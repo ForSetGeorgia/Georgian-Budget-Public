@@ -9,6 +9,7 @@ const {
   getExploreState,
   setExploreDisplay,
   setDetailsItemId,
+  setParentItemId,
   markListLoaded
 } = explore
 
@@ -31,6 +32,30 @@ describe('explore reducer', () => {
       initialExploreState,
       {
         detailsItemId: 'b'
+      }
+    )
+
+    expect(newState).to.deep.equal(expectedState)
+  })
+
+  it('handles setParentItemId action', () => {
+    const initialExploreState = getExploreState(initialState)
+    const previousState = Object.assign(
+      {},
+      initialExploreState,
+      {
+        parentItemId: 'a'
+      }
+    )
+
+    const action = setParentItemId('b')
+    const newState = explore(previousState, action)
+
+    const expectedState = Object.assign(
+      {},
+      initialExploreState,
+      {
+        parentItemId: 'b'
       }
     )
 

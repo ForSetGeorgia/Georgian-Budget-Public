@@ -4,6 +4,7 @@ const { connect } = require('react-redux')
 
 const {
   getDetailsItemId,
+  getParentItemId,
   getSelectedExploreDisplay
 } = require('src/data/ducks/explore')
 
@@ -22,6 +23,7 @@ const UrlQueryUpdater = React.createClass({
   propTypes: {
     budgetItemType: string.isRequired,
     detailsItemId: string.isRequired,
+    parentItemId: string.isRequired,
     financeType: string.isRequired,
     timePeriods: arrayOf(string).isRequired,
     exploreDisplay: string.isRequired
@@ -30,6 +32,7 @@ const UrlQueryUpdater = React.createClass({
   newQueryObject () {
     const {
       detailsItemId,
+      parentItemId,
       budgetItemType,
       financeType,
       timePeriods,
@@ -39,6 +42,7 @@ const UrlQueryUpdater = React.createClass({
     const newQueryObject = {}
 
     if (detailsItemId) newQueryObject.detailsItemId = detailsItemId
+    if (parentItemId) newQueryObject.parentItemId = parentItemId
 
     if (timePeriods && timePeriods.length > 0) {
       newQueryObject.timePeriods = timePeriods
@@ -85,6 +89,7 @@ const UrlQueryUpdater = React.createClass({
 
 const mapStateToProps = (state) => ({
   budgetItemType: getSelectedBudgetItemType(state),
+  parentItemId: getParentItemId(state),
   detailsItemId: getDetailsItemId(state),
   financeType: getSelectedFinanceType(state),
   timePeriods: getSelectedTimePeriods(state),

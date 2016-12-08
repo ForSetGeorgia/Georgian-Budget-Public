@@ -26,6 +26,14 @@ const reducer = (state = {}, action) => {
           detailsItemId: action.id
         }
       )
+    case SET_PARENT_ITEM_ID:
+      return Object.assign(
+        {},
+        state,
+        {
+          parentItemId: action.id
+        }
+      )
     case MARK_LIST_LOADED:
       return Object.assign(
         {},
@@ -49,7 +57,7 @@ reducer.setDetailsItemId = id => ({
   id: id
 })
 
-reducer.setParentBudgetItemId = id => ({
+reducer.setParentItemId = id => ({
   type: SET_PARENT_ITEM_ID,
   id: id
 })
@@ -76,6 +84,11 @@ reducer.getDetailsItemId = createSelector(
 
 reducer.getDetailsItem = state => (
   getBudgetItem(state, reducer.getDetailsItemId(state))
+)
+
+reducer.getParentItemId = createSelector(
+  reducer.getExploreState,
+  ({parentItemId}) => parentItemId
 )
 
 reducer.getExploreListLoaded = createSelector(
