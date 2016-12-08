@@ -3,21 +3,31 @@ const { string, func } = React.PropTypes
 const { connect } = require('react-redux')
 
 const { setBudgetItemType } = require('src/data/ducks/filters')
-const { setExploreDisplay } = require('src/data/ducks/explore')
+const {
+  setExploreDisplay,
+  setParentBudgetItemId
+} = require('src/data/ducks/explore')
 
 const ParentListLink = React.createClass({
   propTypes: {
     text: string.isRequired,
     budgetItemType: string.isRequired,
     setBudgetItemType: func.isRequired,
-    setExploreDisplay: func.isRequired
+    setExploreDisplay: func.isRequired,
+    selectParent: func.isRequired
   },
 
   handleClickEvent () {
-    const { setExploreDisplay, setBudgetItemType, budgetItemType } = this.props
+    const {
+      setExploreDisplay,
+      setBudgetItemType,
+      budgetItemType,
+      selectParent
+    } = this.props
 
     setBudgetItemType(budgetItemType)
     setExploreDisplay('list')
+    selectParent()
   },
 
   render () {
@@ -32,9 +42,10 @@ const mapStateToProps = state => ({
   text: 'View Child Programs'
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   setBudgetItemType: value => dispatch(setBudgetItemType(value)),
-  setExploreDisplay: value => dispatch(setExploreDisplay(value))
+  setExploreDisplay: value => dispatch(setExploreDisplay(value)),
+  selectParent: () => dispatch(setParentBudgetItemId(ownProps.parentItemId))
 })
 
 module.exports = connect(mapStateToProps, mapDispatchToProps)(ParentListLink)

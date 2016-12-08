@@ -4,6 +4,7 @@ const rootSelector = require('./rootSelector')
 const SET_EXPLORE_DISPLAY = 'georgianBudget/explore/SET_EXPLORE_DISPLAY'
 const SET_SELECTED_IDS = 'georgianBudget/explore/SET_SELECTED_IDS'
 const MARK_LIST_LOADED = 'georgianBudget/explore/MARK_LIST_LOADED'
+const SET_PARENT_ITEM_ID = 'georgianBudget/explore/SET_PARENT_ITEM_ID'
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -47,6 +48,11 @@ reducer.setSelectedBudgetItemIds = function (ids) {
     ids: ids
   }
 }
+
+reducer.setParentBudgetItemId = id => ({
+  type: SET_PARENT_ITEM_ID,
+  id: id
+})
 
 reducer.markListLoaded = (listLoaded) => ({
   type: MARK_LIST_LOADED,
