@@ -8,7 +8,7 @@ const {
   getDetailsItemId
 } = require('src/data/ducks/explore')
 
-const BudgetItemDetailsFetcher = require('./components/BudgetItemDetailsFetcher')
+const BudgetItemDetailsFetcher = require('src/components/shared/BudgetItemDetailsFetcher')
 const BudgetItem = require('./components/BudgetItem/index')
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 
@@ -30,7 +30,7 @@ let ExploreDetails = React.createClass({
   render () {
     return (
       <div className='gb-ExploreDetails'>
-        <BudgetItemDetailsFetcher />
+        <BudgetItemDetailsFetcher itemId={this.props.detailsItemId} />
         {this.renderContent()}
       </div>
     )

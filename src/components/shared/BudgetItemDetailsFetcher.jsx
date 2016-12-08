@@ -5,7 +5,6 @@ const { injectIntl } = require('react-intl')
 
 const { getLocale } = require('src/data/ducks/locale')
 const fetchBudgetItemDetails = require('src/data/modules/fetchers/fetchBudgetItemDetails')
-const { getDetailsItemId } = require('src/data/ducks/explore')
 
 const {
   getDetailsLoadedForItemCurrentLocale
@@ -14,14 +13,14 @@ const {
 const BudgetItemDetailsFetcher = React.createClass({
   propTypes: {
     detailsLoaded: bool.isRequired,
-    detailsItemId: string.isRequired,
+    itemId: string.isRequired,
     fetchBudgetItemDetails: func.isRequired
   },
 
   fetchDetails () {
-    const { detailsItemId, detailsLoaded, fetchBudgetItemDetails } = this.props
+    const { itemId, detailsLoaded, fetchBudgetItemDetails } = this.props
 
-    if (!detailsLoaded) fetchBudgetItemDetails(detailsItemId)
+    if (!detailsLoaded) fetchBudgetItemDetails(itemId)
   },
 
   componentDidMount () {
@@ -33,14 +32,9 @@ const BudgetItemDetailsFetcher = React.createClass({
   }
 })
 
-const detailsLoaded = state => (
-  getDetailsLoadedForItemCurrentLocale(state, getDetailsItemId(state))
-)
-
-const mapStateToProps = state => ({
-  detailsLoaded: detailsLoaded(state),
-  detailsItemId: getDetailsItemId(state),
-  key: `${getDetailsItemId(state)}_${getLocale(state)}`
+const mapStateToProps = (state, {itemId}) => ({
+  detailsLoaded: getDetailsLoadedForItemCurrentLocale(state, itemId),
+  key: `${itemId}_${getLocale(state)}`
 })
 
 const mapDispatchToProps = dispatch => ({

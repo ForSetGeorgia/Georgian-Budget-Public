@@ -29,12 +29,8 @@ const getItemPlannedFinances = (state, itemId) => (
   )).filter(finance => finance)
 )
 
-const filterArrayByType = (budgetItems, type) => (
-  budgetItems.filter(budgetItem => budgetItem.type === type)
-)
-
 const getBudgetItemName = (state, itemId) => (
-  getBudgetItem(state, itemId).name[getLocale(state)] || ''
+  (getBudgetItem(state, itemId).name || {})[getLocale(state)] || ''
 )
 
 const getBudgetItemLoaded = (state, itemId) => (
@@ -54,17 +50,16 @@ const getDetailsLoadedForItem = (state, itemId) => {
   return getBudgetItemLoaded(state, itemId).join(',').indexOf('details') > -1
 }
 
-const getDetailsLoadedForItemCurrentLocale = (state, itemId) => {
-  if (!getBudgetItem(state, itemId)) return false
-  return getBudgetItemLoaded(state, itemId).includes(getDetailsLocaleId(state))
-}
+const getDetailsLoadedForItemCurrentLocale = (state, itemId) => (
+  !!getBudgetItem(state, itemId) && getBudgetItemLoaded(state, itemId).includes(getDetailsLocaleId(state))
+)
 
 const getOverallBudgetIdForItem = (state, itemId) => (
   getBudgetItem(state, itemId).overallBudget
 )
 
 const getChildProgramIdsForItem = (state, itemId) => (
-  getBudgetItem(state, itemId).childPrograms || []
+  (getBudgetItem(state, itemId) || {}).childPrograms || []
 )
 
 module.exports = {
@@ -74,7 +69,6 @@ module.exports = {
   getItemSpentFinances,
   getItemPlannedFinanceIds,
   getItemPlannedFinances,
-  filterArrayByType,
   getBudgetItemName,
   getBudgetItemLoaded,
   getItemIsLoaded,

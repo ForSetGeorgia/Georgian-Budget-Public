@@ -5,7 +5,7 @@ const { connect } = require('react-redux')
 
 const { getBudgetItemsData } = require('src/data/ducks/budgetItems')
 const { getSelectedBudgetItemType } = require('src/data/ducks/filters')
-const { filterArrayByType } = require('src/data/modules/entities/budgetItem')
+const { getChildProgramIdsForItem } = require('src/data/modules/entities/budgetItem')
 
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const BudgetItemSelectList = require('./BudgetItemSelectList')
@@ -42,24 +42,36 @@ const BudgetItemSelectLists = React.createClass({
   }
 })
 
-const getListedItemIds = (state, budgetItemType) => {
-  const budgetItems = getBudgetItemsData(state)
-  const budgetItemsArray = Object.keys(budgetItems).map(id => budgetItems[id])
-
-  return filterArrayByType(budgetItemsArray, budgetItemType).map(item => item.id)
+const getChildItemsOfTypeForItem = (state, itemId, budgetItemType) => {
+  if (budgetItemType === 'program') {
+    return getChildProgramIdsForItem(state, itemId)
+  } else {
+    return []
+  }
 }
 
-const getLists = state => {
+const getListedItemIds = (state, itemId, budgetItemType) => {
+  const budgetItems = getBudgetItemsData(state)
+  const budgetItemIds = Object.keys(budgetItems)
+
+  const childrenOfParent = getChildItemsOfTypeForItem(state, itemId, budgetItemType)
+
+  return budgetItemIds.filter(
+    id => childrenOfParent.indexOf(id) > -1
+  )
+}
+
+const getLists = (state, itemId) => {
   const budgetItemType = getSelectedBudgetItemType(state)
 
   return [{
     typeOfItems: budgetItemType,
-    itemIds: getListedItemIds(state, budgetItemType)
+    itemIds: getListedItemIds(state, itemId, budgetItemType)
   }]
 }
 
-const mapStateToProps = state => ({
-  lists: getLists(state)
+const mapStateToProps = (state, {itemId}) => ({
+  lists: getLists(state, itemId)
 })
 
 module.exports = injectIntl(connect(mapStateToProps, null)(BudgetItemSelectLists))
