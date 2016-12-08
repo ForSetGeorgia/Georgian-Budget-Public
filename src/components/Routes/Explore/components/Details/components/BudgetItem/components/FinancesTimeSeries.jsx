@@ -1,7 +1,7 @@
 const React = require('react')
 const { connect } = require('react-redux')
 const { arrayOf, number, shape, string } = React.PropTypes
-const { injectIntl, intlShape } = require('react-intl')
+const { injectIntl, intlShape, defineMessages } = require('react-intl')
 
 const TimeSeriesChart = require('./TimeSeriesChart')
 const timePeriodTypeMessages = require('src/messages/timePeriodTypes')
@@ -15,6 +15,17 @@ const {
 } = require('src/data/modules/entities/finance')
 
 const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
+
+const messages = defineMessages({
+  valueSuffix: {
+    id: 'app.financeTimeSeries.valueSuffix',
+    defaultMessage: 'lari'
+  },
+  yAxisTitle: {
+    id: 'app.financeTimeSeries.yAxisTitle',
+    defaultMessage: 'Lari'
+  }
+})
 
 const FinancesTimeSeries = React.createClass({
   propTypes: {
@@ -81,6 +92,16 @@ const FinancesTimeSeries = React.createClass({
     return series
   },
 
+  valueSuffix () {
+    const { intl } = this.props
+    return intl.formatMessage(messages.valueSuffix)
+  },
+
+  yAxisTitle () {
+    const { intl } = this.props
+    return intl.formatMessage(messages.yAxisTitle)
+  },
+
   render () {
     return (
       <TimeSeriesChart
@@ -89,7 +110,8 @@ const FinancesTimeSeries = React.createClass({
         title={this.title()}
         xAxisCategories={this.timePeriods()}
         series={this.series()}
-        currencyName={'lari'}
+        valueSuffix={this.valueSuffix()}
+        yAxisTitle={this.yAxisTitle()}
       />
     )
   }

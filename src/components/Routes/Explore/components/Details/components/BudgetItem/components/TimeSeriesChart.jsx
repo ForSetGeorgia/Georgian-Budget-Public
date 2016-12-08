@@ -8,7 +8,8 @@ const TimeSeriesChart = React.createClass({
     xAxisCategories: array.isRequired,
     series: array.isRequired,
     title: string.isRequired,
-    currencyName: string.isRequired,
+    valueSuffix: string.isRequired,
+    yAxisTitle: string.isRequired,
     subtitle: string
   },
 
@@ -21,7 +22,8 @@ const TimeSeriesChart = React.createClass({
       subtitle,
       xAxisCategories,
       series,
-      currencyName
+      valueSuffix,
+      yAxisTitle
     } = this.props
 
     // Set container which the chart should render to.
@@ -40,7 +42,7 @@ const TimeSeriesChart = React.createClass({
       },
       tooltip: {
         shared: true,
-        valueSuffix: ` ${currencyName}`
+        valueSuffix: ` ${valueSuffix}`
       },
       xAxis: {
         categories: xAxisCategories,
@@ -48,7 +50,7 @@ const TimeSeriesChart = React.createClass({
       },
       yAxis: {
         title: {
-          text: title
+          text: yAxisTitle
         }
       },
       series: series

@@ -6,6 +6,8 @@
   "app.filters.timePeriod.allOption": "ყველა",
   "app.loading": "მონაცემები იტვირთება",
   "app.explore.list.count": "ნაჩვენებია {count} {count, plural, one {{one}} other {{other}}}.",
+  "app.financeTimeSeries.valueSuffix": "ლარი",
+  "app.financeTimeSeries.yAxisTitle": "ლარი",
   "budgetItem.name": "სახელი",
   "budgetType.wholeBudget.one": "მთლიანი ბიუჯეტი",
   "budgetType.program.one": "პროგრამა",
