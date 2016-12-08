@@ -12,7 +12,7 @@ const timePeriodTypeMessages = require('src/messages/timePeriodTypes')
 const financeTypeMessages = require('src/messages/financeTypes')
 
 const Griddle = require('griddle-react')
-const FormattedAmount = require('src/components/shared/FormattedAmount')
+const GriddleFormattedAmount = require('src/components/shared/GriddleFormattedAmount')
 
 const getNumberColumnMetadata = intl => (
   [{
@@ -27,7 +27,7 @@ const getNumberColumnMetadata = intl => (
     colorAmounts: true
   }]
   .map(column => {
-    column.customComponent = FormattedAmount
+    column.customComponent = GriddleFormattedAmount
     return column
   })
 )

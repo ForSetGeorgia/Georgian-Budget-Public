@@ -23,7 +23,7 @@ const {
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const CountDisplay = require('./CountDisplay')
 const Griddle = require('griddle-react')
-const FormattedAmount = require('src/components/shared/FormattedAmount')
+const GriddleFormattedAmount = require('src/components/shared/GriddleFormattedAmount')
 
 const BudgetItemSelectList = React.createClass({
   propTypes: {
@@ -92,7 +92,7 @@ const getColumnMetadata = (state, intl) => (
   }].concat(getSelectedYears(state).map(year => ({
     columnName: year,
     displayName: translateTimePeriod(year, intl),
-    customComponent: FormattedAmount
+    customComponent: GriddleFormattedAmount
   })))
 )
 
