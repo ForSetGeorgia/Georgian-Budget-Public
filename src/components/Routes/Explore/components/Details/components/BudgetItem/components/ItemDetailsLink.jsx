@@ -21,9 +21,9 @@ const ItemDetailsLink = React.createClass({
   render () {
     const { name } = this.props
     return (
-      <button type='button' onClick={this.handleClickEvent}>
+      <a href='#' onClick={this.handleClickEvent}>
         {name}
-      </button>
+      </a>
     )
   }
 })
