@@ -3,19 +3,19 @@ const { func, string } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl } = require('react-intl')
 
-const { setSelectedBudgetItemIds } = require('src/data/ducks/explore')
+const { setDetailsItemId } = require('src/data/ducks/explore')
 const { getBudgetItemName } = require('src/data/modules/entities/budgetItem')
 
 const ItemDetailsLink = React.createClass({
   propTypes: {
     name: string,
     itemId: string,
-    setSelectedBudgetItemIds: func
+    setDetailsItemId: func
   },
 
   handleClickEvent () {
-    const { itemId, setSelectedBudgetItemIds } = this.props
-    setSelectedBudgetItemIds([itemId])
+    const { itemId, setDetailsItemId } = this.props
+    setDetailsItemId(itemId)
   },
 
   render () {
@@ -33,7 +33,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setSelectedBudgetItemIds: value => dispatch(setSelectedBudgetItemIds(value))
+  setDetailsItemId: value => dispatch(setDetailsItemId(value))
 })
 
 module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ItemDetailsLink))

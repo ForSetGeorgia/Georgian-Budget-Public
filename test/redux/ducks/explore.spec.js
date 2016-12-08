@@ -8,29 +8,29 @@ const explore = require('src/data/ducks/explore')
 const {
   getExploreState,
   setExploreDisplay,
-  setSelectedBudgetItemIds,
+  setDetailsItemId,
   markListLoaded
 } = explore
 
 describe('explore reducer', () => {
-  it('handles setSelectedBudgetItemIds action', () => {
+  it('handles setDetailsItemId action', () => {
     const initialExploreState = getExploreState(initialState)
     const previousState = Object.assign(
       {},
       initialExploreState,
       {
-        selectedIds: ['a']
+        detailsItemId: 'a'
       }
     )
 
-    const action = setSelectedBudgetItemIds(['b', 'c', 'd'])
+    const action = setDetailsItemId('b')
     const newState = explore(previousState, action)
 
     const expectedState = Object.assign(
       {},
       initialExploreState,
       {
-        selectedIds: ['b', 'c', 'd']
+        detailsItemId: 'b'
       }
     )
 

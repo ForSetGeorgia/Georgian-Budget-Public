@@ -4,7 +4,7 @@ module.exports = {
   explore: {
     listLoaded: [],
     display: '',
-    selectedIds: [],
+    detailsItemId: '',
     listedItemIds: []
   },
   filters: {

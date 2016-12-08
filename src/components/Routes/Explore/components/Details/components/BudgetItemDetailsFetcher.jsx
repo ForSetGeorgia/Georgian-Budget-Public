@@ -1,11 +1,11 @@
 const React = require('react')
-const { arrayOf, func, string } = React.PropTypes
+const { bool, func, string } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl } = require('react-intl')
 
 const { getLocale } = require('src/data/ducks/locale')
 const fetchBudgetItemDetails = require('src/data/modules/fetchers/fetchBudgetItemDetails')
-const { getSelectedBudgetItemIds } = require('src/data/ducks/explore')
+const { getDetailsItemId } = require('src/data/ducks/explore')
 
 const {
   getDetailsLoadedForItemCurrentLocale
@@ -13,14 +13,15 @@ const {
 
 const BudgetItemDetailsFetcher = React.createClass({
   propTypes: {
-    idsToLoad: arrayOf(string).isRequired,
+    detailsLoaded: bool.isRequired,
+    detailsItemId: string.isRequired,
     fetchBudgetItemDetails: func.isRequired
   },
 
   fetchDetails () {
-    const { idsToLoad, fetchBudgetItemDetails } = this.props
+    const { detailsItemId, detailsLoaded, fetchBudgetItemDetails } = this.props
 
-    idsToLoad.forEach(id => fetchBudgetItemDetails(id))
+    if (!detailsLoaded) fetchBudgetItemDetails(detailsItemId)
   },
 
   componentDidMount () {
@@ -32,15 +33,14 @@ const BudgetItemDetailsFetcher = React.createClass({
   }
 })
 
-const getIdsToLoad = state => (
-  getSelectedBudgetItemIds(state).filter(
-    itemId => !getDetailsLoadedForItemCurrentLocale(state, itemId)
-  )
+const detailsLoaded = state => (
+  getDetailsLoadedForItemCurrentLocale(state, getDetailsItemId(state))
 )
 
 const mapStateToProps = state => ({
-  idsToLoad: getIdsToLoad(state),
-  key: `${getIdsToLoad(state).join(',')}_${getLocale(state)}`
+  detailsLoaded: detailsLoaded(state),
+  detailsItemId: getDetailsItemId(state),
+  key: `${getDetailsItemId(state)}_${getLocale(state)}`
 })
 
 const mapDispatchToProps = dispatch => ({

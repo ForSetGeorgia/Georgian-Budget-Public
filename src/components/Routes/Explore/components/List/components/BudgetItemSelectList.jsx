@@ -15,8 +15,8 @@ const { getSelectedYears } = require('src/data/modules/timePeriod/type/year')
 const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
 
 const {
-  getSelectedBudgetItemIds,
-  setSelectedBudgetItemIds,
+  getDetailsItemId,
+  setDetailsItemId,
   setExploreDisplay
 } = require('src/data/ducks/explore')
 
@@ -27,28 +27,27 @@ const GriddleFormattedAmount = require('src/components/shared/GriddleFormattedAm
 
 const BudgetItemSelectList = React.createClass({
   propTypes: {
-    selectedIds: arrayOf(string).isRequired,
+    detailsItemId: string.isRequired,
     typeOfItems: string.isRequired,
     items: arrayOf(shape({
       id: string.isRequired,
       name: string.isRequired
     })).isRequired,
-    setSelectedBudgetItemIds: func.isRequired,
+    setDetailsItemId: func.isRequired,
     setExploreDisplay: func.isRequired,
     columns: arrayOf(string).isRequired,
     columnMetadata: arrayOf(object).isRequired
   },
 
   handleClick (row) {
-    const selectedIds = [row.props.data.id]
-    this.props.setSelectedBudgetItemIds(selectedIds)
+    this.props.setDetailsItemId(row.props.data.id)
     this.props.setExploreDisplay('details')
   },
 
   rowClassName (row) {
     let className = 'gb-ExploreList-row'
 
-    if (this.props.selectedIds.includes(row.id)) {
+    if (this.props.detailsItemId === row.id) {
       className += ' is-selected'
     }
 
@@ -136,14 +135,14 @@ const getItems = (state, itemIds) => {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  selectedIds: getSelectedBudgetItemIds(state),
+  detailsItemId: getDetailsItemId(state),
   items: getItems(state, ownProps.itemIds),
   columns: getColumnMetadata(state, ownProps.intl).map(column => column.columnName),
   columnMetadata: getColumnMetadata(state, ownProps.intl)
 })
 
 const mapDispatchToProps = dispatch => ({
-  setSelectedBudgetItemIds: ids => { dispatch(setSelectedBudgetItemIds(ids)) },
+  setDetailsItemId: id => { dispatch(setDetailsItemId(id)) },
   setExploreDisplay: display => { dispatch(setExploreDisplay(display)) }
 })
 
