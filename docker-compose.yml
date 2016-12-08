@@ -1,11 +1,28 @@
 version: '2'
 services:
-  web:
-    build: .
-    image: georgianbudgetpublic
+  packages:
+    image: georgianbudget_app
+    volumes:
+      - /myapp/node_modules
+    command: echo "Loading node modules for public site!"
+
+  build:
+    image: georgianbudget_app
+    command: /bin/sh -c 'npm run watch'
     volumes:
       - .:/myapp
-      - /myapp/node_modules
+      - /myapp/public/bundles/
+    volumes_from:
+      - packages
+
+  app:
+    build: .
+    image: georgianbudget_app
+    volumes:
+      - .:/myapp
+    volumes_from:
+      - build
+      - packages
     command: /bin/sh -c 'npm run start'
     ports:
       - "8080:8080"
