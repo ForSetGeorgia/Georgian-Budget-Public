@@ -23,7 +23,8 @@ const getNumberColumnMetadata = intl => (
     displayName: intl.formatMessage(financeTypeMessages.plannedFinance.adjective)
   }, {
     columnName: 'difference',
-    displayName: intl.formatMessage(financeTypeMessages.difference)
+    displayName: intl.formatMessage(financeTypeMessages.difference),
+    colorAmounts: true
   }]
   .map(column => {
     column.customComponent = FormattedAmount

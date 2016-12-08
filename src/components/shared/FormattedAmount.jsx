@@ -2,17 +2,36 @@ const React = require('react')
 const { number, oneOfType, string } = React.PropTypes
 const { injectIntl, intlShape } = require('react-intl')
 
-const formatAmount = (amount, intl) => {
-  if (amount) {
-    return intl.formatNumber(amount)
+const colorAmount = props => props.metadata.colorAmounts
+
+const getStyle = props => {
+  const { data } = props
+  const style = {}
+
+  if (colorAmount(props)) {
+    if (data < 0) {
+      style.color = 'red'
+    } else {
+      style.color = 'green'
+    }
+  }
+
+  return style
+}
+
+const formatAmount = props => {
+  const { data, intl } = props
+
+  if (data) {
+    return intl.formatNumber(data)
   } else {
     return ''
   }
 }
 
 const FormattedAmount = props => (
-  <span>
-    {formatAmount(props.data, props.intl)}
+  <span style={getStyle(props)}>
+    {formatAmount(props)}
   </span>
 )
 
