@@ -8,7 +8,6 @@ const fetchBudgetItemDetails = require('src/data/modules/fetchers/fetchBudgetIte
 const { getSelectedBudgetItemIds } = require('src/data/ducks/explore')
 
 const {
-  getItemIsLoaded,
   getDetailsLoadedForItemCurrentLocale
 } = require('src/data/modules/entities/budgetItem')
 
@@ -35,10 +34,7 @@ const BudgetItemDetailsFetcher = React.createClass({
 
 const getIdsToLoad = state => (
   getSelectedBudgetItemIds(state).filter(
-    itemId => (
-      !getItemIsLoaded(state, itemId) ||
-      !getDetailsLoadedForItemCurrentLocale(state, itemId)
-    )
+    itemId => !getDetailsLoadedForItemCurrentLocale(state, itemId)
   )
 )
 

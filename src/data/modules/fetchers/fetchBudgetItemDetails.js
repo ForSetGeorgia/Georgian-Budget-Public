@@ -25,7 +25,7 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
 
   georgianBudgetAPI.get(locale, 'v1', {
     params: {
-      budgetItemFields: 'id,code,name,spent_finances,planned_finances',
+      budgetItemFields: 'id,code,name,spent_finances,planned_finances,related_budget_items',
       budgetItemId: itemId
     }
   }).then((response) => {
@@ -44,9 +44,7 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
     dispatch(mergeSpentFinances(spentFinances))
     dispatch(mergePlannedFinances(plannedFinances))
 
-    Object.keys(budgetItems).forEach(budgetItemId => {
-      budgetItems[budgetItemId].loaded = budgetItems[budgetItemId].loaded.concat(`details_${locale}`)
-    })
+    budgetItems[itemId].loaded = budgetItems[itemId].loaded.concat(`details_${locale}`)
 
     dispatch(mergeBudgetItems(budgetItems))
   })

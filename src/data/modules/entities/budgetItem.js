@@ -34,7 +34,7 @@ const filterArrayByType = (budgetItems, type) => (
 )
 
 const getBudgetItemName = (state, itemId) => (
-  getBudgetItem(state, itemId).name[getLocale(state)]
+  getBudgetItem(state, itemId).name[getLocale(state)] || ''
 )
 
 const getBudgetItemLoaded = (state, itemId) => (
@@ -49,12 +49,18 @@ const getItemIsLoaded = (state, itemId) => (
   !!getBudgetItem(state, itemId)
 )
 
-const getDetailsLoadedForItem = (state, itemId) => (
-  getBudgetItemLoaded(state, itemId).join(',').indexOf('details') > -1
-)
+const getDetailsLoadedForItem = (state, itemId) => {
+  if (!getBudgetItem(state, itemId)) return false
+  return getBudgetItemLoaded(state, itemId).join(',').indexOf('details') > -1
+}
 
-const getDetailsLoadedForItemCurrentLocale = (state, itemId) => (
-  getBudgetItemLoaded(state, itemId).includes(getDetailsLocaleId(state))
+const getDetailsLoadedForItemCurrentLocale = (state, itemId) => {
+  if (!getBudgetItem(state, itemId)) return false
+  return getBudgetItemLoaded(state, itemId).includes(getDetailsLocaleId(state))
+}
+
+const getOverallBudgetIdForItem = (state, itemId) => (
+  getBudgetItem(state, itemId).overallBudget
 )
 
 module.exports = {
@@ -69,5 +75,6 @@ module.exports = {
   getBudgetItemLoaded,
   getItemIsLoaded,
   getDetailsLoadedForItem,
-  getDetailsLoadedForItemCurrentLocale
+  getDetailsLoadedForItemCurrentLocale,
+  getOverallBudgetIdForItem
 }

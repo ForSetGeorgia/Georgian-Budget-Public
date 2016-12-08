@@ -7,12 +7,14 @@ const BudgetItemHeading = require('./components/BudgetItemHeading')
 const BudgetItemCharts = require('./components/BudgetItemCharts')
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const BudgetItemYearlyTable = require('./components/BudgetItemYearlyTable')
+const ItemDetailsLink = require('./components/ItemDetailsLink')
 
 const { getSelectedTimePeriods } = require('src/data/ducks/filters')
 
 const {
   getBudgetItemName,
-  getDetailsLoadedForItem
+  getDetailsLoadedForItem,
+  getOverallBudgetIdForItem
 } = require('src/data/modules/entities/budgetItem')
 
 const BudgetItem = React.createClass({
@@ -20,7 +22,16 @@ const BudgetItem = React.createClass({
     detailsLoaded: bool.isRequired,
     id: string.isRequired,
     name: string.isRequired,
+    overallBudgetId: string,
     selectedTimePeriod: string
+  },
+
+  renderOverallBudgetLink () {
+    const { overallBudgetId } = this.props
+
+    return overallBudgetId ? (
+      <ItemDetailsLink itemId={overallBudgetId} />
+    ) : null
   },
 
   renderDetails () {
@@ -32,6 +43,7 @@ const BudgetItem = React.createClass({
       <div>
         <BudgetItemCharts {...{ id, selectedTimePeriod }} />
         <BudgetItemYearlyTable itemId={id} />
+        {this.renderOverallBudgetLink()}
       </div>
     )
   },
@@ -50,8 +62,9 @@ const BudgetItem = React.createClass({
 
 const mapStateToProps = (state, ownProps) => ({
   detailsLoaded: getDetailsLoadedForItem(state, ownProps.id),
-  name: getBudgetItemName(state, ownProps.id) || '',
-  selectedTimePeriod: getSelectedTimePeriods(state)[0]
+  name: getBudgetItemName(state, ownProps.id),
+  selectedTimePeriod: getSelectedTimePeriods(state)[0],
+  overallBudgetId: getOverallBudgetIdForItem(state, ownProps.id)
 })
 
 module.exports = injectIntl(connect(mapStateToProps, null)(BudgetItem))
