@@ -8,13 +8,15 @@ const BudgetItemCharts = require('./components/BudgetItemCharts')
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const BudgetItemYearlyTable = require('./components/BudgetItemYearlyTable')
 const ItemDetailsLink = require('./components/ItemDetailsLink')
+const ParentListLink = require('./components/ParentListLink')
 
 const { getSelectedTimePeriods } = require('src/data/ducks/filters')
 
 const {
   getBudgetItemName,
   getDetailsLoadedForItem,
-  getOverallBudgetIdForItem
+  getOverallBudgetIdForItem,
+  getChildProgramIdsForItem
 } = require('src/data/modules/entities/budgetItem')
 
 const BudgetItem = React.createClass({
@@ -23,7 +25,8 @@ const BudgetItem = React.createClass({
     id: string.isRequired,
     name: string.isRequired,
     overallBudgetId: string,
-    selectedTimePeriod: string
+    selectedTimePeriod: string,
+    hasChildPrograms: bool.isRequired
   },
 
   renderOverallBudgetLink () {
@@ -32,6 +35,16 @@ const BudgetItem = React.createClass({
     return overallBudgetId ? (
       <ItemDetailsLink itemId={overallBudgetId} />
     ) : null
+  },
+
+  renderViewProgramsLink () {
+    const { id, hasChildPrograms } = this.props
+
+    if (!hasChildPrograms) return
+
+    return (
+      <ParentListLink parentItemId={id} budgetItemType='program' />
+    )
   },
 
   renderDetails () {
@@ -44,6 +57,8 @@ const BudgetItem = React.createClass({
         <BudgetItemCharts {...{ id, selectedTimePeriod }} />
         <BudgetItemYearlyTable itemId={id} />
         {this.renderOverallBudgetLink()}
+        <br />
+        {this.renderViewProgramsLink()}
       </div>
     )
   },
@@ -64,7 +79,8 @@ const mapStateToProps = (state, ownProps) => ({
   detailsLoaded: getDetailsLoadedForItem(state, ownProps.id),
   name: getBudgetItemName(state, ownProps.id),
   selectedTimePeriod: getSelectedTimePeriods(state)[0],
-  overallBudgetId: getOverallBudgetIdForItem(state, ownProps.id)
+  overallBudgetId: getOverallBudgetIdForItem(state, ownProps.id),
+  hasChildPrograms: getChildProgramIdsForItem(state, ownProps.id).length !== 0
 })
 
 module.exports = injectIntl(connect(mapStateToProps, null)(BudgetItem))

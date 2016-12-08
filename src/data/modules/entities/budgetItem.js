@@ -63,6 +63,10 @@ const getOverallBudgetIdForItem = (state, itemId) => (
   getBudgetItem(state, itemId).overallBudget
 )
 
+const getChildProgramIdsForItem = (state, itemId) => (
+  getBudgetItem(state, itemId).childPrograms || []
+)
+
 module.exports = {
   budgetItemTypes,
   getBudgetItem,
@@ -76,5 +80,6 @@ module.exports = {
   getItemIsLoaded,
   getDetailsLoadedForItem,
   getDetailsLoadedForItemCurrentLocale,
-  getOverallBudgetIdForItem
+  getOverallBudgetIdForItem,
+  getChildProgramIdsForItem
 }
