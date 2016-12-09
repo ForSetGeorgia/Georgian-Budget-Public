@@ -5,7 +5,10 @@ const { connect } = require('react-redux')
 
 const { getBudgetItemsData } = require('src/data/ducks/budgetItems')
 const { getSelectedBudgetItemType } = require('src/data/ducks/filters')
-const { getChildProgramIdsForItem } = require('src/data/modules/entities/budgetItem')
+const {
+  getChildProgramIdsForItem,
+  getPriorityIdsForItem
+} = require('src/data/modules/entities/budgetItem')
 
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const BudgetItemSelectList = require('./BudgetItemSelectList')
@@ -45,6 +48,8 @@ const BudgetItemSelectLists = React.createClass({
 const getChildItemsOfTypeForItem = (state, itemId, budgetItemType) => {
   if (budgetItemType === 'program') {
     return getChildProgramIdsForItem(state, itemId)
+  } else if (budgetItemType === 'priority') {
+    return getPriorityIdsForItem(state, itemId)
   } else {
     return []
   }

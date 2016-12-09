@@ -62,18 +62,23 @@ const getChildProgramIdsForItem = (state, itemId) => (
   (getBudgetItem(state, itemId) || {}).childPrograms || []
 )
 
+const getPriorityIdsForItem = (state, itemId) => (
+  (getBudgetItem(state, itemId) || {}).priorities || []
+)
+
 module.exports = {
   budgetItemTypes,
   getBudgetItem,
   getItemSpentFinanceIds,
-  getItemSpentFinances,
+  getItemSpentFinances, // TODO: Move to spent finance entity
   getItemPlannedFinanceIds,
-  getItemPlannedFinances,
+  getItemPlannedFinances, // TODO: Move to planned finance entity
   getBudgetItemName,
   getBudgetItemLoaded,
   getItemIsLoaded,
   getDetailsLoadedForItem,
   getDetailsLoadedForItemCurrentLocale,
   getOverallBudgetIdForItem,
-  getChildProgramIdsForItem
+  getChildProgramIdsForItem,
+  getPriorityIdsForItem
 }
