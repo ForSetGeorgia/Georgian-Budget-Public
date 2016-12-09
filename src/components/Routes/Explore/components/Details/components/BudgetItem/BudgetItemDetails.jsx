@@ -31,6 +31,14 @@ const agencyLink = agencyId => (
   )
 )
 
+const parentProgramLink = parentProgramId => (
+  !parentProgramId ? null : (
+    <p>
+      Parent Program: <ItemDetailsLink itemId={parentProgramId} />
+    </p>
+  )
+)
+
 const BudgetItemDetails = props => {
   const {
     detailsLoaded,
@@ -38,7 +46,8 @@ const BudgetItemDetails = props => {
     overallBudgetId,
     selectedTimePeriod,
     priorityId,
-    agencyId
+    agencyId,
+    parentProgramId
   } = props
 
   if (!detailsLoaded) return <LoadingIndicator />
@@ -55,6 +64,7 @@ const BudgetItemDetails = props => {
       {overallBudgetLink(overallBudgetId)}
       {priorityLink(priorityId)}
       {agencyLink(agencyId)}
+      {parentProgramLink(parentProgramId)}
       <br />
       <ChildItemsListLink parentItemId={itemId} budgetItemType='program' />
       <br />
@@ -71,7 +81,8 @@ BudgetItemDetails.propTypes = {
   overallBudgetId: string,
   selectedTimePeriod: string,
   priorityId: string,
-  agencyId: string
+  agencyId: string,
+  parentProgramId: string
 }
 
 module.exports = BudgetItemDetails

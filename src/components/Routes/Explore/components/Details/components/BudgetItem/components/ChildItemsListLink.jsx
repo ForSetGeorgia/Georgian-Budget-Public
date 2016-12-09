@@ -1,5 +1,5 @@
 const React = require('react')
-const { bool, string, func } = React.PropTypes
+const { bool, func, number, string } = React.PropTypes
 const { connect } = require('react-redux')
 const { intlShape, defineMessages, injectIntl } = require('react-intl')
 
@@ -31,6 +31,7 @@ const messages = defineMessages({
 
 const ChildItemsListLink = React.createClass({
   propTypes: {
+    childItemsCount: number.isRequired,
     show: bool.isRequired,
     budgetItemType: string.isRequired,
     intl: intlShape.isRequired,
@@ -60,12 +61,15 @@ const ChildItemsListLink = React.createClass({
   render () {
     if (!this.props.show) return null
     return (
-      <a href='#' onClick={this.handleClickEvent}>{this.text()}</a>
+      <a href='#' onClick={this.handleClickEvent}>
+        {this.text()} ({this.props.childItemsCount})
+      </a>
     )
   }
 })
 
 const mapStateToProps = (state, ownProps) => ({
+  childItemsCount: getChildItemsOfTypeForItem(state, ownProps.parentItemId, ownProps.budgetItemType).length,
   show: getChildItemsOfTypeForItem(state, ownProps.parentItemId, ownProps.budgetItemType).length !== 0
 })
 
