@@ -17,7 +17,7 @@ const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
 const {
   getDetailsItemId,
   setDetailsItemId,
-  setExploreDisplay
+  switchDisplayToDetails
 } = require('src/data/ducks/explore')
 
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
@@ -34,14 +34,14 @@ const BudgetItemSelectList = React.createClass({
       name: string.isRequired
     })).isRequired,
     setDetailsItemId: func.isRequired,
-    setExploreDisplay: func.isRequired,
+    switchDisplayToDetails: func.isRequired,
     columns: arrayOf(string).isRequired,
     columnMetadata: arrayOf(object).isRequired
   },
 
   handleClick (row) {
     this.props.setDetailsItemId(row.props.data.id)
-    this.props.setExploreDisplay('details')
+    this.props.switchDisplayToDetails()
   },
 
   rowClassName (row) {
@@ -143,7 +143,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
   setDetailsItemId: id => { dispatch(setDetailsItemId(id)) },
-  setExploreDisplay: display => { dispatch(setExploreDisplay(display)) }
+  switchDisplayToDetails: display => { dispatch(switchDisplayToDetails(display)) }
 })
 
 module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(BudgetItemSelectList))
