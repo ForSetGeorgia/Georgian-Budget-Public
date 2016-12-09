@@ -14,8 +14,8 @@ require('src/data/modules/entities/budgetItem/loaded')
 const {
   getBudgetItemName,
   getOverallBudgetIdForItem,
-  getChildProgramIdsForItem,
-  getAgencyIdsForItem
+  getPriorityIdForItem,
+  getAgencyIdForItem
 } = require('src/data/modules/entities/budgetItem')
 
 const BudgetItem = React.createClass({
@@ -42,8 +42,8 @@ const mapStateToProps = (state, ownProps) => ({
   name: getBudgetItemName(state, ownProps.itemId),
   selectedTimePeriod: getSelectedTimePeriods(state)[0],
   overallBudgetId: getOverallBudgetIdForItem(state, ownProps.itemId),
-  hasChildPrograms: getChildProgramIdsForItem(state, ownProps.itemId).length !== 0,
-  hasAgencies: getAgencyIdsForItem(state, ownProps.itemId).length !== 0
+  priorityId: getPriorityIdForItem(state, ownProps.itemId),
+  agencyId: getAgencyIdForItem(state, ownProps.itemId)
 })
 
 module.exports = injectIntl(connect(mapStateToProps, null)(BudgetItem))

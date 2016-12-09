@@ -19,9 +19,11 @@ const createLocalizedSchema = locale => {
     spentFinances: arrayOf(spentFinance),
     plannedFinances: arrayOf(plannedFinance),
     overallBudget: budgetItem,
-    childPrograms: arrayOf(budgetItem),
+    priority: budgetItem,
+    spendingAgency: budgetItem,
     priorities: arrayOf(budgetItem),
-    spendingAgencies: arrayOf(budgetItem)
+    spendingAgencies: arrayOf(budgetItem),
+    childPrograms: arrayOf(budgetItem)
   })
 
   return budgetItem

@@ -39,6 +39,14 @@ const getAgencyIdsForItem = (state, itemId) => (
   (getBudgetItem(state, itemId) || {}).spendingAgencies || []
 )
 
+const getPriorityIdForItem = (state, itemId) => (
+  (getBudgetItem(state, itemId) || {}).priority
+)
+
+const getAgencyIdForItem = (state, itemId) => (
+  (getBudgetItem(state, itemId) || {}).spendingAgency
+)
+
 const getChildItemsOfTypeForItem = (state, itemId, budgetItemType) => {
   if (budgetItemType === 'program') {
     return getChildProgramIdsForItem(state, itemId)
@@ -59,6 +67,8 @@ module.exports = {
   getBudgetItemName,
   getItemIsLoaded,
   getOverallBudgetIdForItem,
+  getPriorityIdForItem,
+  getAgencyIdForItem,
   getChildProgramIdsForItem,
   getPriorityIdsForItem,
   getAgencyIdsForItem,
