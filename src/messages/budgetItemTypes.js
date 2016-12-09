@@ -18,6 +18,11 @@ const messages = defineMessages({
       id: 'budgetType.program.other',
       description: 'The text for multiple programs',
       defaultMessage: 'Programs'
+    },
+    afterNumber: {
+      id: 'budgetType.program.afterNumber',
+      description: 'The text for multiple programs when preceded by a number',
+      defaultMessage: 'Programs'
     }
   },
   spendingAgency: {
@@ -30,6 +35,11 @@ const messages = defineMessages({
       id: 'budgetType.spendingAgency.other',
       description: 'Multiple spending agencies',
       defaultMessage: 'Spending Agencies'
+    },
+    afterNumber: {
+      id: 'budgetType.spendingAgency.afterNumber',
+      description: 'The text for multiple agencies when preceded by a number',
+      defaultMessage: 'Spending Agencies'
     }
   },
   priority: {
@@ -41,6 +51,11 @@ const messages = defineMessages({
     other: {
       id: 'budgetType.priority.other',
       description: 'Multiple priorities',
+      defaultMessage: 'Priorities'
+    },
+    afterNumber: {
+      id: 'budgetType.priority.afterNumber',
+      description: 'The text for multiple priorities when preceded by a number',
       defaultMessage: 'Priorities'
     }
   }

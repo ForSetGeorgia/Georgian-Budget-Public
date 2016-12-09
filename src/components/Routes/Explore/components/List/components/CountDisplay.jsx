@@ -14,7 +14,7 @@ const CountDisplay = ({ count, itemTranslations, intl }) => {
       values={{
         count: count,
         one: intl.formatMessage(itemTranslations.one),
-        other: intl.formatMessage(itemTranslations.other)
+        other: intl.formatMessage(itemTranslations.afterNumber)
       }}
     />
   )
