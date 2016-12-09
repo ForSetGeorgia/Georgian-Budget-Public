@@ -21,6 +21,7 @@ const createLocalizedSchema = locale => {
     overallBudget: budgetItem,
     priority: budgetItem,
     spendingAgency: budgetItem,
+    parentProgram: budgetItem,
     priorities: arrayOf(budgetItem),
     spendingAgencies: arrayOf(budgetItem),
     childPrograms: arrayOf(budgetItem)
