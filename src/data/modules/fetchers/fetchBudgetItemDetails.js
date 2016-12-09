@@ -25,7 +25,7 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
 
   georgianBudgetAPI.get(locale, 'v1', {
     params: {
-      budgetItemFields: 'id,code,name,spent_finances,planned_finances,related_budget_items',
+      budgetItemFields: 'id,code,name,spentFinances,plannedFinances,related_budget_items',
       budgetItemId: itemId
     }
   }).then((response) => {

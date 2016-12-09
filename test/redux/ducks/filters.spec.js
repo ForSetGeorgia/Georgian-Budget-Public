@@ -12,18 +12,18 @@ describe('filters reducer', () => {
       {},
       initialState,
       {
-        financeType: 'spent_finance'
+        financeType: 'spentFinance'
       }
     )
 
-    const action = setFinanceType('planned_finance')
+    const action = setFinanceType('plannedFinance')
     const newState = filters(previousState, action)
 
     const expectedState = Object.assign(
       {},
       initialState,
       {
-        financeType: 'planned_finance'
+        financeType: 'plannedFinance'
       }
     )
 

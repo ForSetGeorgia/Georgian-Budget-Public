@@ -119,7 +119,7 @@ const getItemValues = (state, itemId, selectedYears) => (
       state,
       itemId,
       selectedYears,
-      getSelectedFinanceType(state) === 'planned_finance' ? getItemPlannedFinances : getItemSpentFinances
+      getSelectedFinanceType(state) === 'plannedFinance' ? getItemPlannedFinances : getItemSpentFinances
     )
   )
 )

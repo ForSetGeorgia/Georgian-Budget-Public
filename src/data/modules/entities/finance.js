@@ -1,4 +1,4 @@
-const financeTypes = ['spent_finance', 'planned_finance']
+const financeTypes = ['spentFinance', 'plannedFinance']
 
 const filterFinancesByPeriodType = (finances, type) => (
   finances.filter(

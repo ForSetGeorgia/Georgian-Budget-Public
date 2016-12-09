@@ -28,7 +28,7 @@ const fetchListedBudgetItems = () => (dispatch, getState) => {
 
   georgianBudgetAPI.get(locale, 'v1', {
     params: {
-      budgetItemFields: 'id,name,type,spent_finances,planned_finances',
+      budgetItemFields: 'id,name,type,spentFinances,plannedFinances',
       filters: {
         budgetItemType: camelToSnake(budgetItemType),
         timePeriodType: 'year'

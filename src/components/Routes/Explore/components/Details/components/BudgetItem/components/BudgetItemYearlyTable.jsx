@@ -16,10 +16,10 @@ const GriddleFormattedAmount = require('src/components/shared/GriddleFormattedAm
 
 const getNumberColumnMetadata = intl => (
   [{
-    columnName: 'spent_finance',
+    columnName: 'spentFinance',
     displayName: intl.formatMessage(financeTypeMessages.spentFinance.adjective)
   }, {
-    columnName: 'planned_finance',
+    columnName: 'plannedFinance',
     displayName: intl.formatMessage(financeTypeMessages.plannedFinance.adjective)
   }, {
     columnName: 'difference',
@@ -45,8 +45,8 @@ const getDataForYear = (year, spentFinances, plannedFinances) => {
 
   return {
     year: translateTimePeriod(year),
-    spent_finance: spentFinance ? spentFinance.amount : null,
-    planned_finance: plannedFinance ? plannedFinance.amount : null,
+    spentFinance: spentFinance ? spentFinance.amount : null,
+    plannedFinance: plannedFinance ? plannedFinance.amount : null,
     difference: getFinanceDifference(plannedFinance, spentFinance)
   }
 }

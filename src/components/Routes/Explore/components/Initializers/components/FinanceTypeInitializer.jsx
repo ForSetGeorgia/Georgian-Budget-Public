@@ -12,7 +12,7 @@ const StateInitializer = require('src/components/shared/StateInitializer')
 const mapStateToProps = state => ({
   selectedTargetValue: getSelectedFinanceType(state),
   queryTargetName: 'financeType',
-  defaultTargetValue: 'spent_finance',
+  defaultTargetValue: 'spentFinance',
   permittedTargetValues: financeTypes
 })
 
