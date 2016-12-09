@@ -9,8 +9,6 @@ const STAGING = Env === 'staging'
 const PROD = Env === 'production'
 const UGLIFY = STAGING || PROD
 
-console.log('Running webpack in ' + Env + ' environment')
-
 const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -99,7 +97,5 @@ const config = {
   postcss: [ autoprefixer({ browsers: [ '> 1%' ]}) ],
   plugins: plugins
 }
-
-console.log('CONFIG IS: ', config)
 
 module.exports = config
