@@ -7,22 +7,22 @@ const BudgetItemYearlyTable = require('./components/BudgetItemYearlyTable')
 const ItemDetailsLink = require('src/components/shared/ItemDetailsLink')
 const ParentListLink = require('./components/ParentListLink')
 
+const overallBudgetLink = overallBudgetId => (
+  !overallBudgetId ? null : (
+    <ItemDetailsLink itemId={overallBudgetId} />
+  )
+)
+
+const viewProgramsLink = (itemId, hasChildPrograms) => (
+  !hasChildPrograms ? null : (
+    <ParentListLink parentItemId={itemId} budgetItemType='program' />
+  )
+)
+
 const BudgetItemDetails = props => {
   const { detailsLoaded, itemId, overallBudgetId, selectedTimePeriod, hasChildPrograms } = props
 
   if (!detailsLoaded) return <LoadingIndicator />
-
-  let overallBudgetLink
-
-  if (overallBudgetId) {
-    overallBudgetLink = <ItemDetailsLink itemId={overallBudgetId} />
-  }
-
-  let viewProgramsLink
-
-  if (hasChildPrograms) {
-    viewProgramsLink = <ParentListLink parentItemId={itemId} budgetItemType='program' />
-  }
 
   return (
     <div>
@@ -33,9 +33,9 @@ const BudgetItemDetails = props => {
 
       <BudgetItemYearlyTable itemId={itemId} />
 
-      {overallBudgetLink}
+      {overallBudgetLink(overallBudgetId)}
       <br />
-      {viewProgramsLink}
+      {viewProgramsLink(itemId, hasChildPrograms)}
     </div>
   )
 }
