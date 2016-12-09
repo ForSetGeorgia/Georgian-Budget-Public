@@ -30,7 +30,7 @@ const getItemPlannedFinances = (state, itemId) => (
 )
 
 const getBudgetItemName = (state, itemId) => (
-  (getBudgetItem(state, itemId).name || {})[getLocale(state)] || ''
+  ((getBudgetItem(state, itemId) || {}).name || {})[getLocale(state)] || ''
 )
 
 const getBudgetItemLoaded = (state, itemId) => (

@@ -13,9 +13,11 @@ const {
 
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const BudgetItemSelectList = require('./BudgetItemSelectList')
+const ItemDetailsLink = require('src/components/shared/ItemDetailsLink')
 
 const BudgetItemSelectLists = React.createClass({
   propTypes: {
+    itemId: string,
     lists: arrayOf(shape({
       typeOfItems: string,
       itemIds: array
@@ -36,10 +38,12 @@ const BudgetItemSelectLists = React.createClass({
   },
 
   render () {
+    const { itemId } = this.props
     if (this.isLoading()) return <LoadingIndicator />
 
     return (
       <div>
+        <ItemDetailsLink itemId={itemId} />
         {this.props.lists.map(list => this.renderList(list))}
       </div>
     )

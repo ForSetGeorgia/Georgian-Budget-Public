@@ -7,7 +7,7 @@ const BudgetItemHeading = require('./components/BudgetItemHeading')
 const BudgetItemCharts = require('./components/BudgetItemCharts')
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const BudgetItemYearlyTable = require('./components/BudgetItemYearlyTable')
-const ItemDetailsLink = require('./components/ItemDetailsLink')
+const ItemDetailsLink = require('src/components/shared/ItemDetailsLink')
 const ParentListLink = require('./components/ParentListLink')
 
 const { getSelectedTimePeriods } = require('src/data/ducks/filters')

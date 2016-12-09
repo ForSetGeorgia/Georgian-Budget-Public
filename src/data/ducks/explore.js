@@ -52,6 +52,8 @@ reducer.setExploreDisplay = newDisplay => ({
   display: newDisplay
 })
 
+reducer.switchDisplayToDetails = () => reducer.setExploreDisplay('details')
+
 reducer.setDetailsItemId = id => ({
   type: SET_DETAILS_ITEM_ID,
   id: id
