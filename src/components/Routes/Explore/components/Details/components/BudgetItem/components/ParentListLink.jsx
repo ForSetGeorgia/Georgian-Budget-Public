@@ -1,5 +1,5 @@
 const React = require('react')
-const { string, func } = React.PropTypes
+const { bool, string, func } = React.PropTypes
 const { connect } = require('react-redux')
 const { intlShape, defineMessages, injectIntl } = require('react-intl')
 
@@ -9,6 +9,10 @@ const {
   switchDisplayToList,
   setParentItemId
 } = require('src/data/ducks/explore')
+
+const {
+  getChildItemsOfTypeForItem
+} = require('src/data/modules/entities/budgetItem')
 
 const messages = defineMessages({
   program: {
@@ -27,6 +31,7 @@ const messages = defineMessages({
 
 const ParentListLink = React.createClass({
   propTypes: {
+    show: bool.isRequired,
     budgetItemType: string.isRequired,
     intl: intlShape.isRequired,
     setBudgetItemType: func.isRequired,
@@ -53,10 +58,15 @@ const ParentListLink = React.createClass({
   },
 
   render () {
+    if (!this.props.show) return null
     return (
       <a href='#' onClick={this.handleClickEvent}>{this.text()}</a>
     )
   }
+})
+
+const mapStateToProps = (state, ownProps) => ({
+  show: getChildItemsOfTypeForItem(state, ownProps.parentItemId, ownProps.budgetItemType).length !== 0
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -65,4 +75,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   selectParent: () => dispatch(setParentItemId(ownProps.parentItemId))
 })
 
-module.exports = injectIntl(connect(null, mapDispatchToProps)(ParentListLink))
+module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ParentListLink))
