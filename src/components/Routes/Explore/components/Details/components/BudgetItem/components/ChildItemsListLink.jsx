@@ -29,7 +29,7 @@ const messages = defineMessages({
   }
 })
 
-const ParentListLink = React.createClass({
+const ChildItemsListLink = React.createClass({
   propTypes: {
     show: bool.isRequired,
     budgetItemType: string.isRequired,
@@ -75,4 +75,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   selectParent: () => dispatch(setParentItemId(ownProps.parentItemId))
 })
 
-module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ParentListLink))
+module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ChildItemsListLink))
