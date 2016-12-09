@@ -4,14 +4,14 @@ const { connect } = require('react-redux')
 
 const ButtonSelector = require('src/components/shared/ButtonSelector')
 const {
-  switchDisplayToDetails,
+  setExploreDisplay,
   getSelectedExploreDisplay
  } = require('src/data/ducks/explore')
 
 const ExploreDisplaySelect = React.createClass({
   propTypes: {
     selectedExploreDisplay: string.isRequired,
-    switchDisplayToDetails: func.isRequired
+    setExploreDisplay: func.isRequired
   },
 
   options () {
@@ -28,7 +28,7 @@ const ExploreDisplaySelect = React.createClass({
   },
 
   handleChangeEvent (value) {
-    this.props.switchDisplayToDetails(value)
+    this.props.setExploreDisplay(value)
   },
 
   render () {
@@ -49,7 +49,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  switchDisplayToDetails: value => { dispatch(switchDisplayToDetails()) }
+  setExploreDisplay: value => { dispatch(setExploreDisplay(value)) }
 })
 
 module.exports = connect(mapStateToProps, mapDispatchToProps)(ExploreDisplaySelect)
