@@ -6,8 +6,8 @@ const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const TimeSeriesChart = require('./TimeSeriesChart')
 const timePeriodTypeMessages = require('src/messages/timePeriodTypes')
 const financeTypeMessages = require('src/messages/financeTypes')
-const { getItemSpentFinances } = require('src/data/modules/entities/budgetItem')
-const { getItemPlannedFinances } = require('src/data/modules/entities/budgetItem')
+const { getItemSpentFinances } = require('src/data/modules/entities/spentFinance')
+const { getItemPlannedFinances } = require('src/data/modules/entities/plannedFinance')
 
 const {
   filterFinancesByPeriodType,
