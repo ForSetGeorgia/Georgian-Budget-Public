@@ -66,6 +66,10 @@ const getPriorityIdsForItem = (state, itemId) => (
   (getBudgetItem(state, itemId) || {}).priorities || []
 )
 
+const getAgencyIdsForItem = (state, itemId) => (
+  (getBudgetItem(state, itemId) || {}).spendingAgencies || []
+)
+
 module.exports = {
   budgetItemTypes,
   getBudgetItem,
@@ -80,5 +84,6 @@ module.exports = {
   getDetailsLoadedForItemCurrentLocale,
   getOverallBudgetIdForItem,
   getChildProgramIdsForItem,
-  getPriorityIdsForItem
+  getPriorityIdsForItem,
+  getAgencyIdsForItem
 }

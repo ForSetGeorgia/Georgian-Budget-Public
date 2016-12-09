@@ -7,7 +7,8 @@ const { getBudgetItemsData } = require('src/data/ducks/budgetItems')
 const { getSelectedBudgetItemType } = require('src/data/ducks/filters')
 const {
   getChildProgramIdsForItem,
-  getPriorityIdsForItem
+  getPriorityIdsForItem,
+  getAgencyIdsForItem
 } = require('src/data/modules/entities/budgetItem')
 
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
@@ -50,6 +51,8 @@ const getChildItemsOfTypeForItem = (state, itemId, budgetItemType) => {
     return getChildProgramIdsForItem(state, itemId)
   } else if (budgetItemType === 'priority') {
     return getPriorityIdsForItem(state, itemId)
+  } else if (budgetItemType === 'spending_agency') {
+    return getAgencyIdsForItem(state, itemId)
   } else {
     return []
   }
