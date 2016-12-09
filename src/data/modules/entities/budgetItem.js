@@ -1,7 +1,7 @@
 const { getLocale } = require('src/data/ducks/locale')
 const { getBudgetItemsData } = require('src/data/ducks/budgetItems')
 
-const budgetItemTypes = ['priority', 'spending_agency', 'program']
+const budgetItemTypes = ['priority', 'spendingAgency', 'program']
 
 const getBudgetItem = (state, itemId) => (
   getBudgetItemsData(state)[itemId]
@@ -44,7 +44,7 @@ const getChildItemsOfTypeForItem = (state, itemId, budgetItemType) => {
     return getChildProgramIdsForItem(state, itemId)
   } else if (budgetItemType === 'priority') {
     return getPriorityIdsForItem(state, itemId)
-  } else if (budgetItemType === 'spending_agency') {
+  } else if (budgetItemType === 'spendingAgency') {
     return getAgencyIdsForItem(state, itemId)
   } else {
     return []

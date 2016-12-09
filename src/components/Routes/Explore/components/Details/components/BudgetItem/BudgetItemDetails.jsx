@@ -36,7 +36,7 @@ const BudgetItemDetails = props => {
       <br />
       <ChildItemsListLink parentItemId={itemId} budgetItemType='program' />
       <br />
-      <ChildItemsListLink parentItemId={itemId} budgetItemType='spending_agency' />
+      <ChildItemsListLink parentItemId={itemId} budgetItemType='spendingAgency' />
       <br />
       <ChildItemsListLink parentItemId={itemId} budgetItemType='priority' />
     </div>

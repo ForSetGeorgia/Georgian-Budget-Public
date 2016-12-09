@@ -8,6 +8,8 @@ const { mergeBudgetItems } = require('src/data/ducks/budgetItems')
 const { getLocale } = require('src/data/ducks/locale')
 const { addError } = require('src/data/ducks/errors')
 
+const camelToSnake = require('src/utilities/camelToSnake')
+
 const { getSelectedBudgetItemType } = require('src/data/ducks/filters')
 
 const georgianBudgetAPI = require('src/services/georgianBudgetAPI')
@@ -28,7 +30,7 @@ const fetchListedBudgetItems = () => (dispatch, getState) => {
     params: {
       budgetItemFields: 'id,name,type,spent_finances,planned_finances',
       filters: {
-        budgetItemType: budgetItemType,
+        budgetItemType: camelToSnake(budgetItemType),
         timePeriodType: 'year'
       }
     }

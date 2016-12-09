@@ -19,7 +19,7 @@ const messages = defineMessages({
     id: 'app.parentListLink.program',
     defaultMessage: 'View Child Programs'
   },
-  spending_agency: {
+  spendingAgency: {
     id: 'app.parentListLink.spendingAgency',
     defaultMessage: 'View Spending Agencies'
   },
