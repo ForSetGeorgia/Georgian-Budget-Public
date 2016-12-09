@@ -12,9 +12,11 @@ const ParentListLink = require('./components/ParentListLink')
 
 const { getSelectedTimePeriods } = require('src/data/ducks/filters')
 
+const { getDetailsLoadedForItem } =
+require('src/data/modules/entities/budgetItem/loaded')
+
 const {
   getBudgetItemName,
-  getDetailsLoadedForItem,
   getOverallBudgetIdForItem,
   getChildProgramIdsForItem
 } = require('src/data/modules/entities/budgetItem')

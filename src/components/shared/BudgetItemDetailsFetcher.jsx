@@ -8,7 +8,7 @@ const fetchBudgetItemDetails = require('src/data/modules/fetchers/fetchBudgetIte
 
 const {
   getDetailsLoadedForItemCurrentLocale
-} = require('src/data/modules/entities/budgetItem')
+} = require('src/data/modules/entities/budgetItem/loaded')
 
 const BudgetItemDetailsFetcher = React.createClass({
   propTypes: {
