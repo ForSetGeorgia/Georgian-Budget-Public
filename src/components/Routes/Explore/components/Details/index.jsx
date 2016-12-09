@@ -21,7 +21,7 @@ let ExploreDetails = React.createClass({
   renderContent () {
     const { detailsItemId, detailsItemLoaded } = this.props
     if (detailsItemLoaded) {
-      return <BudgetItem id={detailsItemId} />
+      return <BudgetItem itemId={detailsItemId} />
     } else {
       return <LoadingIndicator />
     }

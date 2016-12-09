@@ -8,7 +8,7 @@ const timePeriodTypeMessages = require('src/messages/timePeriodTypes')
 
 const BudgetItemCharts = React.createClass({
   propTypes: {
-    id: string,
+    itemId: string,
     selectedTimePeriod: string,
     intl: intlShape
   },
@@ -29,14 +29,14 @@ const BudgetItemCharts = React.createClass({
   },
 
   renderChart (timePeriodType) {
-    const { id, selectedTimePeriod } = this.props
+    const { itemId, selectedTimePeriod } = this.props
 
     const surroundingTimePeriod = timePeriodType === 'year' ? 'all' : selectedTimePeriod
 
     return (
       <FinancesTimeSeries
         key={`${timePeriodType}-${selectedTimePeriod}`}
-        itemIds={[id]}
+        itemIds={[itemId]}
         timePeriodType={timePeriodType}
         showSpentFinances
         showPlannedFinances
