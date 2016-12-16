@@ -1,5 +1,20 @@
 This site allows users to interact with data from the [Georgian-Budget project API](https://github.com/JumpStartGeorgia/Georgian-Budget-API).
 
+## Get Started
+
+1. Setup .env file
+  1. `cp .env.example .env`
+  1. Set `NODE_ENV` to 'development'
+  1. Set `API_URL` to 'https://dev-budgetapi.jumpstart.ge' (for now)
+1. Install [docker](https://www.docker.com/products/overview)
+1. `docker-compose up` (takes a while)
+1. Open [localhost:8080](http://localhost:8080)
+
+If you want to use the API locally, then...
+
+1. change `API_URL` in the `.env` file to 'http://localhost:3000'
+1. setup the API app by following these [instructions](https://github.com/JumpStartGeorgia/Georgian-Budget-API#get-started)
+
 ## Deploy
 
 For the first time:
