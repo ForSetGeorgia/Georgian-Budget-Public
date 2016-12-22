@@ -84,7 +84,10 @@ const FinancesTimeSeries = React.createClass({
       if (item.plannedFinances && item.plannedFinances.length > 0) {
         series = series.concat({
           name: intl.formatMessage(financeTypeMessages.plannedFinance.other),
-          data: item.plannedFinances.map(f => f.amount)
+          data: item.plannedFinances.map(f => f.amount),
+          color: 'transparent',
+          borderWidth: 2,
+          borderColor: 'black'
         })
       }
     })

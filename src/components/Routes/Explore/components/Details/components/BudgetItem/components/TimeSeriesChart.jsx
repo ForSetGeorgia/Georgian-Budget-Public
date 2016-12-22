@@ -53,6 +53,11 @@ const TimeSeriesChart = React.createClass({
           text: yAxisTitle
         }
       },
+      plotOptions: {
+        column: {
+          grouping: false
+        }
+      },
       series: series
     }
 
