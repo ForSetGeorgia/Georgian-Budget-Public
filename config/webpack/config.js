@@ -45,57 +45,58 @@ if (UGLIFY) {
   }))
 }
 
-const config = {
-  context: paths.ROOT,
-  entry: 'src/browser.jsx',
-  output: {
-    path: paths.BUNDLES,
-    filename: UGLIFY ? 'bundle.min.js' : 'bundle.js'
-  },
-  devtool: DEV ? 'eval-source-map' : 'source-map',
-  resolve: {
-    extensions: ['', '.js', '.jsx', '.scss', '.svg'],
-    root: [ paths.ROOT ]
-  },
-  stats: {
-    colors: true,
-    reasons: true,
-    chunks: true
-  },
-  module: {
-    preLoaders: preloaders,
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        loader: 'babel'
-      },
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract(
-          'style',
-          [
-            UGLIFY ? 'css?minimize!' : 'css',
-            'postcss',
-            'sass'
-          ]
-        )
-      },
-      {
-        test: /\.svg$/,
-        loader: 'svg-inline'
-      },
-      {
-        test: /\.ttf$/,
-        loader: 'url?limit=10000'
-      },
-      {
-        test: /\.json$/,
-        loader: 'json'
-      }
-    ]
-  },
-  postcss: [ autoprefixer({ browsers: [ '> 1%' ]}) ],
-  plugins: plugins
+module.exports = env => {
+  return {
+    context: paths.ROOT,
+    entry: 'src/browser.jsx',
+    output: {
+      pathinfo: DEV,
+      path: paths.BUNDLES,
+      filename: UGLIFY ? 'bundle.min.js' : 'bundle.js'
+    },
+    devtool: DEV ? 'eval' : 'source-map',
+    resolve: {
+      extensions: ['', '.js', '.jsx', '.scss', '.svg'],
+      root: [ paths.ROOT ]
+    },
+    stats: {
+      colors: true,
+      reasons: true,
+      chunks: true
+    },
+    module: {
+      preLoaders: preloaders,
+      loaders: [
+        {
+          test: /\.jsx?$/,
+          loader: 'babel'
+        },
+        {
+          test: /\.scss$/,
+          loader: ExtractTextPlugin.extract(
+            'style',
+            [
+              UGLIFY ? 'css?minimize!' : 'css',
+              'postcss',
+              'sass'
+            ]
+          )
+        },
+        {
+          test: /\.svg$/,
+          loader: 'svg-inline'
+        },
+        {
+          test: /\.ttf$/,
+          loader: 'url?limit=10000'
+        },
+        {
+          test: /\.json$/,
+          loader: 'json'
+        }
+      ]
+    },
+    postcss: [ autoprefixer({ browsers: [ '> 1%' ]}) ],
+    plugins: plugins
+  }
 }
-
-module.exports = config

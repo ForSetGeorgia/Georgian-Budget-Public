@@ -8,7 +8,7 @@ services:
 
   build:
     image: georgianbudget_app
-    command: /bin/sh -c 'npm run watch'
+    command: /bin/sh -c 'yarn run watch:dev'
     volumes:
       - .:/myapp
       - /myapp/public/bundles/
