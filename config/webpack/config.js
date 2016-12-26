@@ -13,10 +13,7 @@ var webpack_isomorphic_tools_plugin = new Webpack_isomorphic_tools_plugin(
 )
 
 module.exports = env => {
-  const DEV = env.dev
-  const PROD = env.prod
-
-  if (DEV) webpack_isomorphic_tools_plugin = webpack_isomorphic_tools_plugin.development()
+  if (env.dev) webpack_isomorphic_tools_plugin = webpack_isomorphic_tools_plugin.development()
 
   const rules = [
     {
@@ -29,7 +26,7 @@ module.exports = env => {
         fallbackLoader: 'style-loader',
         loader: [
           {
-            loader: PROD ? 'css-loader?minimize!' : 'css-loader'
+            loader: env.prod ? 'css-loader?minimize!' : 'css-loader'
           },
           {
             loader: 'postcss-loader'
@@ -50,7 +47,7 @@ module.exports = env => {
     }
   ]
 
-  if (DEV) {
+  if (env.dev) {
     rules.push({
       test: /\.jsx?$/,
       enforce: 'pre',
@@ -67,7 +64,7 @@ module.exports = env => {
     webpack_isomorphic_tools_plugin
   ]
 
-  if (PROD) {
+  if (env.prod) {
     plugins.push(new webpack.optimize.UglifyJsPlugin({
       mangle: true,
       sourceMap: true
@@ -84,11 +81,11 @@ module.exports = env => {
     context: paths.ROOT,
     entry: 'src/browser.jsx',
     output: {
-      pathinfo: DEV,
+      pathinfo: env.dev,
       path: paths.BUNDLES,
-      filename: PROD ? 'bundle.min.js' : 'bundle.js'
+      filename: env.prod ? 'bundle.min.js' : 'bundle.js'
     },
-    devtool: DEV ? 'eval' : 'source-map',
+    devtool: env.dev ? 'eval' : 'source-map',
     resolve: {
       extensions: ['.js', '.jsx', '.json', '.scss', '.svg'],
       modules: [ paths.ROOT, 'node_modules' ]
