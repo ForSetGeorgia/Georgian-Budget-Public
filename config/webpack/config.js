@@ -27,12 +27,18 @@ const rules = [
   },
   {
     test: /\.scss$/,
-    use: ExtractTextPlugin.extract({
+    loader: ExtractTextPlugin.extract({
       fallbackLoader: 'style-loader',
       loader: [
-        { loader: UGLIFY ? 'css-loader?minimize!' : 'css-loader' },
-        'postcss-loader',
-        'sass-loader'
+        {
+          loader: UGLIFY ? 'css-loader?minimize!' : 'css-loader'
+        },
+        {
+          loader: 'postcss-loader'
+        },
+        {
+          loader: 'sass-loader'
+        }
       ]
     })
   },
