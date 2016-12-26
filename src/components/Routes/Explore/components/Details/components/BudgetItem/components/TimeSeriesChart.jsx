@@ -7,7 +7,7 @@ const TimeSeriesChart = React.createClass({
     containerId: string.isRequired,
     xAxisCategories: array.isRequired,
     series: array.isRequired,
-    title: string.isRequired,
+    title: string,
     valueSuffix: string.isRequired,
     yAxisTitle: string.isRequired,
     subtitle: string

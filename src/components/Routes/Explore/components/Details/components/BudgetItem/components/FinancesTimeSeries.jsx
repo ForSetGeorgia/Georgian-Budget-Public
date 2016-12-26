@@ -52,7 +52,7 @@ const FinancesTimeSeries = React.createClass({
   },
 
   title () {
-    return this.timePeriodTypeMessage()
+    return null
   },
 
   uniqueChartId () {
