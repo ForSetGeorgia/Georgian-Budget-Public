@@ -3,12 +3,6 @@ const autoprefixer = require('autoprefixer')
 
 const paths = require('config/paths')
 
-const Env = process.env.NODE_ENV || 'development'
-const DEV = Env === 'development'
-const STAGING = Env === 'staging'
-const PROD = Env === 'production'
-const UGLIFY = STAGING || PROD
-
 const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -18,78 +12,82 @@ var webpack_isomorphic_tools_plugin = new Webpack_isomorphic_tools_plugin(
   require('./isomorphic-tools.config.js')
 )
 
-if (DEV) webpack_isomorphic_tools_plugin = webpack_isomorphic_tools_plugin.development()
-
-const rules = [
-  {
-    test: /\.jsx?$/,
-    use: 'babel-loader'
-  },
-  {
-    test: /\.scss$/,
-    loader: ExtractTextPlugin.extract({
-      fallbackLoader: 'style-loader',
-      loader: [
-        {
-          loader: UGLIFY ? 'css-loader?minimize!' : 'css-loader'
-        },
-        {
-          loader: 'postcss-loader'
-        },
-        {
-          loader: 'sass-loader'
-        }
-      ]
-    })
-  },
-  {
-    test: /\.svg$/,
-    use: 'svg-inline-loader'
-  },
-  {
-    test: /\.ttf$/,
-    use: 'url-loader?limit=10000'
-  }
-]
-
-if (DEV) {
-  rules.push({
-    test: /\.jsx?$/,
-    enforce: 'pre',
-    use: 'eslint-loader',
-    exclude: /node_modules/
-  })
-}
-
-const plugins = [
-  new webpack.DefinePlugin({
-    'process.env.API_URL': JSON.stringify(process.env.API_URL)
-  }),
-  new ExtractTextPlugin('bundle.css'),
-  webpack_isomorphic_tools_plugin
-]
-
-if (UGLIFY) {
-  plugins.push(new webpack.optimize.UglifyJsPlugin({
-    mangle: true,
-    sourceMap: true
-  }))
-}
-
-plugins.push(new webpack.LoaderOptionsPlugin({
-  options: {
-    postcss: [ autoprefixer({ browsers: [ '> 1%' ]}) ]
-  }
-}))
-
 module.exports = env => {
+  const Env = process.env.NODE_ENV || 'development'
+  const DEV = Env === 'development'
+  const PROD = Env === 'production'
+
+  if (DEV) webpack_isomorphic_tools_plugin = webpack_isomorphic_tools_plugin.development()
+
+  const rules = [
+    {
+      test: /\.jsx?$/,
+      use: 'babel-loader'
+    },
+    {
+      test: /\.scss$/,
+      loader: ExtractTextPlugin.extract({
+        fallbackLoader: 'style-loader',
+        loader: [
+          {
+            loader: PROD ? 'css-loader?minimize!' : 'css-loader'
+          },
+          {
+            loader: 'postcss-loader'
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
+      })
+    },
+    {
+      test: /\.svg$/,
+      use: 'svg-inline-loader'
+    },
+    {
+      test: /\.ttf$/,
+      use: 'url-loader?limit=10000'
+    }
+  ]
+
+  if (DEV) {
+    rules.push({
+      test: /\.jsx?$/,
+      enforce: 'pre',
+      use: 'eslint-loader',
+      exclude: /node_modules/
+    })
+  }
+
+  const plugins = [
+    new webpack.DefinePlugin({
+      'process.env.API_URL': JSON.stringify(process.env.API_URL)
+    }),
+    new ExtractTextPlugin('bundle.css'),
+    webpack_isomorphic_tools_plugin
+  ]
+
+  if (PROD) {
+    plugins.push(new webpack.optimize.UglifyJsPlugin({
+      mangle: true,
+      sourceMap: true
+    }))
+  }
+
+  plugins.push(new webpack.LoaderOptionsPlugin({
+    options: {
+      postcss: [ autoprefixer({ browsers: [ '> 1%' ]}) ]
+    }
+  }))
+
   return {
     context: paths.ROOT,
     entry: 'src/browser.jsx',
     output: {
       pathinfo: DEV,
       path: paths.BUNDLES,
-      filename: UGLIFY ? 'bundle.min.js' : 'bundle.js'
+      filename: PROD ? 'bundle.min.js' : 'bundle.js'
     },
     devtool: DEV ? 'eval' : 'source-map',
     resolve: {
