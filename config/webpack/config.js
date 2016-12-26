@@ -13,9 +13,8 @@ var webpack_isomorphic_tools_plugin = new Webpack_isomorphic_tools_plugin(
 )
 
 module.exports = env => {
-  const Env = process.env.NODE_ENV || 'development'
-  const DEV = Env === 'development'
-  const PROD = Env === 'production'
+  const DEV = env.dev
+  const PROD = env.prod
 
   if (DEV) webpack_isomorphic_tools_plugin = webpack_isomorphic_tools_plugin.development()
 
