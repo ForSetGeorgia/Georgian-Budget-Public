@@ -53,14 +53,31 @@ const createDateFromMonthTimePeriod = timePeriod => (
   )
 )
 
+/*
+Cannot figure out how to use react-intl's Georgian locale data to
+translate months. Workaround: we translate the months ourselves, but
+only for Georgian
+*/
+const translateDateToMonthGeorgian = (date, intl) => (
+  `${intl.formatMessage({ id: `timePeriod.month.${date.getMonth() + 1}` })} ${date.getFullYear()}`
+)
+
+const mapDateToMonthTranslation = (date, intl) => {
+  if (intl.locale === 'ka') {
+    return translateDateToMonthGeorgian(date, intl)
+  } else {
+    return intl.formatDate(
+      date,
+      {
+        year: 'numeric',
+        month: 'long'
+      }
+    )
+  }
+}
+
 const translateMonth = (timePeriod, intl) => (
-  intl.formatDate(
-    createDateFromMonthTimePeriod(timePeriod),
-    {
-      year: 'numeric',
-      month: 'long'
-    }
-  )
+  mapDateToMonthTranslation(createDateFromMonthTimePeriod(timePeriod), intl)
 )
 
 const timePeriodIsMonth = (timePeriod) => (

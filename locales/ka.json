@@ -34,5 +34,17 @@
   "timePeriod.quarter.1": "პირველი კვარტალი, {year}",
   "timePeriod.quarter.2": "მეორე კვარტალი, {year}",
   "timePeriod.quarter.3": "მესამე კვარტალი, {year}",
-  "timePeriod.quarter.4": "მეოთხე კვარტალი, {year}"
+  "timePeriod.quarter.4": "მეოთხე კვარტალი, {year}",
+  "timePeriod.month.1": "იანვარი",
+  "timePeriod.month.2": "თებერვალი",
+  "timePeriod.month.3": "მარტი",
+  "timePeriod.month.4": "აპრილი",
+  "timePeriod.month.5": "მაისი",
+  "timePeriod.month.6": "ივნისი",
+  "timePeriod.month.7": "ივლისი",
+  "timePeriod.month.8": "აგვისტო",
+  "timePeriod.month.9": "სექტემბერი",
+  "timePeriod.month.10": "ოქტომბერი",
+  "timePeriod.month.11": "ნოემბერი",
+  "timePeriod.month.12": "დეკემბერი"
 }
