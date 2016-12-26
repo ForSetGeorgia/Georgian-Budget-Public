@@ -20,12 +20,37 @@ var webpack_isomorphic_tools_plugin = new Webpack_isomorphic_tools_plugin(
 
 if (DEV) webpack_isomorphic_tools_plugin = webpack_isomorphic_tools_plugin.development()
 
-const preloaders = []
+const rules = [
+  {
+    test: /\.jsx?$/,
+    use: 'babel-loader'
+  },
+  {
+    test: /\.scss$/,
+    use: ExtractTextPlugin.extract({
+      fallbackLoader: 'style-loader',
+      loader: [
+        { loader: UGLIFY ? 'css-loader?minimize!' : 'css-loader' },
+        'postcss-loader',
+        'sass-loader'
+      ]
+    })
+  },
+  {
+    test: /\.svg$/,
+    use: 'svg-inline-loader'
+  },
+  {
+    test: /\.ttf$/,
+    use: 'url-loader?limit=10000'
+  }
+]
 
 if (DEV) {
-  preloaders.push({
+  rules.push({
     test: /\.jsx?$/,
-    loader: 'eslint-loader',
+    enforce: 'pre',
+    use: 'eslint-loader',
     exclude: /node_modules/
   })
 }
@@ -45,6 +70,12 @@ if (UGLIFY) {
   }))
 }
 
+plugins.push(new webpack.LoaderOptionsPlugin({
+  options: {
+    postcss: [ autoprefixer({ browsers: [ '> 1%' ]}) ]
+  }
+}))
+
 module.exports = env => {
   return {
     context: paths.ROOT,
@@ -56,8 +87,8 @@ module.exports = env => {
     },
     devtool: DEV ? 'eval' : 'source-map',
     resolve: {
-      extensions: ['', '.js', '.jsx', '.scss', '.svg'],
-      root: [ paths.ROOT ]
+      extensions: ['.js', '.jsx', '.json', '.scss', '.svg'],
+      modules: [ paths.ROOT, 'node_modules' ]
     },
     stats: {
       colors: true,
@@ -65,38 +96,8 @@ module.exports = env => {
       chunks: true
     },
     module: {
-      preLoaders: preloaders,
-      loaders: [
-        {
-          test: /\.jsx?$/,
-          loader: 'babel'
-        },
-        {
-          test: /\.scss$/,
-          loader: ExtractTextPlugin.extract(
-            'style',
-            [
-              UGLIFY ? 'css?minimize!' : 'css',
-              'postcss',
-              'sass'
-            ]
-          )
-        },
-        {
-          test: /\.svg$/,
-          loader: 'svg-inline'
-        },
-        {
-          test: /\.ttf$/,
-          loader: 'url?limit=10000'
-        },
-        {
-          test: /\.json$/,
-          loader: 'json'
-        }
-      ]
+      rules: rules
     },
-    postcss: [ autoprefixer({ browsers: [ '> 1%' ]}) ],
     plugins: plugins
   }
 }
