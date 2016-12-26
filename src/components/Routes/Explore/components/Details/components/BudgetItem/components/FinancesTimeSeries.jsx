@@ -76,7 +76,7 @@ const FinancesTimeSeries = React.createClass({
     items.forEach(item => {
       if (item.spentFinances && item.spentFinances.length > 0) {
         series = series.concat({
-          name: intl.formatMessage(financeTypeMessages.spentFinance.other),
+          name: intl.formatMessage(financeTypeMessages.spentFinance.adjective),
           data: item.spentFinances.map(f => f.amount),
           color: 'rgb(255, 191, 31)'
         })
@@ -84,7 +84,7 @@ const FinancesTimeSeries = React.createClass({
 
       if (item.plannedFinances && item.plannedFinances.length > 0) {
         series = series.concat({
-          name: intl.formatMessage(financeTypeMessages.plannedFinance.other),
+          name: intl.formatMessage(financeTypeMessages.plannedFinance.adjective),
           data: item.plannedFinances.map(f => f.amount),
           color: 'transparent',
           borderWidth: 2,
