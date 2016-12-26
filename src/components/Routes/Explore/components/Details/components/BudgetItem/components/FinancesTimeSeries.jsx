@@ -6,6 +6,7 @@ const { injectIntl, intlShape, defineMessages } = require('react-intl')
 const TimeSeriesChart = require('./TimeSeriesChart')
 const timePeriodTypeMessages = require('src/messages/timePeriodTypes')
 const financeTypeMessages = require('src/messages/financeTypes')
+const { getBudgetItemName } = require('src/data/modules/entities/budgetItem')
 const { getItemSpentFinances } = require('src/data/modules/entities/spentFinance')
 const { getItemPlannedFinances } = require('src/data/modules/entities/plannedFinance')
 
@@ -32,6 +33,7 @@ const FinancesTimeSeries = React.createClass({
     intl: intlShape.isRequired,
     timePeriodType: string.isRequired,
     financeType: string.isRequired,
+    exportTitle: string.isRequired,
     items: arrayOf(shape({
       id: string.isRequired,
       spentFinances: arrayOf(shape({
@@ -110,8 +112,9 @@ const FinancesTimeSeries = React.createClass({
     return (
       <TimeSeriesChart
         containerId={this.uniqueChartId()}
-        key={this.uniqueChartId()}
+        key={`${this.uniqueChartId()}-${this.props.exportTitle}`}
         title={this.title()}
+        exportTitle={this.props.exportTitle}
         xAxisCategories={this.timePeriods()}
         series={this.series()}
         valueSuffix={this.valueSuffix()}
@@ -170,9 +173,20 @@ const getItems = (state, ownProps) => {
   return itemIds.map(itemId => getItemFinancesObject(state, ownProps, itemId))
 }
 
+const getExportTitle = (state, ownProps) => {
+  const { intl, itemIds, timePeriodType } = ownProps
+  const timePeriodTypeMessage = intl.formatMessage(
+    timePeriodTypeMessages[timePeriodType].adjective)
+
+  const names = itemIds.map(itemId => getBudgetItemName(state, itemId))
+
+  return `${names.join(' | ')} - ${timePeriodTypeMessage}`
+}
+
 const mapStateToProps = (state, ownProps) => ({
   financeType: getFinanceType(ownProps),
-  items: getItems(state, ownProps)
+  items: getItems(state, ownProps),
+  exportTitle: getExportTitle(state, ownProps)
 })
 
 module.exports = injectIntl(connect(mapStateToProps)(FinancesTimeSeries))

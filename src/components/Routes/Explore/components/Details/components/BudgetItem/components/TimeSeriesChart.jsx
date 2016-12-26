@@ -8,6 +8,7 @@ const TimeSeriesChart = React.createClass({
     xAxisCategories: array.isRequired,
     series: array.isRequired,
     title: string,
+    exportTitle: string.isRequired,
     valueSuffix: string.isRequired,
     yAxisTitle: string.isRequired,
     subtitle: string
@@ -19,6 +20,7 @@ const TimeSeriesChart = React.createClass({
     const {
       containerId,
       title,
+      exportTitle,
       subtitle,
       xAxisCategories,
       series,
@@ -30,6 +32,13 @@ const TimeSeriesChart = React.createClass({
     const options = {
       chart: {
         type: 'column'
+      },
+      exporting: {
+        chartOptions: {
+          title: {
+            text: exportTitle
+          }
+        }
       },
       title: {
         text: title
