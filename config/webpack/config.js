@@ -23,6 +23,7 @@ module.exports = env => {
     },
     {
       test: /\.scss$/,
+      exclude: /node_modules/,
       loader: ExtractTextPlugin.extract({
         fallbackLoader: 'style-loader',
         loader: [
@@ -40,10 +41,12 @@ module.exports = env => {
     },
     {
       test: /\.svg$/,
+      exclude: /node_modules/,
       use: 'svg-inline-loader'
     },
     {
       test: /\.ttf$/,
+      exclude: /node_modules/,
       use: 'url-loader?limit=10000'
     }
   ]
@@ -51,9 +54,9 @@ module.exports = env => {
   if (env.dev) {
     rules.push({
       test: /\.jsx?$/,
+      exclude: /node_modules/,
       enforce: 'pre',
-      use: 'eslint-loader',
-      exclude: /node_modules/
+      use: 'eslint-loader'
     })
   }
 
