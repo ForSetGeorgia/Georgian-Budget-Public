@@ -12,7 +12,7 @@ RUN apt-get update && \
 # https://github.com/nodejs/node-v0.x-archive/issues/3911
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 
-RUN npm install -g yarn pm2
+RUN npm install -g yarn pm2 nodemon
 
 COPY package.json yarn.lock $APPHOME/
 RUN yarn install

@@ -23,6 +23,6 @@ services:
     volumes_from:
       - build
       - packages
-    command: /bin/sh -c 'npm run start'
+    command: /bin/sh -c 'npm run start:dev'
     ports:
       - "8080:8080"

@@ -9,7 +9,7 @@
     "build": "NODE_PATH=. webpack -p --env.prod --config config/webpack/config.js",
     "build:dev": "NODE_PATH=. webpack --env.dev --config config/webpack/config.js",
     "watch:dev": "NODE_PATH=. webpack --env.dev --watch --config config/webpack/config.js",
-    "start": "NODE_PATH=. pm2 start app.js --watch --ignore-watch='node_modules public' && pm2 logs app",
+    "start:dev": "NODE_PATH=. nodemon app.js --ignore public",
     "fix": "standard --fix"
   },
   "author": "JumpStart Georgia",
@@ -45,6 +45,7 @@
     "lodash.template": "^4.4.0",
     "node-ensure": "0.0.0",
     "node-sass": "^3.10.1",
+    "nodemon": "^1.11.0",
     "normalize.css": "^5.0.0",
     "normalizr": "^2.2.1",
     "postcss-loader": "^1.0.0",
