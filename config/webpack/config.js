@@ -77,7 +77,7 @@ module.exports = env => {
     }
   }))
 
-  return {
+  const config = {
     context: paths.ROOT,
     entry: 'src/browser.jsx',
     output: {
@@ -100,4 +100,11 @@ module.exports = env => {
     },
     plugins: plugins
   }
+
+  if (env.debug) {
+    console.log(config)
+    debugger
+  }
+
+  return config
 }

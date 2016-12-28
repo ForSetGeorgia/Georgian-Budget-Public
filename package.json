@@ -6,8 +6,10 @@
   "scripts": {
     "test": "NODE_PATH=. mocha --watch --recursive --require test/helpers/setup.js",
     "lint": "standard",
-    "build": "NODE_PATH=. webpack -p --env.prod --config config/webpack/config.js",
+    "build:prod": "NODE_PATH=. webpack -p --env.prod --config config/webpack/config.js",
     "build:dev": "NODE_PATH=. webpack --env.dev --config config/webpack/config.js",
+    "build:debug": "NODE_PATH=. node --inspect --debug-brk node_modules/.bin/webpack --config config/webpack/config.js --env.debug",
+    "build:debug:dev": "yarn run build:debug -- --env.dev",
     "watch:dev": "NODE_PATH=. webpack --env.dev --watch --config config/webpack/config.js",
     "start:dev": "NODE_PATH=. nodemon app.js --ignore public",
     "fix": "standard --fix"
