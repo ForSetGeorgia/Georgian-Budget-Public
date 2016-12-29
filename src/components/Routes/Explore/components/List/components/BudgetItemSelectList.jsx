@@ -78,6 +78,9 @@ const BudgetItemSelectList = React.createClass({
           columns={columns}
           rowMetadata={{ bodyCssClassName: this.rowClassName }}
           columnMetadata={columnMetadata}
+          rowMetadata={{
+            bodyCssClassName: 'gb-Table-row mod-darker-if-odd'
+          }}
         />
       </div>
     )
