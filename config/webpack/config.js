@@ -84,7 +84,7 @@ module.exports = env => {
     output: {
       pathinfo: env.dev,
       path: paths.BUNDLES,
-      filename: env.prod ? 'bundle.min.js' : 'bundle.js'
+      filename: 'bundle.js'
     },
     devtool: env.dev ? 'eval' : 'source-map',
     resolve: {

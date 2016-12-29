@@ -35,8 +35,7 @@ const app = express()
 
 app.use('/public', express.static('./public'))
 
-const UGLIFY = PROD || STAGING
-const bundleJSFileName = UGLIFY ? 'bundle.min.js' : 'bundle.js'
+const bundleJSFileName = 'bundle.js'
 
 app.use((req, res) => {
   var url = req.protocol + '://' + req.get('host') + req.originalUrl
