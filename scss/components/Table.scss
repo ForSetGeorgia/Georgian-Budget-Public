@@ -1,0 +1,13 @@
+.gb-Table {
+  &-row {
+    &.mod-darker-if-odd {
+      &:nth-child(odd) {
+        & > td {
+          // Griddle uses inline styles, so !important is the only *easy* way
+          // to override it. There is likely a better way to do this.
+          background-color: #f1f5f7 !important;
+        }
+      }
+    }
+  }
+}

@@ -73,7 +73,10 @@ const mapStateToProps = (state, ownProps) => ({
   columns: getColumnMetadata(ownProps.intl).map(column => column.columnName),
   columnMetadata: getColumnMetadata(ownProps.intl),
   results: getResults(state, ownProps.itemId),
-  showPager: false
+  showPager: false,
+  rowMetadata: {
+    bodyCssClassName: 'gb-Table-row mod-darker-if-odd'
+  }
 })
 
 module.exports = injectIntl(connect(mapStateToProps)(Griddle))
