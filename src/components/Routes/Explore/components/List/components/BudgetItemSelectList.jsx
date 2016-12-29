@@ -44,16 +44,6 @@ const BudgetItemSelectList = React.createClass({
     this.props.switchDisplayToDetails()
   },
 
-  rowClassName (row) {
-    let className = 'gb-ExploreList-row'
-
-    if (this.props.detailsItemId === row.id) {
-      className += ' is-selected'
-    }
-
-    return className
-  },
-
   isLoading () {
     return this.props.items.length === 0
   },
@@ -76,11 +66,8 @@ const BudgetItemSelectList = React.createClass({
           enableInfiniteScroll
           bodyHeight='400'
           columns={columns}
-          rowMetadata={{ bodyCssClassName: this.rowClassName }}
+          rowMetadata={{ bodyCssClassName: 'gb-Table-row mod-darker-if-odd' }}
           columnMetadata={columnMetadata}
-          rowMetadata={{
-            bodyCssClassName: 'gb-Table-row mod-darker-if-odd'
-          }}
         />
       </div>
     )

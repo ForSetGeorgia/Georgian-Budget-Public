@@ -2,10 +2,12 @@
   &-row {
     &.mod-darker-if-odd {
       &:nth-child(odd) {
+        background-color: #f1f5f7;
+
         & > td {
           // Griddle uses inline styles, so !important is the only *easy* way
           // to override it. There is likely a better way to do this.
-          background-color: #f1f5f7 !important;
+          background-color: inherit !important;
         }
       }
     }
