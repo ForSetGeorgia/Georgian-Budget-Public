@@ -1,8 +1,8 @@
-var chalk = require('chalk');
+var chalk = require('chalk')
 
 module.exports = function (shipit) {
   require('shipit-deploy')(shipit)
-  require('shipit-shared')(shipit);
+  require('shipit-shared')(shipit)
 
   shipit.initConfig({
     default: {
