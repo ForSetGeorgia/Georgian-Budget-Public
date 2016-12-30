@@ -20,7 +20,7 @@ If you want to use the API locally, then...
 
 For the first time:
 
-1. Add your environment-specific config to `config/pm2.json` and `shipitfile.js`.
+1. Add your environment-specific config to `config/pm2/{env}.json` and `shipitfile.js`.
 2. `shipit staging deploy`
 3. The first deploy won't work fully, because the `.env` file is missing on the server. Run `cp current/.env.example shared/.env` and then add the necessary environment variables to `.env`.
 4. Run `shipit staging deploy` again
