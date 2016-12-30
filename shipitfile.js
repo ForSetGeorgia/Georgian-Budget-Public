@@ -35,6 +35,9 @@ module.exports = function (shipit) {
       pm2_config: 'current/config/pm2/staging.json'
     },
     production: {
+      deployTo: '/home/budget/Budget-Public-Production',
+      servers: 'budget@delta.jumpstart.ge',
+      pm2_config: 'current/config/pm2/production.json'
     }
   });
 

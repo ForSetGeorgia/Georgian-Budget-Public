@@ -1,0 +1,7 @@
+{
+  "apps": [{
+    "name": "Budget-Public-Production",
+    "script": "./app.js",
+    "cwd": "./current"
+  }]
+}
