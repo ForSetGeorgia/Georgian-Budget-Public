@@ -43,7 +43,6 @@ module.exports = function (shipit) {
   })
 
   shipit.blTask('install_modules', function() {
-    shipit.log('Running "yarn install" to install modules')
     return shipit.remote(
       `node -v && cd ${shipit.releasePath} && yarn install`
     ).then(function(result) {
@@ -55,9 +54,8 @@ module.exports = function (shipit) {
   })
 
   shipit.blTask('build', function() {
-    shipit.log('Running "yarn run build" to build project')
     return shipit.remote(
-      `node -v && cd ${shipit.releasePath} && yarn run build`
+      `node -v && cd ${shipit.releasePath} && yarn run build:prod`
     ).then(function(result) {
       const stdout = result[0].stdout
 
