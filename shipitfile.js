@@ -32,7 +32,7 @@ module.exports = function (shipit) {
     staging: {
       deployTo: '/home/budget-staging/Budget-Public-Staging',
       servers: 'budget-staging@alpha.jumpstart.ge',
-      pm2_config: 'current/config/pm2.json'
+      pm2_config: 'current/config/pm2/staging.json'
     },
     production: {
     }
