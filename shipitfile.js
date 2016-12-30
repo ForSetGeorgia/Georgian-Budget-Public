@@ -1,4 +1,4 @@
-var chalk = require('chalk')
+const chalk = require('chalk')
 
 module.exports = function (shipit) {
   require('shipit-deploy')(shipit)
