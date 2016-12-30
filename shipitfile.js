@@ -31,7 +31,8 @@ module.exports = function (shipit) {
     },
     staging: {
       deployTo: '/home/budget-staging/Budget-Public-Staging',
-      servers: 'budget-staging@alpha.jumpstart.ge'
+      servers: 'budget-staging@alpha.jumpstart.ge',
+      pm2_config: 'current/config/pm2.json'
     },
     production: {
     }
@@ -75,7 +76,7 @@ module.exports = function (shipit) {
 
   shipit.blTask('start_server', function() {
     shipit.log('Starting node server')
-    command = `node -v && cd ${shipit.config.deployTo} && NODE_PATH=. pm2 startOrRestart ./current/config/pm2.json`
+    command = `node -v && cd ${shipit.config.deployTo} && NODE_PATH=. pm2 startOrRestart ${shipit.config.deployTo}/${shipit.config.pm2_config}`
 
     console.log(command)
 
