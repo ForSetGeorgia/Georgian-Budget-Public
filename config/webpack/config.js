@@ -27,7 +27,10 @@ module.exports = env => {
         fallbackLoader: 'style-loader',
         loader: [
           {
-            loader: env.prod ? 'css-loader?minimize!' : 'css-loader'
+            loader: 'css-loader',
+            options: {
+              minimize: env.prod
+            }
           },
           {
             loader: 'postcss-loader'
