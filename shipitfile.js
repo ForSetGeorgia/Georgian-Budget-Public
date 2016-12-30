@@ -15,9 +15,7 @@ module.exports = function (shipit) {
           '.env'
         ]
       },
-
       workspace: 'tmp/build',
-      deployTo: '/home/budget-staging/Budget-Public-Staging',
       repositoryUrl: 'https://github.com/JumpStartGeorgia/Georgian-Budget-Public',
       ignores: [
         '.git',
@@ -32,6 +30,7 @@ module.exports = function (shipit) {
       shallowClone: true
     },
     staging: {
+      deployTo: '/home/budget-staging/Budget-Public-Staging',
       servers: 'budget-staging@alpha.jumpstart.ge'
     },
     production: {
