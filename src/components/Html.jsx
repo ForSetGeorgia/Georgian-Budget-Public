@@ -9,12 +9,8 @@ module.exports = (props) => {
     meta,
     body,
     mainJs,
-    mainCss,
-    url,
-    Env
+    mainCss
   } = props
-
-  const liveReload = Env === 'development' ? <script src='http://localhost:35729/livereload.js'></script> : ''
 
   return (
     <html {...htmlAttributes}>
@@ -31,7 +27,6 @@ module.exports = (props) => {
         </div>
 
         <script src={`/public/bundles/${mainJs}`}></script>
-        {liveReload}
       </body>
     </html>
   )

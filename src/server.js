@@ -76,8 +76,6 @@ app.use((req, res) => {
               meta,
               body,
               mainJs,
-              url,
-              Env,
               mainCss
             }
           )
