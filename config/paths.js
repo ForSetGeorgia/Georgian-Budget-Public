@@ -1,11 +1,11 @@
 const path = require('path')
 
 const ROOT = path.resolve('.')
-const PUBLIC = path.join(ROOT, 'public')
-const BUNDLES = path.join(PUBLIC, 'bundles')
+const BUNDLES_RELATIVE = path.join('public', 'bundles')
+const BUNDLES = path.join(ROOT, BUNDLES_RELATIVE)
 
 module.exports = {
   ROOT,
-  PUBLIC,
+  BUNDLES_RELATIVE,
   BUNDLES
 }

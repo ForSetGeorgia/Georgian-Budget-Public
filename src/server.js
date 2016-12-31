@@ -43,7 +43,7 @@ app.use((req, res) => {
     webpack_isomorphic_tools.refresh()
   }
 
-  const bundleJSFileName = webpack_isomorphic_tools.assets().javascript.main
+  const mainJs = webpack_isomorphic_tools.assets().javascript.main
   const mainCss = webpack_isomorphic_tools.assets().styles.main
 
   match(
@@ -75,7 +75,7 @@ app.use((req, res) => {
               title,
               meta,
               body,
-              bundleJSFileName,
+              mainJs,
               url,
               Env,
               mainCss
