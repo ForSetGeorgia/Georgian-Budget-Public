@@ -64,7 +64,7 @@ module.exports = env => {
     new webpack.DefinePlugin({
       'process.env.API_URL': JSON.stringify(process.env.API_URL)
     }),
-    new ExtractTextPlugin('[name].[contenthash].css'),
+    new ExtractTextPlugin(env.dev ? '[name].css' : '[name].[contenthash].css'),
     webpack_isomorphic_tools_plugin
   ]
 
