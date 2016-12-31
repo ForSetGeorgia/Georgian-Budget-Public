@@ -8,8 +8,8 @@ module.exports = (props) => {
     title,
     meta,
     body,
-    link,
     bundleJSFileName,
+    mainCss,
     url,
     Env
   } = props
@@ -22,8 +22,8 @@ module.exports = (props) => {
         {meta}
 
         {title}
-        {link}
-
+        <link rel='stylesheet' href={`/public/bundles/${mainCss}`} />
+        <link rel='shortcut icon' type='image/png' href='/public/favicon.ico' />
       </head>
       <body>
         <div id="app-container">

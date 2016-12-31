@@ -20,10 +20,6 @@ const Layout = React.createClass({
           htmlAttributes={{'lang': this.props.locale}}
           title='Home'
           titleTemplate='%s | Georgian Budget'
-          link={[
-            {'rel': 'stylesheet', 'href': '/public/bundles/bundle.css'},
-            {'rel': 'shortcut icon', 'type': 'image/png', 'href': '/public/favicon.ico'}
-          ]}
         />
         <MetaContainer />
         <LocaleInitializer />

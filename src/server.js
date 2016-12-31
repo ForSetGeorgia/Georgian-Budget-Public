@@ -44,6 +44,7 @@ app.use((req, res) => {
   }
 
   const bundleJSFileName = webpack_isomorphic_tools.assets().javascript.main
+  const mainCss = webpack_isomorphic_tools.assets().styles.main
 
   match(
     { routes: Routes(), location: req.url },
@@ -65,7 +66,6 @@ app.use((req, res) => {
         const htmlAttributes = head.htmlAttributes.toComponent()
         const title = head.title.toComponent()
         const meta = head.meta.toComponent()
-        const link = head.link.toComponent()
 
         const html = '<!DOCTYPE html>' + ReactDOMServer.renderToStaticMarkup(
           React.createElement(
@@ -75,10 +75,10 @@ app.use((req, res) => {
               title,
               meta,
               body,
-              link,
               bundleJSFileName,
               url,
-              Env
+              Env,
+              mainCss
             }
           )
         )
