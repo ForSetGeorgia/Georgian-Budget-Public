@@ -35,14 +35,15 @@ const app = express()
 
 app.use('/public', express.static('./public'))
 
-const bundleJSFileName = 'bundle.js'
-
 app.use((req, res) => {
   var url = req.protocol + '://' + req.get('host') + req.originalUrl
 
   if (DEV) {
+    // global variable
     webpack_isomorphic_tools.refresh()
   }
+
+  const bundleJSFileName = webpack_isomorphic_tools.assets().javascript.main
 
   match(
     { routes: Routes(), location: req.url },

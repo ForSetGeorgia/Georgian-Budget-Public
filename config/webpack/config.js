@@ -87,7 +87,7 @@ module.exports = env => {
     output: {
       pathinfo: env.dev,
       path: paths.BUNDLES,
-      filename: 'bundle.js'
+      filename: '[name].[chunkhash].js'
     },
     devtool: env.dev ? 'eval' : 'source-map',
     resolve: {
