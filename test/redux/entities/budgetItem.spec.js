@@ -33,37 +33,3 @@ describe('getItemSpentFinanceIds', () => {
 
   expect(getItemSpentFinanceIds(state, 1)).to.deep.eq([1, 2, 3])
 })
-
-describe('getItemSpentFinances', () => {
-  it("gets item's spent finances", () => {
-    const state = {
-      budgetItems: {
-        '1': {
-          spentFinances: [3]
-        },
-        '2': {
-          spentFinances: [1, 2]
-        }
-      },
-      spentFinances: {
-        '1': {
-          amount: 1
-        },
-        '2': {
-          amount: 2
-        },
-        '3': {
-          amount: 3
-        }
-      }
-    }
-
-    expect(getItemSpentFinances(state, 2)).to.deep.eq([
-      {
-        amount: 1
-      }, {
-        amount: 2
-      }
-    ])
-  })
-})
