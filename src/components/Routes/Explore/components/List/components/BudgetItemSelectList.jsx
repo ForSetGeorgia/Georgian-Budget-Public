@@ -24,6 +24,7 @@ const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const CountDisplay = require('./CountDisplay')
 const Griddle = require('griddle-react')
 const GriddleFormattedAmount = require('src/components/shared/GriddleFormattedAmount')
+const BudgetItemListFetcher = require('./BudgetItemListFetcher')
 
 const BudgetItemSelectList = React.createClass({
   propTypes: {
@@ -48,7 +49,7 @@ const BudgetItemSelectList = React.createClass({
     return this.props.items.length === 0
   },
 
-  render () {
+  renderMainContent () {
     const { items, typeOfItems, columns, columnMetadata } = this.props
 
     if (this.isLoading()) return <LoadingIndicator />
@@ -69,6 +70,15 @@ const BudgetItemSelectList = React.createClass({
           rowMetadata={{ bodyCssClassName: 'gb-Table-row mod-darker-if-odd' }}
           columnMetadata={columnMetadata}
         />
+      </div>
+    )
+  },
+
+  render () {
+    return (
+      <div>
+        <BudgetItemListFetcher />
+        {this.renderMainContent()}
       </div>
     )
   }
