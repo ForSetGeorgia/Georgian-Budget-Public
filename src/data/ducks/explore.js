@@ -6,7 +6,6 @@ const { getBudgetItem } = require('src/data/modules/entities/budgetItem')
 const SET_EXPLORE_DISPLAY = 'georgianBudget/explore/SET_EXPLORE_DISPLAY'
 const SET_DETAILS_ITEM_ID = 'georgianBudget/explore/SET_DETAILS_ITEM_ID'
 const MARK_LIST_LOADED = 'georgianBudget/explore/MARK_LIST_LOADED'
-const SET_PARENT_ITEM_ID = 'georgianBudget/explore/SET_PARENT_ITEM_ID'
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -24,14 +23,6 @@ const reducer = (state = {}, action) => {
         state,
         {
           detailsItemId: action.id
-        }
-      )
-    case SET_PARENT_ITEM_ID:
-      return Object.assign(
-        {},
-        state,
-        {
-          parentItemId: action.id
         }
       )
     case MARK_LIST_LOADED:
@@ -60,11 +51,6 @@ reducer.setDetailsItemId = id => ({
   id: id
 })
 
-reducer.setParentItemId = id => ({
-  type: SET_PARENT_ITEM_ID,
-  id: id
-})
-
 reducer.markListLoaded = (listLoaded) => ({
   type: MARK_LIST_LOADED,
   listLoaded: listLoaded
@@ -87,11 +73,6 @@ reducer.getDetailsItemId = createSelector(
 
 reducer.getDetailsItem = state => (
   getBudgetItem(state, reducer.getDetailsItemId(state))
-)
-
-reducer.getParentItemId = createSelector(
-  reducer.getExploreState,
-  ({parentItemId}) => parentItemId
 )
 
 reducer.getExploreListLoaded = createSelector(

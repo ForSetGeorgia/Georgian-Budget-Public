@@ -66,11 +66,11 @@ const BudgetItemDetails = props => {
       {agencyLink(agencyId)}
       {parentProgramLink(parentProgramId)}
       <br />
-      <ChildItemsListLink parentItemId={itemId} budgetItemType='program' />
+      <ChildItemsListLink detailsItemId={itemId} budgetItemType='program' />
       <br />
-      <ChildItemsListLink parentItemId={itemId} budgetItemType='spendingAgency' />
+      <ChildItemsListLink detailsItemId={itemId} budgetItemType='spendingAgency' />
       <br />
-      <ChildItemsListLink parentItemId={itemId} budgetItemType='priority' />
+      <ChildItemsListLink detailsItemId={itemId} budgetItemType='priority' />
     </div>
   )
 }

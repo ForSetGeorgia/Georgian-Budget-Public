@@ -9,26 +9,26 @@ const BudgetItemSelectLists = require('./components/BudgetItemSelectLists')
 const BudgetItemListFetcher = require('./components/BudgetItemListFetcher')
 const BudgetItemDetailsFetcher = require('src/components/shared/BudgetItemDetailsFetcher')
 
-const { getParentItemId } = require('src/data/ducks/explore')
+const { getDetailsItemId } = require('src/data/ducks/explore')
 
-const ExploreList = ({parentItemId}) => (
+const ExploreList = ({detailsItemId}) => (
   <div className='gb-ExploreList'>
     <BudgetItemListFetcher />
-    <BudgetItemDetailsFetcher itemId={parentItemId} />
+    <BudgetItemDetailsFetcher itemId={detailsItemId} />
 
     <BudgetItemTypeSelect />
     <FinanceTypeSelect />
 
-    <BudgetItemSelectLists itemId={parentItemId} />
+    <BudgetItemSelectLists itemId={detailsItemId} />
   </div>
 )
 
 ExploreList.propTypes = {
-  parentItemId: string
+  detailsItemId: string
 }
 
 const mapStateToProps = state => ({
-  parentItemId: getParentItemId(state)
+  detailsItemId: getDetailsItemId(state)
 })
 
 module.exports = injectIntl(connect(mapStateToProps)(ExploreList))

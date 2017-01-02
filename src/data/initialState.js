@@ -4,8 +4,7 @@ module.exports = {
   explore: {
     listLoaded: [],
     display: '',
-    detailsItemId: '',
-    parentItemId: ''
+    detailsItemId: ''
   },
   filters: {
     budgetItemType: '',

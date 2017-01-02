@@ -53,10 +53,10 @@ const getListedItemIds = (state, itemId, budgetItemType) => {
   const budgetItems = getBudgetItemsData(state)
   const budgetItemIds = Object.keys(budgetItems)
 
-  const childrenOfParent = getChildItemsOfTypeForItem(state, itemId, budgetItemType)
+  const childrenOfItem = getChildItemsOfTypeForItem(state, itemId, budgetItemType)
 
   return budgetItemIds.filter(
-    id => childrenOfParent.indexOf(id) > -1
+    id => childrenOfItem.indexOf(id) > -1
   )
 }
 
