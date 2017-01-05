@@ -5,7 +5,6 @@ const BudgetItemCharts = require('./components/BudgetItemCharts')
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const BudgetItemYearlyTable = require('./components/BudgetItemYearlyTable')
 const ItemDetailsLink = require('src/components/shared/ItemDetailsLink')
-const ChildItemsListLink = require('./components/ChildItemsListLink')
 
 const overallBudgetLink = overallBudgetId => (
   !overallBudgetId ? null : (
@@ -65,12 +64,6 @@ const BudgetItemDetails = props => {
       {priorityLink(priorityId)}
       {agencyLink(agencyId)}
       {parentProgramLink(parentProgramId)}
-      <br />
-      <ChildItemsListLink detailsItemId={itemId} budgetItemType='program' />
-      <br />
-      <ChildItemsListLink detailsItemId={itemId} budgetItemType='spendingAgency' />
-      <br />
-      <ChildItemsListLink detailsItemId={itemId} budgetItemType='priority' />
     </div>
   )
 }

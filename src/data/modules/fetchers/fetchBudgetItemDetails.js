@@ -41,12 +41,16 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
 
     const { budgetItems, spentFinances, plannedFinances } = normalized.entities
 
-    dispatch(mergeSpentFinances(spentFinances))
-    dispatch(mergePlannedFinances(plannedFinances))
+    if (spentFinances) dispatch(mergeSpentFinances(spentFinances))
+    if (plannedFinances) dispatch(mergePlannedFinances(plannedFinances))
 
-    budgetItems[itemId].loaded = budgetItems[itemId].loaded.concat(`details_${locale}`)
+    if (budgetItems) {
+      if (budgetItems[itemId]) {
+        budgetItems[itemId].loaded = budgetItems[itemId].loaded.concat(`details_${locale}`)
+      }
 
-    dispatch(mergeBudgetItems(budgetItems))
+      dispatch(mergeBudgetItems(budgetItems))
+    }
   })
 }
 

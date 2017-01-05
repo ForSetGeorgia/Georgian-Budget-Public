@@ -3,7 +3,6 @@ module.exports = {
   errors: [],
   explore: {
     listLoaded: [],
-    display: '',
     detailsItemId: ''
   },
   filters: {
