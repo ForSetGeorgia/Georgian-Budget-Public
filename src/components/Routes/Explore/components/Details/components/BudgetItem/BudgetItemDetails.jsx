@@ -7,38 +7,6 @@ const BudgetItemYearlyTable = require('./components/BudgetItemYearlyTable')
 const ItemDetailsLink = require('src/components/shared/ItemDetailsLink')
 const BudgetItemSelectLists = require('./BudgetItemSelectLists/index')
 
-const overallBudgetLink = overallBudgetId => (
-  !overallBudgetId ? null : (
-    <p>
-      <ItemDetailsLink itemId={overallBudgetId} />
-    </p>
-  )
-)
-
-const priorityLink = priorityId => (
-  !priorityId ? null : (
-    <p>
-      Priority: <ItemDetailsLink itemId={priorityId} />
-    </p>
-  )
-)
-
-const agencyLink = agencyId => (
-  !agencyId ? null : (
-    <p>
-      Agency: <ItemDetailsLink itemId={agencyId} />
-    </p>
-  )
-)
-
-const parentProgramLink = parentProgramId => (
-  !parentProgramId ? null : (
-    <p>
-      Parent Program: <ItemDetailsLink itemId={parentProgramId} />
-    </p>
-  )
-)
-
 const BudgetItemDetails = props => {
   const {
     detailsLoaded,
@@ -49,6 +17,38 @@ const BudgetItemDetails = props => {
     agencyId,
     parentProgramId
   } = props
+
+  const overallBudgetLink = overallBudgetId => (
+    !overallBudgetId ? null : (
+      <p>
+        <ItemDetailsLink itemId={overallBudgetId} />
+      </p>
+    )
+  )
+
+  const priorityLink = priorityId => (
+    !priorityId ? null : (
+      <p>
+        Priority: <ItemDetailsLink itemId={priorityId} />
+      </p>
+    )
+  )
+
+  const agencyLink = agencyId => (
+    !agencyId ? null : (
+      <p>
+        Agency: <ItemDetailsLink itemId={agencyId} />
+      </p>
+    )
+  )
+
+  const parentProgramLink = parentProgramId => (
+    !parentProgramId ? null : (
+      <p>
+        Parent Program: <ItemDetailsLink itemId={parentProgramId} />
+      </p>
+    )
+  )
 
   if (!detailsLoaded) return <LoadingIndicator />
 
