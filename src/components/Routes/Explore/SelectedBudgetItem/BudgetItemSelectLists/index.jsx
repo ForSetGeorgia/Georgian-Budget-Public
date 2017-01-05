@@ -5,6 +5,7 @@ const { connect } = require('react-redux')
 
 const { getBudgetItemsData } = require('src/data/ducks/budgetItems')
 const { getSelectedBudgetItemType } = require('src/data/ducks/filters')
+const { getDetailsItemId } = require('src/data/ducks/explore')
 
 const {
   getChildItemsOfTypeForItem
@@ -71,7 +72,7 @@ const getLists = (state, itemId) => {
 }
 
 const mapStateToProps = (state, {itemId}) => ({
-  lists: getLists(state, itemId)
+  lists: getLists(state, getDetailsItemId(state))
 })
 
 module.exports = injectIntl(connect(mapStateToProps, null)(BudgetItemSelectLists))

@@ -7,6 +7,7 @@ const { getItemPlannedFinances } = require('src/data/modules/entities/plannedFin
 const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
 const { getSelectedTimePeriods } = require('src/data/ducks/filters')
 const { getFinanceDifference } = require('src/data/modules/finance/difference')
+const { getDetailsItemId } = require('src/data/ducks/explore')
 
 const timePeriodTypeMessages = require('src/messages/timePeriodTypes')
 const financeTypeMessages = require('src/messages/financeTypes')
@@ -72,7 +73,7 @@ const getResults = (state, itemId) => {
 const mapStateToProps = (state, ownProps) => ({
   columns: getColumnMetadata(ownProps.intl).map(column => column.columnName),
   columnMetadata: getColumnMetadata(ownProps.intl),
-  results: getResults(state, ownProps.itemId),
+  results: getResults(state, getDetailsItemId(state)),
   showPager: false,
   rowMetadata: {
     bodyCssClassName: 'gb-Table-row mod-darker-if-odd'

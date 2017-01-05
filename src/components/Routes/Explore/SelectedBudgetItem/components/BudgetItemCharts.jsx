@@ -1,7 +1,11 @@
 const React = require('react')
+const { connect } = require('react-redux')
 const { string } = React.PropTypes
 const { intlShape, injectIntl } = require('react-intl')
 const { Tab, Tabs, TabList, TabPanel } = require('react-tabs')
+
+const { getSelectedTimePeriods } = require('src/data/ducks/filters')
+const { getDetailsItemId } = require('src/data/ducks/explore')
 
 const FinancesTimeSeries = require('./FinancesTimeSeries')
 const timePeriodTypeMessages = require('src/messages/timePeriodTypes')
@@ -89,4 +93,9 @@ const BudgetItemCharts = React.createClass({
   }
 })
 
-module.exports = injectIntl(BudgetItemCharts)
+const mapStateToProps = state => ({
+  itemId: getDetailsItemId(state),
+  selectedTimePeriod: getSelectedTimePeriods(state)[0]
+})
+
+module.exports = injectIntl(connect(mapStateToProps)(BudgetItemCharts))
