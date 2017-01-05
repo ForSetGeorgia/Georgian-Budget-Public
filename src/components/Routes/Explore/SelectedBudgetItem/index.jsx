@@ -3,10 +3,15 @@ const { injectIntl } = require('react-intl')
 const { bool, string } = React.PropTypes
 const { connect } = require('react-redux')
 
-const BudgetItemDetailsFetcher = require('./BudgetItemDetailsFetcher')
-const BudgetItemDetails = require('./BudgetItemDetails')
+const BudgetItemDetailsFetcher = require('./components/BudgetItemDetailsFetcher')
 const BudgetItemHeading = require('./components/BudgetItemHeading')
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
+const BudgetItemCharts = require('./components/BudgetItemCharts')
+const BudgetItemYearlyTable = require('./components/BudgetItemYearlyTable')
+const BudgetItemSelectLists = require('./BudgetItemSelectLists/index')
+const OverallBudgetLink = require('./components/OverallBudgetLink')
+const AgencyLink = require('./components/AgencyLink')
+const ParentProgramLink = require('./components/ParentProgramLink')
 
 const { getDetailsLoadedForItem } =
 require('src/data/modules/entities/budgetItem/loaded')
@@ -18,8 +23,29 @@ const {
 
 const BudgetItem = React.createClass({
   propTypes: {
+    detailsLoaded: bool.isRequired,
     itemLoaded: bool.isRequired,
     itemId: string.isRequired
+  },
+
+  renderDetails () {
+    const { detailsLoaded } = this.props
+
+    if (!detailsLoaded) return <LoadingIndicator />
+
+    return (
+      <div>
+        <BudgetItemCharts />
+
+        <BudgetItemYearlyTable />
+
+        <OverallBudgetLink />
+        <AgencyLink />
+        <ParentProgramLink />
+
+        <BudgetItemSelectLists />
+      </div>
+    )
   },
 
   renderContent () {
@@ -28,7 +54,7 @@ const BudgetItem = React.createClass({
     return (
       <div>
         <BudgetItemHeading />
-        <BudgetItemDetails {...this.props} />
+        {this.renderDetails()}
       </div>
     )
   },
