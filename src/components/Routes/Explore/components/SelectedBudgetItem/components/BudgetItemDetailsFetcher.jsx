@@ -22,7 +22,7 @@ const BudgetItemDetailsFetcher = React.createClass({
   fetchDetails () {
     const { itemId, detailsLoaded, fetchBudgetItemDetails } = this.props
 
-    if (!detailsLoaded) fetchBudgetItemDetails(itemId)
+    if (itemId && !detailsLoaded) fetchBudgetItemDetails(itemId)
   },
 
   componentDidMount () {
