@@ -40,11 +40,19 @@ const ExploreContent = React.createClass({
 
         <BudgetItemYearlyTable />
 
-        <OverallBudgetLink />
         <AgencyLink />
         <ParentProgramLink />
 
         <BudgetItemSelectLists />
+      </div>
+    )
+  },
+
+  renderMainContent () {
+    return (
+      <div className='gb-BudgetItem-mainContent'>
+        <BudgetItemHeading />
+        {this.renderDetails()}
       </div>
     )
   },
@@ -54,8 +62,8 @@ const ExploreContent = React.createClass({
 
     return (
       <div>
-        <BudgetItemHeading />
-        {this.renderDetails()}
+        <OverallBudgetLink />
+        {this.renderMainContent()}
       </div>
     )
   },

@@ -1,5 +1,16 @@
+$main-content-padding: 30px;
+
 .gb-BudgetItem {
+  padding: 0 $main-content-padding;
+
+  &-mainContent {
+    margin: 0 (-1 * $main-content-padding);
+    padding: $main-content-padding;
+    background-color: white;
+  }
+
   &-heading {
+    margin: 0;
     margin-bottom: 10px;
   }
 }
