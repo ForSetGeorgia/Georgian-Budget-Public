@@ -4,26 +4,17 @@ const { string, bool } = React.PropTypes
 const BudgetItemCharts = require('./components/BudgetItemCharts')
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const BudgetItemYearlyTable = require('./components/BudgetItemYearlyTable')
-const ItemDetailsLink = require('src/components/shared/ItemDetailsLink')
 const BudgetItemSelectLists = require('./BudgetItemSelectLists/index')
 const OverallBudgetLink = require('./components/OverallBudgetLink')
 const AgencyLink = require('./components/AgencyLink')
+const ParentProgramLink = require('./components/ParentProgramLink')
 
 const BudgetItemDetails = props => {
   const {
     detailsLoaded,
     itemId,
-    selectedTimePeriod,
-    parentProgramId
+    selectedTimePeriod
   } = props
-
-  const parentProgramLink = parentProgramId => (
-    !parentProgramId ? null : (
-      <p>
-        Parent Program: <ItemDetailsLink itemId={parentProgramId} />
-      </p>
-    )
-  )
 
   if (!detailsLoaded) return <LoadingIndicator />
 
@@ -38,7 +29,7 @@ const BudgetItemDetails = props => {
 
       <OverallBudgetLink />
       <AgencyLink />
-      {parentProgramLink(parentProgramId)}
+      <ParentProgramLink />
 
       <BudgetItemSelectLists itemId={itemId} />
     </div>
@@ -49,8 +40,7 @@ BudgetItemDetails.propTypes = {
   detailsLoaded: bool.isRequired,
   itemId: string.isRequired,
   selectedTimePeriod: string,
-  agencyId: string,
-  parentProgramId: string
+  agencyId: string
 }
 
 module.exports = BudgetItemDetails

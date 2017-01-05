@@ -16,7 +16,7 @@ const AgencyLink = ({agencyId}) => (
 )
 
 AgencyLink.propTypes = {
-  agencyId: string.isRequired
+  agencyId: string
 }
 
 const mapStateToProps = state => ({
