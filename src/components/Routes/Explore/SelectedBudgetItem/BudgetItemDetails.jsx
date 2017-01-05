@@ -13,18 +13,9 @@ const BudgetItemDetails = props => {
     detailsLoaded,
     itemId,
     selectedTimePeriod,
-    priorityId,
     agencyId,
     parentProgramId
   } = props
-
-  const priorityLink = priorityId => (
-    !priorityId ? null : (
-      <p>
-        Priority: <ItemDetailsLink itemId={priorityId} />
-      </p>
-    )
-  )
 
   const agencyLink = agencyId => (
     !agencyId ? null : (
@@ -54,7 +45,6 @@ const BudgetItemDetails = props => {
       <BudgetItemYearlyTable itemId={itemId} />
 
       <OverallBudgetLink />
-      {priorityLink(priorityId)}
       {agencyLink(agencyId)}
       {parentProgramLink(parentProgramId)}
 
@@ -67,7 +57,6 @@ BudgetItemDetails.propTypes = {
   detailsLoaded: bool.isRequired,
   itemId: string.isRequired,
   selectedTimePeriod: string,
-  priorityId: string,
   agencyId: string,
   parentProgramId: string
 }

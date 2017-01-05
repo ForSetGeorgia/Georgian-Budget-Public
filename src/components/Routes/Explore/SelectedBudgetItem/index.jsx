@@ -62,7 +62,6 @@ const mapStateToProps = (state, ownProps) => ({
   detailsLoaded: getDetailsLoadedForItem(state, getDetailsItemId(state)),
   name: getBudgetItemName(state, getDetailsItemId(state)),
   selectedTimePeriod: getSelectedTimePeriods(state)[0],
-  priorityId: getPriorityIdForItem(state, getDetailsItemId(state)),
   agencyId: getAgencyIdForItem(state, getDetailsItemId(state)),
   parentProgramId: getParentProgramIdForItem(state, getDetailsItemId(state))
 })
