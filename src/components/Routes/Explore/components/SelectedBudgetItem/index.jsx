@@ -6,6 +6,7 @@ const { connect } = require('react-redux')
 const BudgetItemDetailsFetcher = require('./components/BudgetItemDetailsFetcher')
 const BudgetItemHeading = require('./components/BudgetItemHeading')
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
+const TimePeriodSelect = require('./components/TimePeriodSelect')
 const BudgetItemCharts = require('./components/BudgetItemCharts')
 const BudgetItemYearlyTable = require('./components/BudgetItemYearlyTable')
 const BudgetItemSelectLists = require('./components/BudgetItemSelectLists/index')
@@ -34,6 +35,7 @@ const BudgetItem = React.createClass({
 
     return (
       <div>
+        <TimePeriodSelect />
         <BudgetItemCharts />
 
         <BudgetItemYearlyTable />
