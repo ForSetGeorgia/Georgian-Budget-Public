@@ -6,7 +6,8 @@ const UrlQueryUpdater = require('./components/UrlQueryUpdater')
 
 const TimePeriodSelect = require('./components/TimePeriodSelect')
 const AppErrorsDisplay = require('./components/AppErrorsDisplay')
-const ExploreDisplay = require('./components/ExploreDisplay')
+const ExploreDetails = require('./components/Details/index')
+const ExploreList = require('./components/List/index')
 
 const Explore = React.createClass({
   render () {
@@ -19,7 +20,8 @@ const Explore = React.createClass({
         <AppErrorsDisplay />
         <TimePeriodSelect />
 
-        <ExploreDisplay />
+        <ExploreDetails />
+        <ExploreList />
       </div>
     )
   }
