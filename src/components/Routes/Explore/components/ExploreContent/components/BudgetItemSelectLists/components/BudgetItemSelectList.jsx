@@ -21,7 +21,7 @@ const {
 
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const CountDisplay = require('./CountDisplay')
-const Griddle = require('griddle-react')
+const CustomGriddle = require('src/components/shared/CustomGriddle')
 const GriddleFormattedAmount = require('src/components/shared/GriddleFormattedAmount')
 const BudgetItemListFetcher = require('./BudgetItemListFetcher')
 
@@ -57,14 +57,13 @@ const BudgetItemSelectList = React.createClass({
           count={items.length}
           itemTranslations={budgetItemTypeMessages[snakeToCamel(typeOfItems)]}
         />
-        <Griddle
+        <CustomGriddle
           results={items}
           onRowClick={this.handleClick}
           showFilter
           enableInfiniteScroll
           bodyHeight='400'
           columns={columns}
-          rowMetadata={{ bodyCssClassName: 'gb-Table-row mod-darker-if-odd' }}
           columnMetadata={columnMetadata}
         />
       </div>
