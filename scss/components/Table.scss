@@ -1,4 +1,16 @@
 .gb-Table {
+  min-width: 100%;
+
+  &-row, & > thead > tr {
+    display: flex;
+    justify-content: space-around;
+
+    & > td, & > th {
+      text-align: left;
+      width: 100%;
+    }
+  }
+
   &-row {
     &.mod-darker-if-odd {
       &:nth-child(odd) {
