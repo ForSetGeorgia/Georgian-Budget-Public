@@ -6,7 +6,7 @@ const UrlQueryUpdater = require('./components/UrlQueryUpdater')
 
 const TimePeriodSelect = require('./components/TimePeriodSelect')
 const AppErrorsDisplay = require('./components/AppErrorsDisplay')
-const SelectedBudgetItem = require('./SelectedBudgetItem/index')
+const SelectedBudgetItem = require('./components/SelectedBudgetItem/index')
 
 const Explore = React.createClass({
   render () {
