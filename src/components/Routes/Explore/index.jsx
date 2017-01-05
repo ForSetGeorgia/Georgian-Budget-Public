@@ -5,7 +5,7 @@ const Initializers = require('./components/Initializers/index')
 const UrlQueryUpdater = require('./components/UrlQueryUpdater')
 
 const AppErrorsDisplay = require('./components/AppErrorsDisplay')
-const SelectedBudgetItem = require('./components/SelectedBudgetItem/index')
+const ExploreContent = require('./components/ExploreContent/index')
 
 const Explore = React.createClass({
   render () {
@@ -17,7 +17,7 @@ const Explore = React.createClass({
 
         <AppErrorsDisplay />
 
-        <SelectedBudgetItem />
+        <ExploreContent />
       </div>
     )
   }

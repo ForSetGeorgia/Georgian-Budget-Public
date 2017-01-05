@@ -22,7 +22,7 @@ const {
   getDetailsItemId
 } = require('src/data/ducks/explore')
 
-const BudgetItem = React.createClass({
+const ExploreContent = React.createClass({
   propTypes: {
     detailsLoaded: bool.isRequired,
     itemLoaded: bool.isRequired
@@ -75,4 +75,4 @@ const mapStateToProps = (state, ownProps) => ({
   detailsLoaded: getDetailsLoadedForItem(state, getDetailsItemId(state))
 })
 
-module.exports = injectIntl(connect(mapStateToProps)(BudgetItem))
+module.exports = injectIntl(connect(mapStateToProps)(ExploreContent))
