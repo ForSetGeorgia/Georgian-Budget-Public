@@ -1,6 +1,6 @@
 const React = require('react')
 const { injectIntl } = require('react-intl')
-const { bool, string } = React.PropTypes
+const { bool } = React.PropTypes
 const { connect } = require('react-redux')
 
 const BudgetItemDetailsFetcher = require('./components/BudgetItemDetailsFetcher')
@@ -24,8 +24,7 @@ const {
 const BudgetItem = React.createClass({
   propTypes: {
     detailsLoaded: bool.isRequired,
-    itemLoaded: bool.isRequired,
-    itemId: string.isRequired
+    itemLoaded: bool.isRequired
   },
 
   renderDetails () {
@@ -62,7 +61,7 @@ const BudgetItem = React.createClass({
   render () {
     return (
       <div className='gb-BudgetItem'>
-        <BudgetItemDetailsFetcher itemId={this.props.itemId} />
+        <BudgetItemDetailsFetcher />
         {this.renderContent()}
       </div>
     )
@@ -70,7 +69,6 @@ const BudgetItem = React.createClass({
 })
 
 const mapStateToProps = (state, ownProps) => ({
-  itemId: getDetailsItemId(state),
   itemLoaded: !!getDetailsItem(state, getDetailsItemId(state)),
   detailsLoaded: getDetailsLoadedForItem(state, getDetailsItemId(state))
 })

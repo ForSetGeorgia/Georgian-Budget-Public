@@ -4,6 +4,8 @@ const { connect } = require('react-redux')
 const { injectIntl } = require('react-intl')
 
 const { getLocale } = require('src/data/ducks/locale')
+const { getDetailsItemId } = require('src/data/ducks/explore')
+
 const fetchBudgetItemDetails = require('src/data/modules/fetchers/fetchBudgetItemDetails')
 
 const {
@@ -33,6 +35,7 @@ const BudgetItemDetailsFetcher = React.createClass({
 })
 
 const mapStateToProps = (state, {itemId}) => ({
+  itemId: getDetailsItemId(state),
   detailsLoaded: getDetailsLoadedForItemCurrentLocale(state, itemId),
   key: `${itemId}_${getLocale(state)}`
 })
