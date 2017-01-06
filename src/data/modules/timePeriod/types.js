@@ -1,3 +1,3 @@
-const timePeriodTypes = ['year', 'quarter', 'month']
+const timePeriodTypes = ['month', 'quarter', 'year']
 
 module.exports = { timePeriodTypes }
