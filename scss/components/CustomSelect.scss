@@ -1,0 +1,9 @@
+.gb-CustomSelect {
+  display: flex;
+  align-items: center;
+
+  &-select {
+    min-width: 6rem;
+    max-width: 6rem;
+  }
+}
