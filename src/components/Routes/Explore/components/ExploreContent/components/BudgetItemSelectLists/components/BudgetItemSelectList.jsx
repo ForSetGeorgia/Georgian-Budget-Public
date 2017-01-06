@@ -61,7 +61,6 @@ const BudgetItemSelectList = React.createClass({
           results={items}
           onRowClick={this.handleClick}
           showFilter
-          enableInfiniteScroll
           bodyHeight='400'
           columns={columns}
           columnMetadata={columnMetadata}
