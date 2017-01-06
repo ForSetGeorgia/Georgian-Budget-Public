@@ -55,10 +55,11 @@ const ExploreContent = React.createClass({
       <div className='gb-BudgetItem-mainContent'>
         <div className='gb-BudgetItem-mainContent-topRow'>
           <BudgetItemHeading />
-          <TimePeriodSelect />
+          <div className='gb-BudgetItem-mainContent-topRow-controls'>
+            <TimePeriodTypeSelect />
+            <TimePeriodSelect />
+          </div>
         </div>
-
-        <TimePeriodTypeSelect />
 
         {this.renderDetails()}
       </div>
