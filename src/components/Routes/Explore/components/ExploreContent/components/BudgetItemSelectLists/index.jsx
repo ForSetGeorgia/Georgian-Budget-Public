@@ -13,8 +13,6 @@ const {
 
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const BudgetItemSelectList = require('./components/BudgetItemSelectList')
-const BudgetItemTypeSelect = require('./components/BudgetItemTypeSelect')
-const FinanceTypeSelect = require('./components/FinanceTypeSelect')
 
 const BudgetItemSelectLists = React.createClass({
   propTypes: {
@@ -42,9 +40,6 @@ const BudgetItemSelectLists = React.createClass({
 
     return (
       <div>
-        <BudgetItemTypeSelect />
-        <FinanceTypeSelect />
-
         {this.props.lists.map(list => this.renderList(list))}
       </div>
     )

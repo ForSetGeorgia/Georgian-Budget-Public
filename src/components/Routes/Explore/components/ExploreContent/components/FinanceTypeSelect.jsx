@@ -2,7 +2,7 @@ const React = require('react')
 const { func, string } = React.PropTypes
 const { connect } = require('react-redux')
 
-const { injectIntl, intlShape, defineMessages } = require('react-intl')
+const { injectIntl, intlShape } = require('react-intl')
 const financeTypeMessages = require('src/messages/financeTypes')
 
 const { financeTypes } = require('src/data/modules/entities/finance')
@@ -15,14 +15,6 @@ const {
 } = require('src/data/ducks/filters')
 
 const ButtonSelector = require('src/components/shared/ButtonSelector')
-
-const messages = defineMessages({
-  label: {
-    id: 'app.filters.financeType.label',
-    description: 'Label for finance type filter',
-    defaultMessage: 'Select finance type'
-  }
-})
 
 const FinanceTypeSelect = React.createClass({
   propTypes: {
@@ -45,14 +37,13 @@ const FinanceTypeSelect = React.createClass({
   },
 
   render () {
-    const { intl, selectedFinanceType } = this.props
+    const { selectedFinanceType } = this.props
 
     return (
       <ButtonSelector
         handleChangeEvent={this.handleChangeEvent}
         options={this.options()}
         selectedValue={selectedFinanceType}
-        labelText={intl.formatMessage(messages.label)}
       />
     )
   }

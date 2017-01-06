@@ -1,5 +1,5 @@
 const { connect } = require('react-redux')
-const { injectIntl, defineMessages } = require('react-intl')
+const { injectIntl } = require('react-intl')
 const budgetItemTypeMessages = require('src/messages/budgetItemTypes')
 const snakeToCamel = require('src/utilities/snakeToCamel')
 const { budgetItemTypes } = require('src/data/modules/entities/budgetItem')
@@ -13,14 +13,6 @@ const {
 } = require('src/data/modules/entities/budgetItem')
 
 const ButtonSelector = require('src/components/shared/ButtonSelector')
-
-const messages = defineMessages({
-  label: {
-    id: 'app.filters.budgetItemType.label',
-    description: 'Label text for budget item type filter',
-    defaultMessage: 'Select budget item type'
-  }
-})
 
 const getOptions = (state, ownProps) => {
   const { intl } = ownProps
@@ -44,8 +36,7 @@ const getOptions = (state, ownProps) => {
 const mapStateToProps = (state, ownProps) => ({
   detailsItemId: getDetailsItemId(state),
   selectedValue: getSelectedBudgetItemType(state),
-  options: getOptions(state, ownProps),
-  labelText: ownProps.intl.formatMessage(messages.label)
+  options: getOptions(state, ownProps)
 })
 
 const mapDispatchToProps = (dispatch) => ({
