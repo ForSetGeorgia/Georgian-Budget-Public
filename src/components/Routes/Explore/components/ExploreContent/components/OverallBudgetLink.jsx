@@ -19,7 +19,7 @@ const OverallBudgetLink = ({overallBudgetId}) => (
 )
 
 OverallBudgetLink.propTypes = {
-  overallBudgetId: string.isRequired
+  overallBudgetId: string
 }
 
 const mapStateToProps = state => ({
