@@ -2,6 +2,7 @@ const React = require('react')
 const { array, arrayOf, shape, string } = React.PropTypes
 const { injectIntl } = require('react-intl')
 const { connect } = require('react-redux')
+const snakeToCamel = require('src/utilities/snakeToCamel')
 
 const { getBudgetItemsData } = require('src/data/ducks/budgetItems')
 const { getSelectedBudgetItemType } = require('src/data/ducks/filters')
@@ -13,6 +14,11 @@ const {
 
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const BudgetItemSelectList = require('./components/BudgetItemSelectList')
+const CountDisplay = require('./components/CountDisplay')
+const budgetItemTypeMessages = require('src/messages/budgetItemTypes')
+const BudgetItemTypeSelect = require('./components/BudgetItemTypeSelect')
+const FinanceTypeSelect = require('./components/FinanceTypeSelect')
+const TimePeriodSelect = require('src/components/shared/TimePeriodSelect')
 
 const BudgetItemSelectLists = React.createClass({
   propTypes: {
@@ -28,10 +34,30 @@ const BudgetItemSelectLists = React.createClass({
 
   renderList (list) {
     return (
-      <BudgetItemSelectList
-        key={list.typeOfItems}
-        {...list}
-      />
+      <div>
+        <div className='gb-BudgetItem-selectListHeader'>
+          <h3>
+            <CountDisplay
+              count={list.itemIds.length}
+              itemTranslations={budgetItemTypeMessages[snakeToCamel(list.typeOfItems)]}
+            />
+          </h3>
+
+          <div className='gb-BudgetItem-selectListHeader-controls'>
+            <BudgetItemTypeSelect />
+
+            <div className='gb-BudgetItem-selectListHeader-controls-row2'>
+              <FinanceTypeSelect />
+              <TimePeriodSelect />
+            </div>
+          </div>
+        </div>
+
+        <BudgetItemSelectList
+          key={list.typeOfItems}
+          {...list}
+        />
+      </div>
     )
   },
 

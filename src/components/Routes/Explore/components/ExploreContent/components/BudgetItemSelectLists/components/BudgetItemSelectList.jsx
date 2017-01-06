@@ -2,9 +2,7 @@ const React = require('react')
 const { arrayOf, func, object, shape, string } = React.PropTypes
 const { injectIntl } = require('react-intl')
 const { connect } = require('react-redux')
-const snakeToCamel = require('src/utilities/snakeToCamel')
 
-const budgetItemTypeMessages = require('src/messages/budgetItemTypes')
 const budgetItemMessages = require('src/messages/budgetItem')
 
 const { getSelectedFinanceType } = require('src/data/ducks/filters')
@@ -20,7 +18,6 @@ const {
 } = require('src/data/ducks/explore')
 
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
-const CountDisplay = require('./CountDisplay')
 const CustomGriddle = require('src/components/shared/CustomGriddle')
 const GriddleFormattedAmount = require('src/components/shared/GriddleFormattedAmount')
 const BudgetItemListFetcher = require('./BudgetItemListFetcher')
@@ -29,7 +26,6 @@ const SearchBar = require('./SearchBar')
 const BudgetItemSelectList = React.createClass({
   propTypes: {
     detailsItemId: string.isRequired,
-    typeOfItems: string.isRequired,
     items: arrayOf(shape({
       id: string.isRequired,
       name: string.isRequired
@@ -48,16 +44,12 @@ const BudgetItemSelectList = React.createClass({
   },
 
   renderMainContent () {
-    const { items, typeOfItems, columns, columnMetadata } = this.props
+    const { items, columns, columnMetadata } = this.props
 
     if (this.isLoading()) return <LoadingIndicator />
 
     return (
       <div>
-        <CountDisplay
-          count={items.length}
-          itemTranslations={budgetItemTypeMessages[snakeToCamel(typeOfItems)]}
-        />
         <CustomGriddle
           results={items}
           onRowClick={this.handleClick}

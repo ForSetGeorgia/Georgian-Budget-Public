@@ -6,12 +6,10 @@ const { connect } = require('react-redux')
 const BudgetItemDetailsFetcher = require('./components/BudgetItemDetailsFetcher')
 const BudgetItemHeading = require('./components/BudgetItemHeading')
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
-const TimePeriodSelect = require('./components/TimePeriodSelect')
+const TimePeriodSelect = require('src/components/shared/TimePeriodSelect')
 const TimePeriodTypeSelect = require('./components/TimePeriodTypeSelect')
 const SelectedFinanceTimeSeries = require('./components/SelectedFinanceTimeSeries')
 const BudgetItemYearlyTable = require('./components/BudgetItemYearlyTable')
-const BudgetItemTypeSelect = require('./components/BudgetItemTypeSelect')
-const FinanceTypeSelect = require('./components/FinanceTypeSelect')
 const BudgetItemSelectLists = require('./components/BudgetItemSelectLists/index')
 const OverallBudgetLink = require('./components/OverallBudgetLink')
 const AgencyLink = require('./components/AgencyLink')
@@ -44,21 +42,6 @@ const ExploreContent = React.createClass({
 
         <AgencyLink />
         <ParentProgramLink />
-
-        <div className='gb-BudgetItem-selectListHeader'>
-          <h3>
-            Select List Name
-          </h3>
-
-          <div className='gb-BudgetItem-selectListHeader-controls'>
-            <BudgetItemTypeSelect />
-
-            <div className='gb-BudgetItem-selectListHeader-controls-row2'>
-              <FinanceTypeSelect />
-              <TimePeriodSelect />
-            </div>
-          </div>
-        </div>
 
         <BudgetItemSelectLists />
       </div>
