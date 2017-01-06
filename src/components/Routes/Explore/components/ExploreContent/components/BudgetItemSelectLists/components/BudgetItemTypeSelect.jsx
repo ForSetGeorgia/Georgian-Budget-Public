@@ -1,7 +1,5 @@
-const React = require('react')
-const { string, func, array } = React.PropTypes
 const { connect } = require('react-redux')
-const { injectIntl, intlShape, defineMessages } = require('react-intl')
+const { injectIntl, defineMessages } = require('react-intl')
 const budgetItemTypeMessages = require('src/messages/budgetItemTypes')
 const snakeToCamel = require('src/utilities/snakeToCamel')
 const { budgetItemTypes } = require('src/data/modules/entities/budgetItem')
@@ -21,30 +19,6 @@ const messages = defineMessages({
     id: 'app.filters.budgetItemType.label',
     description: 'Label text for budget item type filter',
     defaultMessage: 'Select budget item type'
-  }
-})
-
-const BudgetItemTypeSelect = React.createClass({
-  propTypes: {
-    detailsItemId: string,
-    selectedBudgetItemType: string,
-    intl: intlShape,
-    handleChangeEvent: func,
-    options: array,
-    labelText: string
-  },
-
-  render () {
-    const { selectedBudgetItemType, options, handleChangeEvent, labelText } = this.props
-
-    return (
-      <ButtonSelector
-        handleChangeEvent={handleChangeEvent}
-        options={options}
-        selectedValue={selectedBudgetItemType}
-        labelText={labelText}
-      />
-    )
   }
 })
 
@@ -69,7 +43,7 @@ const getOptions = (state, ownProps) => {
 
 const mapStateToProps = (state, ownProps) => ({
   detailsItemId: getDetailsItemId(state),
-  selectedBudgetItemType: getSelectedBudgetItemType(state),
+  selectedValue: getSelectedBudgetItemType(state),
   options: getOptions(state, ownProps),
   labelText: ownProps.intl.formatMessage(messages.label)
 })
@@ -80,4 +54,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(BudgetItemTypeSelect))
+module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ButtonSelector))
