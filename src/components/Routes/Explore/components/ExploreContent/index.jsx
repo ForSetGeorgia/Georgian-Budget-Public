@@ -43,6 +43,8 @@ const ExploreContent = React.createClass({
         <AgencyLink />
         <ParentProgramLink />
 
+        <TimePeriodSelect />
+
         <BudgetItemSelectLists />
       </div>
     )
