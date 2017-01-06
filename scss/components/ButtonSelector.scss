@@ -4,10 +4,15 @@ $select-button-border-radius: 5px;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
+  margin: 5px 0;
 
   &-label {
     margin: 0;
     margin-right: 10px
+  }
+
+  &-buttons {
+    display: flex;
   }
 
   &-button {

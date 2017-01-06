@@ -11,7 +11,8 @@ const TimeSeriesChart = React.createClass({
     exportTitle: string.isRequired,
     valueSuffix: string.isRequired,
     yAxisTitle: string.isRequired,
-    subtitle: string
+    subtitle: string,
+    className: string
   },
 
   // When the DOM is ready, create the chart.
