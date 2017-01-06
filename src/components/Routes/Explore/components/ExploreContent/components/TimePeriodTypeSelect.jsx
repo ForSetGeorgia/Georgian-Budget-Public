@@ -8,7 +8,7 @@ const {
   getTimePeriodType
 } = require('src/data/ducks/filters')
 
-const CustomSelect = require('src/components/shared/CustomSelect')
+const ButtonSelector = require('src/components/shared/ButtonSelector')
 
 const getOptions = intl => (
   timePeriodTypes.map(timePeriodType => ({
@@ -18,16 +18,14 @@ const getOptions = intl => (
 )
 
 const mapStateToProps = (state, ownProps) => ({
-  name: 'time-period-type-select',
-  clearable: false,
   options: getOptions(ownProps.intl),
-  value: getTimePeriodType(state)
+  selectedValue: getTimePeriodType(state)
 })
 
 const mapDispatchToProps = dispatch => ({
-  onChange: selectedOption => dispatch(setTimePeriodType(selectedOption.value))
+  handleChangeEvent: value => dispatch(setTimePeriodType(value))
 })
 
 module.exports = injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(CustomSelect)
+  connect(mapStateToProps, mapDispatchToProps)(ButtonSelector)
 )
