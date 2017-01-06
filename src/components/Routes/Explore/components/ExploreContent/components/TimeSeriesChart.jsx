@@ -83,7 +83,12 @@ const TimeSeriesChart = React.createClass({
 
   // Create the div which the chart will be rendered to.
   render: function () {
-    return <div id={this.props.containerId} />
+    return (
+      <div
+        id={this.props.containerId}
+        className={this.props.className}
+      />
+    )
   }
 })
 

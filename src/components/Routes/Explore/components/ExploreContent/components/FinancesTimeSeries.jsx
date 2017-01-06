@@ -119,6 +119,7 @@ const FinancesTimeSeries = React.createClass({
         series={this.series()}
         valueSuffix={this.valueSuffix()}
         yAxisTitle={this.yAxisTitle()}
+        className={'gb-FinanceTimeSeries'}
       />
     )
   }
