@@ -30,18 +30,19 @@ const BudgetItemTypeSelect = React.createClass({
     selectedBudgetItemType: string,
     intl: intlShape,
     handleChangeEvent: func,
-    options: array
+    options: array,
+    labelText: string
   },
 
   render () {
-    const { selectedBudgetItemType, intl, options, handleChangeEvent } = this.props
+    const { selectedBudgetItemType, options, handleChangeEvent, labelText } = this.props
 
     return (
       <ButtonSelector
         handleChangeEvent={handleChangeEvent}
         options={options}
         selectedValue={selectedBudgetItemType}
-        labelText={intl.formatMessage(messages.label)}
+        labelText={labelText}
       />
     )
   }
@@ -69,7 +70,8 @@ const getOptions = (state, ownProps) => {
 const mapStateToProps = (state, ownProps) => ({
   detailsItemId: getDetailsItemId(state),
   selectedBudgetItemType: getSelectedBudgetItemType(state),
-  options: getOptions(state, ownProps)
+  options: getOptions(state, ownProps),
+  labelText: ownProps.intl.formatMessage(messages.label)
 })
 
 const mapDispatchToProps = (dispatch) => ({
