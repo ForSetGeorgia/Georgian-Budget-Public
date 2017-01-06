@@ -3,8 +3,14 @@
 
 const { expect } = require('chai')
 const filters = require('src/data/ducks/filters')
-const { setFinanceType, setBudgetItemType, setTimePeriods } = filters
 const initialState = require('src/data/initialState').filters
+
+const {
+  setFinanceType,
+  setBudgetItemType,
+  setTimePeriods,
+  setTimePeriodType
+} = filters
 
 describe('filters reducer', () => {
   it('handles setFinanceType action', () => {
@@ -70,6 +76,27 @@ describe('filters reducer', () => {
       initialState,
       {
         timePeriods: ['y2014']
+      }
+    ))
+  })
+
+  it ('handles setTimePeriodType', () => {
+    const previousState = Object.assign(
+      {},
+      initialState,
+      {
+        timePeriodType: 'month'
+      }
+    )
+
+    const action = setTimePeriodType('year')
+    const newState = filters(previousState, action)
+
+    expect(newState).to.deep.equal(Object.assign(
+      {},
+      initialState,
+      {
+        timePeriodType: 'year'
       }
     ))
   })

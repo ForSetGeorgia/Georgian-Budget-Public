@@ -8,7 +8,8 @@ module.exports = {
   filters: {
     budgetItemType: '',
     financeType: '',
-    timePeriods: []
+    timePeriods: [],
+    timePeriodType: ''
   },
   locale: '',
   plannedFinances: {},

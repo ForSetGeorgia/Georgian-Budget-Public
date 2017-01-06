@@ -1,10 +1,15 @@
 const React = require('react')
 const { connect } = require('react-redux')
-const { string } = React.PropTypes
+const { string, func } = React.PropTypes
 const { intlShape, injectIntl } = require('react-intl')
 const { Tab, Tabs, TabList, TabPanel } = require('react-tabs')
 
-const { getSelectedTimePeriods } = require('src/data/ducks/filters')
+const {
+  getSelectedTimePeriods,
+  getTimePeriodType,
+  setTimePeriodType
+} = require('src/data/ducks/filters')
+
 const { getDetailsItemId } = require('src/data/ducks/explore')
 
 const FinancesTimeSeries = require('./FinancesTimeSeries')
@@ -14,13 +19,9 @@ const BudgetItemCharts = React.createClass({
   propTypes: {
     itemId: string,
     selectedTimePeriod: string,
-    intl: intlShape
-  },
-
-  getInitialState () {
-    return {
-      visibleTimePeriodType: 'month'
-    }
+    intl: intlShape,
+    timePeriodType: string,
+    setTimePeriodType: func
   },
 
   renderChartTitle (timePeriodType) {
@@ -60,21 +61,19 @@ const BudgetItemCharts = React.createClass({
     }))
   },
 
-  defaultTabIndex () {
-    return this.getTimePeriodTypes().indexOf(this.state.visibleTimePeriodType)
+  selectedTabIndex () {
+    return this.getTimePeriodTypes().indexOf(this.props.timePeriodType)
   },
 
   handleSelectTabEvent (index) {
-    this.setState({
-      visibleTimePeriodType: this.getTimePeriodTypes()[index]
-    })
+    this.props.setTimePeriodType(this.getTimePeriodTypes()[index])
   },
 
   render () {
     const chartGroups = this.getChartGroups()
     return (
       <Tabs
-        selectedIndex={this.defaultTabIndex()}
+        selectedIndex={this.selectedTabIndex()}
         onSelect={this.handleSelectTabEvent}
       >
 
@@ -95,7 +94,14 @@ const BudgetItemCharts = React.createClass({
 
 const mapStateToProps = state => ({
   itemId: getDetailsItemId(state),
-  selectedTimePeriod: getSelectedTimePeriods(state)[0]
+  selectedTimePeriod: getSelectedTimePeriods(state)[0],
+  timePeriodType: getTimePeriodType(state)
 })
 
-module.exports = injectIntl(connect(mapStateToProps)(BudgetItemCharts))
+const mapDispatchToProps = dispatch => ({
+  setTimePeriodType: value => { dispatch(setTimePeriodType(value)) }
+})
+
+module.exports = injectIntl(
+  connect(mapStateToProps, mapDispatchToProps)(BudgetItemCharts)
+)
