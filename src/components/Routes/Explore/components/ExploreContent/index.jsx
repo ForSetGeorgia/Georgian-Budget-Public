@@ -7,6 +7,7 @@ const BudgetItemDetailsFetcher = require('./components/BudgetItemDetailsFetcher'
 const BudgetItemHeading = require('./components/BudgetItemHeading')
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const TimePeriodSelect = require('./components/TimePeriodSelect')
+const TimePeriodTypeSelect = require('./components/TimePeriodTypeSelect')
 const BudgetItemCharts = require('./components/BudgetItemCharts')
 const BudgetItemYearlyTable = require('./components/BudgetItemYearlyTable')
 const BudgetItemSelectLists = require('./components/BudgetItemSelectLists/index')
@@ -56,6 +57,8 @@ const ExploreContent = React.createClass({
           <BudgetItemHeading />
           <TimePeriodSelect />
         </div>
+
+        <TimePeriodTypeSelect />
 
         {this.renderDetails()}
       </div>
