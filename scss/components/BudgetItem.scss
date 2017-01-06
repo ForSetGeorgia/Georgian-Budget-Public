@@ -44,10 +44,11 @@
   }
 
   &-selectListHeader {
+    align-items: flex-end;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
+
     &-controls {
       display: flex;
       font-size: 0.9rem;
