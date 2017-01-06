@@ -5,7 +5,8 @@ const Select = require('react-select')
 const CustomSelect = props => {
   return (
     <span className='gb-CustomSelect'>
-      {props.labelText}: <Select
+      <span className='gb-CustomSelect-label'>{props.labelText}:</span>
+      <Select
         className='gb-CustomSelect-select'
         {...props}
       />

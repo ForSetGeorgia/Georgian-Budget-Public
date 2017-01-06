@@ -10,6 +10,12 @@
     margin: 0 (-1 * $content-padding);
     padding: $content-padding;
     background-color: white;
+
+    &-topRow {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   &-heading {

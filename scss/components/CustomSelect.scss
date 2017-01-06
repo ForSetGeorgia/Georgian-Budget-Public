@@ -2,8 +2,17 @@
   display: flex;
   align-items: center;
 
+  &-label {
+    margin-right: 0.5rem;
+  }
+
   &-select {
     min-width: 6rem;
     max-width: 6rem;
+
+    & .Select-control {
+      border: 0;
+      background-color: rgb(231, 241, 244);
+    }
   }
 }

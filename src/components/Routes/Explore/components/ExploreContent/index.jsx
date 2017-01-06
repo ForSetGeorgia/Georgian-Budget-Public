@@ -35,7 +35,6 @@ const ExploreContent = React.createClass({
 
     return (
       <div>
-        <TimePeriodSelect />
         <BudgetItemCharts />
 
         <BudgetItemYearlyTable />
@@ -53,7 +52,11 @@ const ExploreContent = React.createClass({
   renderMainContent () {
     return (
       <div className='gb-BudgetItem-mainContent'>
-        <BudgetItemHeading />
+        <div className='gb-BudgetItem-mainContent-topRow'>
+          <BudgetItemHeading />
+          <TimePeriodSelect />
+        </div>
+
         {this.renderDetails()}
       </div>
     )
