@@ -9,8 +9,9 @@ const {
 const {
   getSelectedBudgetItemType,
   getSelectedFinanceType,
-  getSelectedTimePeriods
- } = require('src/data/ducks/filters')
+  getSelectedTimePeriods,
+  getTimePeriodType
+} = require('src/data/ducks/filters')
 
 const UrlQueryUpdater = React.createClass({
   contextTypes: {
@@ -22,7 +23,8 @@ const UrlQueryUpdater = React.createClass({
     budgetItemType: string.isRequired,
     detailsItemId: string.isRequired,
     financeType: string.isRequired,
-    timePeriods: arrayOf(string).isRequired
+    timePeriods: arrayOf(string).isRequired,
+    timePeriodType: string.isRequired
   },
 
   newQueryObject () {
@@ -30,7 +32,8 @@ const UrlQueryUpdater = React.createClass({
       detailsItemId,
       budgetItemType,
       financeType,
-      timePeriods
+      timePeriods,
+      timePeriodType
     } = this.props
 
     const newQueryObject = {}
@@ -43,6 +46,7 @@ const UrlQueryUpdater = React.createClass({
 
     if (budgetItemType) newQueryObject.budgetItemType = budgetItemType
     if (financeType) newQueryObject.financeType = financeType
+    if (timePeriodType) newQueryObject.timePeriodType = timePeriodType
 
     return newQueryObject
   },
@@ -83,7 +87,8 @@ const mapStateToProps = (state) => ({
   budgetItemType: getSelectedBudgetItemType(state),
   detailsItemId: getDetailsItemId(state),
   financeType: getSelectedFinanceType(state),
-  timePeriods: getSelectedTimePeriods(state)
+  timePeriods: getSelectedTimePeriods(state),
+  timePeriodType: getTimePeriodType(state)
 })
 
 module.exports = connect(mapStateToProps)(UrlQueryUpdater)
