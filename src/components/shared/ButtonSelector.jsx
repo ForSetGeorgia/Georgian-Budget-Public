@@ -19,7 +19,7 @@ const ButtonSelector = React.createClass({
     if (!labelText) return null
 
     return (
-      <p>{labelText}:</p>
+      <p className='gb-ButtonSelector-label'>{labelText}:</p>
     )
   },
 

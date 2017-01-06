@@ -16,7 +16,7 @@ const SelectButton = React.createClass({
   },
 
   className () {
-    let className = 'gb-SelectButton'
+    let className = 'gb-ButtonSelector-button'
     if (this.props.disabled) className += ' is-disabled'
     return className
   },
