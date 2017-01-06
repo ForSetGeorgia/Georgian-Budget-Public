@@ -3,9 +3,11 @@ $select-button-border-radius: 5px;
 .gb-ButtonSelector {
   display: flex;
   flex-flow: row wrap;
+  align-items: center;
 
   &-label {
     margin: 0;
+    margin-right: 10px
   }
 
   &-button {
