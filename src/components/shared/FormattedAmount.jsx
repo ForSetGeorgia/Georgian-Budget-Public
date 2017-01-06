@@ -21,7 +21,7 @@ const formatAmount = props => {
   const { amount, intl } = props
 
   if (amount) {
-    return intl.formatNumber(amount)
+    return intl.formatNumber(Math.round(amount))
   } else {
     return ''
   }
