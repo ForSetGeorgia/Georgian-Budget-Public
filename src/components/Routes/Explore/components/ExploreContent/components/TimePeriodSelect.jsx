@@ -1,5 +1,6 @@
 const { injectIntl, defineMessages } = require('react-intl')
 const { connect } = require('react-redux')
+const CustomSelect = require('src/components/shared/CustomSelect')
 
 const { getYearsWithData } = require('src/data/modules/timePeriod/type/year')
 const timePeriodTypeMessages = require('src/messages/timePeriodTypes')
@@ -10,8 +11,6 @@ const {
  } = require('src/data/ducks/filters')
 
 const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
-
-const ButtonSelector = require('src/components/shared/ButtonSelector')
 
 const messages = defineMessages({
   allOption: {
@@ -46,15 +45,19 @@ const getLabelText = intl => (
 )
 
 const mapStateToProps = (state, ownProps) => ({
+  name: 'time-period-select',
+  clearable: false,
   options: getOptions(ownProps.intl),
-  selectedValue: getSelectedValue(state),
+  value: getSelectedValue(state),
   labelText: getLabelText(ownProps.intl)
 })
 
 const mapDispatchToProps = dispatch => ({
-  handleChangeEvent: value => { dispatch(setTimePeriods([value])) }
+  onChange: selectedOption => {
+    dispatch(setTimePeriods([selectedOption.value]))
+  }
 })
 
 module.exports = injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(ButtonSelector)
+  connect(mapStateToProps, mapDispatchToProps)(CustomSelect)
 )
