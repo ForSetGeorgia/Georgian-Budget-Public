@@ -1,6 +1,4 @@
-const React = require('react')
-const { func, string } = React.PropTypes
-const { injectIntl, defineMessages, intlShape } = require('react-intl')
+const { injectIntl, defineMessages } = require('react-intl')
 const { connect } = require('react-redux')
 
 const { getYearsWithData } = require('src/data/modules/timePeriod/type/year')
@@ -23,57 +21,40 @@ const messages = defineMessages({
   }
 })
 
-const TimePeriodSelect = React.createClass({
-  propTypes: {
-    selectedTimePeriod: string,
-    setTimePeriods: func,
-    intl: intlShape
-  },
+const allYearsOption = intl => (
+  [{
+    value: 'all',
+    label: intl.formatMessage(messages.allOption)
+  }]
+)
 
-  allYearsOption () {
-    const { intl } = this.props
+const selectableYears = () => (
+  getYearsWithData().map(year => ({
+    value: year,
+    label: translateTimePeriod(year)
+  }))
+)
 
-    return [{
-      value: 'all',
-      label: intl.formatMessage(messages.allOption)
-    }]
-  },
+const getOptions = intl => allYearsOption(intl).concat(selectableYears())
 
-  selectableYears () {
-    return getYearsWithData().map(year => ({
-      value: year,
-      label: translateTimePeriod(year)
-    }))
-  },
+const getSelectedValue = state => (
+  getSelectedTimePeriods(state).length > 0 ? getSelectedTimePeriods(state)[0] : ''
+)
 
-  options () {
-    return this.allYearsOption().concat(this.selectableYears())
-  },
+const getLabelText = intl => (
+  intl.formatMessage(timePeriodTypeMessages.year.noun)
+)
 
-  handleChangeEvent (value) {
-    this.props.setTimePeriods([value])
-  },
-
-  render () {
-    const { intl, selectedTimePeriod } = this.props
-
-    return (
-      <ButtonSelector
-        handleChangeEvent={this.handleChangeEvent}
-        options={this.options()}
-        selectedValue={selectedTimePeriod}
-        labelText={intl.formatMessage(timePeriodTypeMessages.year.noun)}
-      />
-    )
-  }
-})
-
-const mapStateToProps = state => ({
-  selectedTimePeriod: getSelectedTimePeriods(state).length > 0 ? getSelectedTimePeriods(state)[0] : ''
+const mapStateToProps = (state, ownProps) => ({
+  options: getOptions(ownProps.intl),
+  selectedValue: getSelectedValue(state),
+  labelText: getLabelText(ownProps.intl)
 })
 
 const mapDispatchToProps = dispatch => ({
-  setTimePeriods: value => { dispatch(setTimePeriods(value)) }
+  handleChangeEvent: value => { dispatch(setTimePeriods([value])) }
 })
 
-module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(TimePeriodSelect))
+module.exports = injectIntl(
+  connect(mapStateToProps, mapDispatchToProps)(ButtonSelector)
+)
