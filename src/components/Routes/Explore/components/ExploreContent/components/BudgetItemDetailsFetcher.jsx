@@ -34,10 +34,10 @@ const BudgetItemDetailsFetcher = React.createClass({
   }
 })
 
-const mapStateToProps = (state, {itemId}) => ({
+const mapStateToProps = state => ({
   itemId: getDetailsItemId(state),
-  detailsLoaded: getDetailsLoadedForItemCurrentLocale(state, itemId),
-  key: `${itemId}_${getLocale(state)}`
+  detailsLoaded: getDetailsLoadedForItemCurrentLocale(state, getDetailsItemId(state)),
+  key: `${getDetailsItemId(state)}_${getLocale(state)}`
 })
 
 const mapDispatchToProps = dispatch => ({
