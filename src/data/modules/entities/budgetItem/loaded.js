@@ -31,6 +31,7 @@ const getCurrentItemListLoaded = state => (
 )
 
 module.exports = {
+  getDetailsLocaleId,
   getDetailsLoadedForItem,
   getDetailsLoadedForItemCurrentLocale,
   getCurrentItemListLoadedId,

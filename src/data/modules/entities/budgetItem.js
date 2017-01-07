@@ -63,6 +63,16 @@ const getChildItemsOfTypeForItem = (state, itemId, budgetItemType) => {
   }
 }
 
+const getRelatedBudgetItemTypes = (state, itemId) => (
+  budgetItemTypes.filter(
+    budgetItemType => getChildItemsOfTypeForItem(
+      state,
+      itemId,
+      budgetItemType
+    ).length > 0
+  )
+)
+
 module.exports = {
   budgetItemTypes,
   getBudgetItem,
@@ -77,5 +87,6 @@ module.exports = {
   getChildProgramIdsForItem,
   getPriorityIdsForItem,
   getAgencyIdsForItem,
-  getChildItemsOfTypeForItem
+  getChildItemsOfTypeForItem,
+  getRelatedBudgetItemTypes
 }

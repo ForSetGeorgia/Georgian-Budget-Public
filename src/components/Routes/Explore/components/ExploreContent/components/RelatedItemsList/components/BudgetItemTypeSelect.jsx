@@ -1,3 +1,5 @@
+const React = require('react')
+const { array } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl } = require('react-intl')
 const budgetItemTypeMessages = require('src/messages/budgetItemTypes')
@@ -13,6 +15,14 @@ const {
 } = require('src/data/modules/entities/budgetItem')
 
 const ButtonSelector = require('src/components/shared/ButtonSelector')
+
+const BudgetItemTypeSelect = props => (
+  props.options.length > 1 ? <ButtonSelector {...props} /> : null
+)
+
+BudgetItemTypeSelect.propTypes = {
+  options: array
+}
 
 const getOptions = (state, ownProps) => {
   const { intl } = ownProps
@@ -45,4 +55,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ButtonSelector))
+module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(BudgetItemTypeSelect))

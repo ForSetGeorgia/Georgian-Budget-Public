@@ -1,10 +1,16 @@
 const React = require('react')
 const { connect } = require('react-redux')
-const { func, object, string } = React.PropTypes
-const { budgetItemTypes } = require('src/data/modules/entities/budgetItem')
+const { array, bool, func, object, string } = React.PropTypes
+const { getRelatedBudgetItemTypes } = require('src/data/modules/entities/budgetItem')
 
 const { setBudgetItemType } = require('src/data/ducks/filters')
 const { getSelectedBudgetItemType } = require('src/data/ducks/filters')
+
+const { getDetailsItemId } = require('src/data/ducks/explore')
+
+const {
+  getDetailsLoadedForItem
+} = require('src/data/modules/entities/budgetItem/loaded')
 
 const BudgetItemTypeInitializer = React.createClass({
   contextTypes: {
@@ -12,26 +18,37 @@ const BudgetItemTypeInitializer = React.createClass({
   },
 
   propTypes: {
-    budgetItemType: string.isRequired,
-    setBudgetItemType: func.isRequired
+    relatedBudgetItemTypes: array.isRequired,
+    budgetItemType: string,
+    setBudgetItemType: func.isRequired,
+    detailsLoaded: bool.isRequired
   },
 
-  defaultBudgetItemType: 'priority',
-
-  initializeBudgetItemType () {
+  chooseBudgetItemType () {
+    const { relatedBudgetItemTypes } = this.props
     const { budgetItemType: queryBudgetItemType } = this.context.location.query
 
-    if (budgetItemTypes.includes(queryBudgetItemType)) {
-      this.props.setBudgetItemType(queryBudgetItemType)
+    if (relatedBudgetItemTypes.includes(queryBudgetItemType)) {
+      return queryBudgetItemType
+    } else if (relatedBudgetItemTypes.length > 0) {
+      return relatedBudgetItemTypes[0]
     } else {
-      this.props.setBudgetItemType(this.defaultBudgetItemType)
+      return null
     }
   },
 
-  componentDidMount () {
+  initializeBudgetItemType () {
     const { budgetItemType } = this.props
+    const newType = this.chooseBudgetItemType()
+    if (budgetItemType !== newType) this.props.setBudgetItemType(newType)
+  },
 
-    if (!budgetItemType) this.initializeBudgetItemType()
+  componentDidMount () {
+    const { detailsLoaded } = this.props
+
+    // Only initialize budget item type when the selected item has been loaded
+    if (!detailsLoaded) return
+    this.initializeBudgetItemType()
   },
 
   render () {
@@ -40,6 +57,9 @@ const BudgetItemTypeInitializer = React.createClass({
 })
 
 const mapStateToProps = state => ({
+  key: getDetailsItemId(state) + getDetailsLoadedForItem(state, getDetailsItemId(state)),
+  relatedBudgetItemTypes: getRelatedBudgetItemTypes(state, getDetailsItemId(state)),
+  detailsLoaded: getDetailsLoadedForItem(state, getDetailsItemId(state)),
   budgetItemType: getSelectedBudgetItemType(state)
 })
 
