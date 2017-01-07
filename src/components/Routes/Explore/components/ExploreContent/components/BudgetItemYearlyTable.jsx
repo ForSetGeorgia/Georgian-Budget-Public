@@ -25,7 +25,8 @@ const getNumberColumnMetadata = intl => (
   }, {
     columnName: 'difference',
     displayName: intl.formatMessage(financeTypeMessages.difference),
-    colorAmounts: true
+    colorAmounts: true,
+    withPlusWhenPositive: true
   }]
   .map(column => {
     column.customComponent = GriddleFormattedAmount

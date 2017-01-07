@@ -5,7 +5,7 @@ const FormattedAmount = require('./FormattedAmount')
 const GriddleFormattedAmount = props => (
   <FormattedAmount
     amount={props.data}
-    colorAmount={props.metadata.colorAmounts}
+    {...props.metadata}
     {...props}
   />
 )

@@ -3,10 +3,10 @@ const { bool, number, oneOfType, string } = React.PropTypes
 const { injectIntl, intlShape } = require('react-intl')
 
 const getStyle = props => {
-  const { amount, colorAmount } = props
+  const { amount, colorAmounts } = props
   const style = {}
 
-  if (colorAmount) {
+  if (colorAmounts) {
     if (amount < 0) {
       style.color = 'red'
     } else {
@@ -17,14 +17,18 @@ const getStyle = props => {
   return style
 }
 
-const formatAmount = props => {
-  const { amount, intl } = props
+const formatPresentAmount = props => {
+  const { amount, intl, withPlusWhenPositive } = props
 
-  if (amount) {
-    return intl.formatNumber(Math.round(amount))
-  } else {
-    return ''
-  }
+  let formatted = intl.formatNumber(Math.round(amount))
+  if (withPlusWhenPositive && amount > 0) formatted = `+${formatted}`
+  return formatted
+}
+
+const formatAmount = props => {
+  const { amount } = props
+
+  return amount ? formatPresentAmount(props) : ''
 }
 
 const FormattedAmount = props => (
@@ -34,8 +38,9 @@ const FormattedAmount = props => (
 )
 
 FormattedAmount.propTypes = {
-  colorAmount: bool,
+  colorAmounts: bool,
   amount: oneOfType([number, string]),
+  withPlusWhenPositive: bool,
   intl: intlShape
 }
 
