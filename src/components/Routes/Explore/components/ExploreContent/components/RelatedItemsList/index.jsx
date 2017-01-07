@@ -19,7 +19,7 @@ const BudgetItemTypeSelect = require('./components/BudgetItemTypeSelect')
 const FinanceTypeSelect = require('./components/FinanceTypeSelect')
 const TimePeriodSelect = require('src/components/shared/TimePeriodSelect')
 
-const BudgetItemSelectLists = React.createClass({
+const RelatedItemsList = React.createClass({
   propTypes: {
     budgetItemType: string,
     itemIds: array
@@ -76,4 +76,4 @@ const mapStateToProps = state => ({
   itemIds: getListedItemIds(state)
 })
 
-module.exports = injectIntl(connect(mapStateToProps, null)(BudgetItemSelectLists))
+module.exports = injectIntl(connect(mapStateToProps, null)(RelatedItemsList))

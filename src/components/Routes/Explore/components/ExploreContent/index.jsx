@@ -10,7 +10,7 @@ const TimePeriodSelect = require('src/components/shared/TimePeriodSelect')
 const TimePeriodTypeSelect = require('./components/TimePeriodTypeSelect')
 const SelectedFinanceTimeSeries = require('./components/SelectedFinanceTimeSeries')
 const BudgetItemYearlyTable = require('./components/BudgetItemYearlyTable')
-const BudgetItemSelectLists = require('./components/BudgetItemSelectLists/index')
+const RelatedItemsList = require('./components/RelatedItemsList/index')
 const OverallBudgetLink = require('./components/OverallBudgetLink')
 const AgencyLink = require('./components/AgencyLink')
 const ParentProgramLink = require('./components/ParentProgramLink')
@@ -43,7 +43,7 @@ const ExploreContent = React.createClass({
         <AgencyLink />
         <ParentProgramLink />
 
-        <BudgetItemSelectLists />
+        <RelatedItemsList />
       </div>
     )
   },
