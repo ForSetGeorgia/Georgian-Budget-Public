@@ -1,5 +1,5 @@
 const React = require('react')
-const { array, arrayOf, shape, string } = React.PropTypes
+const { array, string } = React.PropTypes
 const { injectIntl } = require('react-intl')
 const { connect } = require('react-redux')
 const snakeToCamel = require('src/utilities/snakeToCamel')
@@ -12,7 +12,6 @@ const {
   getChildItemsOfTypeForItem
 } = require('src/data/modules/entities/budgetItem')
 
-const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const BudgetItemSelectList = require('./components/BudgetItemSelectList')
 const CountDisplay = require('./components/CountDisplay')
 const budgetItemTypeMessages = require('src/messages/budgetItemTypes')
@@ -22,24 +21,24 @@ const TimePeriodSelect = require('src/components/shared/TimePeriodSelect')
 
 const BudgetItemSelectLists = React.createClass({
   propTypes: {
-    lists: arrayOf(shape({
-      typeOfItems: string,
-      itemIds: array
-    }))
+    budgetItemType: string,
+    itemIds: array
   },
 
   isLoading () {
-    return this.props.lists.length === 0
+    return this.props.itemIds.length === 0
   },
 
-  renderList (list) {
+  render () {
+    const { itemIds, budgetItemType } = this.props
+
     return (
       <div>
         <div className='gb-BudgetItem-selectListHeader'>
           <h3>
             <CountDisplay
-              count={list.itemIds.length}
-              itemTranslations={budgetItemTypeMessages[snakeToCamel(list.typeOfItems)]}
+              count={itemIds.length}
+              itemTranslations={budgetItemTypeMessages[snakeToCamel(budgetItemType)]}
             />
           </h3>
 
@@ -53,26 +52,15 @@ const BudgetItemSelectLists = React.createClass({
           </div>
         </div>
 
-        <BudgetItemSelectList
-          key={list.typeOfItems}
-          {...list}
-        />
-      </div>
-    )
-  },
-
-  render () {
-    if (this.isLoading()) return <LoadingIndicator />
-
-    return (
-      <div>
-        {this.props.lists.map(list => this.renderList(list))}
+        <BudgetItemSelectList {...this.props} />
       </div>
     )
   }
 })
 
-const getListedItemIds = (state, itemId, budgetItemType) => {
+const getListedItemIds = (state) => {
+  const itemId = getDetailsItemId(state)
+  const budgetItemType = getSelectedBudgetItemType(state)
   const budgetItems = getBudgetItemsData(state)
   const budgetItemIds = Object.keys(budgetItems)
 
@@ -83,17 +71,9 @@ const getListedItemIds = (state, itemId, budgetItemType) => {
   )
 }
 
-const getLists = (state, itemId) => {
-  const budgetItemType = getSelectedBudgetItemType(state)
-
-  return [{
-    typeOfItems: budgetItemType,
-    itemIds: getListedItemIds(state, itemId, budgetItemType)
-  }]
-}
-
-const mapStateToProps = (state, {itemId}) => ({
-  lists: getLists(state, getDetailsItemId(state))
+const mapStateToProps = state => ({
+  budgetItemType: getSelectedBudgetItemType(state),
+  itemIds: getListedItemIds(state)
 })
 
 module.exports = injectIntl(connect(mapStateToProps, null)(BudgetItemSelectLists))
