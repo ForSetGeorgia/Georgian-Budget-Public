@@ -6,7 +6,7 @@ const { injectIntl } = require('react-intl')
 const {
   getCurrentListLoadedId,
   getCurrentListLoaded
-} = require('src/data/modules/entities/budgetItem/loaded')
+} = require('src/data/modules/list')
 
 const fetchListedBudgetItems =
 require('src/data/modules/fetchers/fetchListedBudgetItems')

@@ -1,5 +1,5 @@
 const React = require('react')
-const { arrayOf, func, object, shape, string } = React.PropTypes
+const { arrayOf, bool, func, object, shape, string } = React.PropTypes
 const { injectIntl } = require('react-intl')
 const { connect } = require('react-redux')
 
@@ -11,7 +11,11 @@ const { getItemSpentFinances } = require('src/data/modules/entities/spentFinance
 const { getItemPlannedFinances } = require('src/data/modules/entities/plannedFinance')
 const { getSelectedYears } = require('src/data/modules/timePeriod/type/year')
 const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
-const { getListedItemIds } = require('src/data/modules/list')
+
+const {
+  getCurrentListLoaded,
+  getListedItemIds
+} = require('src/data/modules/list')
 
 const {
   getDetailsItemId,
@@ -31,6 +35,7 @@ const BudgetItemSelectList = React.createClass({
       id: string.isRequired,
       name: string.isRequired
     })).isRequired,
+    listLoaded: bool.isRequired,
     setDetailsItemId: func.isRequired,
     columns: arrayOf(string).isRequired,
     columnMetadata: arrayOf(object).isRequired
@@ -41,7 +46,7 @@ const BudgetItemSelectList = React.createClass({
   },
 
   isLoading () {
-    return this.props.items.length === 0
+    return !this.props.listLoaded
   },
 
   renderMainContent () {
@@ -128,6 +133,7 @@ const getItems = (state, itemIds) => {
 
 const mapStateToProps = (state, ownProps) => ({
   detailsItemId: getDetailsItemId(state),
+  listLoaded: getCurrentListLoaded(state),
   items: getItems(state),
   columns: getColumnMetadata(state, ownProps.intl).map(column => column.columnName),
   columnMetadata: getColumnMetadata(state, ownProps.intl)
