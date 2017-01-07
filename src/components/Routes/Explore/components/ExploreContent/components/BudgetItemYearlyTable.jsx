@@ -75,7 +75,7 @@ const mapStateToProps = (state, ownProps) => ({
   columnMetadata: getColumnMetadata(ownProps.intl),
   results: getResults(state, getDetailsItemId(state)),
   showPager: false,
-  modTableClassName: 'mod-BudgetItemYearlyTable'
+  tableClassName: 'gb-BudgetItemYearlyTable'
 })
 
 module.exports = injectIntl(connect(mapStateToProps)(CustomGriddle))

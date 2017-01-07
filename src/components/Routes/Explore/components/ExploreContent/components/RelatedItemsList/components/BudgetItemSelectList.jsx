@@ -59,6 +59,7 @@ const BudgetItemSelectList = React.createClass({
           bodyHeight='400'
           columns={columns}
           columnMetadata={columnMetadata}
+          tableClassName='gb-BudgetItemSelectList'
         />
       </div>
     )

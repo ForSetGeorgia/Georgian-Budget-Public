@@ -18,10 +18,13 @@
     & > td, & > th {
       border: 1px solid #e7f1f4;
       text-align: left;
-      width: 100%;
       padding: 10px $content-padding;
       display: flex;
       align-items: center;
+      flex: 100% 1;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      word-wrap: break-word;
 
       &:first-child {
         border-left: 0;
@@ -44,6 +47,22 @@
           background-color: inherit !important;
         }
       }
+    }
+  }
+}
+
+.gb-BudgetItemYearlyTable {
+  @extend .gb-Table;
+}
+
+.gb-BudgetItemSelectList {
+  @extend .gb-Table;
+
+  font-size: 0.9rem;
+
+  .gb-Table-row > td, & > thead > tr > th {
+    &:first-child {
+      flex-grow: 1.5;
     }
   }
 }
