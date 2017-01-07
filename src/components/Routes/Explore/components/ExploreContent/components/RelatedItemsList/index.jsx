@@ -25,10 +25,6 @@ const RelatedItemsList = React.createClass({
     itemIds: array
   },
 
-  isLoading () {
-    return this.props.itemIds.length === 0
-  },
-
   render () {
     const { itemIds, budgetItemType } = this.props
 
