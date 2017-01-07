@@ -4,8 +4,8 @@ const { connect } = require('react-redux')
 const { injectIntl } = require('react-intl')
 
 const {
-  getCurrentItemListLoadedId,
-  getCurrentItemListLoaded
+  getCurrentListLoadedId,
+  getCurrentListLoaded
 } = require('src/data/modules/entities/budgetItem/loaded')
 
 const fetchListedBudgetItems =
@@ -30,8 +30,8 @@ const BudgetItemListFetcher = React.createClass({
 })
 
 const mapStateToProps = state => ({
-  alreadyFetched: getCurrentItemListLoaded(state),
-  key: getCurrentItemListLoadedId(state)
+  alreadyFetched: getCurrentListLoaded(state),
+  key: getCurrentListLoadedId(state)
 })
 
 const mapDispatchToProps = dispatch => ({

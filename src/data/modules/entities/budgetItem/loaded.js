@@ -20,13 +20,13 @@ const getDetailsLoadedForItemCurrentLocale = (state, itemId) => (
   !!getBudgetItem(state, itemId) && getBudgetItemLoaded(state, itemId).includes(getDetailsLocaleId(state))
 )
 
-const getCurrentItemListLoadedId = state => (
+const getCurrentListLoadedId = state => (
   `${getSelectedBudgetItemType(state)}_${getLocale(state)}`
 )
 
-const getCurrentItemListLoaded = state => (
+const getCurrentListLoaded = state => (
   getExploreListLoaded(state).includes(
-    getCurrentItemListLoadedId(state)
+    getCurrentListLoadedId(state)
   )
 )
 
@@ -34,6 +34,6 @@ module.exports = {
   getDetailsLocaleId,
   getDetailsLoadedForItem,
   getDetailsLoadedForItemCurrentLocale,
-  getCurrentItemListLoadedId,
-  getCurrentItemListLoaded
+  getCurrentListLoadedId,
+  getCurrentListLoaded
 }
