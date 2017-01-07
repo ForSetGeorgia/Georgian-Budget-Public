@@ -16,7 +16,7 @@ const SearchBar = React.createClass({
     this.setState({
       query: event.target.value
     })
-    this.props.changeFilter(this.state.query)
+    this.props.changeFilter(event.target.value)
   },
 
   render () {
