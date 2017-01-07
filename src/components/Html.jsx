@@ -20,6 +20,7 @@ module.exports = (props) => {
         {title}
         <link rel='stylesheet' href={`/public/bundles/${mainCss}`} />
         <link rel='shortcut icon' type='image/png' href='/public/favicon.ico' />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet" />
       </head>
       <body>
         <div id="app-container">

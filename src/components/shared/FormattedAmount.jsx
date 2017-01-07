@@ -14,6 +14,9 @@ const getStyle = props => {
     }
   }
 
+  style.fontFamily = "'Roboto Mono', monospace"
+  style.justifyContent = 'flex-end'
+
   return style
 }
 
