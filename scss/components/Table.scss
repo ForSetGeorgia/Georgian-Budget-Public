@@ -59,6 +59,7 @@
   @extend .gb-Table;
 
   font-size: 0.9rem;
+  cursor: pointer;
 
   .gb-Table-row > td, & > thead > tr > th {
     &:first-child {
