@@ -37,12 +37,7 @@ const ExploreContent = React.createClass({
     return (
       <div>
         <SelectedFinanceTimeSeries />
-
         <BudgetItemYearlyTable />
-
-        <AgencyLink />
-        <ParentProgramLink />
-
         <RelatedItemsList />
       </div>
     )
@@ -70,6 +65,8 @@ const ExploreContent = React.createClass({
     return (
       <div>
         <OverallBudgetLink />
+        <AgencyLink />
+        <ParentProgramLink />
         {this.renderMainContent()}
       </div>
     )
