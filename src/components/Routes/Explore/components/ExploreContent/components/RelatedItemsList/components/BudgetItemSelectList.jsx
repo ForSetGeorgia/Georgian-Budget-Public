@@ -11,6 +11,7 @@ const { getItemSpentFinances } = require('src/data/modules/entities/spentFinance
 const { getItemPlannedFinances } = require('src/data/modules/entities/plannedFinance')
 const { getSelectedYears } = require('src/data/modules/timePeriod/type/year')
 const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
+const { getListedItemIds } = require('src/data/modules/list')
 
 const {
   getDetailsItemId,
@@ -119,7 +120,7 @@ const getItems = (state, itemIds) => {
   const selectedYears = getSelectedYears(state)
 
   return (
-    itemIds
+    getListedItemIds(state)
     .map(itemId => getItemValues(state, itemId, selectedYears))
     .filter(listItem => listItem.name)
   )
@@ -127,7 +128,7 @@ const getItems = (state, itemIds) => {
 
 const mapStateToProps = (state, ownProps) => ({
   detailsItemId: getDetailsItemId(state),
-  items: getItems(state, ownProps.itemIds),
+  items: getItems(state),
   columns: getColumnMetadata(state, ownProps.intl).map(column => column.columnName),
   columnMetadata: getColumnMetadata(state, ownProps.intl)
 })
