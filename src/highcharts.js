@@ -1,13 +1,21 @@
 const Highcharts = require('highcharts')
 require('highcharts/modules/exporting')(Highcharts)
+const { defineMessages } = require('react-intl')
 
-Highcharts.setOptions({
+const messages = defineMessages({
+  thousandsSep: {
+    id: 'number.thousandsSep',
+    defaultMessage: ','
+  }
+})
+
+const getHighchartsOptions = intl => ({
   credits: false,
   lang: {
     decimalPoint: '.',
-    thousandsSep: ' ',
+    thousandsSep: intl.formatMessage(messages.thousandsSep),
     numericSymbols: null
   }
 })
 
-module.exports = Highcharts
+module.exports = { Highcharts, getHighchartsOptions }

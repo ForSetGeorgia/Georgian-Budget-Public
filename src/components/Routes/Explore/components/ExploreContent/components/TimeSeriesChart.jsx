@@ -1,5 +1,6 @@
 const React = require('react')
 const { string, array } = React.PropTypes
+const { intlShape } = require('react-intl')
 
 const TimeSeriesChart = React.createClass({
 
@@ -12,12 +13,12 @@ const TimeSeriesChart = React.createClass({
     valueSuffix: string.isRequired,
     yAxisTitle: string.isRequired,
     subtitle: string,
-    className: string
+    className: string,
+    intl: intlShape.isRequired
   },
 
   // When the DOM is ready, create the chart.
   componentDidMount: function () {
-    const Highcharts = require('src/highcharts')
     const {
       containerId,
       title,
@@ -26,8 +27,12 @@ const TimeSeriesChart = React.createClass({
       xAxisCategories,
       series,
       valueSuffix,
-      yAxisTitle
+      yAxisTitle,
+      intl
     } = this.props
+
+    const { Highcharts, getHighchartsOptions } = require('src/highcharts')
+    Highcharts.setOptions(getHighchartsOptions(intl))
 
     // Set container which the chart should render to.
     const options = {

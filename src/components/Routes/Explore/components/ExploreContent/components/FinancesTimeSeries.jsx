@@ -111,6 +111,7 @@ const FinancesTimeSeries = React.createClass({
   render () {
     return (
       <TimeSeriesChart
+        intl={this.props.intl}
         containerId={this.uniqueChartId()}
         key={`${this.uniqueChartId()}-${this.props.exportTitle}`}
         title={this.title()}

@@ -27,6 +27,7 @@
   "financeType.plannedFinance.adjective": "დაგეგმილი",
   "financeType.plannedFinance.other": "დაგეგმილი ფინანსები",
   "financeType.difference": "სხვაობა",
+  "number.thousandsSep": " ",
   "timePeriodType.month.adjective": "თვიური",
   "timePeriodType.quarter.adjective": "კვარტლური",
   "timePeriodType.year.noun": "წელი",
