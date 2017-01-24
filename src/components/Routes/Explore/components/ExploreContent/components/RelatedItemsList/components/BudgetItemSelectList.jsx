@@ -27,7 +27,7 @@ const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const CustomGriddle = require('src/components/shared/CustomGriddle')
 const GriddleFormattedAmount = require('src/components/shared/GriddleFormattedAmount')
 const BudgetItemListFetcher = require('./BudgetItemListFetcher')
-const SearchBar = require('./SearchBar')
+const SearchBarContainer = require('./SearchBarContainer')
 
 const BudgetItemSelectList = React.createClass({
   propTypes: {
@@ -62,7 +62,7 @@ const BudgetItemSelectList = React.createClass({
           onRowClick={this.handleClick}
           showFilter
           useCustomFilterComponent
-          customFilterComponent={SearchBar}
+          customFilterComponent={SearchBarContainer}
           bodyHeight='400'
           columns={columns}
           columnMetadata={columnMetadata}
