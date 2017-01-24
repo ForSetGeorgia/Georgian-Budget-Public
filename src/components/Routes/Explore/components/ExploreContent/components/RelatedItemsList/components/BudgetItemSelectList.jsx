@@ -11,6 +11,7 @@ const { getItemSpentFinances } = require('src/data/modules/entities/spentFinance
 const { getItemPlannedFinances } = require('src/data/modules/entities/plannedFinance')
 const { getSelectedYears } = require('src/data/modules/timePeriod/type/year')
 const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
+const { getSelectedBudgetItemType } = require('src/data/ducks/filters')
 
 const {
   getCurrentListLoaded,
@@ -131,7 +132,12 @@ const getItems = (state, itemIds) => {
   )
 }
 
+const getKey = state => (
+  getSelectedFinanceType(state) + getSelectedBudgetItemType(state)
+)
+
 const mapStateToProps = (state, ownProps) => ({
+  key: getKey(state),
   detailsItemId: getDetailsItemId(state),
   listLoaded: getCurrentListLoaded(state),
   items: getItems(state),
