@@ -3,6 +3,7 @@ const rootSelector = require('./rootSelector')
 
 const SET_BUDGET_ITEM_TYPE = 'georgianBudget/filters/SET_BUDGET_ITEM_TYPE'
 const SET_FINANCE_TYPE = 'georgianBudget/filters/SET_FINANCE_TYPE'
+const SET_SEARCH = 'georgianBudget/filters/SET_SEARCH'
 const SET_TIME_PERIODS = 'georgianBudget/filters/SET_TIME_PERIODS'
 const SET_TIME_PERIOD_TYPE = 'georgianBudget/filters/SET_TIME_PERIOD_TYPE'
 
@@ -22,6 +23,14 @@ const reducer = (state = {}, action) => {
         state,
         {
           financeType: action.value
+        }
+      )
+    case SET_SEARCH:
+      return Object.assign(
+        {},
+        state,
+        {
+          search: action.search
         }
       )
     case SET_TIME_PERIODS:
@@ -57,6 +66,11 @@ reducer.setFinanceType = function (value) {
   }
 }
 
+reducer.setSearch = search => ({
+  type: SET_SEARCH,
+  search: search
+})
+
 reducer.setTimePeriods = function (timePeriods) {
   return {
     type: SET_TIME_PERIODS,
@@ -82,6 +96,11 @@ reducer.getSelectedFinanceType = createSelector(
 reducer.getSelectedBudgetItemType = createSelector(
   getFilters,
   ({budgetItemType}) => budgetItemType
+)
+
+reducer.getSearch = createSelector(
+  getFilters,
+  ({search}) => search
 )
 
 reducer.getSelectedTimePeriods = createSelector(

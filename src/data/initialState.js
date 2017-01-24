@@ -8,6 +8,7 @@ module.exports = {
   filters: {
     budgetItemType: '',
     financeType: '',
+    search: '',
     timePeriods: [],
     timePeriodType: ''
   },

@@ -1,5 +1,5 @@
 const React = require('react')
-const { func } = React.PropTypes
+const { func, string } = React.PropTypes
 
 const SearchBar = props => (
   <div className='gb-SearchBar'>
@@ -9,12 +9,14 @@ const SearchBar = props => (
       name='budget-item-select-search-bar'
       placeholder='Search'
       onChange={props.onChange}
+      value={props.query}
     />
   </div>
 )
 
 SearchBar.propTypes = {
-  onChange: func
+  onChange: func,
+  query: string
 }
 
 module.exports = SearchBar

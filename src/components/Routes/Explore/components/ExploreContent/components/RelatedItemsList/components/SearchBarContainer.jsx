@@ -1,32 +1,48 @@
 const React = require('react')
+const { func, string } = React.PropTypes
+const { connect } = require('react-redux')
+
+const { setSearch, getSearch } = require('src/data/ducks/filters')
+
 const SearchBar = require('./SearchBar')
-const { func } = React.PropTypes
 
 const SearchBarContainer = React.createClass({
   propTypes: {
-    changeFilter: func
-  },
-
-  getInitialState () {
-    return {
-      query: ''
-    }
+    changeFilter: func,
+    setSearch: func,
+    query: string
   },
 
   onChange (event) {
-    this.setState({
-      query: event.target.value
-    })
-    this.props.changeFilter(event.target.value)
+    const { setSearch, changeFilter } = this.props
+    const { value } = event.target
+
+    setSearch(value)
+    changeFilter(value)
+  },
+
+  componentDidMount () {
+    const { changeFilter, query } = this.props
+
+    changeFilter(query)
   },
 
   render () {
     return (
       <SearchBar
         onChange={this.onChange}
+        query={this.props.query}
       />
     )
   }
 })
 
-module.exports = SearchBarContainer
+const mapStateToProps = state => ({
+  query: getSearch(state)
+})
+
+const mapDispatchToProps = dispatch => ({
+  setSearch: query => dispatch(setSearch(query))
+})
+
+module.exports = connect(mapStateToProps, mapDispatchToProps)(SearchBarContainer)

@@ -8,6 +8,7 @@ const initialState = require('src/data/initialState').filters
 const {
   setFinanceType,
   setBudgetItemType,
+  setSearch,
   setTimePeriods,
   setTimePeriodType
 } = filters
@@ -57,6 +58,27 @@ describe('filters reducer', () => {
     )
 
     expect(newState).to.deep.equal(expectedState)
+  })
+
+  it ('handles setSearch', () => {
+    const previousState = Object.assign(
+      {},
+      initialState,
+      {
+        search: 'hello'
+      }
+    )
+
+    const action = setSearch('goodbye')
+    const newState = filters(previousState, action)
+
+    expect(newState).to.deep.equal(Object.assign(
+      {},
+      initialState,
+      {
+        search: 'goodbye'
+      }
+    ))
   })
 
   it('handles setTimePeriods', () => {
