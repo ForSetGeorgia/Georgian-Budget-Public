@@ -15,5 +15,16 @@
     &-copyright {
       vertical-align: middle;
     }
+
+    &-right {
+      display: flex;
+      align-items: center;
+
+      &-ned {
+        display: inline-block;
+        min-width: 45px;
+        margin-right: 16px;
+      }
+    }
   }
 }
