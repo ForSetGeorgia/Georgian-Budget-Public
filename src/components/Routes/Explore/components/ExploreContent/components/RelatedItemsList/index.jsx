@@ -1,6 +1,7 @@
 const React = require('react')
 const { string } = React.PropTypes
 const { connect } = require('react-redux')
+const { injectIntl } = require('react-intl')
 
 const { getSelectedBudgetItemType } = require('src/data/ducks/filters')
 
@@ -41,4 +42,4 @@ const mapStateToProps = state => ({
   budgetItemType: getSelectedBudgetItemType(state)
 })
 
-module.exports = connect(mapStateToProps)(RelatedItemsList)
+module.exports = injectIntl(connect(mapStateToProps)(RelatedItemsList))
