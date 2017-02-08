@@ -12,6 +12,7 @@
   "app.parentListLink.spendingAgency": "ნახე სამინისტროები",
   "app.parentListLink.priority": "ნახე პრიორიტეტები",
   "budgetItem.name": "სახელი",
+  "budgetItem.code": "კოდი",
   "budgetType.wholeBudget.one": "მთლიანი ბიუჯეტი",
   "budgetType.program.one": "პროგრამა",
   "budgetType.program.other": "პროგრამები",

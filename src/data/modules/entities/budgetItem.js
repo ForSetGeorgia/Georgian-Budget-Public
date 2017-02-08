@@ -23,6 +23,10 @@ const getBudgetItemType = (state, itemId) => (
   (getBudgetItem(state, itemId) || {}).type
 )
 
+const getBudgetItemCode = (state, itemId) => (
+  (getBudgetItem(state, itemId) || {}).code
+)
+
 const getItemIsLoaded = (state, itemId) => (
   !!getBudgetItem(state, itemId)
 )
@@ -84,6 +88,7 @@ module.exports = {
   getItemPlannedFinanceIds,
   getBudgetItemName,
   getBudgetItemType,
+  getBudgetItemCode,
   getItemIsLoaded,
   getOverallBudgetIdForItem,
   getPriorityIdForItem,

@@ -4,5 +4,9 @@ module.exports = defineMessages({
   name: {
     id: 'budgetItem.name',
     defaultMessage: 'Name'
+  },
+  code: {
+    id: 'budgetItem.code',
+    defaultMessage: 'Code'
   }
 })
