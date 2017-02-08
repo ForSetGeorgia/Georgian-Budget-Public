@@ -19,6 +19,10 @@ const getBudgetItemName = (state, itemId) => (
   ((getBudgetItem(state, itemId) || {}).name || {})[getLocale(state)] || ''
 )
 
+const getBudgetItemType = (state, itemId) => (
+  (getBudgetItem(state, itemId) || {}).type
+)
+
 const getItemIsLoaded = (state, itemId) => (
   !!getBudgetItem(state, itemId)
 )
@@ -79,6 +83,7 @@ module.exports = {
   getItemSpentFinanceIds,
   getItemPlannedFinanceIds,
   getBudgetItemName,
+  getBudgetItemType,
   getItemIsLoaded,
   getOverallBudgetIdForItem,
   getPriorityIdForItem,
