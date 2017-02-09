@@ -4,6 +4,7 @@
   "app.filters.budgetItemType.label": "აირჩიე სახეობა",
   "app.filters.financeType.label": "აირჩიე ფინანსები",
   "app.filters.timePeriod.allOption": "ყველა",
+  "app.name": "ბიუჯეტის ამბები",
   "app.loading": "მონაცემები იტვირთება",
   "app.explore.list.count": "ნაჩვენებია {count} {count, plural, one {{one}} other {{other}}}.",
   "app.financeTimeSeries.valueSuffix": "ლარი",
