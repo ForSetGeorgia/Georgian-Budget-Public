@@ -6,7 +6,7 @@ const { injectIntl } = require('react-intl')
 const { getLocale } = require('src/data/ducks/locale')
 const { getDetailsItemId } = require('src/data/ducks/explore')
 
-const fetchBudgetItemDetails = require('src/data/modules/fetchers/fetchBudgetItemDetails')
+const fetchBudgetItemDetails = require('src/data/thunks/fetchers/fetchBudgetItemDetails')
 
 const {
   getDetailsLoadedForItemCurrentLocale

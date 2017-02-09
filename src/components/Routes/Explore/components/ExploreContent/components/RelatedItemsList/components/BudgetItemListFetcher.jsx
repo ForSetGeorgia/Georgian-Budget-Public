@@ -9,7 +9,7 @@ const {
 } = require('src/data/modules/list')
 
 const fetchListedBudgetItems =
-require('src/data/modules/fetchers/fetchListedBudgetItems')
+require('src/data/thunks/fetchers/fetchListedBudgetItems')
 
 const BudgetItemListFetcher = React.createClass({
   propTypes: {
