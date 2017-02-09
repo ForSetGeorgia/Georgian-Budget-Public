@@ -18,10 +18,8 @@ const {
   getListedItemIds
 } = require('src/data/modules/list')
 
-const {
-  getDetailsItemId,
-  setDetailsItemId
-} = require('src/data/ducks/explore')
+const { getDetailsItemId } = require('src/data/ducks/explore')
+const switchDetailsItemId = require('src/data/thunks/switchDetailsItemId')
 
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const CustomGriddle = require('src/components/shared/CustomGriddle')
@@ -37,13 +35,13 @@ const BudgetItemSelectList = React.createClass({
       name: string.isRequired
     })).isRequired,
     listLoaded: bool.isRequired,
-    setDetailsItemId: func.isRequired,
+    switchDetailsItemId: func.isRequired,
     columns: arrayOf(string).isRequired,
     columnMetadata: arrayOf(object).isRequired
   },
 
   handleClick (row) {
-    this.props.setDetailsItemId(row.props.data.id)
+    this.props.switchDetailsItemId(row.props.data.id)
   },
 
   isLoading () {
@@ -146,7 +144,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setDetailsItemId: id => { dispatch(setDetailsItemId(id)) }
+  switchDetailsItemId: id => { dispatch(switchDetailsItemId(id)) }
 })
 
 module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(BudgetItemSelectList))

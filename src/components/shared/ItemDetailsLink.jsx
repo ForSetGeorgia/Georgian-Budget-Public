@@ -3,9 +3,7 @@ const { func, string } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl } = require('react-intl')
 
-const {
-  setDetailsItemId
-} = require('src/data/ducks/explore')
+const switchDetailsItemId = require('src/data/thunks/switchDetailsItemId')
 
 const { getBudgetItemName } = require('src/data/modules/entities/budgetItem')
 
@@ -13,12 +11,12 @@ const ItemDetailsLink = React.createClass({
   propTypes: {
     name: string,
     itemId: string,
-    setDetailsItemId: func
+    switchDetailsItemId: func
   },
 
   handleClickEvent () {
-    const { itemId, setDetailsItemId } = this.props
-    setDetailsItemId(itemId)
+    const { itemId, switchDetailsItemId } = this.props
+    switchDetailsItemId(itemId)
   },
 
   render () {
@@ -36,7 +34,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setDetailsItemId: value => dispatch(setDetailsItemId(value))
+  switchDetailsItemId: value => dispatch(switchDetailsItemId(value))
 })
 
 module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ItemDetailsLink))
