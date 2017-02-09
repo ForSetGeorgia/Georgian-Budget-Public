@@ -3,7 +3,7 @@ const { object, string, shape, func } = React.PropTypes
 const { addLocaleData, IntlProvider } = require('react-intl')
 const { connect } = require('react-redux')
 
-const { setLocale } = require('src/data/ducks/locale')
+const switchLocale = require('src/data/thunks/switchLocale')
 
 const Layout = require('src/components/Layout/index')
 
@@ -19,7 +19,7 @@ const ConnectedIntlProvider = React.createClass({
   propTypes: {
     children: object.isRequired,
     params: shape({ locale: string.isRequired }),
-    setLocale: func.isRequired,
+    switchLocale: func.isRequired,
     location: object.isRequired
   },
 
@@ -63,11 +63,11 @@ const ConnectedIntlProvider = React.createClass({
   },
 
   changeLocale (newLocale) {
-    const { params, setLocale } = this.props
+    const { params, switchLocale } = this.props
     if (params.locale === newLocale) return
 
     this.changeLocaleInURL(newLocale)
-    setLocale(newLocale)
+    switchLocale(newLocale)
   },
 
   handleChangeLocaleEvent (e) {
@@ -93,8 +93,8 @@ const ConnectedIntlProvider = React.createClass({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setLocale (locale) {
-    dispatch(setLocale(locale))
+  switchLocale (locale) {
+    dispatch(switchLocale(locale))
   }
 })
 
