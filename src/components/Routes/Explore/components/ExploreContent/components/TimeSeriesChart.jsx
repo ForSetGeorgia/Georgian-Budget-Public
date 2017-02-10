@@ -57,7 +57,8 @@ const TimeSeriesChart = React.createClass({
       },
       tooltip: {
         shared: true,
-        valueSuffix: ` ${valueSuffix}`
+        valueSuffix: ` ${valueSuffix}`,
+        valueDecimals: 0
       },
       xAxis: {
         categories: xAxisCategories,
