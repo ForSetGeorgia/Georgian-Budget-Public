@@ -44,23 +44,6 @@ const ExploreContent = React.createClass({
     )
   },
 
-  renderMainContent () {
-    return (
-      <div className='gb-BudgetItem-mainContent'>
-        <div className='gb-BudgetItem-mainContent-topRow'>
-          <TitleBudgetItemNameSetter />
-          <BudgetItemHeading />
-          <div className='gb-BudgetItem-mainContent-topRow-controls'>
-            <TimePeriodTypeSelect />
-            <TimePeriodSelect />
-          </div>
-        </div>
-
-        {this.renderDetails()}
-      </div>
-    )
-  },
-
   renderContent () {
     if (!this.props.itemLoaded) return <LoadingIndicator />
 
@@ -69,7 +52,19 @@ const ExploreContent = React.createClass({
         <OverallBudgetLink />
         <AgencyLink />
         <ParentProgramLink />
-        {this.renderMainContent()}
+
+        <div className='gb-BudgetItem-mainContent'>
+          <div className='gb-BudgetItem-mainContent-topRow'>
+            <TitleBudgetItemNameSetter />
+            <BudgetItemHeading />
+            <div className='gb-BudgetItem-mainContent-topRow-controls'>
+              <TimePeriodTypeSelect />
+              <TimePeriodSelect />
+            </div>
+          </div>
+
+          {this.renderDetails()}
+        </div>
       </div>
     )
   },
