@@ -16,7 +16,7 @@ const Layout = React.createClass({
   render () {
     return (
       <div className='gb-Layout'>
-        <HelmetContainer locale={this.props.locale} />
+        <HelmetContainer />
         <MetaContainer />
         <LocaleInitializer />
 
