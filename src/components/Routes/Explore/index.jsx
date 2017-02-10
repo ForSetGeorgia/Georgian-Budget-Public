@@ -1,6 +1,5 @@
 const React = require('react')
 
-const Helmet = require('react-helmet')
 const Initializers = require('./components/Initializers/index')
 const UrlQueryUpdater = require('./components/UrlQueryUpdater')
 
@@ -11,7 +10,6 @@ const Explore = React.createClass({
   render () {
     return (
       <div>
-        <Helmet title='Explore' />
         <Initializers />
         <UrlQueryUpdater />
 

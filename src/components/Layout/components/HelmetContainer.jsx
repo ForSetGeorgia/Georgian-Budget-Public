@@ -7,7 +7,7 @@ const appMessages = require('src/messages/app')
 const HelmetContainer = props => (
   <Helmet
     htmlAttributes={{'lang': props.intl.locale}}
-    title='Home'
+    defaultTitle={props.intl.formatMessage(appMessages.name)}
     titleTemplate={`%s | ${props.intl.formatMessage(appMessages.name)}`}
   />
 )

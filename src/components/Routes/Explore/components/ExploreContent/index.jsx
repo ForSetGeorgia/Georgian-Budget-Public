@@ -14,6 +14,7 @@ const RelatedItemsList = require('./components/RelatedItemsList/index')
 const OverallBudgetLink = require('./components/OverallBudgetLink')
 const AgencyLink = require('./components/AgencyLink')
 const ParentProgramLink = require('./components/ParentProgramLink')
+const TitleBudgetItemNameSetter = require('./components/TitleBudgetItemNameSetter')
 
 const { getDetailsLoadedForItem } =
 require('src/data/modules/entities/budgetItem/loaded')
@@ -47,6 +48,7 @@ const ExploreContent = React.createClass({
     return (
       <div className='gb-BudgetItem-mainContent'>
         <div className='gb-BudgetItem-mainContent-topRow'>
+          <TitleBudgetItemNameSetter />
           <BudgetItemHeading />
           <div className='gb-BudgetItem-mainContent-topRow-controls'>
             <TimePeriodTypeSelect />
