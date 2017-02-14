@@ -1,9 +1,11 @@
 const React = require('react')
 const { string } = React.PropTypes
-const Meta = require('src/components/shared/Meta')
 const { connect } = require('react-redux')
+const { injectIntl } = require('react-intl')
 
-const Container = React.createClass({
+const Meta = require('src/components/shared/Meta')
+
+const MetaContainer = React.createClass({
   propTypes: {
     pathname: string,
     search: string
@@ -47,4 +49,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-module.exports = connect(mapStateToProps)(Container)
+module.exports = injectIntl(connect(mapStateToProps)(MetaContainer))

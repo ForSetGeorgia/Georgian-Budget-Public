@@ -42,12 +42,16 @@ module.exports = env => {
       })
     },
     {
-      test: /\.svg$/,
+      test: webpack_isomorphic_tools_plugin.regular_expression('svg'),
       use: 'svg-inline-loader'
     },
     {
+      test: webpack_isomorphic_tools_plugin.regular_expression('images'),
+      use: 'file-loader'
+    },
+    {
       test: /\.ttf$/,
-      use: 'url-loader?limit=10000'
+      use: 'url-loader'
     }
   ]
 
@@ -87,6 +91,7 @@ module.exports = env => {
     output: {
       pathinfo: env.dev,
       path: paths.BUNDLES,
+      publicPath: `/${paths.BUNDLES_RELATIVE}/`,
       filename: env.dev ? '[name].js' : '[name].[chunkhash].js'
     },
     devtool: env.dev ? 'eval' : 'source-map',

@@ -6,6 +6,9 @@ module.exports = {
   assets: {
     svg: {
       extensions: ['svg']
+    },
+    images: {
+      extensions: ['png', 'jpg', 'gif', 'ico']
     }
   }
 }

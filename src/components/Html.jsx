@@ -18,7 +18,7 @@ module.exports = (props) => {
         {meta}
 
         {title}
-        <link rel='stylesheet' href={`/public/bundles/${mainCss}`} />
+        <link rel='stylesheet' href={mainCss} />
         <link rel='shortcut icon' type='image/png' href='/public/favicon.ico' />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet" />
       </head>
@@ -27,7 +27,7 @@ module.exports = (props) => {
           <div dangerouslySetInnerHTML={{ __html: body }} />
         </div>
 
-        <script src={`/public/bundles/${mainJs}`}></script>
+        <script src={mainJs}></script>
       </body>
     </html>
   )
