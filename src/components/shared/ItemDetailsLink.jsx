@@ -1,40 +1,51 @@
 const React = require('react')
-const { func, string } = React.PropTypes
+const { object, string } = React.PropTypes
 const { connect } = require('react-redux')
-const { injectIntl } = require('react-intl')
-
-const switchDetailsItemId = require('src/data/thunks/switchDetailsItemId')
+const { injectIntl, intlShape } = require('react-intl')
+const { Link, withRouter } = require('react-router')
 
 const { getBudgetItemName } = require('src/data/modules/entities/budgetItem')
 
 const ItemDetailsLink = React.createClass({
+  contextTypes: {
+    location: object
+  },
+
   propTypes: {
     name: string,
     itemId: string,
-    switchDetailsItemId: func
+    intl: intlShape,
+    router: object
   },
 
-  handleClickEvent () {
-    const { itemId, switchDetailsItemId } = this.props
-    switchDetailsItemId(itemId)
+  navigateToBudgetItem (e) {
+    e.preventDefault()
+
+    const { itemId, intl, router } = this.props
+    const { location } = this.context
+
+    router.replace({
+      pathname: `/${intl.locale}/explore/details/${itemId}`,
+      query: location.query
+    })
   },
 
   render () {
     const { name } = this.props
+
     return (
-      <a href='#' onClick={this.handleClickEvent}>
+      <Link onClick={this.navigateToBudgetItem}>
         {name}
-      </a>
+      </Link>
     )
   }
 })
 
 const mapStateToProps = (state, ownProps) => ({
-  name: getBudgetItemName(state, ownProps.itemId)
+  name: getBudgetItemName(state, ownProps.itemId),
+  itemId: ownProps.itemId
 })
 
-const mapDispatchToProps = dispatch => ({
-  switchDetailsItemId: value => dispatch(switchDetailsItemId(value))
-})
-
-module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ItemDetailsLink))
+module.exports = injectIntl(withRouter(
+  connect(mapStateToProps, null)(ItemDetailsLink)
+))

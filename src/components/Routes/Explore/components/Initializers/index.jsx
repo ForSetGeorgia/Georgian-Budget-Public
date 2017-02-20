@@ -1,6 +1,5 @@
 const React = require('react')
 
-const DetailsItemIdInitializer = require('./components/DetailsItemIdInitializer')
 const BudgetItemTypeInitializer = require('./components/BudgetItemTypeInitializer')
 const FinanceTypeInitializer = require('./components/FinanceTypeInitializer')
 const TimePeriodsInitializer = require('./components/TimePeriodsInitializer')
@@ -8,7 +7,6 @@ const TimePeriodTypeInitializer = require('./components/TimePeriodTypeInitialize
 
 const Initializers = () => (
   <div>
-    <DetailsItemIdInitializer />
     <BudgetItemTypeInitializer />
     <FinanceTypeInitializer />
     <TimePeriodsInitializer />

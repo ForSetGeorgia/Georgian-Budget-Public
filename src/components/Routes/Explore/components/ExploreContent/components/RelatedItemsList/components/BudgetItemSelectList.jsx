@@ -1,7 +1,8 @@
 const React = require('react')
 const { arrayOf, bool, func, object, shape, string } = React.PropTypes
-const { injectIntl } = require('react-intl')
+const { intlShape, injectIntl } = require('react-intl')
 const { connect } = require('react-redux')
+const { withRouter } = require('react-router')
 
 const budgetItemMessages = require('src/messages/budgetItem')
 
@@ -28,6 +29,10 @@ const BudgetItemListFetcher = require('./BudgetItemListFetcher')
 const SearchBarContainer = require('./SearchBarContainer')
 
 const BudgetItemSelectList = React.createClass({
+  contextTypes: {
+    location: object
+  },
+
   propTypes: {
     detailsItemId: string.isRequired,
     items: arrayOf(shape({
@@ -37,11 +42,19 @@ const BudgetItemSelectList = React.createClass({
     listLoaded: bool.isRequired,
     switchDetailsItemId: func.isRequired,
     columns: arrayOf(string).isRequired,
-    columnMetadata: arrayOf(object).isRequired
+    columnMetadata: arrayOf(object).isRequired,
+    intl: intlShape,
+    router: object
   },
 
   handleClick (row) {
-    this.props.switchDetailsItemId(row.props.data.id)
+    const { intl, router } = this.props
+    const { location } = this.context
+
+    router.replace({
+      pathname: `/${intl.locale}/explore/details/${row.props.data.id}`,
+      query: location.query
+    })
   },
 
   isLoading () {
@@ -147,4 +160,6 @@ const mapDispatchToProps = dispatch => ({
   switchDetailsItemId: id => { dispatch(switchDetailsItemId(id)) }
 })
 
-module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(BudgetItemSelectList))
+module.exports = injectIntl(withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(BudgetItemSelectList)
+))
