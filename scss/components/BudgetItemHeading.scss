@@ -1,0 +1,19 @@
+.gb-BudgetItemHeading {
+  margin: 0;
+  margin-bottom: 10px;
+
+  &-subheading {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+
+    &-item {
+      margin-top: 5px;
+
+      &-value {
+        font-weight: normal;
+        margin-left: 5px;
+      }
+    }
+  }
+}

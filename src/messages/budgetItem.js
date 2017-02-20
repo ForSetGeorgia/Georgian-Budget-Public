@@ -8,5 +8,9 @@ module.exports = defineMessages({
   code: {
     id: 'budgetItem.code',
     defaultMessage: 'Code'
+  },
+  type: {
+    id: 'budgetItem.type',
+    defaultMessage: 'Type'
   }
 })

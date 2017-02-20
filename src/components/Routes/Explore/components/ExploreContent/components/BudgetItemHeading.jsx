@@ -26,38 +26,62 @@ const BudgetItemHeading = ({ name, type, timePeriod, intl, code }) => {
     }
   }
 
-  const getType = () => {
+  const getPrimaryHeaderMarkup = () => (
+    getTranslatedTimePeriod() + name
+  )
+
+  const getTypeMarkup = () => {
     if (!type || type === 'total') {
       return ''
     } else {
-      return `${intl.formatMessage(budgetItemTypeMessages[snakeToCamel(type)].one)}: `
+      return (
+        <span className='gb-BudgetItemHeading-subheading-item'>
+          {intl.formatMessage(budgetItemMessages.type)}:
+          <span className='gb-BudgetItemHeading-subheading-item-value'>
+            {intl.formatMessage(budgetItemTypeMessages[snakeToCamel(type)].one)}
+          </span>
+        </span>
+      )
     }
   }
 
-  const getSecondLineMarkup = () => {
+  const getCodeMarkup = () => {
     if (!code) {
       return ''
     } else {
       return (
-        <small>
-          {intl.formatMessage(budgetItemMessages.code)}: {code}
+        <span className='gb-BudgetItemHeading-subheading-item'>
+          {intl.formatMessage(budgetItemMessages.code)}:
+          <span className='gb-BudgetItemHeading-subheading-item-value'>
+            {code}
+          </span>
+        </span>
+      )
+    }
+  }
+
+  const getSubHeaderMarkup = () => {
+    if (!getCodeMarkup() && !getTypeMarkup()) {
+      return ''
+    } else {
+      return (
+        <small className='gb-BudgetItemHeading-subheading'>
+          {getTypeMarkup()}
+          {getCodeMarkup()}
         </small>
       )
     }
   }
 
   const getBreak = () => (
-    getSecondLineMarkup() ? <br /> : ''
+    getSubHeaderMarkup() ? <br /> : ''
   )
 
   return (
-    <h3 className='gb-BudgetItem-heading'>
-      {getTranslatedTimePeriod() +
-        getType() +
-        name
-      }
+    <h3 className='gb-BudgetItemHeading'>
+      {getPrimaryHeaderMarkup()}
       {getBreak()}
-      {getSecondLineMarkup()}
+      {getSubHeaderMarkup()}
     </h3>
   )
 }
