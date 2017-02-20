@@ -33,8 +33,11 @@ const StateInitializer = React.createClass({
   initializeTargetValue () {
     const {
       setTargetValue,
-      defaultTargetValue
+      defaultTargetValue,
+      selectedTargetValue
     } = this.props
+
+    if (selectedTargetValue === this.getQueryTargetValue()) return
 
     if (this.validQueryTargetValue()) {
       setTargetValue(this.getQueryTargetValue())
@@ -43,9 +46,11 @@ const StateInitializer = React.createClass({
     }
   },
 
+  componentDidUpdate () {
+    this.initializeTargetValue()
+  },
+
   componentDidMount () {
-    const { selectedTargetValue } = this.props
-    if (selectedTargetValue) return
     this.initializeTargetValue()
   },
 

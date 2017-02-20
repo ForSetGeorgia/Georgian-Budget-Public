@@ -1,6 +1,7 @@
 const React = require('react')
-const { func, string } = React.PropTypes
+const { func, object, string } = React.PropTypes
 const { connect } = require('react-redux')
+const { withRouter } = require('react-router')
 
 const { injectIntl, intlShape } = require('react-intl')
 const financeTypeMessages = require('src/messages/financeTypes')
@@ -8,6 +9,7 @@ const financeTypeMessages = require('src/messages/financeTypes')
 const { financeTypes } = require('src/data/modules/entities/finance')
 
 const snakeToCamel = require('src/utilities/snakeToCamel')
+const changeQueryOption = require('src/data/modules/changeQueryOption')
 
 const {
   setFinanceType,
@@ -17,10 +19,15 @@ const {
 const ButtonSelector = require('src/components/shared/ButtonSelector')
 
 const FinanceTypeSelect = React.createClass({
+  contextTypes: {
+    location: object.isRequired
+  },
+
   propTypes: {
     setFinanceType: func.isRequired,
     selectedFinanceType: string.isRequired,
-    intl: intlShape
+    intl: intlShape.isRequired,
+    router: object.isRequired
   },
 
   options () {
@@ -33,7 +40,11 @@ const FinanceTypeSelect = React.createClass({
   },
 
   handleChangeEvent (selectedFinanceType) {
-    this.props.setFinanceType(selectedFinanceType)
+    const { setFinanceType, router } = this.props
+    const { location } = this.context
+
+    changeQueryOption(router, location, { financeType: selectedFinanceType })
+    setFinanceType(selectedFinanceType)
   },
 
   render () {
@@ -59,4 +70,6 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(FinanceTypeSelect))
+module.exports = injectIntl(withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(FinanceTypeSelect)
+))

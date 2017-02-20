@@ -1,6 +1,8 @@
 const React = require('react')
 const { arrayOf, func, object, string } = React.PropTypes
+const { injectIntl } = require('react-intl')
 const { connect } = require('react-redux')
+const isEqual = require('lodash.isequal')
 
 const {
   getSelectedTimePeriods,
@@ -25,9 +27,11 @@ const TimePeriodsInitializer = React.createClass({
   },
 
   initializeTimePeriods () {
-    const { setTimePeriods } = this.props
+    const { setTimePeriods, selectedTimePeriods } = this.props
 
     const queryTimePeriods = this.getQueryTimePeriods()
+
+    if (isEqual(selectedTimePeriods, queryTimePeriods)) return
 
     if (queryTimePeriods && queryTimePeriods.length > 0) {
       setTimePeriods(queryTimePeriods)
@@ -36,9 +40,11 @@ const TimePeriodsInitializer = React.createClass({
     }
   },
 
+  componentDidUpdate () {
+    this.initializeTimePeriods()
+  },
+
   componentDidMount () {
-    const { selectedTimePeriods } = this.props
-    if (selectedTimePeriods && selectedTimePeriods.length > 0) return
     this.initializeTimePeriods()
   },
 
@@ -55,4 +61,4 @@ const mapDispatchToProps = dispatch => ({
   setTimePeriods: timePeriods => { dispatch(setTimePeriods(timePeriods)) }
 })
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(TimePeriodsInitializer)
+module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(TimePeriodsInitializer))

@@ -6,7 +6,6 @@ const switchDetailsItemId = require('src/data/thunks/switchDetailsItemId')
 const { getDetailsItemId } = require('src/data/ducks/explore')
 
 const Initializers = require('./components/Initializers/index')
-const UrlQueryUpdater = require('./components/UrlQueryUpdater')
 
 const AppErrorsDisplay = require('./components/AppErrorsDisplay')
 const ExploreContent = require('./components/ExploreContent/index')
@@ -20,7 +19,7 @@ const Explore = React.createClass({
     detailsItemId: string
   },
 
-  componentDidUpdate () {
+  updateItemIdFromURL () {
     const { detailsItemId, switchDetailsItemId, routeParams } = this.props
 
     if (detailsItemId !== routeParams.detailsItemId) {
@@ -28,11 +27,18 @@ const Explore = React.createClass({
     }
   },
 
+  componentDidUpdate () {
+    this.updateItemIdFromURL()
+  },
+
+  componentDidMount () {
+    this.updateItemIdFromURL()
+  },
+
   render () {
     return (
       <div>
         <Initializers />
-        <UrlQueryUpdater />
 
         <AppErrorsDisplay />
 

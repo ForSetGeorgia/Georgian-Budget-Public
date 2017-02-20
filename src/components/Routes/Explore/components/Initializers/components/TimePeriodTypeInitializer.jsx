@@ -1,4 +1,5 @@
 const { connect } = require('react-redux')
+const { injectIntl } = require('react-intl')
 
 const { timePeriodTypes } = require('src/data/modules/timePeriod/types')
 
@@ -22,4 +23,4 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(StateInitializer)
+module.exports = injectIntl(connect(mapStateToProps, mapDispatchToProps)(StateInitializer))
