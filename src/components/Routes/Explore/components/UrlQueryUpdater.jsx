@@ -46,7 +46,7 @@ const UrlQueryUpdater = React.createClass({
   updateQuery () {
     const { location, router } = this.context
 
-    router.push(
+    router.replace(
       Object.assign(
         {},
         location,

@@ -51,7 +51,7 @@ const BudgetItemSelectList = React.createClass({
     const { intl, router } = this.props
     const { location } = this.context
 
-    router.replace({
+    router.push({
       pathname: `/${intl.locale}/explore/details/${row.props.data.id}`,
       query: location.query
     })

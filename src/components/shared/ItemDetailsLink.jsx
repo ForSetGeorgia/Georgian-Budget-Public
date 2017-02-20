@@ -24,7 +24,7 @@ const ItemDetailsLink = React.createClass({
     const { itemId, intl, router } = this.props
     const { location } = this.context
 
-    router.replace({
+    router.push({
       pathname: `/${intl.locale}/explore/details/${itemId}`,
       query: location.query
     })
