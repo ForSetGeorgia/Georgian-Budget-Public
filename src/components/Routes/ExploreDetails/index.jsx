@@ -9,6 +9,7 @@ const Initializers = require('./components/Initializers/index')
 
 const AppErrorsDisplay = require('./components/AppErrorsDisplay')
 const ExploreContent = require('./components/ExploreContent/index')
+const UrlQueryUpdater = require('./components/UrlQueryUpdater')
 
 const Explore = React.createClass({
   propTypes: {
@@ -39,6 +40,7 @@ const Explore = React.createClass({
     return (
       <div>
         <Initializers />
+        <UrlQueryUpdater />
 
         <AppErrorsDisplay />
 
