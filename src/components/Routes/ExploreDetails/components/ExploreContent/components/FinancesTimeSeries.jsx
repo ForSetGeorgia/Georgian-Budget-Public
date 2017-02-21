@@ -80,7 +80,8 @@ const FinancesTimeSeries = React.createClass({
         series = series.concat({
           name: intl.formatMessage(financeTypeMessages.spentFinance.adjective),
           data: item.spentFinances.map(f => f.amount),
-          color: 'rgb(255, 191, 31)'
+          color: 'rgb(255, 191, 31)',
+          financeType: 'spentFinance'
         })
       }
 
@@ -90,7 +91,8 @@ const FinancesTimeSeries = React.createClass({
           data: item.plannedFinances.map(f => f.amount),
           color: 'transparent',
           borderWidth: 2,
-          borderColor: 'black'
+          borderColor: 'black',
+          financeType: 'plannedFinance'
         })
       }
     })

@@ -17,6 +17,20 @@ const TimeSeriesChart = React.createClass({
     intl: intlShape.isRequired
   },
 
+  plannedFinanceIndeces () {
+    return this.props.series.reduce((indeces, item, index) => {
+      if (item.financeType === 'plannedFinance') {
+        return indeces.concat(index)
+      } else {
+        return indeces
+      }
+    }, [])
+  },
+
+  hasPlannedFinanceSeriesIndex (seriesIndex) {
+    return this.plannedFinanceIndeces().includes(seriesIndex)
+  },
+
   // When the DOM is ready, create the chart.
   componentDidMount: function () {
     const {
@@ -81,6 +95,15 @@ const TimeSeriesChart = React.createClass({
       containerId,
       options
     )
+
+    const that = this
+
+    this.chart.series.forEach((series, index) => {
+      if (that.hasPlannedFinanceSeriesIndex(index)) {
+        series.legendSymbol.attr('stroke-width', '2')
+        series.legendSymbol.attr('stroke', 'black')
+      }
+    })
   },
 
   // Destroy chart before unmount.
