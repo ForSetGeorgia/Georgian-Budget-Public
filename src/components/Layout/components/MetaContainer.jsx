@@ -45,14 +45,25 @@ const MetaContainer = React.createClass({
   }
 })
 
+const getShareImage = intl => {
+  if (intl.locale === 'en') {
+    return require('public/images/share_en.jpg')
+  } else if (intl.locale === 'ka') {
+    return require('public/images/share_ka.jpg')
+  }
+}
+
 const mapStateToProps = (state, ownProps) => {
   const locationBeforeTransitions = (((state || {}).routing || {}).locationBeforeTransitions || {})
+  const { intl } = ownProps
 
   return {
     title: getBudgetItemName(state, getDetailsItemId(state)),
-    siteName: ownProps.intl.formatMessage(appMessages.name),
+    siteName: intl.formatMessage(appMessages.name),
     pathname: locationBeforeTransitions.pathname,
-    search: locationBeforeTransitions.search
+    search: locationBeforeTransitions.search,
+    shareImage: getShareImage(intl),
+    description: intl.formatMessage(appMessages.description)
   }
 }
 
