@@ -3,6 +3,10 @@ const { string } = React.PropTypes
 const { connect } = require('react-redux')
 const { injectIntl } = require('react-intl')
 
+const { getBudgetItemName } = require('src/data/modules/entities/budgetItem')
+const { getDetailsItemId } = require('src/data/ducks/explore')
+const appMessages = require('src/messages/app')
+
 const Meta = require('src/components/shared/Meta')
 
 const MetaContainer = React.createClass({
@@ -36,14 +40,17 @@ const MetaContainer = React.createClass({
   render () {
     return <Meta
       url={this.url()}
+      {...this.props}
     />
   }
 })
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   const locationBeforeTransitions = (((state || {}).routing || {}).locationBeforeTransitions || {})
 
   return {
+    title: getBudgetItemName(state, getDetailsItemId(state)),
+    siteName: ownProps.intl.formatMessage(appMessages.name),
     pathname: locationBeforeTransitions.pathname,
     search: locationBeforeTransitions.search
   }

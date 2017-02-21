@@ -8,8 +8,10 @@ const Helmet = require('react-helmet')
 
 const Meta = React.createClass({
   propTypes: {
+    title: string.isRequired,
     url: string.isRequired,
-    intl: intlShape.isRequired
+    intl: intlShape.isRequired,
+    siteName: string.isRequired
   },
 
   description () {
@@ -34,9 +36,12 @@ const Meta = React.createClass({
         meta={[
           { 'charset': 'UTF-8' },
           { 'name': 'viewport', 'content': 'width=device-width, initial-scale=1' },
+          { 'property': 'og:title', 'content': this.props.title },
+          { 'property': 'og:site_name', 'content': this.props.siteName },
+          { 'property': 'og:description', 'content': this.description() },
+          { 'property': 'og:type', 'content': 'website' },
           { 'property': 'og:url', 'content': this.props.url },
-          { 'property': 'og:image', 'content': this.shareImage() },
-          { 'property': 'og:description', 'content': this.description() }
+          { 'property': 'og:image', 'content': this.shareImage() }
         ]}
       />
     )
