@@ -35,7 +35,7 @@ const ItemDetailsLink = React.createClass({
 
     return (
       <Link className='gb-ItemDetailsLink' onClick={this.navigateToBudgetItem}>
-        {name}
+        ← {name}
       </Link>
     )
   }
