@@ -11,7 +11,7 @@ const ItemDetailsLink = require('src/components/shared/ItemDetailsLink')
 const AgencyLink = ({agencyId}) => (
   !agencyId ? null
   : <p>
-    Agency: <ItemDetailsLink itemId={agencyId} />
+    <ItemDetailsLink beforeName={'Agency: '} itemId={agencyId} />
   </p>
 )
 

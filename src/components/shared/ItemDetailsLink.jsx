@@ -15,7 +15,8 @@ const ItemDetailsLink = React.createClass({
     name: string,
     itemId: string,
     intl: intlShape,
-    router: object
+    router: object,
+    beforeName: string
   },
 
   navigateToBudgetItem (e) {
@@ -30,12 +31,16 @@ const ItemDetailsLink = React.createClass({
     })
   },
 
-  render () {
-    const { name } = this.props
+  text () {
+    const { beforeName = '', name } = this.props
 
+    return beforeName + name
+  },
+
+  render () {
     return (
       <Link className='gb-ItemDetailsLink' onClick={this.navigateToBudgetItem}>
-        ← {name}
+        ← {this.text()}
       </Link>
     )
   }

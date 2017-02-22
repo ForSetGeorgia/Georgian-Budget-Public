@@ -13,7 +13,7 @@ const ItemDetailsLink = require('src/components/shared/ItemDetailsLink')
 const ParentProgramLink = ({parentProgramId}) => (
   !parentProgramId ? null
   : <p>
-    Parent Program: <ItemDetailsLink itemId={parentProgramId} />
+    <ItemDetailsLink beforeName={'Parent Program: '} itemId={parentProgramId} />
   </p>
 )
 
