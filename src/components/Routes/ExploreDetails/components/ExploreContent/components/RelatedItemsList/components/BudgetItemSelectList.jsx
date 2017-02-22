@@ -13,6 +13,7 @@ const { getItemPlannedFinances } = require('src/data/modules/entities/plannedFin
 const { getSelectedYears } = require('src/data/modules/timePeriod/type/year')
 const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
 const { getSelectedBudgetItemType } = require('src/data/ducks/filters')
+const { getSearch } = require('src/data/ducks/filters')
 
 const {
   getCurrentListLoaded,
@@ -68,12 +69,11 @@ const BudgetItemSelectList = React.createClass({
 
     return (
       <div>
+        <SearchBarContainer />
         <CustomGriddle
           results={items}
           onRowClick={this.handleClick}
-          showFilter
-          useCustomFilterComponent
-          customFilterComponent={SearchBarContainer}
+          showFilter={false}
           bodyHeight='400'
           columns={columns}
           columnMetadata={columnMetadata}
@@ -139,7 +139,9 @@ const getItems = (state, itemIds) => {
   return (
     getListedItemIds(state)
     .map(itemId => getItemValues(state, itemId, selectedYears))
-    .filter(listItem => listItem.name)
+    .filter(listItem => (
+      listItem.name && listItem.name.toLowerCase().includes(getSearch(state))
+    ))
   )
 }
 
