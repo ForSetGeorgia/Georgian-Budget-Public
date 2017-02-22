@@ -1,5 +1,5 @@
 const React = require('react')
-const { injectIntl } = require('react-intl')
+const { defineMessages, injectIntl, intlShape } = require('react-intl')
 const { connect } = require('react-redux')
 const { string } = React.PropTypes
 
@@ -8,15 +8,26 @@ const { getAgencyIdForItem } = require('src/data/modules/entities/budgetItem')
 
 const ItemDetailsLink = require('src/components/shared/ItemDetailsLink')
 
-const AgencyLink = ({agencyId}) => (
+const messages = defineMessages({
+  agency: {
+    id: 'app.itemDetailsLink.agency',
+    defaultMessage: 'Spending Agency'
+  }
+})
+
+const AgencyLink = ({intl, agencyId}) => (
   !agencyId ? null
   : <p>
-    <ItemDetailsLink beforeName={'Agency: '} itemId={agencyId} />
+    <ItemDetailsLink
+      beforeName={`${intl.formatMessage(messages.agency)}: `}
+      itemId={agencyId}
+    />
   </p>
 )
 
 AgencyLink.propTypes = {
-  agencyId: string
+  agencyId: string,
+  intl: intlShape
 }
 
 const mapStateToProps = state => ({

@@ -1,5 +1,5 @@
 const React = require('react')
-const { injectIntl } = require('react-intl')
+const { defineMessages, injectIntl, intlShape } = require('react-intl')
 const { connect } = require('react-redux')
 const { string } = React.PropTypes
 
@@ -10,15 +10,23 @@ const {
 
 const ItemDetailsLink = require('src/components/shared/ItemDetailsLink')
 
-const ParentProgramLink = ({parentProgramId}) => (
+const messages = defineMessages({
+  parentProgram: {
+    id: 'app.itemDetailsLink.parentProgram',
+    defaultMessage: 'Parent Program'
+  }
+})
+
+const ParentProgramLink = ({intl, parentProgramId}) => (
   !parentProgramId ? null
   : <p>
-    <ItemDetailsLink beforeName={'Parent Program: '} itemId={parentProgramId} />
+    <ItemDetailsLink beforeName={`${intl.formatMessage(messages.parentProgram)}: `} itemId={parentProgramId} />
   </p>
 )
 
 ParentProgramLink.propTypes = {
-  parentProgramId: string
+  parentProgramId: string,
+  intl: intlShape
 }
 
 const mapStateToProps = state => ({
