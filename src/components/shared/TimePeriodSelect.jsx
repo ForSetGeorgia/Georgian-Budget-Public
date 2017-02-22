@@ -60,14 +60,14 @@ const allYearsOption = intl => (
   }]
 )
 
-const selectableYears = () => (
-  getYearsWithData().map(year => ({
+const selectableYears = state => (
+  getYearsWithData(state).map(year => ({
     value: year,
     label: translateTimePeriod(year)
   }))
 )
 
-const getOptions = intl => allYearsOption(intl).concat(selectableYears())
+const getOptions = (state, intl) => allYearsOption(intl).concat(selectableYears(state))
 
 const getSelectedValue = state => (
   getSelectedTimePeriods(state).length > 0 ? getSelectedTimePeriods(state)[0] : ''
@@ -80,7 +80,7 @@ const getLabelText = intl => (
 const mapStateToProps = (state, ownProps) => ({
   name: 'time-period-select',
   clearable: false,
-  options: getOptions(ownProps.intl),
+  options: getOptions(state, ownProps.intl),
   value: getSelectedValue(state),
   labelText: getLabelText(ownProps.intl)
 })

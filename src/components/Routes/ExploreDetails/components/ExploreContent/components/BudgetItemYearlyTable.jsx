@@ -54,7 +54,7 @@ const getDataForYear = (year, spentFinances, plannedFinances) => {
 }
 
 const getVisibleYears = (state) => {
-  const years = getYearsWithData()
+  const years = getYearsWithData(state)
   const selectedTimePeriod = getSelectedTimePeriods(state)[0]
 
   if (selectedTimePeriod === 'all') return years

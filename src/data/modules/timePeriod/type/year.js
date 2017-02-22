@@ -1,16 +1,21 @@
+const { getSpentFinancesArray } = require('src/data/modules/entities/spentFinance')
 const { getSelectedTimePeriods } = require('src/data/ducks/filters')
 const Year = {}
 
-Year.getYearsWithData = () => (
-  ['y2012', 'y2013', 'y2014', 'y2015', 'y2016']
-)
+Year.getYearsWithData = state => {
+  return ([...new Set(
+    getSpentFinancesArray(state)
+    .filter(finance => finance.timePeriodType === 'year')
+    .map(finance => finance.timePeriod)
+  )])
+}
 
 Year.getSelectedYears = state => {
   const selectedTimePeriods = getSelectedTimePeriods(state)
 
-  if (selectedTimePeriods[0] === 'all') return Year.getYearsWithData()
+  if (selectedTimePeriods[0] === 'all') return Year.getYearsWithData(state)
 
-  return Year.getYearsWithData().filter(
+  return Year.getYearsWithData(state).filter(
     availableYear => selectedTimePeriods.includes(availableYear)
   )
 }
