@@ -1,5 +1,6 @@
 const { getPlannedFinances } = require('src/data/ducks/plannedFinances')
 const { getItemPlannedFinanceIds } = require('./budgetItem')
+const convertObjectToArray = require('src/utilities/convertObjectToArray')
 
 const getPlannedFinance = (state, financeId) => (
   getPlannedFinances(state)[financeId]
@@ -11,7 +12,11 @@ const getItemPlannedFinances = (state, itemId) => (
   )).filter(finance => finance)
 )
 
+const getPlannedFinancesArray = state =>
+  convertObjectToArray(getPlannedFinances(state))
+
 module.exports = {
   getPlannedFinance,
-  getItemPlannedFinances
+  getItemPlannedFinances,
+  getPlannedFinancesArray
 }
