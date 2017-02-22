@@ -66,7 +66,8 @@ module.exports = env => {
 
   const plugins = [
     new webpack.DefinePlugin({
-      'process.env.API_URL': JSON.stringify(process.env.API_URL)
+      'process.env.API_URL': JSON.stringify(process.env.API_URL),
+      'process.env.GOOGLE_ANALYTICS_ID': JSON.stringify(process.env.GOOGLE_ANALYTICS_ID)
     }),
     new ExtractTextPlugin(env.dev ? '[name].css' : '[name].[contenthash].css'),
     webpack_isomorphic_tools_plugin
