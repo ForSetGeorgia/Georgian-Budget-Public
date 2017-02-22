@@ -19,7 +19,7 @@
     text-decoration: none;
     fill: currentColor;
     vertical-align: middle;
-    padding: 0.5rem;
+    padding: 0.8rem;
     line-height: 1;
 
     &:hover {
@@ -27,7 +27,7 @@
     }
 
     @media (min-width: $width-display-full-menu) {
-      padding: 0 1.5rem;
+      padding: 0 2.4rem;
       max-height: 1em;
       display: inline-block;
       min-height: 1em;

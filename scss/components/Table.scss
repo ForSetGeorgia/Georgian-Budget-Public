@@ -56,7 +56,7 @@
 
   & > thead > tr > th {
     cursor: pointer;
-    
+
     &:hover {
       background-color: rgb(255, 191, 31);
     }
@@ -66,7 +66,7 @@
 .gb-BudgetItemSelectList {
   @extend .gb-Table;
 
-  font-size: 0.9rem;
+  font-size: 1.44rem;
   cursor: pointer;
 
   .gb-Table-row, & > thead > tr > th {
