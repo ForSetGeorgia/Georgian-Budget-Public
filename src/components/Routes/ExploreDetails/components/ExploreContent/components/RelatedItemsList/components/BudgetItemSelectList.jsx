@@ -146,7 +146,7 @@ const getItems = (state, itemIds) => {
 }
 
 const getKey = state => (
-  getSelectedFinanceType(state) + getSelectedBudgetItemType(state)
+  getSelectedFinanceType(state) + getSelectedBudgetItemType(state) + getSelectedYears(state).join('')
 )
 
 const mapStateToProps = (state, ownProps) => ({
