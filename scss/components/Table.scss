@@ -53,6 +53,14 @@
 
 .gb-BudgetItemYearlyTable {
   @extend .gb-Table;
+
+  & > thead > tr > th {
+    cursor: pointer;
+    
+    &:hover {
+      background-color: rgb(255, 191, 31);
+    }
+  }
 }
 
 .gb-BudgetItemSelectList {
