@@ -61,6 +61,12 @@
   font-size: 0.9rem;
   cursor: pointer;
 
+  .gb-Table-row, & > thead > tr > th {
+    &:hover {
+      background-color: rgb(255, 191, 31);
+    }
+  }
+
   .gb-Table-row > td, & > thead > tr > th {
     &:first-child {
       flex-grow: 1.5;
