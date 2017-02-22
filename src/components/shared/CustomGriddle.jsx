@@ -6,6 +6,7 @@ const CustomGriddle = props => (
   <Griddle
     rowMetadata={{ bodyCssClassName: 'gb-Table-row mod-darker-if-odd' }}
     useGriddleStyles={false}
+    resultsPerPage={10}
     {...props}
   />
 )
