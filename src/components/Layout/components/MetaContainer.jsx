@@ -40,6 +40,7 @@ const MetaContainer = React.createClass({
   render () {
     return <Meta
       url={this.url()}
+      shareImage={`${this.state.host}${this.props.shareImagePath}`}
       {...this.props}
     />
   }
@@ -62,7 +63,7 @@ const mapStateToProps = (state, ownProps) => {
     siteName: intl.formatMessage(appMessages.name),
     pathname: locationBeforeTransitions.pathname,
     search: locationBeforeTransitions.search,
-    shareImage: getShareImage(intl),
+    shareImagePath: getShareImage(intl),
     description: intl.formatMessage(appMessages.description)
   }
 }
