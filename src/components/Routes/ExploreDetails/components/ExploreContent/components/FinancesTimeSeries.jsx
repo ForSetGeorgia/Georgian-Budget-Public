@@ -1,8 +1,6 @@
-const React = require('react')
 const Ramda = require('ramda')
 const { connect } = require('react-redux')
-const { arrayOf, number, shape, string } = React.PropTypes
-const { injectIntl, intlShape, defineMessages } = require('react-intl')
+const { injectIntl, defineMessages } = require('react-intl')
 
 const TimeSeriesChart = require('./TimeSeriesChart')
 const timePeriodTypeMessages = require('src/messages/timePeriodTypes')
@@ -28,36 +26,6 @@ const messages = defineMessages({
   yAxisTitle: {
     id: 'app.financeTimeSeries.yAxisTitle',
     defaultMessage: 'Lari'
-  }
-})
-
-const FinancesTimeSeries = React.createClass({
-  propTypes: {
-    intl: intlShape.isRequired,
-    timePeriodType: string.isRequired,
-    financeType: string.isRequired,
-    exportTitle: string.isRequired,
-    uniqueChartId: string.isRequired,
-    items: arrayOf(shape({
-      id: string.isRequired,
-      spentFinances: arrayOf(shape({
-        timePeriod: string.isRequired,
-        amount: number.isRequired
-      })),
-      plannedFinances: arrayOf(shape({
-        timePeriod: string.isRequired,
-        amount: number.isRequired
-      }))
-    }))
-  },
-
-  render () {
-    return (
-      <TimeSeriesChart
-        key={`${this.props.uniqueChartId}-${this.props.exportTitle}`}
-        {...this.props}
-      />
-    )
   }
 })
 
@@ -156,6 +124,10 @@ const getSeries = (intl, items) => {
   return series
 }
 
+const getKey = (state, ownProps, uniqueChartId) => {
+  `${uniqueChartId}-${getExportTitle(state, ownProps)}`
+}
+
 const mapStateToProps = (state, ownProps) => {
   const { intl } = ownProps
   const items = getItems(state, ownProps)
@@ -165,6 +137,7 @@ const mapStateToProps = (state, ownProps) => {
     uniqueChartId: getUniqueChartId(ownProps, items, financeType),
     financeType,
     items,
+    key: getKey(state, ownProps, getUniqueChartId(ownProps, items, financeType)),
     series: getSeries(intl, items),
     valueSuffix: intl.formatMessage(messages.valueSuffix),
     yAxisTitle: intl.formatMessage(messages.yAxisTitle),
@@ -174,4 +147,6 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-module.exports = injectIntl(connect(mapStateToProps)(FinancesTimeSeries))
+const FinanceTimeSeries = injectIntl(connect(mapStateToProps)(TimeSeriesChart))
+
+module.exports = FinanceTimeSeries
