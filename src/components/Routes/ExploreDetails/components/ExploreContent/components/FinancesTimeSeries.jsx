@@ -12,8 +12,8 @@ const { getItemPlannedFinances } = require('src/data/modules/entities/plannedFin
 const sortByStartDate = require('src/data/modules/timePeriod/sortByStartDate')
 
 const {
-  filterFinancesByPeriodType,
-  selectInTimePeriod
+  filterByTimePeriodType,
+  filterByTimePeriod
 } = require('src/data/modules/entities/finance')
 
 const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
@@ -142,16 +142,16 @@ const getFinanceType = ({ showSpentFinances, showPlannedFinances }) => {
 const getFinances = (state, ownProps, finances, itemId) => {
   const { timePeriodType, inTimePeriod } = ownProps
 
-  const filterBySelectedType = filterFinancesByPeriodType(timePeriodType)
+  const filterBySelectedTimePeriodType = filterByTimePeriodType(timePeriodType)
 
-  const filterBySelectedTimePeriod = selectInTimePeriod(inTimePeriod)
+  const filterBySelectedTimePeriod = filterByTimePeriod(inTimePeriod)
 
   if (inTimePeriod && inTimePeriod !== 'all') {
     return filterBySelectedTimePeriod(
-      sortByStartDate(filterBySelectedType(finances))
+      sortByStartDate(filterBySelectedTimePeriodType(finances))
     )
   } else {
-    return sortByStartDate(filterBySelectedType(finances))
+    return sortByStartDate(filterBySelectedTimePeriodType(finances))
   }
 }
 
