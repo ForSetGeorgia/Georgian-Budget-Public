@@ -12,7 +12,8 @@ const Meta = require('src/components/shared/Meta')
 const MetaContainer = React.createClass({
   propTypes: {
     pathname: string,
-    search: string
+    search: string,
+    shareImagePath: string
   },
 
   getInitialState () {
