@@ -142,18 +142,16 @@ const getFinanceType = ({ showSpentFinances, showPlannedFinances }) => {
 const getFinances = (state, ownProps, finances, itemId) => {
   const { timePeriodType, inTimePeriod } = ownProps
 
-  finances = sortByStartDate(
-    filterFinancesByPeriodType(
-      finances,
-      timePeriodType
-    )
-  )
+  const filterBySelectedType = filterFinancesByPeriodType(timePeriodType)
 
   if (inTimePeriod && inTimePeriod !== 'all') {
-    finances = selectInTimePeriod(finances, inTimePeriod)
+    return selectInTimePeriod(
+      sortByStartDate(filterBySelectedType(finances)),
+      inTimePeriod
+    )
+  } else {
+    return sortByStartDate(filterBySelectedType(finances))
   }
-
-  return finances
 }
 
 const getItemFinancesObject = (state, ownProps, itemId) => {
