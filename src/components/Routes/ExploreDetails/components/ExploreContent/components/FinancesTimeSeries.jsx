@@ -57,10 +57,6 @@ const FinancesTimeSeries = React.createClass({
     return intl.formatMessage(timePeriodTypeMessages[timePeriodType].adjective)
   },
 
-  title () {
-    return null
-  },
-
   timePeriods () {
     const { items, intl } = this.props
 
@@ -97,26 +93,12 @@ const FinancesTimeSeries = React.createClass({
     return series
   },
 
-  valueSuffix () {
-    const { intl } = this.props
-    return intl.formatMessage(messages.valueSuffix)
-  },
-
-  yAxisTitle () {
-    const { intl } = this.props
-    return intl.formatMessage(messages.yAxisTitle)
-  },
-
   render () {
     return (
       <TimeSeriesChart
         key={`${this.props.uniqueChartId}-${this.props.exportTitle}`}
-        title={this.title()}
         xAxisCategories={this.timePeriods()}
         series={this.series()}
-        valueSuffix={this.valueSuffix()}
-        yAxisTitle={this.yAxisTitle()}
-        className='gb-FinanceTimeSeries'
         {...this.props}
       />
     )
@@ -187,6 +169,7 @@ const getUniqueChartId = (ownProps, items, financeType) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  const { intl } = ownProps
   const items = getItems(state, ownProps)
   const financeType = getFinanceType(ownProps)
 
@@ -194,7 +177,10 @@ const mapStateToProps = (state, ownProps) => {
     uniqueChartId: getUniqueChartId(ownProps, items, financeType),
     financeType,
     items,
-    exportTitle: getExportTitle(state, ownProps)
+    valueSuffix: intl.formatMessage(messages.valueSuffix),
+    yAxisTitle: intl.formatMessage(messages.yAxisTitle),
+    exportTitle: getExportTitle(state, ownProps),
+    className: 'gb-FinanceTimeSeries'
   }
 }
 
