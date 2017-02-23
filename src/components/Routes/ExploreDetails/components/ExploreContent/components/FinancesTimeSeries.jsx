@@ -51,47 +51,10 @@ const FinancesTimeSeries = React.createClass({
     }))
   },
 
-  timePeriodTypeMessage () {
-    const { intl, timePeriodType } = this.props
-
-    return intl.formatMessage(timePeriodTypeMessages[timePeriodType].adjective)
-  },
-
-  series () {
-    const { intl, items } = this.props
-
-    let series = []
-
-    items.forEach(item => {
-      if (item.spentFinances && item.spentFinances.length > 0) {
-        series = series.concat({
-          name: intl.formatMessage(financeTypeMessages.spentFinance.adjective),
-          data: item.spentFinances.map(f => f.amount),
-          color: 'rgb(255, 191, 31)',
-          financeType: 'spentFinance'
-        })
-      }
-
-      if (item.plannedFinances && item.plannedFinances.length > 0) {
-        series = series.concat({
-          name: intl.formatMessage(financeTypeMessages.plannedFinance.adjective),
-          data: item.plannedFinances.map(f => f.amount),
-          color: 'transparent',
-          borderWidth: 2,
-          borderColor: 'black',
-          financeType: 'plannedFinance'
-        })
-      }
-    })
-
-    return series
-  },
-
   render () {
     return (
       <TimeSeriesChart
         key={`${this.props.uniqueChartId}-${this.props.exportTitle}`}
-        series={this.series()}
         {...this.props}
       />
     )
@@ -165,6 +128,34 @@ const getTimePeriods = (intl, items) => {
   return items[0].spentFinances.map(f => translateTimePeriod(f.timePeriod, intl))
 }
 
+const getSeries = (intl, items) => {
+  let series = []
+
+  items.forEach(item => {
+    if (item.spentFinances && item.spentFinances.length > 0) {
+      series = series.concat({
+        name: intl.formatMessage(financeTypeMessages.spentFinance.adjective),
+        data: item.spentFinances.map(f => f.amount),
+        color: 'rgb(255, 191, 31)',
+        financeType: 'spentFinance'
+      })
+    }
+
+    if (item.plannedFinances && item.plannedFinances.length > 0) {
+      series = series.concat({
+        name: intl.formatMessage(financeTypeMessages.plannedFinance.adjective),
+        data: item.plannedFinances.map(f => f.amount),
+        color: 'transparent',
+        borderWidth: 2,
+        borderColor: 'black',
+        financeType: 'plannedFinance'
+      })
+    }
+  })
+
+  return series
+}
+
 const mapStateToProps = (state, ownProps) => {
   const { intl } = ownProps
   const items = getItems(state, ownProps)
@@ -174,6 +165,7 @@ const mapStateToProps = (state, ownProps) => {
     uniqueChartId: getUniqueChartId(ownProps, items, financeType),
     financeType,
     items,
+    series: getSeries(intl, items),
     valueSuffix: intl.formatMessage(messages.valueSuffix),
     yAxisTitle: intl.formatMessage(messages.yAxisTitle),
     exportTitle: getExportTitle(state, ownProps),
