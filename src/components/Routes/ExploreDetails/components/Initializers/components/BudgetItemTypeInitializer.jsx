@@ -24,6 +24,8 @@ const BudgetItemTypeInitializer = React.createClass({
     detailsLoaded: bool.isRequired
   },
 
+  defaultBudgetItemType: 'priority',
+
   chooseBudgetItemType () {
     const { relatedBudgetItemTypes } = this.props
     const { budgetItemType: queryBudgetItemType } = this.context.location.query
@@ -33,7 +35,7 @@ const BudgetItemTypeInitializer = React.createClass({
     } else if (relatedBudgetItemTypes.length > 0) {
       return relatedBudgetItemTypes[0]
     } else {
-      return null
+      return this.defaultBudgetItemType
     }
   },
 
