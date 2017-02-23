@@ -1,4 +1,5 @@
 const React = require('react')
+const Ramda = require('ramda')
 const { connect } = require('react-redux')
 const { arrayOf, number, shape, string } = React.PropTypes
 const { injectIntl, intlShape, defineMessages } = require('react-intl')
@@ -140,40 +141,34 @@ const getFinanceType = ({ showSpentFinances, showPlannedFinances }) => {
   }
 }
 
-const getFinances = (state, ownProps, finances, itemId) => {
-  const { timePeriodType, inTimePeriod } = ownProps
-
-  const filterBySelectedTimePeriodType = filterByTimePeriodType(timePeriodType)
-  const filterBySelectedTimePeriod = filterByTimePeriod(inTimePeriod)
-
-  return filterBySelectedTimePeriod(
-    sortByStartDate(filterBySelectedTimePeriodType(finances))
+const composeFinancePreparer = (inTimePeriod, timePeriodType) => (
+  Ramda.compose(
+    sortByStartDate,
+    filterByTimePeriod(inTimePeriod),
+    filterByTimePeriodType(timePeriodType)
   )
-}
+)
 
 const getItemFinancesObject = (state, ownProps, itemId) => {
-  const { showSpentFinances, showPlannedFinances } = ownProps
+  const {
+    showSpentFinances,
+    showPlannedFinances,
+    inTimePeriod,
+    timePeriodType
+  } = ownProps
 
   const obj = {
     id: itemId
   }
 
+  const financePreparer = composeFinancePreparer(inTimePeriod, timePeriodType)
+
   if (showSpentFinances) {
-    obj.spentFinances = getFinances(
-      state,
-      ownProps,
-      getItemSpentFinances(state, itemId),
-      itemId
-    )
+    obj.spentFinances = financePreparer(getItemSpentFinances(state, itemId))
   }
 
   if (showPlannedFinances) {
-    obj.plannedFinances = getFinances(
-      state,
-      ownProps,
-      getItemPlannedFinances(state, itemId),
-      itemId
-    )
+    obj.plannedFinances = financePreparer(getItemPlannedFinances(state, itemId))
   }
 
   return obj

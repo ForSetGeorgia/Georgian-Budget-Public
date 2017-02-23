@@ -1,6 +1,6 @@
-const R = require('ramda')
+const Ramda = require('ramda')
 
-module.exports = R.curry((type, finances) => (
+module.exports = Ramda.curry((type, finances) => (
   finances.filter(
     f => f.timePeriodType === type
   )

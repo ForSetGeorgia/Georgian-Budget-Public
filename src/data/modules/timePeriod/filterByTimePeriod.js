@@ -1,6 +1,6 @@
-const R = require('ramda')
+const Ramda = require('ramda')
 
-module.exports = R.curry((timePeriod, finances) => (
+module.exports = Ramda.curry((timePeriod, finances) => (
   timePeriod === 'all' ? finances : finances.filter(
     f => f.timePeriod.indexOf(timePeriod) > -1
   )
