@@ -11,10 +11,11 @@ const { getItemSpentFinances } = require('src/data/modules/entities/spentFinance
 const { getItemPlannedFinances } = require('src/data/modules/entities/plannedFinance')
 const sortByStartDate = require('src/data/modules/timePeriod/sortByStartDate')
 
-const {
-  filterByTimePeriodType,
-  filterByTimePeriod
-} = require('src/data/modules/entities/finance')
+const filterByTimePeriodType =
+require('src/data/modules/timePeriod/filterByTimePeriodType')
+
+const filterByTimePeriod =
+require('src/data/modules/timePeriod/filterByTimePeriod')
 
 const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
 
