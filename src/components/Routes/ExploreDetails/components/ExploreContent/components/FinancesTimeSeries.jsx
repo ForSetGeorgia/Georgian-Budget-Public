@@ -85,9 +85,8 @@ const getExportTitle = (state, ownProps) => {
   return `${names.join(' | ')} - ${timePeriodTypeMessage}`
 }
 
-const getUniqueChartId = (ownProps, items, financeType) => {
-  const { timePeriodType, intl } = ownProps
-  const itemIds = items.map(item => item.id)
+const getUniqueChartId = (ownProps, financeType) => {
+  const { timePeriodType, intl, itemIds } = ownProps
 
   return `${itemIds.join(',')}-${financeType}-${timePeriodType}-${intl.locale}`
 }
@@ -137,10 +136,10 @@ const mapStateToProps = (state, ownProps) => {
     className: 'gb-FinanceTimeSeries',
     exportTitle: getExportTitle(state, ownProps),
     intl,
-    key: getKey(state, ownProps, getUniqueChartId(ownProps, items, financeType)),
+    key: getKey(state, ownProps, getUniqueChartId(ownProps, financeType)),
     series: getSeries(intl, items),
     timePeriods: getTimePeriods(intl, items),
-    uniqueChartId: getUniqueChartId(ownProps, items, financeType),
+    uniqueChartId: getUniqueChartId(ownProps, financeType),
     valueSuffix: intl.formatMessage(messages.valueSuffix),
     yAxisTitle: intl.formatMessage(messages.yAxisTitle)
   }
