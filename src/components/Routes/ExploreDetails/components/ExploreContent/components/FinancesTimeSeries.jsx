@@ -134,16 +134,15 @@ const mapStateToProps = (state, ownProps) => {
   const financeType = getFinanceType(ownProps)
 
   return {
-    uniqueChartId: getUniqueChartId(ownProps, items, financeType),
-    financeType,
-    items,
+    className: 'gb-FinanceTimeSeries',
+    exportTitle: getExportTitle(state, ownProps),
+    intl,
     key: getKey(state, ownProps, getUniqueChartId(ownProps, items, financeType)),
     series: getSeries(intl, items),
-    valueSuffix: intl.formatMessage(messages.valueSuffix),
-    yAxisTitle: intl.formatMessage(messages.yAxisTitle),
-    exportTitle: getExportTitle(state, ownProps),
     timePeriods: getTimePeriods(intl, items),
-    className: 'gb-FinanceTimeSeries'
+    uniqueChartId: getUniqueChartId(ownProps, items, financeType),
+    valueSuffix: intl.formatMessage(messages.valueSuffix),
+    yAxisTitle: intl.formatMessage(messages.yAxisTitle)
   }
 }
 

@@ -5,16 +5,16 @@ const { intlShape } = require('react-intl')
 const TimeSeriesChart = React.createClass({
 
   propTypes: {
-    uniqueChartId: string.isRequired,
-    timePeriods: array.isRequired,
-    series: array.isRequired,
-    title: string,
-    exportTitle: string.isRequired,
-    valueSuffix: string.isRequired,
-    yAxisTitle: string.isRequired,
-    subtitle: string,
     className: string,
-    intl: intlShape.isRequired
+    exportTitle: string.isRequired,
+    intl: intlShape.isRequired,
+    series: array.isRequired,
+    subtitle: string,
+    timePeriods: array.isRequired,
+    title: string,
+    uniqueChartId: string.isRequired,
+    valueSuffix: string.isRequired,
+    yAxisTitle: string.isRequired
   },
 
   plannedFinanceIndeces () {
