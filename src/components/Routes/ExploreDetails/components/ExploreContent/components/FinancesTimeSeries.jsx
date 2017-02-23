@@ -157,21 +157,18 @@ const getItemFinancesObject = (state, ownProps, itemId) => {
     timePeriodType
   } = ownProps
 
-  const obj = {
-    id: itemId
-  }
-
   const financePreparer = composeFinancePreparer(inTimePeriod, timePeriodType)
 
-  if (showSpentFinances) {
-    obj.spentFinances = financePreparer(getItemSpentFinances(state, itemId))
-  }
-
-  if (showPlannedFinances) {
-    obj.plannedFinances = financePreparer(getItemPlannedFinances(state, itemId))
-  }
-
-  return obj
+  return Object.assign(
+    {},
+    { id: itemId },
+    !showSpentFinances ? {} : {
+      spentFinances: financePreparer(getItemSpentFinances(state, itemId))
+    },
+    !showPlannedFinances ? {} : {
+      plannedFinances: financePreparer(getItemPlannedFinances(state, itemId))
+    }
+  )
 }
 
 const getItems = (state, ownProps) => {
