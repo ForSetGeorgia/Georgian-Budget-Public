@@ -31,7 +31,7 @@ const formatPresentAmount = props => {
 const formatAmount = props => {
   const { amount } = props
 
-  return amount ? formatPresentAmount(props) : ''
+  return (typeof amount === 'number') ? formatPresentAmount(props) : ''
 }
 
 const FormattedAmount = props => (
