@@ -116,16 +116,15 @@ const FinancesTimeSeries = React.createClass({
   render () {
     return (
       <TimeSeriesChart
-        intl={this.props.intl}
         containerId={this.uniqueChartId()}
         key={`${this.uniqueChartId()}-${this.props.exportTitle}`}
         title={this.title()}
-        exportTitle={this.props.exportTitle}
         xAxisCategories={this.timePeriods()}
         series={this.series()}
         valueSuffix={this.valueSuffix()}
         yAxisTitle={this.yAxisTitle()}
         className={'gb-FinanceTimeSeries'}
+        {...this.props}
       />
     )
   }
