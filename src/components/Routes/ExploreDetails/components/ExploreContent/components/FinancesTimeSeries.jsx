@@ -138,12 +138,10 @@ const getFinanceType = ({ showSpentFinances, showPlannedFinances }) => {
   }
 }
 
-const getFinances = (state, ownProps, financeGetter, itemId) => {
+const getFinances = (state, ownProps, finances, itemId) => {
   const { timePeriodType, inTimePeriod } = ownProps
 
-  let finances = filterFinancesByPeriodType(
-    financeGetter(state, itemId), timePeriodType
-  )
+  finances = filterFinancesByPeriodType(finances, timePeriodType)
 
   finances = finances.sort((f1, f2) => (
     (new Date(f1.startDate)) - (new Date(f2.startDate))
@@ -157,19 +155,28 @@ const getFinances = (state, ownProps, financeGetter, itemId) => {
 }
 
 const getItemFinancesObject = (state, ownProps, itemId) => {
-  const {
-    showSpentFinances,
-    showPlannedFinances
-  } = ownProps
+  const { showSpentFinances, showPlannedFinances } = ownProps
 
-  const obj = { id: itemId }
+  const obj = {
+    id: itemId
+  }
 
   if (showSpentFinances) {
-    obj.spentFinances = getFinances(state, ownProps, getItemSpentFinances, itemId)
+    obj.spentFinances = getFinances(
+      state,
+      ownProps,
+      getItemSpentFinances(state, itemId),
+      itemId
+    )
   }
 
   if (showPlannedFinances) {
-    obj.plannedFinances = getFinances(state, ownProps, getItemPlannedFinances, itemId)
+    obj.plannedFinances = getFinances(
+      state,
+      ownProps,
+      getItemPlannedFinances(state, itemId),
+      itemId
+    )
   }
 
   return obj
