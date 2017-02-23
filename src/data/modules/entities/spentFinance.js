@@ -1,3 +1,4 @@
+const { createSelector } = require('reselect')
 const { getSpentFinances } = require('src/data/ducks/spentFinances')
 const { getItemSpentFinanceIds } = require('./budgetItem')
 const convertObjectToArray = require('src/utilities/convertObjectToArray')
@@ -12,8 +13,10 @@ const getItemSpentFinances = (state, itemId) => (
   )).filter(finance => finance)
 )
 
-const getSpentFinancesArray = state =>
-  convertObjectToArray(getSpentFinances(state))
+const getSpentFinancesArray = createSelector(
+  getSpentFinances,
+  spentFinances => convertObjectToArray(spentFinances)
+)
 
 module.exports = {
   getSpentFinance,
