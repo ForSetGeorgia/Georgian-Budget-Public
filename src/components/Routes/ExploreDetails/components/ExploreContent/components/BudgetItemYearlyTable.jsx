@@ -41,8 +41,8 @@ const getColumnMetadata = intl => (
 )
 
 const getDataForYear = (year, spentFinances, plannedFinances) => {
-  const spentFinance = spentFinances.filter(f => f.timePeriod === year)[0]
-  const plannedFinance = plannedFinances.filter(f => f.timePeriod === year)[0]
+  const spentFinance = spentFinances.find(f => f.timePeriod === year)
+  const plannedFinance = plannedFinances.find(f => f.timePeriod === year)
 
   return {
     year: translateTimePeriod(year),
