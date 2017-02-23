@@ -1,11 +1,10 @@
 const { connect } = require('react-redux')
 const { injectIntl } = require('react-intl')
 
-const { getYearsWithData } = require('src/data/modules/timePeriod/type/year')
+const { getSelectedYears } = require('src/data/modules/timePeriod/type/year')
 const { getItemSpentFinances } = require('src/data/modules/entities/spentFinance')
 const { getItemPlannedFinances } = require('src/data/modules/entities/plannedFinance')
 const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
-const { getSelectedTimePeriods } = require('src/data/ducks/filters')
 const { getFinanceDifference } = require('src/data/modules/finance/difference')
 const { getDetailsItemId } = require('src/data/ducks/explore')
 
@@ -53,20 +52,11 @@ const getDataForYear = (year, spentFinances, plannedFinances) => {
   }
 }
 
-const getVisibleYears = (state) => {
-  const years = getYearsWithData(state)
-  const selectedTimePeriod = getSelectedTimePeriods(state)[0]
-
-  if (selectedTimePeriod === 'all') return years
-
-  return years.filter(year => year === selectedTimePeriod)
-}
-
 const getResults = (state, itemId) => {
   const spentFinances = getItemSpentFinances(state, itemId)
   const plannedFinances = getItemPlannedFinances(state, itemId)
 
-  return getVisibleYears(state).map(year => (
+  return getSelectedYears(state).map(year => (
     getDataForYear(year, spentFinances, plannedFinances)
   ))
 }
