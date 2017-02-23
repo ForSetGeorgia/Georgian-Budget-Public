@@ -24,7 +24,7 @@ const BudgetItemTypeInitializer = React.createClass({
     detailsLoaded: bool.isRequired
   },
 
-  defaultBudgetItemType: 'priority',
+  defaultBudgetItemType: null,
 
   chooseBudgetItemType () {
     const { relatedBudgetItemTypes } = this.props

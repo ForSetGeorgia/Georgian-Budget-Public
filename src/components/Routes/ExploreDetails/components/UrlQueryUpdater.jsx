@@ -16,7 +16,7 @@ const UrlQueryUpdater = React.createClass({
   },
 
   propTypes: {
-    budgetItemType: string.isRequired,
+    budgetItemType: string,
     financeType: string.isRequired,
     timePeriods: arrayOf(string).isRequired,
     timePeriodType: string.isRequired
