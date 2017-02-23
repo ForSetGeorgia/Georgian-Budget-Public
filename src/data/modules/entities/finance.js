@@ -8,11 +8,11 @@ const filterFinancesByPeriodType = R.curry((type, finances) => (
 ))
 
 // Select all finances with time periods that fall inside the time period
-const selectInTimePeriod = (finances, timePeriod) => (
+const selectInTimePeriod = R.curry((timePeriod, finances) => (
   finances.filter(
     f => f.timePeriod.indexOf(timePeriod) > -1
   )
-)
+))
 
 module.exports = {
   financeTypes,

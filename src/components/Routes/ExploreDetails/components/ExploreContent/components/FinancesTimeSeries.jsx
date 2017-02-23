@@ -144,10 +144,11 @@ const getFinances = (state, ownProps, finances, itemId) => {
 
   const filterBySelectedType = filterFinancesByPeriodType(timePeriodType)
 
+  const filterBySelectedTimePeriod = selectInTimePeriod(inTimePeriod)
+
   if (inTimePeriod && inTimePeriod !== 'all') {
-    return selectInTimePeriod(
-      sortByStartDate(filterBySelectedType(finances)),
-      inTimePeriod
+    return filterBySelectedTimePeriod(
+      sortByStartDate(filterBySelectedType(finances))
     )
   } else {
     return sortByStartDate(filterBySelectedType(finances))
