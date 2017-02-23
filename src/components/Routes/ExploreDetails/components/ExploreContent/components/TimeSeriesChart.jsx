@@ -5,7 +5,7 @@ const { intlShape } = require('react-intl')
 const TimeSeriesChart = React.createClass({
 
   propTypes: {
-    containerId: string.isRequired,
+    uniqueChartId: string.isRequired,
     xAxisCategories: array.isRequired,
     series: array.isRequired,
     title: string,
@@ -34,7 +34,7 @@ const TimeSeriesChart = React.createClass({
   // When the DOM is ready, create the chart.
   componentDidMount: function () {
     const {
-      containerId,
+      uniqueChartId,
       title,
       exportTitle,
       subtitle,
@@ -92,7 +92,7 @@ const TimeSeriesChart = React.createClass({
     }
 
     this.chart = new Highcharts.Chart(
-      containerId,
+      uniqueChartId,
       options
     )
 
@@ -115,7 +115,7 @@ const TimeSeriesChart = React.createClass({
   render: function () {
     return (
       <div
-        id={this.props.containerId}
+        id={this.props.uniqueChartId}
         className={this.props.className}
       />
     )

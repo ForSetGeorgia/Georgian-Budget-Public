@@ -37,6 +37,7 @@ const FinancesTimeSeries = React.createClass({
     timePeriodType: string.isRequired,
     financeType: string.isRequired,
     exportTitle: string.isRequired,
+    uniqueChartId: string.isRequired,
     items: arrayOf(shape({
       id: string.isRequired,
       spentFinances: arrayOf(shape({
@@ -58,13 +59,6 @@ const FinancesTimeSeries = React.createClass({
 
   title () {
     return null
-  },
-
-  uniqueChartId () {
-    const { items, timePeriodType, financeType, intl } = this.props
-    const itemIds = items.map(item => item.id)
-
-    return `${itemIds.join(',')}-${financeType}-${timePeriodType}-${intl.locale}`
   },
 
   timePeriods () {
@@ -116,14 +110,13 @@ const FinancesTimeSeries = React.createClass({
   render () {
     return (
       <TimeSeriesChart
-        containerId={this.uniqueChartId()}
-        key={`${this.uniqueChartId()}-${this.props.exportTitle}`}
+        key={`${this.props.uniqueChartId}-${this.props.exportTitle}`}
         title={this.title()}
         xAxisCategories={this.timePeriods()}
         series={this.series()}
         valueSuffix={this.valueSuffix()}
         yAxisTitle={this.yAxisTitle()}
-        className={'gb-FinanceTimeSeries'}
+        className='gb-FinanceTimeSeries'
         {...this.props}
       />
     )
@@ -186,10 +179,23 @@ const getExportTitle = (state, ownProps) => {
   return `${names.join(' | ')} - ${timePeriodTypeMessage}`
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  financeType: getFinanceType(ownProps),
-  items: getItems(state, ownProps),
-  exportTitle: getExportTitle(state, ownProps)
-})
+const getUniqueChartId = (ownProps, items, financeType) => {
+  const { timePeriodType, intl } = ownProps
+  const itemIds = items.map(item => item.id)
+
+  return `${itemIds.join(',')}-${financeType}-${timePeriodType}-${intl.locale}`
+}
+
+const mapStateToProps = (state, ownProps) => {
+  const items = getItems(state, ownProps)
+  const financeType = getFinanceType(ownProps)
+
+  return {
+    uniqueChartId: getUniqueChartId(ownProps, items, financeType),
+    financeType,
+    items,
+    exportTitle: getExportTitle(state, ownProps)
+  }
+}
 
 module.exports = injectIntl(connect(mapStateToProps)(FinancesTimeSeries))
