@@ -16,7 +16,7 @@
     justify-content: space-around;
 
     & > td, & > th {
-      border: 1px solid #e7f1f4;
+      border: 1px solid $background-gray;
       text-align: left;
       padding: 10px $content-padding;
       display: flex;
@@ -49,6 +49,31 @@
       }
     }
   }
+
+  // Griddle puts two tbodies in the table - the first containing
+  // the table rows, and the second containing the footer (which
+  // contains the pager)
+  & tbody:nth-child(3) {
+    display: flex;
+    justify-content: center;
+  }
+
+  & .griddle-footer {
+    margin: 5px 0;
+
+    & .gb-GriddlePaginationLink {
+      display: inline-block;
+
+      & > button {
+        @extend .gb-Link;
+      }
+    }
+  }
+
+  & .griddle-page {
+    padding: 0 10px;
+    display: inline-block;
+  }
 }
 
 .gb-BudgetItemYearlyTable {
@@ -67,9 +92,10 @@
   @extend .gb-Table;
 
   font-size: 1.44rem;
-  cursor: pointer;
 
   .gb-Table-row, & > thead > tr > th {
+    cursor: pointer;
+
     &:hover {
       background-color: rgb(255, 191, 31);
     }

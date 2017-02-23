@@ -39,7 +39,7 @@ const ItemDetailsLink = React.createClass({
 
   render () {
     return (
-      <Link className='gb-ItemDetailsLink' onClick={this.navigateToBudgetItem}>
+      <Link className='gb-Link' onClick={this.navigateToBudgetItem}>
         ← {this.text()}
       </Link>
     )

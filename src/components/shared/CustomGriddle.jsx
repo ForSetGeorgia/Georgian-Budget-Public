@@ -19,8 +19,12 @@ const CustomGriddle = props => (
     rowMetadata={{ bodyCssClassName: 'gb-Table-row mod-darker-if-odd' }}
     useGriddleStyles={false}
     resultsPerPage={10}
-    nextText={props.intl.formatMessage(messages.next)}
     previousText={props.intl.formatMessage(messages.previous)}
+    previousClassName='gb-GriddlePaginationLink'
+    previousIconComponent='← '
+    nextText={props.intl.formatMessage(messages.next)}
+    nextClassName='gb-GriddlePaginationLink'
+    nextIconComponent=' →'
     {...props}
   />
 )

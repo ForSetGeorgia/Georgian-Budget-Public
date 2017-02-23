@@ -1,11 +1,11 @@
 .gb-SearchBar {
   padding: $content-padding;
   margin: 0 (-1 * $content-padding);
-  border-top: 1px solid #e7f1f4;
+  border-top: 1px solid $background-gray;
 
   &-input {
     min-width: 100%;
-    border: 2px solid #e7f1f4;
+    border: 2px solid $background-gray;
     padding: 10px;
     box-sizing: border-box;
   }
