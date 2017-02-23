@@ -9,6 +9,7 @@ const financeTypeMessages = require('src/messages/financeTypes')
 const { getBudgetItemName } = require('src/data/modules/entities/budgetItem')
 const { getItemSpentFinances } = require('src/data/modules/entities/spentFinance')
 const { getItemPlannedFinances } = require('src/data/modules/entities/plannedFinance')
+const sortByStartDate = require('src/data/modules/timePeriod/sortByStartDate')
 
 const {
   filterFinancesByPeriodType,
@@ -141,11 +142,12 @@ const getFinanceType = ({ showSpentFinances, showPlannedFinances }) => {
 const getFinances = (state, ownProps, finances, itemId) => {
   const { timePeriodType, inTimePeriod } = ownProps
 
-  finances = filterFinancesByPeriodType(finances, timePeriodType)
-
-  finances = finances.sort((f1, f2) => (
-    (new Date(f1.startDate)) - (new Date(f2.startDate))
-  ))
+  finances = sortByStartDate(
+    filterFinancesByPeriodType(
+      finances,
+      timePeriodType
+    )
+  )
 
   if (inTimePeriod && inTimePeriod !== 'all') {
     finances = selectInTimePeriod(finances, inTimePeriod)
