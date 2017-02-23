@@ -85,24 +85,24 @@ const getExportTitle = (state, ownProps) => {
   return `${names.join(' | ')} - ${timePeriodTypeMessage}`
 }
 
-const getUniqueChartId = (ownProps, financeType) => {
+const getUniqueChartId = (ownProps) => {
   const { timePeriodType, intl, itemIds } = ownProps
 
-  return `${itemIds.join(',')}-${financeType}-${timePeriodType}-${intl.locale}`
+  return `${itemIds.join(',')}-${getFinanceType(ownProps)}-${timePeriodType}-${intl.locale}`
 }
 
-const getTimePeriods = (intl, items) => {
-  return items[0].spentFinances.map(f => translateTimePeriod(f.timePeriod, intl))
-}
-
-const getSeries = (intl, items) => {
+const getSeries = (state, ownProps) => {
+  const { intl } = ownProps
   let series = []
 
-  items.forEach(item => {
+  getItems(state, ownProps).forEach(item => {
     if (item.spentFinances && item.spentFinances.length > 0) {
       series = series.concat({
         name: intl.formatMessage(financeTypeMessages.spentFinance.adjective),
-        data: item.spentFinances.map(f => f.amount),
+        data: item.spentFinances.map(f => ({
+          name: translateTimePeriod(f.timePeriod, intl),
+          y: f.amount
+        })),
         color: 'rgb(255, 191, 31)',
         financeType: 'spentFinance'
       })
@@ -111,7 +111,10 @@ const getSeries = (intl, items) => {
     if (item.plannedFinances && item.plannedFinances.length > 0) {
       series = series.concat({
         name: intl.formatMessage(financeTypeMessages.plannedFinance.adjective),
-        data: item.plannedFinances.map(f => f.amount),
+        data: item.plannedFinances.map(f => ({
+          name: translateTimePeriod(f.timePeriod, intl),
+          y: f.amount
+        })),
         color: 'transparent',
         borderWidth: 2,
         borderColor: 'black',
@@ -129,17 +132,14 @@ const getKey = (state, ownProps, uniqueChartId) => {
 
 const mapStateToProps = (state, ownProps) => {
   const { intl } = ownProps
-  const items = getItems(state, ownProps)
-  const financeType = getFinanceType(ownProps)
 
   return {
     className: 'gb-FinanceTimeSeries',
     exportTitle: getExportTitle(state, ownProps),
     intl,
-    key: getKey(state, ownProps, getUniqueChartId(ownProps, financeType)),
-    series: getSeries(intl, items),
-    timePeriods: getTimePeriods(intl, items),
-    uniqueChartId: getUniqueChartId(ownProps, financeType),
+    key: getKey(state, ownProps, getUniqueChartId(ownProps)),
+    series: getSeries(state, ownProps),
+    uniqueChartId: getUniqueChartId(ownProps),
     valueSuffix: intl.formatMessage(messages.valueSuffix),
     yAxisTitle: intl.formatMessage(messages.yAxisTitle)
   }
