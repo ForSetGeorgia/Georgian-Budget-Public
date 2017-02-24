@@ -5,7 +5,6 @@ const { getSelectedYears } = require('src/data/modules/timePeriod/type/year')
 const { getItemSpentFinances } = require('src/data/modules/entities/spentFinance')
 const { getItemPlannedFinances } = require('src/data/modules/entities/plannedFinance')
 const { translateTimePeriod } = require('src/data/modules/timePeriod/translate')
-const { getFinanceDifference } = require('src/data/modules/finance/difference')
 const { getDetailsItemId } = require('src/data/ducks/explore')
 
 const timePeriodTypeMessages = require('src/messages/timePeriodTypes')
@@ -48,7 +47,7 @@ const getDataForYear = (year, spentFinances, plannedFinances) => {
     year: translateTimePeriod(year),
     spentFinance: spentFinance ? spentFinance.amount : null,
     plannedFinance: plannedFinance ? plannedFinance.amount : null,
-    difference: getFinanceDifference(plannedFinance, spentFinance)
+    difference: plannedFinance && spentFinance ? plannedFinance.amount - spentFinance.amount : null
   }
 }
 
