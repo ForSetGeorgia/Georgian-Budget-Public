@@ -5,12 +5,12 @@ const { Router } = require('react-router')
 const Routes = require('src/components/Routes')
 const store = require('src/data/store')
 const history = require('src/data/history')
-const logPageView = require('src/data/analytics/logPageView')
+const sendAnalyticsUpdates = require('src/data/sendAnalyticsUpdates')
 
 const App = function () {
   return (
     <Provider store={store}>
-      <Router history={history} onUpdate={logPageView}>
+      <Router history={history} onUpdate={sendAnalyticsUpdates}>
         {Routes()}
       </Router>
     </Provider>
