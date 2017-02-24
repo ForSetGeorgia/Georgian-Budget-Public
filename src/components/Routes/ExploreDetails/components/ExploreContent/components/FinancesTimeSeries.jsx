@@ -126,10 +126,6 @@ const getSeries = (state, ownProps) => {
   return series
 }
 
-const getKey = (state, ownProps) => (
-  `${getUniqueChartId(ownProps)}-${getExportTitle(state, ownProps)}`
-)
-
 const mapStateToProps = (state, ownProps) => {
   const { intl } = ownProps
 
@@ -137,7 +133,7 @@ const mapStateToProps = (state, ownProps) => {
     className: 'gb-FinanceTimeSeries',
     exportTitle: getExportTitle(state, ownProps),
     intl,
-    key: getKey(state, ownProps),
+    key: getUniqueChartId(ownProps),
     series: getSeries(state, ownProps),
     uniqueChartId: getUniqueChartId(ownProps),
     valueSuffix: intl.formatMessage(messages.valueSuffix),
