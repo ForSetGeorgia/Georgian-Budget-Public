@@ -38,6 +38,8 @@ const ItemDetailsLink = React.createClass({
   },
 
   render () {
+    if (!this.props.name) return null
+    
     return (
       <Link className='gb-Link' onClick={this.navigateToBudgetItem}>
         ← {this.text()}
