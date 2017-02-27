@@ -5,7 +5,7 @@
   "app.filters.financeType.label": "აირჩიე ფინანსები",
   "app.filters.timePeriod.allOption": "ყველა",
   "app.name": "ბიუჯეტის ამბები",
-  "app.description": "აქ შეგიძლია ყველაფერი გაიგო საქართველოს ბიუჯეტის შესახებ.",
+  "app.description": "პორტალზე თავმოყრილია საქართველოს სახელმწიფოს ბიუჯეტის ყოველთვიური მონაცემები პროგრამების, პრიორიტეტების და მხარჯავი დაწესებულებების მიხედვით. გაიგე ბიუჯეტის ამბები!",
   "app.loading": "მონაცემები იტვირთება",
   "app.explore.list.count": "ნაჩვენებია {count} {count, plural, one {{one}} other {{other}}}.",
   "app.financeTimeSeries.valueSuffix": "ლარი",

@@ -7,6 +7,6 @@ module.exports = defineMessages({
   },
   description: {
     id: 'app.description',
-    defaultMessage: "These are some stories about Georgia's budget"
+    defaultMessage: "Budget Stories from Georgia visualizes financial data about the Georgian government's programs, priorities, and spending agencies. Explore and learn more about the Georgian State Budget."
   }
 })
