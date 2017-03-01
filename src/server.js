@@ -36,8 +36,6 @@ const app = express()
 app.use('/public', express.static('./public'))
 
 app.use((req, res) => {
-  var url = req.protocol + '://' + req.get('host') + req.originalUrl
-
   if (DEV) {
     // global variable
     webpack_isomorphic_tools.refresh()
@@ -75,7 +73,7 @@ app.use((req, res) => {
               body,
               mainJs,
               mainCss,
-              url
+              url: req.protocol + '://' + req.get('host') + req.originalUrl
             }
           )
         )
