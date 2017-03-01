@@ -73,6 +73,7 @@ app.use((req, res) => {
               body,
               mainJs,
               mainCss,
+              // req.url is not the whole URL
               url: req.protocol + '://' + req.get('host') + req.originalUrl
             }
           )
