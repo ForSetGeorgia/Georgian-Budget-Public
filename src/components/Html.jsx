@@ -10,7 +10,8 @@ module.exports = (props) => {
     body,
     mainJs,
     mainCss,
-    url
+    url,
+    imageUrl
   } = props
 
   return (
@@ -18,6 +19,7 @@ module.exports = (props) => {
       <head>
         {meta}
         <meta data-react-helmet='true' property='og:url' content={url} />
+        <meta data-react-helmet='true' property='og:image' content={imageUrl} />
 
         {title}
         <link rel='stylesheet' href={mainCss} />

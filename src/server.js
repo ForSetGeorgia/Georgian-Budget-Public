@@ -43,6 +43,9 @@ app.use((req, res) => {
 
   const mainJs = webpack_isomorphic_tools.assets().javascript.main
   const mainCss = webpack_isomorphic_tools.assets().styles.main
+  const shareImagePath = webpack_isomorphic_tools
+  .assets()
+  .assets['./public/images/share_en.jpg']
 
   match(
     { routes: Routes(), location: req.url },
@@ -63,6 +66,8 @@ app.use((req, res) => {
         const title = head.title.toComponent()
         const meta = head.meta.toComponent()
 
+        const protocolAndHost = req.protocol + '://' + req.get('host')
+
         const html = '<!DOCTYPE html>' + ReactDOMServer.renderToStaticMarkup(
           React.createElement(
             Html,
@@ -74,7 +79,8 @@ app.use((req, res) => {
               mainJs,
               mainCss,
               // req.url is not the whole URL
-              url: req.protocol + '://' + req.get('host') + req.originalUrl
+              url: protocolAndHost + req.originalUrl,
+              imageUrl: protocolAndHost + shareImagePath
             }
           )
         )

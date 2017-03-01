@@ -19,12 +19,17 @@ const Meta = React.createClass({
       { 'property': 'og:title', 'content': this.props.title },
       { 'property': 'og:site_name', 'content': this.props.siteName },
       { 'property': 'og:description', 'content': this.props.description },
-      { 'property': 'og:type', 'content': 'website' },
-      { 'property': 'og:image', 'content': this.props.shareImage }
+      { 'property': 'og:type', 'content': 'website' }
     ]
 
     if (this.props.url) {
       meta = meta.concat({ 'property': 'og:url', 'content': this.props.url })
+    }
+
+    if (this.props.shareImage) {
+      meta = meta.concat(
+        { 'property': 'og:image', 'content': this.props.shareImage }
+      )
     }
 
     return meta

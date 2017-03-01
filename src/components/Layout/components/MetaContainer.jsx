@@ -38,10 +38,16 @@ const MetaContainer = React.createClass({
     return url
   },
 
+  shareImage () {
+    if (!this.state.host || !this.props.shareImagePath) return ''
+
+    return `${this.state.host}${this.props.shareImagePath}`
+  },
+
   render () {
     return <Meta
       url={this.url()}
-      shareImage={`${this.state.host}${this.props.shareImagePath}`}
+      shareImage={this.shareImage()}
       {...this.props}
     />
   }
