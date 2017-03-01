@@ -9,13 +9,15 @@ module.exports = (props) => {
     meta,
     body,
     mainJs,
-    mainCss
+    mainCss,
+    url
   } = props
 
   return (
     <html {...htmlAttributes}>
       <head>
         {meta}
+        <meta data-react-helmet='true' property='og:url' content={url} />
 
         {title}
         <link rel='stylesheet' href={mainCss} />

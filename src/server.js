@@ -60,8 +60,6 @@ app.use((req, res) => {
           )
         )
 
-        React.createElement(Meta, { url })
-
         const head = Helmet.rewind()
         const htmlAttributes = head.htmlAttributes.toComponent()
         const title = head.title.toComponent()
@@ -76,7 +74,8 @@ app.use((req, res) => {
               meta,
               body,
               mainJs,
-              mainCss
+              mainCss,
+              url
             }
           )
         )
