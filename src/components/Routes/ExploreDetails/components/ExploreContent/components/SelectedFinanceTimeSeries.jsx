@@ -22,13 +22,9 @@ const getSurroundingTimePeriod = state => {
   }
 }
 
-const getKey = state => (
-  `${getTimePeriodType(state)}-${getSelectedTimePeriod(state)}`
-)
-
 const mapStateToProps = state => ({
   itemIds: [getDetailsItemId(state)],
-  key: getKey(state),
+  key: getSurroundingTimePeriod(state),
   showSpentFinances: true,
   showPlannedFinances: true,
   timePeriodType: getTimePeriodType(state),
