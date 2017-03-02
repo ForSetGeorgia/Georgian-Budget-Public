@@ -21,6 +21,9 @@ module.exports = (props) => {
         {meta}
         <meta data-react-helmet='true' property='og:url' content={url} />
         <meta data-react-helmet='true' property='og:image' content={imageUrl} />
+        {/* explanation of og:image:width and :height - https://developers.facebook.com/docs/sharing/best-practices/#precaching */}
+        <meta property='og:image:width' content='1200' />
+        <meta property='og:image:height' content='750' />
         <meta property='fb:app_id' content={appId} />
 
         {title}
