@@ -66,7 +66,7 @@ app.use((req, res) => {
         const meta = head.meta.toComponent()
         const locale = renderProps.params.locale
         const shareImagePath = isomorphic_assets.assets[`./public/images/share_${locale}.jpg`]
-        const protocolAndHost = req.protocol + '://' + req.get('host')
+        const protocolAndHost = req.protocol + '://' + req.headers.host
 
         const html = '<!DOCTYPE html>' + ReactDOMServer.renderToStaticMarkup(
           React.createElement(
