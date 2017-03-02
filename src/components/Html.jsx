@@ -11,7 +11,8 @@ module.exports = (props) => {
     mainJs,
     mainCss,
     url,
-    imageUrl
+    imageUrl,
+    appId
   } = props
 
   return (
@@ -20,6 +21,7 @@ module.exports = (props) => {
         {meta}
         <meta data-react-helmet='true' property='og:url' content={url} />
         <meta data-react-helmet='true' property='og:image' content={imageUrl} />
+        <meta property='fb:app_id' content={appId} />
 
         {title}
         <link rel='stylesheet' href={mainCss} />

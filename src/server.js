@@ -87,7 +87,8 @@ app.use((req, res) => {
               imageUrl: urlWithPath(
                 req,
                 isomorphic_assets.assets[`./public/images/share_${locale}.jpg`]
-              )
+              ),
+              appId: process.env.FB_APP_ID
             }
           )
         )
