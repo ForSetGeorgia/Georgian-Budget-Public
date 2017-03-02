@@ -67,7 +67,7 @@ app.use((req, res) => {
         const locale = renderProps.params.locale
 
         const urlWithPath = (req, path) => (
-          req.protocol + '://' + req.get('Referrer') + req.originalUrl
+          req.protocol + '://' + req.get('Host') + req.originalUrl
         )
 
         const fullUrl = req => urlWithPath(req, req.originalUrl)
