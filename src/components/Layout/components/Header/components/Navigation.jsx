@@ -1,10 +1,13 @@
 const React = require('react')
+const { bool } = React.PropTypes
+const { intlShape, injectIntl } = require('react-intl')
 const { Link } = require('react-router')
 const LocaleLink = require('./LocaleLink')
 const Svg = require('src/components/shared/Svg')
 const { FormattedMessage } = require('react-intl')
 
-const Navigation = (props, { currentLocale }) => {
+const Navigation = (props) => {
+  const { locale } = props.intl
   let className = 'app-navigation'
   if (props.showOnSmallScreens) {
     className += ' is-shown-on-small-screens'
@@ -15,7 +18,7 @@ const Navigation = (props, { currentLocale }) => {
   return (
     <div className={className}>
       <Link
-        to={`/${currentLocale}/explore`}
+        to={`/${locale}/explore/details`}
         className='app-navigation-link'
       >
         <FormattedMessage
@@ -25,7 +28,7 @@ const Navigation = (props, { currentLocale }) => {
         />
       </Link>
       <Link
-        to={`/${currentLocale}/about`}
+        to={`/${locale}/about`}
         className='app-navigation-link'
       >
         <FormattedMessage
@@ -66,14 +69,9 @@ const Navigation = (props, { currentLocale }) => {
   )
 }
 
-const { bool, string } = React.PropTypes
-
 Navigation.propTypes = {
-  showOnSmallScreens: bool
+  showOnSmallScreens: bool,
+  intl: intlShape
 }
 
-Navigation.contextTypes = {
-  currentLocale: string
-}
-
-module.exports = Navigation
+module.exports = injectIntl(Navigation)
