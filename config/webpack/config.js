@@ -1,7 +1,7 @@
 require('dotenv').config()
 const autoprefixer = require('autoprefixer')
 
-const paths = require('config/paths')
+const paths = require('src/paths')
 
 const path = require('path')
 const webpack = require('webpack')

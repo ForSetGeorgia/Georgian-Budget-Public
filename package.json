@@ -10,7 +10,7 @@
     "build:dev": "NODE_PATH=. webpack --env.dev --config config/webpack/config.js",
     "build:debug": "NODE_PATH=. node --inspect --debug-brk node_modules/.bin/webpack --config config/webpack/config.js --env.debug",
     "watch:dev": "NODE_PATH=. webpack --env.dev --watch --config config/webpack/config.js",
-    "start:dev": "NODE_PATH=. nodemon app.js",
+    "start:dev": "NODE_PATH=. nodemon --ext js,jsx --watch src app.js",
     "fix": "standard --fix"
   },
   "author": "JumpStart Georgia",

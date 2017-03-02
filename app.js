@@ -4,7 +4,7 @@
 require('babel-register')
 require('dotenv').config()
 
-const paths = require('config/paths')
+const paths = require('src/paths')
 const Webpack_isomorphic_tools = require('webpack-isomorphic-tools')
 
 const project_base_path = require('path').resolve(__dirname)
