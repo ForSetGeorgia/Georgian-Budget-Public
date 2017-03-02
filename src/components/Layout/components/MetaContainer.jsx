@@ -11,6 +11,8 @@ const Meta = require('src/components/shared/Meta')
 
 const MetaContainer = React.createClass({
   propTypes: {
+    budgetItemName: string,
+    siteName: string,
     pathname: string,
     search: string,
     shareImagePath: string
@@ -44,8 +46,14 @@ const MetaContainer = React.createClass({
     return `${this.state.host}${this.props.shareImagePath}`
   },
 
+  title () {
+    if (this.props.budgetItemName) return this.props.budgetItemName
+    return this.props.siteName
+  },
+
   render () {
     return <Meta
+      title={this.title()}
       url={this.url()}
       shareImage={this.shareImage()}
       {...this.props}
@@ -66,7 +74,7 @@ const mapStateToProps = (state, ownProps) => {
   const { intl } = ownProps
 
   return {
-    title: getBudgetItemName(state, getDetailsItemId(state)),
+    budgetItemName: getBudgetItemName(state, getDetailsItemId(state)),
     siteName: intl.formatMessage(appMessages.name),
     pathname: locationBeforeTransitions.pathname,
     search: locationBeforeTransitions.search,
