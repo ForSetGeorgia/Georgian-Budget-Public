@@ -65,8 +65,12 @@ app.use((req, res) => {
         const title = head.title.toComponent()
         const meta = head.meta.toComponent()
         const locale = renderProps.params.locale
-        const shareImagePath = isomorphic_assets.assets[`./public/images/share_${locale}.jpg`]
-        const protocolAndHost = req.protocol + '://' + req.headers.host
+
+        const urlWithPath = (req, path) => (
+          req.protocol + '://' + req.get('host') + req.originalUrl
+        )
+
+        const fullUrl = req => urlWithPath(req, req.originalUrl)
 
         const html = '<!DOCTYPE html>' + ReactDOMServer.renderToStaticMarkup(
           React.createElement(
@@ -79,8 +83,11 @@ app.use((req, res) => {
               mainJs,
               mainCss,
               // req.url is not the whole URL
-              url: protocolAndHost + req.originalUrl,
-              imageUrl: protocolAndHost + shareImagePath
+              url: fullUrl(req),
+              imageUrl: urlWithPath(
+                req,
+                isomorphic_assets.assets[`./public/images/share_${locale}.jpg`]
+              )
             }
           )
         )
