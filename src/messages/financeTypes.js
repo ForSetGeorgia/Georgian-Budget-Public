@@ -12,6 +12,17 @@ module.exports = defineMessages({
       defaultMessage: 'Spent Finances'
     }
   },
+  spentFinanceCalculated: {
+    adjective: {
+      id: 'financeType.spentFinanceCalculated.adjective',
+      defaultMessage: 'Spent (Calculated)'
+    },
+    other: {
+      id: 'financeType.spentFinanceCalculated.other',
+      description: 'Multiple spent finances(Calculated)',
+      defaultMessage: 'Spent Finances (Calculated)'
+    }
+  },
   plannedFinance: {
     adjective: {
       id: 'financeType.plannedFinance.adjective',
@@ -21,6 +32,17 @@ module.exports = defineMessages({
       id: 'financeType.plannedFinance.other',
       description: 'Multiple planned finances',
       defaultMessage: 'Planned Finances'
+    }
+  },
+  plannedFinanceCalculated: {
+    adjective: {
+      id: 'financeType.plannedFinanceCalculated.adjective',
+      defaultMessage: 'Planned (Calculated)'
+    },
+    other: {
+      id: 'financeType.plannedFinanceCalculated.other',
+      description: 'Multiple planned finances(Calculated)',
+      defaultMessage: 'Planned Finances (Calculated)'
     }
   },
   difference: {

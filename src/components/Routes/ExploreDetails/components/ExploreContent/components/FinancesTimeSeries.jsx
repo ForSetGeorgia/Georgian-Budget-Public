@@ -97,28 +97,59 @@ const getSeries = (state, ownProps) => {
 
   getItems(state, ownProps).forEach(item => {
     if (item.spentFinances && item.spentFinances.length > 0) {
-      series = series.concat({
-        name: intl.formatMessage(financeTypeMessages.spentFinance.adjective),
-        data: item.spentFinances.map(f => ({
-          name: translateTimePeriod(f.timePeriod, intl),
-          y: f.amount
-        })),
-        color: 'rgb(255, 191, 31)',
-        financeType: 'spentFinance'
+      let spentFinancesByType = [[], []]
+      item.spentFinances.forEach((spentFinancesItem)=>{
+        spentFinancesByType[spentFinancesItem.official ? 0 : 1].push(spentFinancesItem)
+      })
+      spentFinancesByType.forEach((spentFinancesByTypeItem, spentFinancesByTypeItem_i) => {
+        if(spentFinancesByTypeItem.length) {
+          let _name = 'spentFinance'
+          let _color = 'rgb(255, 191, 31)'
+          if (spentFinancesByTypeItem_i === 1) {
+            _name += 'Calculated'
+            _color = 'url(#highchartPattern)'
+          }
+
+          series.push({
+            name: intl.formatMessage(financeTypeMessages[_name].adjective),
+            data: spentFinancesByTypeItem.map(f => ({
+              name: translateTimePeriod(f.timePeriod, intl),
+              y: f.amount
+            })),
+            color: _color,
+            financeType: 'spentFinance'
+          })
+        }
       })
     }
 
-    if (item.plannedFinances && item.plannedFinances.length > 0) {
-      series = series.concat({
-        name: intl.formatMessage(financeTypeMessages.plannedFinance.adjective),
-        data: item.plannedFinances.map(f => ({
-          name: translateTimePeriod(f.timePeriod, intl),
-          y: f.amount
-        })),
-        color: 'transparent',
-        borderWidth: 2,
-        borderColor: 'black',
-        financeType: 'plannedFinance'
+    if (item.plannedFinances && item.spentFinances.length > 0) {
+      let plannedFinancesByType = [[], []]
+      item.plannedFinances.forEach((plannedFinancesItem)=>{
+        plannedFinancesByType[plannedFinancesItem.official ? 0 : 1].push(plannedFinancesItem)
+      })
+      plannedFinancesByType.forEach((plannedFinancesByTypeItem, plannedFinancesByTypeItem_i) => {
+        if(plannedFinancesByTypeItem.length) {
+          let _name = 'plannedFinance'
+          let _dashStyle = 'solid'
+          if (plannedFinancesByTypeItem_i === 1) {
+            _name += 'Calculated'
+            _dashStyle = 'dash'
+          }
+
+          series.push({
+            name: intl.formatMessage(financeTypeMessages[_name].adjective),
+            data: plannedFinancesByTypeItem.map(f => ({
+              name: translateTimePeriod(f.timePeriod, intl),
+              y: f.amount
+            })),
+            color: 'transparent',
+            borderWidth: 2,
+            borderColor: 'black',
+            dashStyle: _dashStyle,
+            financeType: 'plannedFinance'
+          })
+        }
       })
     }
   })

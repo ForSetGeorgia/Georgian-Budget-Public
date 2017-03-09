@@ -46,6 +46,9 @@ const TimeSeriesChart = React.createClass({
     const { Highcharts, getHighchartsOptions } = require('src/highcharts')
     Highcharts.setOptions(getHighchartsOptions(intl))
 
+    // mapping between SVG attributes and the corresponding options
+    Highcharts.seriesTypes.column.prototype.pointAttrToOptions.dashstyle = 'dashStyle';
+
     // Set container which the chart should render to.
     const options = {
       chart: {
@@ -100,6 +103,7 @@ const TimeSeriesChart = React.createClass({
       if (that.hasPlannedFinanceSeriesIndex(index)) {
         series.legendSymbol.attr('stroke-width', '2')
         series.legendSymbol.attr('stroke', 'black')
+        series.legendSymbol.attr('stroke-dasharray', '5,5')
       }
     })
   },
