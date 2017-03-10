@@ -91,6 +91,18 @@ const getUniqueChartId = (ownProps) => {
   return `${itemIds.join(',')}-${getFinanceType(ownProps)}-${timePeriodType}-${intl.locale}`
 }
 
+const getSeriesName = (intl, financeType, iterator) => {
+  if (iterator === 1) {
+    return intl.formatMessage(
+      financeTypeMessages[`${financeType}Calculated`].adjective
+    )
+  } else {
+    return intl.formatMessage(
+      financeTypeMessages[financeType].adjective
+    )
+  }
+}
+
 const getSeries = (state, ownProps) => {
   const { intl } = ownProps
   let series = []
@@ -103,15 +115,13 @@ const getSeries = (state, ownProps) => {
       })
       spentFinancesByType.forEach((spentFinancesByTypeItem, spentFinancesByTypeItem_i) => {
         if(spentFinancesByTypeItem.length) {
-          let _name = 'spentFinance'
           let _color = 'rgb(255, 191, 31)'
           if (spentFinancesByTypeItem_i === 1) {
-            _name += 'Calculated'
             _color = 'url(#highchartPattern)'
           }
 
           series.push({
-            name: intl.formatMessage(financeTypeMessages[_name].adjective),
+            name: getSeriesName(intl, 'spentFinance', spentFinancesByTypeItem_i),
             data: spentFinancesByTypeItem.map(f => ({
               name: translateTimePeriod(f.timePeriod, intl),
               y: f.amount
@@ -130,15 +140,13 @@ const getSeries = (state, ownProps) => {
       })
       plannedFinancesByType.forEach((plannedFinancesByTypeItem, plannedFinancesByTypeItem_i) => {
         if(plannedFinancesByTypeItem.length) {
-          let _name = 'plannedFinance'
           let _dashStyle = 'solid'
           if (plannedFinancesByTypeItem_i === 1) {
-            _name += 'Calculated'
             _dashStyle = 'dash'
           }
 
           series.push({
-            name: intl.formatMessage(financeTypeMessages[_name].adjective),
+            name: getSeriesName(intl, 'plannedFinance', plannedFinancesByTypeItem_i),
             data: plannedFinancesByTypeItem.map(f => ({
               name: translateTimePeriod(f.timePeriod, intl),
               y: f.amount
