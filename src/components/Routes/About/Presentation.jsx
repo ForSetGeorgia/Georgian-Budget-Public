@@ -6,6 +6,7 @@ const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 
 const About = React.createClass({
   propTypes: {
+    title: string,
     content: string
   },
 
@@ -13,13 +14,26 @@ const About = React.createClass({
     return { __html: this.props.content }
   },
 
+  renderTitle () {
+    if (!this.props.title) return
+
+    return (
+      <h2>
+        {this.props.title}
+      </h2>
+    )
+  },
+
   renderContent () {
-    if (!this.props.content) {
+    if (!this.props.content && !this.props.title) {
       return <LoadingIndicator />
     }
 
     return (
-      <div dangerouslySetInnerHTML={this.createContentMarkup()} />
+      <div>
+        {this.renderTitle()}
+        <div dangerouslySetInnerHTML={this.createContentMarkup()} />
+      </div>
     )
   },
 

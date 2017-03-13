@@ -1,25 +1,28 @@
 const React = require('react')
+const { string } = React.PropTypes
 const { injectIntl, intlShape } = require('react-intl')
 const axios = require('axios')
 
 const AboutPresentation = require('./Presentation')
 
-const AboutContainer = React.createClass({
+const PageSection = React.createClass({
   propTypes: {
-    intl: intlShape
+    intl: intlShape,
+    name: string.isRequired
   },
 
   getInitialState () {
     return {
+      title: '',
       content: ''
     }
   },
 
   componentDidMount () {
-    const { intl } = this.props
+    const { name, intl } = this.props
 
     axios.get(
-      `${process.env.API_URL}/${intl.locale}/v1/page_contents/about`,
+      `${process.env.API_URL}/${intl.locale}/v1/page_contents/${name}`,
       {
         headers: {
           'X-Requested-With': 'XMLHttpRequest',
@@ -28,9 +31,16 @@ const AboutContainer = React.createClass({
       }
     )
     .then(response => {
-      if (!((response || {}).data || {}).content) return
+      if (!((response || {}).data || {}).content) {
+        this.setState({
+          title: `Unable to load page section: ${name}`
+        })
+
+        return
+      }
 
       this.setState({
+        title: response.data.title,
         content: response.data.content
       })
     })
@@ -38,9 +48,9 @@ const AboutContainer = React.createClass({
 
   render () {
     return (
-      <AboutPresentation content={this.state.content} />
+      <AboutPresentation title={this.state.title} content={this.state.content} />
     )
   }
 })
 
-module.exports = injectIntl(AboutContainer)
+module.exports = injectIntl(PageSection)
