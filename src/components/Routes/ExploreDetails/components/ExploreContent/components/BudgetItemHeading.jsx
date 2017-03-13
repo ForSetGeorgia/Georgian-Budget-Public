@@ -46,9 +46,9 @@ const BudgetItemHeading = ({ name, type, timePeriod, intl, code }) => {
   }
 
   const getCodeMarkup = () => {
-    if (!code) {
-      return ''
-    } else {
+    const env = process.env.NODE_ENV
+    const dev = typeof env === 'undefined' || env === 'development'
+    if (code && dev) {
       return (
         <span className='gb-BudgetItemHeading-subheading-item'>
           {intl.formatMessage(budgetItemMessages.code)}:
@@ -57,6 +57,8 @@ const BudgetItemHeading = ({ name, type, timePeriod, intl, code }) => {
           </span>
         </span>
       )
+    } else {
+      return ''
     }
   }
 
