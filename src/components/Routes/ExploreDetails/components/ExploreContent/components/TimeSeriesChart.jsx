@@ -1,6 +1,7 @@
 const React = require('react')
 const { string, array } = React.PropTypes
 const { intlShape } = require('react-intl')
+const Svg = require('src/components/shared/Svg')
 
 const TimeSeriesChart = React.createClass({
 
@@ -47,7 +48,7 @@ const TimeSeriesChart = React.createClass({
     Highcharts.setOptions(getHighchartsOptions(intl))
 
     // mapping between SVG attributes and the corresponding options
-    Highcharts.seriesTypes.column.prototype.pointAttrToOptions.dashstyle = 'dashStyle';
+    Highcharts.seriesTypes.column.prototype.pointAttrToOptions.dashstyle = 'dashStyle'
 
     // Set container which the chart should render to.
     const options = {
@@ -103,7 +104,9 @@ const TimeSeriesChart = React.createClass({
       if (that.hasPlannedFinanceSeriesIndex(index)) {
         series.legendSymbol.attr('stroke-width', '2')
         series.legendSymbol.attr('stroke', 'black')
-        series.legendSymbol.attr('stroke-dasharray', '5,5')
+        if (!series.userOptions.official) {
+          series.legendSymbol.attr('stroke-dasharray', '5,5')
+        }
       }
     })
   },
@@ -116,10 +119,15 @@ const TimeSeriesChart = React.createClass({
   // Create the div which the chart will be rendered to.
   render: function () {
     return (
-      <div
-        id={this.props.uniqueChartId}
-        className={this.props.className}
-      />
+      <div>
+        <Svg
+          className='gb-FinanceTimeSeries-Pattern'
+          markup={require('public/images/highchart_pattern')} />
+        <div
+          id={this.props.uniqueChartId}
+          className={this.props.className}
+        />
+      </div>
     )
   }
 })

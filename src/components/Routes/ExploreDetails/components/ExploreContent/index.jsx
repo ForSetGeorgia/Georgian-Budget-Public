@@ -8,7 +8,6 @@ const BudgetItemHeading = require('./components/BudgetItemHeading')
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const TimePeriodSelect = require('src/components/shared/TimePeriodSelect')
 const TimePeriodTypeSelect = require('./components/TimePeriodTypeSelect')
-const Svg = require('src/components/shared/Svg')
 const SelectedFinanceTimeSeries = require('./components/SelectedFinanceTimeSeries')
 const BudgetItemYearlyTable = require('./components/BudgetItemYearlyTable')
 const RelatedItemsList = require('./components/RelatedItemsList/index')
@@ -38,7 +37,6 @@ const ExploreContent = React.createClass({
 
     return (
       <div>
-        <Svg markup={require('public/images/highchart_pattern')} />
         <SelectedFinanceTimeSeries />
         <BudgetItemYearlyTable />
         <RelatedItemsList />

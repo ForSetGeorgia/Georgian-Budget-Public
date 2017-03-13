@@ -103,65 +103,69 @@ const getSeriesName = (intl, financeType, iterator) => {
   }
 }
 
+const getSeriesByType = (intl, finances, name, defaults, options) => {
+  // console.log(finances, name, defaults, options);
+  let series = []
+  if (finances && finances.length > 0) {
+    let types = [[], []]
+
+    finances.forEach((item) => {
+      types[item.official ? 0 : 1].push(item)
+    })
+
+    types.forEach((item, itemIndex) => {
+      if (item && item.length > 0) {
+        series.push(
+          Object.assign(
+            {},
+            {
+              name: getSeriesName(intl, name, itemIndex),
+              data: item.map(f => ({
+                name: translateTimePeriod(f.timePeriod, intl),
+                y: f.amount
+              })),
+              financeType: name
+            },
+            defaults,
+            options[itemIndex]
+          )
+        )
+      }
+    })
+  }
+  return series
+}
+
 const getSeries = (state, ownProps) => {
   const { intl } = ownProps
   let series = []
 
   getItems(state, ownProps).forEach(item => {
-    if (item.spentFinances && item.spentFinances.length > 0) {
-      let spentFinancesByType = [[], []]
-      item.spentFinances.forEach((spentFinancesItem)=>{
-        spentFinancesByType[spentFinancesItem.official ? 0 : 1].push(spentFinancesItem)
-      })
-      spentFinancesByType.forEach((spentFinancesByTypeItem, spentFinancesByTypeItem_i) => {
-        if(spentFinancesByTypeItem.length) {
-          let _color = 'rgb(255, 191, 31)'
-          if (spentFinancesByTypeItem_i === 1) {
-            _color = 'url(#highchartPattern)'
-          }
-
-          series.push({
-            name: getSeriesName(intl, 'spentFinance', spentFinancesByTypeItem_i),
-            data: spentFinancesByTypeItem.map(f => ({
-              name: translateTimePeriod(f.timePeriod, intl),
-              y: f.amount
-            })),
-            color: _color,
-            financeType: 'spentFinance'
-          })
-        }
-      })
-    }
-
-    if (item.plannedFinances && item.spentFinances.length > 0) {
-      let plannedFinancesByType = [[], []]
-      item.plannedFinances.forEach((plannedFinancesItem)=>{
-        plannedFinancesByType[plannedFinancesItem.official ? 0 : 1].push(plannedFinancesItem)
-      })
-      plannedFinancesByType.forEach((plannedFinancesByTypeItem, plannedFinancesByTypeItem_i) => {
-        if(plannedFinancesByTypeItem.length) {
-          let _dashStyle = 'solid'
-          if (plannedFinancesByTypeItem_i === 1) {
-            _dashStyle = 'dash'
-          }
-
-          series.push({
-            name: getSeriesName(intl, 'plannedFinance', plannedFinancesByTypeItem_i),
-            data: plannedFinancesByTypeItem.map(f => ({
-              name: translateTimePeriod(f.timePeriod, intl),
-              y: f.amount
-            })),
-            color: 'transparent',
-            borderWidth: 2,
-            borderColor: 'black',
-            dashStyle: _dashStyle,
-            financeType: 'plannedFinance'
-          })
-        }
-      })
-    }
+    series = series.concat(
+      // spent finances
+      getSeriesByType(
+        intl,
+        item.spentFinances,
+        'spentFinance',
+        {},
+        [
+          { official: true, color: 'rgb(255, 191, 31)' },
+          { official: false, color: 'url(#highchartPattern)' }
+        ]
+      ),
+      // planned finances
+      getSeriesByType(
+        intl,
+        item.plannedFinances,
+        'plannedFinance',
+        { color: 'transparent', borderWidth: 2, borderColor: 'black' },
+        [
+          { official: true, dashStyle: 'solid' },
+          { official: false, dashStyle: 'dash' }
+        ]
+      )
+    )
   })
-
   return series
 }
 
