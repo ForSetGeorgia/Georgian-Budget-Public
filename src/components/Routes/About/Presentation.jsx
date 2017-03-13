@@ -39,7 +39,7 @@ const About = React.createClass({
 
   render () {
     return (
-      <div>
+      <div className='gb-PageSection'>
         <Helmet
           title='About'
         />
