@@ -47,34 +47,6 @@ const composeFinancePreparer = (inTimePeriod, timePeriodType) => (
   )
 )
 
-const getItemFinancesObject = (state, ownProps, itemId) => {
-  const {
-    showSpentFinances,
-    showPlannedFinances,
-    inTimePeriod,
-    timePeriodType
-  } = ownProps
-
-  const financePreparer = composeFinancePreparer(inTimePeriod, timePeriodType)
-
-  return Object.assign(
-    {},
-    { id: itemId },
-    !showSpentFinances ? {} : {
-      spentFinances: financePreparer(getItemSpentFinances(state, itemId))
-    },
-    !showPlannedFinances ? {} : {
-      plannedFinances: financePreparer(getItemPlannedFinances(state, itemId))
-    }
-  )
-}
-
-const getItems = (state, ownProps) => {
-  const { itemIds } = ownProps
-
-  return itemIds.map(itemId => getItemFinancesObject(state, ownProps, itemId))
-}
-
 const getExportTitle = (state, ownProps) => {
   const { intl, itemIds, timePeriodType } = ownProps
   const timePeriodTypeMessage = intl.formatMessage(
@@ -103,7 +75,8 @@ const getSeriesName = (intl, financeType, iterator) => {
   }
 }
 
-const getSeriesByType = (intl, finances, name, defaults, options) => {
+const getSeriesByType = (ownProps, finances, name, defaults, options) => {
+  const { intl } = ownProps
   // console.log(finances, name, defaults, options);
   let series = []
   if (finances && finances.length > 0) {
@@ -136,37 +109,45 @@ const getSeriesByType = (intl, finances, name, defaults, options) => {
   return series
 }
 
-const getSeries = (state, ownProps) => {
-  const { intl } = ownProps
-  let series = []
+const getSeriesForBudgetItemId = (state, ownProps, itemId) => {
+  const {
+    showPlannedFinances,
+    showSpentFinances,
+    inTimePeriod,
+    timePeriodType
+  } = ownProps
 
-  getItems(state, ownProps).forEach(item => {
-    series = series.concat(
-      // spent finances
-      getSeriesByType(
-        intl,
-        item.spentFinances,
-        'spentFinance',
-        {},
-        [
-          { official: true, color: 'rgb(255, 191, 31)' },
-          { official: false, color: 'url(#highchartPattern)' }
-        ]
-      ),
-      // planned finances
-      getSeriesByType(
-        intl,
-        item.plannedFinances,
-        'plannedFinance',
-        { color: 'transparent', borderWidth: 2, borderColor: 'black' },
-        [
-          { official: true, dashStyle: 'solid' },
-          { official: false, dashStyle: 'dash' }
-        ]
-      )
+  const financePreparer = composeFinancePreparer(inTimePeriod, timePeriodType)
+
+  return Object.assign(
+    [],
+    !showSpentFinances ? [] : getSeriesByType(
+      ownProps,
+      financePreparer(getItemSpentFinances(state, itemId)),
+      'spentFinance',
+      {},
+      [
+        { official: true, color: 'rgb(255, 191, 31)' },
+        { official: false, color: 'url(#highchartPattern)' }
+      ]
+    ),
+    !showPlannedFinances ? [] : getSeriesByType(
+      ownProps,
+      financePreparer(getItemPlannedFinances(state, itemId)),
+      'plannedFinance',
+      { color: 'transparent', borderWidth: 2, borderColor: 'black' },
+      [
+        { official: true, dashStyle: 'solid' },
+        { official: false, dashStyle: 'dash' }
+      ]
     )
-  })
-  return series
+  )
+}
+
+const getSeries = (state, ownProps) => {
+  return ownProps.itemIds.reduce((allSeries, itemId) => {
+    return allSeries.concat(...getSeriesForBudgetItemId(state, ownProps, itemId))
+  }, [])
 }
 
 const mapStateToProps = (state, ownProps) => {
