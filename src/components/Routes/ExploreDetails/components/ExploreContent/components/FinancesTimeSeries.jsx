@@ -63,50 +63,45 @@ const getUniqueChartId = (ownProps) => {
   return `${itemIds.join(',')}-${getFinanceType(ownProps)}-${timePeriodType}-${intl.locale}`
 }
 
-const getSeriesName = (intl, financeType, iterator) => {
-  if (iterator === 1) {
-    return intl.formatMessage(
-      financeTypeMessages[`${financeType}Calculated`].adjective
-    )
-  } else {
-    return intl.formatMessage(
-      financeTypeMessages[financeType].adjective
-    )
-  }
+const getFinanceTypeIntlMessage = (financeType, isOfficial) => (
+  `${financeType}${isOfficial ? '' : 'Calculated'}`
+)
+
+const getSeriesName = (intl, financeType, isOfficial) => {
+  return intl.formatMessage(
+    financeTypeMessages[getFinanceTypeIntlMessage(financeType, isOfficial)].adjective
+  )
 }
 
-const getSeriesByType = (ownProps, finances, name, defaults, options) => {
+const getSeriesByType = (ownProps, finances, financeType, defaults, options) => {
   const { intl } = ownProps
-  // console.log(finances, name, defaults, options);
-  let series = []
-  if (finances && finances.length > 0) {
-    let types = [[], []]
 
-    finances.forEach((item) => {
+  if (!(finances && finances.length)) { return [] }
+
+  return finances
+    .reduce((types, item) => {
       types[item.official ? 0 : 1].push(item)
-    })
+      return types
+    }, [[], []])
+    .reduce((series, item, itemIndex) => {
+      if (!(item && item.length)) { return series }
 
-    types.forEach((item, itemIndex) => {
-      if (item && item.length > 0) {
-        series.push(
-          Object.assign(
-            {},
-            {
-              name: getSeriesName(intl, name, itemIndex),
-              data: item.map(f => ({
-                name: translateTimePeriod(f.timePeriod, intl),
-                y: f.amount
-              })),
-              financeType: name
-            },
-            defaults,
-            options[itemIndex]
-          )
+      series.push(
+        Object.assign(
+          {
+            name: getSeriesName(intl, financeType, itemIndex === 0),
+            data: item.map(f => ({
+              name: translateTimePeriod(f.timePeriod, intl),
+              y: f.amount
+            })),
+            financeType: financeType
+          },
+          defaults,
+          options[itemIndex]
         )
-      }
-    })
-  }
-  return series
+      )
+      return series
+    }, [])
 }
 
 const getSeriesForBudgetItemId = (state, ownProps, itemId) => {
@@ -119,8 +114,7 @@ const getSeriesForBudgetItemId = (state, ownProps, itemId) => {
 
   const financePreparer = composeFinancePreparer(inTimePeriod, timePeriodType)
 
-  return Object.assign(
-    [],
+  return [].concat(
     !showSpentFinances ? [] : getSeriesByType(
       ownProps,
       financePreparer(getItemSpentFinances(state, itemId)),
