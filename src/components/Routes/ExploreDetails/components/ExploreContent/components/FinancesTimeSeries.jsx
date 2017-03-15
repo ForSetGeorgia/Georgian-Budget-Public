@@ -47,34 +47,6 @@ const composeFinancePreparer = (inTimePeriod, timePeriodType) => (
   )
 )
 
-const getItemFinancesObject = (state, ownProps, itemId) => {
-  const {
-    showSpentFinances,
-    showPlannedFinances,
-    inTimePeriod,
-    timePeriodType
-  } = ownProps
-
-  const financePreparer = composeFinancePreparer(inTimePeriod, timePeriodType)
-
-  return Object.assign(
-    {},
-    { id: itemId },
-    !showSpentFinances ? {} : {
-      spentFinances: financePreparer(getItemSpentFinances(state, itemId))
-    },
-    !showPlannedFinances ? {} : {
-      plannedFinances: financePreparer(getItemPlannedFinances(state, itemId))
-    }
-  )
-}
-
-const getItems = (state, ownProps) => {
-  const { itemIds } = ownProps
-
-  return itemIds.map(itemId => getItemFinancesObject(state, ownProps, itemId))
-}
-
 const getExportTitle = (state, ownProps) => {
   const { intl, itemIds, timePeriodType } = ownProps
   const timePeriodTypeMessage = intl.formatMessage(
@@ -91,39 +63,109 @@ const getUniqueChartId = (ownProps) => {
   return `${itemIds.join(',')}-${getFinanceType(ownProps)}-${timePeriodType}-${intl.locale}`
 }
 
+const getFinanceTypeIntlMessage = (financeType, isOfficial) => (
+  `${financeType}${isOfficial ? '' : 'Calculated'}`
+)
+
+const getSeriesName = (intl, financeType, isOfficial) => {
+  return intl.formatMessage(
+    financeTypeMessages[getFinanceTypeIntlMessage(financeType, isOfficial)].adjective
+  )
+}
+
+const getSpentFinanceSeriesColor = isOfficial => (
+  isOfficial ? 'rgb(255, 191, 31)' : 'url(#highchartPattern)'
+)
+
+const getSeriesColor = (financeType, isOfficial) => {
+  if (financeType === 'plannedFinance') return 'transparent'
+  if (financeType === 'spentFinance') {
+    return getSpentFinanceSeriesColor(isOfficial)
+  }
+}
+
+const getPlannedFinanceSeriesBorder = isOfficial => ({
+  borderWidth: 2,
+  borderColor: 'black',
+  dashStyle: isOfficial ? 'solid' : 'dash'
+})
+
+const getSeriesOptions = (financeType, isOfficial) => (
+  Object.assign(
+    {},
+    {
+      official: isOfficial,
+      color: getSeriesColor(financeType, isOfficial)
+    },
+    financeType === 'plannedFinance' ? getPlannedFinanceSeriesBorder(isOfficial) : {}
+  )
+)
+
+const getIndividualSeries = ({ intl }, financeType, finances, isOfficial) => (
+  Object.assign(
+    {},
+    {
+      name: getSeriesName(intl, financeType, isOfficial),
+      data: finances.map(f => ({
+        name: translateTimePeriod(f.timePeriod, intl),
+        y: f.amount
+      })),
+      financeType: financeType
+    },
+    getSeriesOptions(financeType, isOfficial)
+  )
+)
+
+const getSeriesByType = (ownProps, finances, financeType) => {
+  if (!(finances && finances.length)) { return [] }
+
+  return finances
+    .reduce((types, item) => {
+      types[item.official ? 0 : 1].push(item)
+      return types
+    }, [[], []])
+    .reduce((series, filteredFinances, itemIndex) => {
+      if (!(filteredFinances && filteredFinances.length)) { return series }
+
+      series.push(getIndividualSeries(
+        ownProps,
+        financeType,
+        filteredFinances,
+        itemIndex === 0
+      ))
+
+      return series
+    }, [])
+}
+
+const getSeriesForBudgetItemId = (state, ownProps, itemId) => {
+  const {
+    showPlannedFinances,
+    showSpentFinances,
+    inTimePeriod,
+    timePeriodType
+  } = ownProps
+
+  const financePreparer = composeFinancePreparer(inTimePeriod, timePeriodType)
+
+  return [].concat(
+    !showSpentFinances ? [] : getSeriesByType(
+      ownProps,
+      financePreparer(getItemSpentFinances(state, itemId)),
+      'spentFinance'
+    ),
+    !showPlannedFinances ? [] : getSeriesByType(
+      ownProps,
+      financePreparer(getItemPlannedFinances(state, itemId)),
+      'plannedFinance'
+    )
+  )
+}
+
 const getSeries = (state, ownProps) => {
-  const { intl } = ownProps
-  let series = []
-
-  getItems(state, ownProps).forEach(item => {
-    if (item.spentFinances && item.spentFinances.length > 0) {
-      series = series.concat({
-        name: intl.formatMessage(financeTypeMessages.spentFinance.adjective),
-        data: item.spentFinances.map(f => ({
-          name: translateTimePeriod(f.timePeriod, intl),
-          y: f.amount
-        })),
-        color: 'rgb(255, 191, 31)',
-        financeType: 'spentFinance'
-      })
-    }
-
-    if (item.plannedFinances && item.plannedFinances.length > 0) {
-      series = series.concat({
-        name: intl.formatMessage(financeTypeMessages.plannedFinance.adjective),
-        data: item.plannedFinances.map(f => ({
-          name: translateTimePeriod(f.timePeriod, intl),
-          y: f.amount
-        })),
-        color: 'transparent',
-        borderWidth: 2,
-        borderColor: 'black',
-        financeType: 'plannedFinance'
-      })
-    }
-  })
-
-  return series
+  return ownProps.itemIds.reduce((allSeries, itemId) => {
+    return allSeries.concat(...getSeriesForBudgetItemId(state, ownProps, itemId))
+  }, [])
 }
 
 const mapStateToProps = (state, ownProps) => {
