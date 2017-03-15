@@ -73,9 +73,22 @@ const getSeriesName = (intl, financeType, isOfficial) => {
   )
 }
 
-const getSeriesByType = (ownProps, finances, financeType, defaults, options) => {
-  const { intl } = ownProps
+const getIndividualSeries = ({ intl }, financeType, finances, isOfficial, defaults, options) => (
+  Object.assign(
+    {
+      name: getSeriesName(intl, financeType, isOfficial),
+      data: finances.map(f => ({
+        name: translateTimePeriod(f.timePeriod, intl),
+        y: f.amount
+      })),
+      financeType: financeType
+    },
+    defaults,
+    options
+  )
+)
 
+const getSeriesByType = (ownProps, finances, financeType, defaults, options) => {
   if (!(finances && finances.length)) { return [] }
 
   return finances
@@ -86,20 +99,15 @@ const getSeriesByType = (ownProps, finances, financeType, defaults, options) => 
     .reduce((series, item, itemIndex) => {
       if (!(item && item.length)) { return series }
 
-      series.push(
-        Object.assign(
-          {
-            name: getSeriesName(intl, financeType, itemIndex === 0),
-            data: item.map(f => ({
-              name: translateTimePeriod(f.timePeriod, intl),
-              y: f.amount
-            })),
-            financeType: financeType
-          },
-          defaults,
-          options[itemIndex]
-        )
-      )
+      series.push(getIndividualSeries(
+        ownProps,
+        financeType,
+        finances,
+        itemIndex === 0,
+        defaults,
+        options[itemIndex]
+      ))
+
       return series
     }, [])
 }
