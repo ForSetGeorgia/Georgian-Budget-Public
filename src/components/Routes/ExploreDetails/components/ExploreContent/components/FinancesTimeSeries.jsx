@@ -96,13 +96,13 @@ const getSeriesByType = (ownProps, finances, financeType, defaults, options) => 
       types[item.official ? 0 : 1].push(item)
       return types
     }, [[], []])
-    .reduce((series, item, itemIndex) => {
-      if (!(item && item.length)) { return series }
+    .reduce((series, filteredFinances, itemIndex) => {
+      if (!(filteredFinances && filteredFinances.length)) { return series }
 
       series.push(getIndividualSeries(
         ownProps,
         financeType,
-        finances,
+        filteredFinances,
         itemIndex === 0,
         defaults,
         options[itemIndex]
