@@ -73,8 +73,37 @@ const getSeriesName = (intl, financeType, isOfficial) => {
   )
 }
 
-const getIndividualSeries = ({ intl }, financeType, finances, isOfficial, defaults, options) => (
+const getSpentFinanceSeriesColor = isOfficial => (
+  isOfficial ? 'rgb(255, 191, 31)' : 'url(#highchartPattern)'
+)
+
+const getSeriesColor = (financeType, isOfficial) => {
+  if (financeType === 'plannedFinance') return 'transparent'
+  if (financeType === 'spentFinance') {
+    return getSpentFinanceSeriesColor(isOfficial)
+  }
+}
+
+const getPlannedFinanceSeriesBorder = isOfficial => ({
+  borderWidth: 2,
+  borderColor: 'black',
+  dashStyle: isOfficial ? 'solid' : 'dash'
+})
+
+const getSeriesOptions = (financeType, isOfficial) => (
   Object.assign(
+    {},
+    {
+      official: isOfficial,
+      color: getSeriesColor(financeType, isOfficial)
+    },
+    financeType === 'plannedFinance' ? getPlannedFinanceSeriesBorder(isOfficial) : {}
+  )
+)
+
+const getIndividualSeries = ({ intl }, financeType, finances, isOfficial) => (
+  Object.assign(
+    {},
     {
       name: getSeriesName(intl, financeType, isOfficial),
       data: finances.map(f => ({
@@ -83,12 +112,11 @@ const getIndividualSeries = ({ intl }, financeType, finances, isOfficial, defaul
       })),
       financeType: financeType
     },
-    defaults,
-    options
+    getSeriesOptions(financeType, isOfficial)
   )
 )
 
-const getSeriesByType = (ownProps, finances, financeType, defaults, options) => {
+const getSeriesByType = (ownProps, finances, financeType) => {
   if (!(finances && finances.length)) { return [] }
 
   return finances
@@ -103,9 +131,7 @@ const getSeriesByType = (ownProps, finances, financeType, defaults, options) => 
         ownProps,
         financeType,
         filteredFinances,
-        itemIndex === 0,
-        defaults,
-        options[itemIndex]
+        itemIndex === 0
       ))
 
       return series
@@ -126,22 +152,12 @@ const getSeriesForBudgetItemId = (state, ownProps, itemId) => {
     !showSpentFinances ? [] : getSeriesByType(
       ownProps,
       financePreparer(getItemSpentFinances(state, itemId)),
-      'spentFinance',
-      {},
-      [
-        { official: true, color: 'rgb(255, 191, 31)' },
-        { official: false, color: 'url(#highchartPattern)' }
-      ]
+      'spentFinance'
     ),
     !showPlannedFinances ? [] : getSeriesByType(
       ownProps,
       financePreparer(getItemPlannedFinances(state, itemId)),
-      'plannedFinance',
-      { color: 'transparent', borderWidth: 2, borderColor: 'black' },
-      [
-        { official: true, dashStyle: 'solid' },
-        { official: false, dashStyle: 'dash' }
-      ]
+      'plannedFinance'
     )
   )
 }
