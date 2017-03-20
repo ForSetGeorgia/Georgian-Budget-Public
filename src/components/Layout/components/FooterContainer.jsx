@@ -1,6 +1,7 @@
 const React = require('react')
+const axios = require('axios')
 const { func, string } = React.PropTypes
-const { injectIntl } = require('react-intl')
+const { injectIntl, intlShape } = require('react-intl')
 const { connect } = require('react-redux')
 
 const Footer = require('./Footer')
@@ -13,13 +14,21 @@ const {
 const FooterContainer = React.createClass({
   propTypes: {
     setLastUpdatedDate: func.isRequired,
-    lastUpdatedDate: string
+    lastUpdatedDate: string,
+    intl: intlShape.isRequired
   },
 
   componentDidMount () {
+    const { locale } = this.props.intl
+
     if (this.props.lastUpdatedDate) return
 
-    setTimeout(() => { this.props.setLastUpdatedDate('2005-05-04') }, 5000)
+    axios.get(`${process.env.API_URL}/${locale}/v1/last_updated_date`)
+    .then(response => {
+      if (!response || !response.data) return
+
+      this.props.setLastUpdatedDate(response.data.last_updated_date)
+    })
   },
 
   render () {
