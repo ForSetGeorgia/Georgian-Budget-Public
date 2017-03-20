@@ -1,13 +1,22 @@
 const React = require('react')
+const { string } = React.PropTypes
 const Svg = require('src/components/shared/Svg')
 const nedLogo = require('public/images/ned_logo')
 
-const Footer = () => (
+const lastUpdatedMarkup = lastUpdatedDate => (
+  <div>
+    {lastUpdatedDate && (new Date(lastUpdatedDate)).getFullYear()}
+  </div>
+)
+
+const Footer = props => (
   <div className='gb-Footer'>
     <footer className='gb-Footer-content'>
       <div>
         <span className='gb-Footer-content-copyright'>© </span><span>{(new Date()).getFullYear()}</span>
       </div>
+
+      {lastUpdatedMarkup(props.lastUpdatedDate)}
 
       <div className='gb-Footer-content-right'>
         <a className='gb-Footer-content-right-ned' href='http://www.ned.org/' target='blank' title="National Endowment for Democracy">
@@ -21,5 +30,9 @@ const Footer = () => (
     </footer>
   </div>
 )
+
+Footer.propTypes = {
+  lastUpdatedDate: string
+}
 
 module.exports = Footer

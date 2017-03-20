@@ -5,7 +5,7 @@ const HelmetContainer = require('./components/HelmetContainer')
 const MetaContainer = require('./components/MetaContainer')
 const LocaleInitializer = require('./components/LocaleInitializer')
 const Header = require('./components/Header/index')
-const Footer = require('./components/Footer')
+const FooterContainer = require('./components/FooterContainer')
 
 const Layout = React.createClass({
   propTypes: {
@@ -28,7 +28,7 @@ const Layout = React.createClass({
           </main>
         </div>
 
-        <Footer />
+        <FooterContainer />
       </div>
     )
   }

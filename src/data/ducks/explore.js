@@ -5,6 +5,7 @@ const { getBudgetItem } = require('src/data/modules/entities/budgetItem')
 
 const SET_DETAILS_ITEM_ID = 'georgianBudget/explore/SET_DETAILS_ITEM_ID'
 const MARK_LIST_LOADED = 'georgianBudget/explore/MARK_LIST_LOADED'
+const SET_LAST_UPDATED_DATE = 'georgianBudget/explore/SET_LAST_UPDATED_DATE'
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -24,6 +25,14 @@ const reducer = (state = {}, action) => {
           listLoaded: state.listLoaded.concat(action.listLoaded)
         }
       )
+    case SET_LAST_UPDATED_DATE:
+      return Object.assign(
+        {},
+        state,
+        {
+          lastUpdatedDate: action.date
+        }
+      )
     default:
       return state
   }
@@ -32,6 +41,11 @@ const reducer = (state = {}, action) => {
 reducer.setDetailsItemId = id => ({
   type: SET_DETAILS_ITEM_ID,
   id: id
+})
+
+reducer.setLastUpdatedDate = date => ({
+  type: SET_LAST_UPDATED_DATE,
+  date: date
 })
 
 reducer.markListLoaded = (listLoaded) => ({
@@ -56,6 +70,11 @@ reducer.getDetailsItem = state => (
 reducer.getExploreListLoaded = createSelector(
   reducer.getExploreState,
   ({listLoaded}) => listLoaded
+)
+
+reducer.getLastUpdatedDate = createSelector(
+  reducer.getExploreState,
+  ({lastUpdatedDate}) => lastUpdatedDate
 )
 
 module.exports = reducer

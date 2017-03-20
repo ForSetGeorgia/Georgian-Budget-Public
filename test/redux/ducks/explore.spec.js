@@ -8,7 +8,8 @@ const explore = require('src/data/ducks/explore')
 const {
   getExploreState,
   setDetailsItemId,
-  markListLoaded
+  markListLoaded,
+  setLastUpdatedDate
 } = explore
 
 describe('explore reducer', () => {
@@ -54,6 +55,27 @@ describe('explore reducer', () => {
       initialExploreState,
       {
         listLoaded: ['program', 'priority']
+      }
+    ))
+  })
+
+  it('handles setLastUpdatedDate action', () => {
+    const initialExploreState = getExploreState(initialState)
+    const previousState = Object.assign(
+      {},
+      initialExploreState,
+      {
+        lastUpdatedDate: '2011-01-28'
+      }
+    )
+
+    const action = setLastUpdatedDate('2011-05-04')
+    const newState = explore(previousState, action)
+
+    expect(newState).to.deep.eq(Object.assign(
+      initialExploreState,
+      {
+        lastUpdatedDate: '2011-05-04'
       }
     ))
   })
