@@ -10,6 +10,7 @@
   "app.explore.list.count": "ნაჩვენებია {count} {count, plural, one {{one}} other {{other}}}.",
   "app.financeTimeSeries.valueSuffix": "ლარი",
   "app.financeTimeSeries.yAxisTitle": "ლარი",
+  "app.footer.lastUpdated": "ბოლოს განახლებულია",
   "app.itemDetailsLink.parentProgram": "მშობელი პროგრამა",
   "app.itemDetailsLink.agency": "მხარჯავი დაწესებულება",
   "app.parentListLink.program": "ნახე პროგრამები",
