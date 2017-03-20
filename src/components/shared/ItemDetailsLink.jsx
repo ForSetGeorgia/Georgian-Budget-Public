@@ -19,18 +19,6 @@ const ItemDetailsLink = React.createClass({
     beforeName: string
   },
 
-  navigateToBudgetItem (e) {
-    e.preventDefault()
-
-    const { itemId, intl, router } = this.props
-    const { location } = this.context
-
-    router.push({
-      pathname: `/${intl.locale}/explore/details/${itemId}`,
-      query: location.query
-    })
-  },
-
   text () {
     const { beforeName = '', name } = this.props
 
@@ -38,10 +26,19 @@ const ItemDetailsLink = React.createClass({
   },
 
   render () {
+    const { itemId, intl } = this.props
+    const { location } = this.context
+
     if (!this.props.name) return null
 
     return (
-      <Link className='gb-Link' onClick={this.navigateToBudgetItem}>
+      <Link
+        className='gb-Link'
+        to={{
+          pathname: `/${intl.locale}/explore/details/${itemId}`,
+          query: location.query
+        }}
+      >
         ← {this.text()}
       </Link>
     )
