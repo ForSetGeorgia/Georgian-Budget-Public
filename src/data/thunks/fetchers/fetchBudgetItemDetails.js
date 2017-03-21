@@ -23,11 +23,10 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
   }
 
   axios.get(
-    `${process.env.API_URL}/${locale}/v1`,
+    `${process.env.API_URL}/${locale}/v1/budget_items/${itemId}`,
     {
       params: {
-        budgetItemFields: 'id,type,code,name,spentFinances,plannedFinances,related_budget_items',
-        budgetItemId: itemId
+        budgetItemFields: 'id,type,code,name,spentFinances,plannedFinances,related_budget_items'
       },
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
