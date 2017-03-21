@@ -1,3 +1,4 @@
+<!-- this file is template, this code is used to add pattern to chart svg defs element when generating highcharts -->
 <svg>
   <defs>
     <pattern id="highchartPattern" patternUnits="userSpaceOnUse" width="8" height="8">
