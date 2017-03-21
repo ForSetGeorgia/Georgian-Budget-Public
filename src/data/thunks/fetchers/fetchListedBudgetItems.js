@@ -9,13 +9,10 @@ const { mergeBudgetItems } = require('src/data/ducks/budgetItems')
 const { getLocale } = require('src/data/ducks/locale')
 const { addError } = require('src/data/ducks/errors')
 
-const camelToSnake = require('src/utilities/camelToSnake')
-
 const { getSelectedBudgetItemType } = require('src/data/ducks/filters')
 
 const fetchListedBudgetItems = () => (dispatch, getState) => {
   const state = getState()
-
   const locale = getLocale(state)
   const budgetItemType = getSelectedBudgetItemType(state)
 
@@ -25,15 +22,21 @@ const fetchListedBudgetItems = () => (dispatch, getState) => {
     if (requiredState[i].length === 0) return
   }
 
+  const getBudgetItemsPathForAPI = budgetItemType => {
+    switch (budgetItemType) {
+      case 'program': return 'programs'
+      case 'spendingAgency': return 'spending_agencies'
+      case 'priority': return 'priorities'
+      default: return ''
+    }
+  }
+
   axios.get(
-    `${process.env.API_URL}/${locale}/v1`,
+    `${process.env.API_URL}/${locale}/v1/${getBudgetItemsPathForAPI(budgetItemType)}`,
     {
       params: {
         budgetItemFields: 'id,name,type,spentFinances,plannedFinances',
-        filters: {
-          budgetItemType: camelToSnake(budgetItemType),
-          timePeriodType: 'year'
-        }
+        timePeriodType: 'year'
       },
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
