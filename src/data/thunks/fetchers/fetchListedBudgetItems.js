@@ -1,3 +1,4 @@
+const axios = require('axios')
 const { normalize, arrayOf } = require('normalizr')
 const budgetItemSchemaForLocale = require('src/data/schemas/budgetItemForLocale')
 
@@ -12,8 +13,6 @@ const camelToSnake = require('src/utilities/camelToSnake')
 
 const { getSelectedBudgetItemType } = require('src/data/ducks/filters')
 
-const georgianBudgetAPI = require('src/services/georgianBudgetAPI')
-
 const fetchListedBudgetItems = () => (dispatch, getState) => {
   const state = getState()
 
@@ -26,14 +25,23 @@ const fetchListedBudgetItems = () => (dispatch, getState) => {
     if (requiredState[i].length === 0) return
   }
 
-  georgianBudgetAPI.get(locale, 'v1', {
-    params: {
-      budgetItemFields: 'id,name,type,spentFinances,plannedFinances',
-      filters: {
-        budgetItemType: camelToSnake(budgetItemType),
-        timePeriodType: 'year'
+  axios.get(
+    `${process.env.API_URL}/${locale}/v1`,
+    {
+      params: {
+        budgetItemFields: 'id,name,type,spentFinances,plannedFinances',
+        filters: {
+          budgetItemType: camelToSnake(budgetItemType),
+          timePeriodType: 'year'
+        }
+      },
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-Key-Inflection': 'camel'
       }
     }
+  ).catch((error) => {
+    dispatch(addError(`Error communicating with API: ${error}`))
   }).then((response) => {
     if (!response || !response.data || typeof response.data !== 'object') return
 

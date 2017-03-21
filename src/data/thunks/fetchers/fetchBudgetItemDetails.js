@@ -1,3 +1,4 @@
+const axios = require('axios')
 const { normalize } = require('normalizr')
 const budgetItemSchemaForLocale = require('src/data/schemas/budgetItemForLocale')
 
@@ -8,8 +9,6 @@ const { mergeSpentFinances } = require('src/data/ducks/spentFinances')
 const { mergePlannedFinances } = require('src/data/ducks/plannedFinances')
 
 const { getLocale } = require('src/data/ducks/locale')
-
-const georgianBudgetAPI = require('src/services/georgianBudgetAPI')
 
 const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
   const state = getState()
@@ -23,11 +22,20 @@ const fetchBudgetItemDetails = (itemId) => (dispatch, getState) => {
     if (requiredState[i].length === 0) return
   }
 
-  georgianBudgetAPI.get(locale, 'v1', {
-    params: {
-      budgetItemFields: 'id,type,code,name,spentFinances,plannedFinances,related_budget_items',
-      budgetItemId: itemId
+  axios.get(
+    `${process.env.API_URL}/${locale}/v1`,
+    {
+      params: {
+        budgetItemFields: 'id,type,code,name,spentFinances,plannedFinances,related_budget_items',
+        budgetItemId: itemId
+      },
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-Key-Inflection': 'camel'
+      }
     }
+  ).catch((error) => {
+    dispatch(addError(`Error communicating with API: ${error}`))
   }).then((response) => {
     if (!response || !response.data || typeof response.data !== 'object') return
 
