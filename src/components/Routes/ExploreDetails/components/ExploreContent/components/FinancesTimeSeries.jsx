@@ -64,6 +64,20 @@ const getUniqueChartId = (ownProps) => {
   return `${itemIds.join(',')}-${getFinanceType(ownProps)}-${timePeriodType}-${intl.locale}`
 }
 
+const getMissingSeries = ({ intl }, missingTimePeriods, allTimePeriods) => {
+  if (missingTimePeriods.length === 0) { return undefined }
+
+  return {
+    name: intl.formatMessage(financeTypeMessages.missing),
+    data: missingTimePeriods.map(f => ({
+      y: 0,
+      x: allTimePeriods.indexOf(f)
+    })),
+    financeType: 'missingFinance',
+    color: 'rgb(117, 117, 117)'
+  }
+}
+
 const getFinanceTypeIntlMessage = (financeType, isOfficial) => (
   `${financeType}${isOfficial ? '' : 'Calculated'}`
 )
@@ -93,7 +107,6 @@ const getPlannedFinanceSeriesBorder = isOfficial => ({
 
 const getSeriesOptions = (financeType, isOfficial) => (
   Object.assign(
-    {},
     {
       official: isOfficial,
       color: getSeriesColor(financeType, isOfficial)
@@ -102,14 +115,14 @@ const getSeriesOptions = (financeType, isOfficial) => (
   )
 )
 
-const getIndividualSeries = ({ intl }, financeType, finances, isOfficial) => (
+const getIndividualSeries = ({ intl }, financeType, finances, isOfficial, allTimePeriods) => (
   Object.assign(
     {},
     {
       name: getSeriesName(intl, financeType, isOfficial),
       data: finances.map(f => ({
-        name: translateTimePeriod(f.timePeriod, intl),
-        y: f.amount
+        y: f.amount,
+        x: allTimePeriods.indexOf(f.timePeriod)
       })),
       financeType: financeType
     },
@@ -117,8 +130,7 @@ const getIndividualSeries = ({ intl }, financeType, finances, isOfficial) => (
   )
 )
 
-const getSeriesByType = (ownProps, finances) => {
-  // console.log(ownProps, finances, financeType, 'sd')
+const getSeriesByType = (ownProps, finances, allTimePeriods) => {
   const financesData = finances.data
   const financesType = finances.type
   if (!(financesData && financesData.length)) { return [] }
@@ -130,84 +142,112 @@ const getSeriesByType = (ownProps, finances) => {
     }, [[], []])
     .reduce((series, filteredFinances, itemIndex) => {
       if (!(filteredFinances && filteredFinances.length)) { return series }
-
       series.push(getIndividualSeries(
         ownProps,
         financesType,
         filteredFinances,
-        itemIndex === 0
+        itemIndex === 0,
+        allTimePeriods
       ))
 
       return series
     }, [])
 }
 
-const getCallbackForMonthTimeSlot = (timeSlots) => {
-  const missingTimeSlots = []
-  const first = timeSlots[0].replace('y', '').replace('m', '').split('_')
-  const last = timeSlots[timeSlots.length - 1].replace('y', '').replace('m', '').split('_')
-  // const current = timeSlots.shift().replace('y', '').replace('m', '').split("_")
-  const firstYear = parseInt(first[0])
-  const firstMonth = parseInt(first[1])
-  const lastYear = parseInt(last[0])
-  const lastMonth = parseInt(last[1])
-  console.log(timeSlots)
+const getCallbackForMonthTimePeriod = (timePeriods) => {
+  const missingTimePeriods = []
+  const [firstYear, firstMonth] = timePeriods[0].replace('y', '').replace('m', '').split('_').map((m) => parseInt(m))
+  const [lastYear, lastMonth] = timePeriods[timePeriods.length - 1].replace('y', '').replace('m', '').split('_').map((m) => parseInt(m))
+
   let isEnd = firstYear === lastYear && firstMonth === lastMonth
-  let currMonth = firstMonth
-  let currYear = firstYear
+  let [currYear, currMonth] = [firstYear, firstMonth]
   while (!isEnd) {
     currMonth = ++currMonth % 13
     if (currMonth === 0) {
       currMonth = 1
     }
     currYear += currMonth === 1 ? 1 : 0
-    const currTimeSlot = `y${currYear}_m${padStart(currMonth, 2, '0')}`
-    if (timeSlots.indexOf(currTimeSlot) === -1) {
-      console.log(currTimeSlot)
-      missingTimeSlots.push(currTimeSlot)
+    let currTimePeriod = `y${currYear}_m${padStart(currMonth, 2, '0')}`
+    if (timePeriods.indexOf(currTimePeriod) === -1) {
+      missingTimePeriods.push(currTimePeriod)
     }
     isEnd = currYear === lastYear && currMonth === lastMonth
   }
+  return missingTimePeriods
+}
 
-  // console.log(firstYear, firstMonth, lastYear, lastMonth, missingTimeSlots)
-  return 'monthCallback'
+const getCallbackForQuarterTimePeriod = (timePeriods) => {
+  const missingTimePeriods = []
+  const [firstYear, firstQuarter] = timePeriods[0].replace('y', '').replace('q', '').split('_').map((m) => parseInt(m))
+  const [lastYear, lastQuarter] = timePeriods[timePeriods.length - 1].replace('y', '').replace('q', '').split('_').map((m) => parseInt(m))
+
+  let isEnd = firstYear === lastYear && firstQuarter === lastQuarter
+  let [currYear, currQuarter] = [firstYear, firstQuarter]
+
+  while (!isEnd) {
+    currQuarter = ++currQuarter % 5
+    if (currQuarter === 0) {
+      currQuarter = 1
+    }
+    currYear += currQuarter === 1 ? 1 : 0
+    let currTimePeriod = `y${currYear}_q${currQuarter}`
+    if (timePeriods.indexOf(currTimePeriod) === -1) {
+      missingTimePeriods.push(currTimePeriod)
+    }
+    isEnd = currYear === lastYear && currQuarter === lastQuarter
+  }
+  return missingTimePeriods
 }
-const getCallbackForQuarterTimeSlot = () => {
-  console.log('quarterCallback')
-  return 'quarterCallback'
+
+const getCallbackForYearTimePeriod = (timePeriods) => {
+  const missingTimePeriods = []
+  const firstYear = parseInt(timePeriods[0].replace('y', ''))
+  const lastYear = parseInt(timePeriods[timePeriods.length - 1].replace('y', ''))
+  let isEnd = firstYear === lastYear
+  let [currYear] = [firstYear]
+
+  while (!isEnd) {
+    ++currYear
+    let currTimePeriod = `y${currYear}`
+    if (timePeriods.indexOf(currTimePeriod) === -1) {
+      missingTimePeriods.push(currTimePeriod)
+    }
+    isEnd = currYear === lastYear
+  }
+  return missingTimePeriods
 }
-const getCallbackForYearTimeSlot = () => {
-  console.log('yearCallback')
-  return 'yearCallback'
-}
-const getCallbackForTimeSlotType = (timePeriodType) => {
+
+const getCallbackForTimePeriodType = (timePeriodType) => {
   if (timePeriodType === 'month') {
-    return getCallbackForMonthTimeSlot
+    return getCallbackForMonthTimePeriod
   } else if (timePeriodType === 'quarter') {
-    return getCallbackForQuarterTimeSlot
+    return getCallbackForQuarterTimePeriod
   } else if (timePeriodType === 'year') {
-    return getCallbackForYearTimeSlot
+    return getCallbackForYearTimePeriod
   }
   return () => {}
 }
 
-const getSeriesForMissingTimeSlotByType = (timeSlots, timePeriodTypeCallback) => {
-  // console.log(timeSlots, timePeriodTypeCallback)
-  return timePeriodTypeCallback(timeSlots)
+const getMissingTimePeriodsByType = (timePeriods, timePeriodTypeCallback) => {
+  return timePeriodTypeCallback(timePeriods)
 }
 
-const getSeriesForMissingTimeSlot = ({ timePeriodType }, finances) => {
-  // console.log(getCallbackForTimeSlotType(timePeriodType))
-  getSeriesForMissingTimeSlotByType(
-    uniq(finances.reduce((reducer, finance) => {
-      return reducer.concat(finance.data.map((element) => element.timePeriod))
-    }, [])).sort(),
-    getCallbackForTimeSlotType(timePeriodType)
+const getCategorySpecifications = ({ timePeriodType, intl }, finances) => {
+  const existingTimePeriods = uniq(finances.reduce((reducer, finance) => {
+    return reducer.concat(finance.data.map((element) => element.timePeriod))
+  }, [])).sort()
+
+  const missingTimePeriods = getMissingTimePeriodsByType(
+    existingTimePeriods,
+    getCallbackForTimePeriodType(timePeriodType)
   )
-  return []
+
+  const fullSetOfTimePeriods = existingTimePeriods.concat(missingTimePeriods).sort()
+
+  return [missingTimePeriods, fullSetOfTimePeriods, fullSetOfTimePeriods.map((m) => translateTimePeriod(m, intl))]
 }
 
-const getSeriesForBudgetItemId = (state, ownProps, itemId) => {
+const getFinancesForBudgetItemId = (state, ownProps, itemId) => {
   const {
     showPlannedFinances,
     showSpentFinances,
@@ -216,40 +256,44 @@ const getSeriesForBudgetItemId = (state, ownProps, itemId) => {
   } = ownProps
 
   const financePreparer = composeFinancePreparer(inTimePeriod, timePeriodType)
-  const finances = []
-  if (showSpentFinances) {
-    finances.push({ data: financePreparer(getItemSpentFinances(state, itemId)), type: 'spentFinance' })
-  }
-  if (showPlannedFinances) {
-    finances.push({ data: financePreparer(getItemPlannedFinances(state, itemId)), type: 'plannedFinance' })
-  }
-  return finances.reduce((reducer, finance) => {
-    return reducer.concat(getSeriesByType(ownProps, finance))
-  }, []).concat(getSeriesForMissingTimeSlot(ownProps, finances))
+
+  return [].concat(
+    showSpentFinances ? { data: financePreparer(getItemSpentFinances(state, itemId)), type: 'spentFinance' } : {},
+    showPlannedFinances ? { data: financePreparer(getItemPlannedFinances(state, itemId)), type: 'plannedFinance' } : {}
+  )
 }
 
-const getSeries = (state, ownProps) => {
-  const allSeries = ownProps.itemIds.reduce((series, itemId) => {
-    return series.concat(...getSeriesForBudgetItemId(state, ownProps, itemId))
+const getCategoriesAndSeries = (state, ownProps) => {
+  const allFinances = ownProps.itemIds.reduce((reducer, itemId) => {
+    return reducer.concat(getFinancesForBudgetItemId(state, ownProps, itemId))
   }, [])
-  // console.log(allSeries)
-  console.log('--------------')
-  return allSeries
-}
 
-const mapStateToProps = (state, ownProps) => {
-  const { intl } = ownProps
+  const [missingTimePeriods, allTimePeriods, allTimePeriodNames] = getCategorySpecifications(ownProps, allFinances)
 
   return {
-    className: 'gb-FinanceTimeSeries',
-    exportTitle: getExportTitle(state, ownProps),
-    intl,
-    key: getUniqueChartId(ownProps),
-    series: getSeries(state, ownProps),
-    uniqueChartId: getUniqueChartId(ownProps),
-    valueSuffix: intl.formatMessage(messages.valueSuffix),
-    yAxisTitle: intl.formatMessage(messages.yAxisTitle)
+    categories: allTimePeriodNames,
+    series: allFinances
+      .reduce((reducer, finance) => {
+        return reducer.concat(getSeriesByType(ownProps, finance, allTimePeriods))
+      }, [])
+      .concat(getMissingSeries(ownProps, missingTimePeriods, allTimePeriods))
+      .filter((f) => typeof f !== 'undefined')
   }
+}
+const mapStateToProps = (state, ownProps) => {
+  const { intl } = ownProps
+  return Object.assign(
+    {
+      className: 'gb-FinanceTimeSeries',
+      exportTitle: getExportTitle(state, ownProps),
+      intl,
+      key: getUniqueChartId(ownProps),
+      uniqueChartId: getUniqueChartId(ownProps),
+      valueSuffix: intl.formatMessage(messages.valueSuffix),
+      yAxisTitle: intl.formatMessage(messages.yAxisTitle)
+    },
+    getCategoriesAndSeries(state, ownProps)
+  )
 }
 
 const FinanceTimeSeries = injectIntl(connect(mapStateToProps)(TimeSeriesChart))
