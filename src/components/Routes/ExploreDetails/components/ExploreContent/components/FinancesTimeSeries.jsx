@@ -6,6 +6,7 @@ const padStart = require('lodash.padstart')
 
 const TimeSeriesChart = require('./TimeSeriesChart')
 const timePeriodTypeMessages = require('src/messages/timePeriodTypes')
+const appMessages = require('src/messages/app')
 const financeTypeMessages = require('src/messages/financeTypes')
 const { getBudgetItemName } = require('src/data/modules/entities/budgetItem')
 const { getItemSpentFinances } = require('src/data/modules/entities/spentFinance')
@@ -57,6 +58,13 @@ const getExportTitle = (state, ownProps) => {
   const names = itemIds.map(itemId => getBudgetItemName(state, itemId))
 
   return `${names.join(' | ')} - ${timePeriodTypeMessage}`
+}
+
+const getExportSubTitle = (state, ownProps) => {
+  const { getLastUpdatedDate } = require('src/data/ducks/explore')
+  const { intl } = ownProps
+
+  return `${intl.formatMessage(appMessages.lastUpdated)}: ${getLastUpdatedDate(state)}` // `${intl.formatMessage(timePeriodTypeMessages[].adjective} - ${timePeriodTypeMessage}`
 }
 
 const getUniqueChartId = (ownProps) => {
@@ -286,6 +294,7 @@ const mapStateToProps = (state, ownProps) => {
     {
       className: 'gb-FinanceTimeSeries',
       exportTitle: getExportTitle(state, ownProps),
+      exportSubTitle: getExportSubTitle(state, ownProps),
       intl,
       key: getUniqueChartId(ownProps),
       uniqueChartId: getUniqueChartId(ownProps),
