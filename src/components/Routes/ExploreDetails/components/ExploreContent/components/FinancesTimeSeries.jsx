@@ -1,7 +1,8 @@
 const Ramda = require('ramda')
 const { connect } = require('react-redux')
 const { injectIntl, defineMessages } = require('react-intl')
-const { uniq, padStart } = require('lodash')
+const uniq = require('lodash.uniq')
+const padStart = require('lodash.padstart')
 
 const TimeSeriesChart = require('./TimeSeriesChart')
 const timePeriodTypeMessages = require('src/messages/timePeriodTypes')
@@ -131,8 +132,7 @@ const getIndividualSeries = ({ intl }, financeType, finances, isOfficial, allTim
 )
 
 const getSeriesByType = (ownProps, finances, allTimePeriods) => {
-  const financesData = finances.data
-  const financesType = finances.type
+  const { data: financesData, type: financesType } = finances
   if (!(financesData && financesData.length)) { return [] }
 
   return financesData
