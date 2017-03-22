@@ -25,7 +25,7 @@ const switchDetailsItemId = require('src/data/thunks/switchDetailsItemId')
 
 const LoadingIndicator = require('src/components/shared/LoadingIndicator')
 const CustomGriddle = require('src/components/shared/CustomGriddle')
-const GriddleFormattedAmount = require('src/components/shared/GriddleFormattedAmount')
+const RelatedItemsTableCell = require('./RelatedItemsTableCell')
 const BudgetItemListFetcher = require('./BudgetItemListFetcher')
 const SearchBarContainer = require('./SearchBarContainer')
 
@@ -48,16 +48,6 @@ const BudgetItemSelectList = React.createClass({
     router: object
   },
 
-  handleClick (row) {
-    const { intl, router } = this.props
-    const { location } = this.context
-
-    router.push({
-      pathname: `/${intl.locale}/explore/details/${row.props.data.id}`,
-      query: location.query
-    })
-  },
-
   isLoading () {
     return !this.props.listLoaded
   },
@@ -72,7 +62,6 @@ const BudgetItemSelectList = React.createClass({
         <SearchBarContainer />
         <CustomGriddle
           results={items}
-          onRowClick={this.handleClick}
           showFilter={false}
           bodyHeight='400'
           columns={columns}
@@ -96,11 +85,12 @@ const BudgetItemSelectList = React.createClass({
 const getColumnMetadata = (state, intl) => (
   [{
     columnName: 'name',
-    displayName: intl.formatMessage(budgetItemMessages.name)
+    displayName: intl.formatMessage(budgetItemMessages.name),
+    customComponent: RelatedItemsTableCell
   }].concat(getSelectedYears(state).map(year => ({
     columnName: year,
     displayName: translateTimePeriod(year, intl),
-    customComponent: GriddleFormattedAmount
+    customComponent: RelatedItemsTableCell
   })))
 )
 
