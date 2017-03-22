@@ -48,5 +48,9 @@ module.exports = defineMessages({
   difference: {
     id: 'financeType.difference',
     defaultMessage: 'Difference'
+  },
+  missing: {
+    id: 'financeType.missing',
+    defaultMessage: 'Missing'
   }
 })
