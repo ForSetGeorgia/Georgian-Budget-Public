@@ -1,7 +1,6 @@
 const React = require('react')
 const { string, array } = React.PropTypes
 const { intlShape } = require('react-intl')
-const Svg = require('src/components/shared/Svg')
 
 const TimeSeriesChart = React.createClass({
 
@@ -10,6 +9,7 @@ const TimeSeriesChart = React.createClass({
     exportTitle: string.isRequired,
     exportSubTitle: string.isRequired,
     intl: intlShape.isRequired,
+    categories: array.isRequired,
     series: array.isRequired,
     subtitle: string,
     title: string,
@@ -40,6 +40,7 @@ const TimeSeriesChart = React.createClass({
       exportTitle,
       exportSubTitle,
       subtitle,
+      categories,
       series,
       valueSuffix,
       yAxisTitle,
@@ -83,6 +84,7 @@ const TimeSeriesChart = React.createClass({
       },
       xAxis: {
         type: 'category',
+        categories: categories,
         crosshair: true
       },
       yAxis: {
@@ -98,22 +100,24 @@ const TimeSeriesChart = React.createClass({
       series: series
     }
 
-    this.chart = new Highcharts.Chart(
-      uniqueChartId,
-      options
-    )
-
     const that = this
 
-    this.chart.series.forEach((series, index) => {
-      if (that.hasPlannedFinanceSeriesIndex(index)) {
-        series.legendSymbol.attr('stroke-width', '2')
-        series.legendSymbol.attr('stroke', 'black')
-        if (!series.userOptions.official) {
-          series.legendSymbol.attr('stroke-dasharray', '5,5')
-        }
+    this.chart = new Highcharts.Chart(
+      uniqueChartId,
+      options,
+      function (chartObject) {
+        chartObject.series.forEach((series, index) => {
+          if (that.hasPlannedFinanceSeriesIndex(index)) {
+            series.legendSymbol.attr('stroke-width', '2')
+            series.legendSymbol.attr('stroke', 'black')
+            if (!series.userOptions.official) {
+              series.legendSymbol.attr('stroke-dasharray', '5,5')
+            }
+          }
+        })
+        chartObject.renderer.defs.element.innerHTML += '<pattern id="highchartPattern" patternUnits="userSpaceOnUse" width="8" height="8"> <rect  x="0" y="0" width="8" height="8" stroke="transparent" fill="rgb(255, 191, 31)"></rect> <path stroke="rgb(237, 235, 243)" stroke-width="2" d="M-2.008,1.997l4.004-4.004 M-0.005,8.006l8.011-8.01 M6.002,10.008l4.006-4.006"/> </pattern>'
       }
-    })
+    )
   },
 
   // Destroy chart before unmount.
@@ -124,15 +128,10 @@ const TimeSeriesChart = React.createClass({
   // Create the div which the chart will be rendered to.
   render: function () {
     return (
-      <div>
-        <Svg
-          className='gb-FinanceTimeSeries-Pattern'
-          markup={require('public/images/highchart_pattern')} />
-        <div
-          id={this.props.uniqueChartId}
-          className={this.props.className}
-        />
-      </div>
+      <div
+        id={this.props.uniqueChartId}
+        className={this.props.className}
+      />
     )
   }
 })

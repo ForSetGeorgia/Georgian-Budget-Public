@@ -1,6 +1,8 @@
 const Ramda = require('ramda')
 const { connect } = require('react-redux')
 const { injectIntl, defineMessages } = require('react-intl')
+const uniq = require('lodash.uniq')
+const padStart = require('lodash.padstart')
 
 const TimeSeriesChart = require('./TimeSeriesChart')
 const timePeriodTypeMessages = require('src/messages/timePeriodTypes')
@@ -71,6 +73,20 @@ const getUniqueChartId = (ownProps) => {
   return `${itemIds.join(',')}-${getFinanceType(ownProps)}-${timePeriodType}-${intl.locale}`
 }
 
+const getMissingSeries = ({ intl }, missingTimePeriods, allTimePeriods) => {
+  if (missingTimePeriods.length === 0) { return undefined }
+
+  return {
+    name: intl.formatMessage(financeTypeMessages.missing),
+    data: missingTimePeriods.map(f => ({
+      y: 0,
+      x: allTimePeriods.indexOf(f)
+    })),
+    financeType: 'missingFinance',
+    color: 'rgb(117, 117, 117)'
+  }
+}
+
 const getFinanceTypeIntlMessage = (financeType, isOfficial) => (
   `${financeType}${isOfficial ? '' : 'Calculated'}`
 )
@@ -100,7 +116,6 @@ const getPlannedFinanceSeriesBorder = isOfficial => ({
 
 const getSeriesOptions = (financeType, isOfficial) => (
   Object.assign(
-    {},
     {
       official: isOfficial,
       color: getSeriesColor(financeType, isOfficial)
@@ -109,14 +124,14 @@ const getSeriesOptions = (financeType, isOfficial) => (
   )
 )
 
-const getIndividualSeries = ({ intl }, financeType, finances, isOfficial) => (
+const getIndividualSeries = ({ intl }, financeType, finances, isOfficial, allTimePeriods) => (
   Object.assign(
     {},
     {
       name: getSeriesName(intl, financeType, isOfficial),
       data: finances.map(f => ({
-        name: translateTimePeriod(f.timePeriod, intl),
-        y: f.amount
+        y: f.amount,
+        x: allTimePeriods.indexOf(f.timePeriod)
       })),
       financeType: financeType
     },
@@ -124,29 +139,123 @@ const getIndividualSeries = ({ intl }, financeType, finances, isOfficial) => (
   )
 )
 
-const getSeriesByType = (ownProps, finances, financeType) => {
-  if (!(finances && finances.length)) { return [] }
+const getSeriesByType = (ownProps, finances, allTimePeriods) => {
+  const { data: financesData, type: financesType } = finances
+  if (!(financesData && financesData.length)) { return [] }
 
-  return finances
+  return financesData
     .reduce((types, item) => {
       types[item.official ? 0 : 1].push(item)
       return types
     }, [[], []])
     .reduce((series, filteredFinances, itemIndex) => {
       if (!(filteredFinances && filteredFinances.length)) { return series }
-
       series.push(getIndividualSeries(
         ownProps,
-        financeType,
+        financesType,
         filteredFinances,
-        itemIndex === 0
+        itemIndex === 0,
+        allTimePeriods
       ))
 
       return series
     }, [])
 }
 
-const getSeriesForBudgetItemId = (state, ownProps, itemId) => {
+const getCallbackForMonthTimePeriod = (timePeriods) => {
+  const missingTimePeriods = []
+  const [firstYear, firstMonth] = timePeriods[0].replace('y', '').replace('m', '').split('_').map((m) => parseInt(m))
+  const [lastYear, lastMonth] = timePeriods[timePeriods.length - 1].replace('y', '').replace('m', '').split('_').map((m) => parseInt(m))
+
+  let isEnd = firstYear === lastYear && firstMonth === lastMonth
+  let [currYear, currMonth] = [firstYear, firstMonth]
+  while (!isEnd) {
+    currMonth = ++currMonth % 13
+    if (currMonth === 0) {
+      currMonth = 1
+    }
+    currYear += currMonth === 1 ? 1 : 0
+    let currTimePeriod = `y${currYear}_m${padStart(currMonth, 2, '0')}`
+    if (timePeriods.indexOf(currTimePeriod) === -1) {
+      missingTimePeriods.push(currTimePeriod)
+    }
+    isEnd = currYear === lastYear && currMonth === lastMonth
+  }
+  return missingTimePeriods
+}
+
+const getCallbackForQuarterTimePeriod = (timePeriods) => {
+  const missingTimePeriods = []
+  const [firstYear, firstQuarter] = timePeriods[0].replace('y', '').replace('q', '').split('_').map((m) => parseInt(m))
+  const [lastYear, lastQuarter] = timePeriods[timePeriods.length - 1].replace('y', '').replace('q', '').split('_').map((m) => parseInt(m))
+
+  let isEnd = firstYear === lastYear && firstQuarter === lastQuarter
+  let [currYear, currQuarter] = [firstYear, firstQuarter]
+
+  while (!isEnd) {
+    currQuarter = ++currQuarter % 5
+    if (currQuarter === 0) {
+      currQuarter = 1
+    }
+    currYear += currQuarter === 1 ? 1 : 0
+    let currTimePeriod = `y${currYear}_q${currQuarter}`
+    if (timePeriods.indexOf(currTimePeriod) === -1) {
+      missingTimePeriods.push(currTimePeriod)
+    }
+    isEnd = currYear === lastYear && currQuarter === lastQuarter
+  }
+  return missingTimePeriods
+}
+
+const getCallbackForYearTimePeriod = (timePeriods) => {
+  const missingTimePeriods = []
+  const firstYear = parseInt(timePeriods[0].replace('y', ''))
+  const lastYear = parseInt(timePeriods[timePeriods.length - 1].replace('y', ''))
+  let isEnd = firstYear === lastYear
+  let [currYear] = [firstYear]
+
+  while (!isEnd) {
+    ++currYear
+    let currTimePeriod = `y${currYear}`
+    if (timePeriods.indexOf(currTimePeriod) === -1) {
+      missingTimePeriods.push(currTimePeriod)
+    }
+    isEnd = currYear === lastYear
+  }
+  return missingTimePeriods
+}
+
+const getCallbackForTimePeriodType = (timePeriodType) => {
+  if (timePeriodType === 'month') {
+    return getCallbackForMonthTimePeriod
+  } else if (timePeriodType === 'quarter') {
+    return getCallbackForQuarterTimePeriod
+  } else if (timePeriodType === 'year') {
+    return getCallbackForYearTimePeriod
+  }
+  return () => {}
+}
+
+const getMissingTimePeriodsByType = (timePeriods, timePeriodTypeCallback) => {
+  return timePeriodTypeCallback(timePeriods)
+}
+
+const getCategorySpecifications = ({ timePeriodType, intl }, finances) => {
+  const existingTimePeriods = uniq(finances.reduce((reducer, finance) => {
+    return reducer.concat(finance.data.map((element) => element.timePeriod))
+  }, [])).sort()
+
+  const missingTimePeriods = getMissingTimePeriodsByType(
+    existingTimePeriods,
+    getCallbackForTimePeriodType(timePeriodType)
+  )
+
+  const fullSetOfTimePeriods = existingTimePeriods.concat(missingTimePeriods).sort()
+
+  return [missingTimePeriods, fullSetOfTimePeriods, fullSetOfTimePeriods.map((m) => translateTimePeriod(m, intl))]
+}
+
+const getFinancesForBudgetItemId = (state, ownProps, itemId) => {
   const {
     showPlannedFinances,
     showSpentFinances,
@@ -157,39 +266,43 @@ const getSeriesForBudgetItemId = (state, ownProps, itemId) => {
   const financePreparer = composeFinancePreparer(inTimePeriod, timePeriodType)
 
   return [].concat(
-    !showSpentFinances ? [] : getSeriesByType(
-      ownProps,
-      financePreparer(getItemSpentFinances(state, itemId)),
-      'spentFinance'
-    ),
-    !showPlannedFinances ? [] : getSeriesByType(
-      ownProps,
-      financePreparer(getItemPlannedFinances(state, itemId)),
-      'plannedFinance'
-    )
+    showSpentFinances ? { data: financePreparer(getItemSpentFinances(state, itemId)), type: 'spentFinance' } : {},
+    showPlannedFinances ? { data: financePreparer(getItemPlannedFinances(state, itemId)), type: 'plannedFinance' } : {}
   )
 }
 
-const getSeries = (state, ownProps) => {
-  return ownProps.itemIds.reduce((allSeries, itemId) => {
-    return allSeries.concat(...getSeriesForBudgetItemId(state, ownProps, itemId))
+const getCategoriesAndSeries = (state, ownProps) => {
+  const allFinances = ownProps.itemIds.reduce((reducer, itemId) => {
+    return reducer.concat(getFinancesForBudgetItemId(state, ownProps, itemId))
   }, [])
-}
 
-const mapStateToProps = (state, ownProps) => {
-  const { intl } = ownProps
+  const [missingTimePeriods, allTimePeriods, allTimePeriodNames] = getCategorySpecifications(ownProps, allFinances)
 
   return {
-    className: 'gb-FinanceTimeSeries',
-    exportTitle: getExportTitle(state, ownProps),
-    exportSubTitle: getExportSubTitle(state, ownProps),
-    intl,
-    key: getUniqueChartId(ownProps),
-    series: getSeries(state, ownProps),
-    uniqueChartId: getUniqueChartId(ownProps),
-    valueSuffix: intl.formatMessage(messages.valueSuffix),
-    yAxisTitle: intl.formatMessage(messages.yAxisTitle)
+    categories: allTimePeriodNames,
+    series: allFinances
+      .reduce((reducer, finance) => {
+        return reducer.concat(getSeriesByType(ownProps, finance, allTimePeriods))
+      }, [])
+      .concat(getMissingSeries(ownProps, missingTimePeriods, allTimePeriods))
+      .filter((f) => typeof f !== 'undefined')
   }
+}
+const mapStateToProps = (state, ownProps) => {
+  const { intl } = ownProps
+  return Object.assign(
+    {
+      className: 'gb-FinanceTimeSeries',
+      exportTitle: getExportTitle(state, ownProps),
+      exportSubTitle: getExportSubTitle(state, ownProps),
+      intl,
+      key: getUniqueChartId(ownProps),
+      uniqueChartId: getUniqueChartId(ownProps),
+      valueSuffix: intl.formatMessage(messages.valueSuffix),
+      yAxisTitle: intl.formatMessage(messages.yAxisTitle)
+    },
+    getCategoriesAndSeries(state, ownProps)
+  )
 }
 
 const FinanceTimeSeries = injectIntl(connect(mapStateToProps)(TimeSeriesChart))
