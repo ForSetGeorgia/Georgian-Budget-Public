@@ -2,7 +2,6 @@ const Ramda = require('ramda')
 const { connect } = require('react-redux')
 const { injectIntl, defineMessages } = require('react-intl')
 const uniq = require('lodash.uniq')
-const padStart = require('lodash.padstart')
 
 const TimeSeriesChart = require('./TimeSeriesChart')
 const timePeriodTypeMessages = require('src/messages/timePeriodTypes')
@@ -12,6 +11,7 @@ const { getBudgetItemName } = require('src/data/modules/entities/budgetItem')
 const { getItemSpentFinances } = require('src/data/modules/entities/spentFinance')
 const { getItemPlannedFinances } = require('src/data/modules/entities/plannedFinance')
 const sortByStartDate = require('src/data/modules/timePeriod/sortByStartDate')
+const { getMissingTimePeriodMontly, getMissingTimePeriodQuarterly, getMissingTimePeriodYearly } = require('src/utilities/timePeriodGaps')
 
 const filterByTimePeriodType =
 require('src/data/modules/timePeriod/filterByTimePeriodType')
@@ -161,77 +161,13 @@ const getSeriesByType = (ownProps, finances, allTimePeriods) => {
       return series
     }, [])
 }
-
-const getCallbackForMonthTimePeriod = (timePeriods) => {
-  const missingTimePeriods = []
-  const [firstYear, firstMonth] = timePeriods[0].replace('y', '').replace('m', '').split('_').map((m) => parseInt(m))
-  const [lastYear, lastMonth] = timePeriods[timePeriods.length - 1].replace('y', '').replace('m', '').split('_').map((m) => parseInt(m))
-
-  let isEnd = firstYear === lastYear && firstMonth === lastMonth
-  let [currYear, currMonth] = [firstYear, firstMonth]
-  while (!isEnd) {
-    currMonth = ++currMonth % 13
-    if (currMonth === 0) {
-      currMonth = 1
-    }
-    currYear += currMonth === 1 ? 1 : 0
-    let currTimePeriod = `y${currYear}_m${padStart(currMonth, 2, '0')}`
-    if (timePeriods.indexOf(currTimePeriod) === -1) {
-      missingTimePeriods.push(currTimePeriod)
-    }
-    isEnd = currYear === lastYear && currMonth === lastMonth
-  }
-  return missingTimePeriods
-}
-
-const getCallbackForQuarterTimePeriod = (timePeriods) => {
-  const missingTimePeriods = []
-  const [firstYear, firstQuarter] = timePeriods[0].replace('y', '').replace('q', '').split('_').map((m) => parseInt(m))
-  const [lastYear, lastQuarter] = timePeriods[timePeriods.length - 1].replace('y', '').replace('q', '').split('_').map((m) => parseInt(m))
-
-  let isEnd = firstYear === lastYear && firstQuarter === lastQuarter
-  let [currYear, currQuarter] = [firstYear, firstQuarter]
-
-  while (!isEnd) {
-    currQuarter = ++currQuarter % 5
-    if (currQuarter === 0) {
-      currQuarter = 1
-    }
-    currYear += currQuarter === 1 ? 1 : 0
-    let currTimePeriod = `y${currYear}_q${currQuarter}`
-    if (timePeriods.indexOf(currTimePeriod) === -1) {
-      missingTimePeriods.push(currTimePeriod)
-    }
-    isEnd = currYear === lastYear && currQuarter === lastQuarter
-  }
-  return missingTimePeriods
-}
-
-const getCallbackForYearTimePeriod = (timePeriods) => {
-  const missingTimePeriods = []
-  const firstYear = parseInt(timePeriods[0].replace('y', ''))
-  const lastYear = parseInt(timePeriods[timePeriods.length - 1].replace('y', ''))
-  let isEnd = firstYear === lastYear
-  let [currYear] = [firstYear]
-
-  while (!isEnd) {
-    ++currYear
-    let currTimePeriod = `y${currYear}`
-    if (timePeriods.indexOf(currTimePeriod) === -1) {
-      missingTimePeriods.push(currTimePeriod)
-    }
-    isEnd = currYear === lastYear
-  }
-  return missingTimePeriods
-}
-
 const getCallbackForTimePeriodType = (timePeriodType) => {
   if (timePeriodType === 'month') {
-    return getCallbackForMonthTimePeriod
+    return getMissingTimePeriodMontly
   } else if (timePeriodType === 'quarter') {
-    return getCallbackForQuarterTimePeriod
+    return getMissingTimePeriodQuarterly
   } else if (timePeriodType === 'year') {
-    return getCallbackForYearTimePeriod
+    return getMissingTimePeriodYearly
   }
   return () => {}
 }
@@ -277,7 +213,6 @@ const getCategoriesAndSeries = (state, ownProps) => {
   }, [])
 
   const [missingTimePeriods, allTimePeriods, allTimePeriodNames] = getCategorySpecifications(ownProps, allFinances)
-
   return {
     categories: allTimePeriodNames,
     series: allFinances
