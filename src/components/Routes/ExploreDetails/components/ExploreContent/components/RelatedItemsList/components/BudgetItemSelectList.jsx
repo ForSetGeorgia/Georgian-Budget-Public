@@ -130,7 +130,7 @@ const getItems = (state, itemIds) => {
     getListedItemIds(state)
     .map(itemId => getItemValues(state, itemId, selectedYears))
     .filter(listItem => (
-      listItem.name && listItem.name.toLowerCase().includes(getSearch(state))
+      listItem.name && listItem.name.toLowerCase().includes(getSearch(state).toLowerCase())
     ))
   )
 }
