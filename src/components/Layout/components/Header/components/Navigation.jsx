@@ -28,6 +28,16 @@ const Navigation = (props) => {
         />
       </Link>
       <Link
+        to={`/${locale}/media`}
+        className='app-navigation-link'
+      >
+        <FormattedMessage
+          id='app.header.media'
+          description='Media link in the Header navigation'
+          defaultMessage='In Media'
+        />
+      </Link>
+      <Link
         to={`/${locale}/about`}
         className='app-navigation-link'
       >
