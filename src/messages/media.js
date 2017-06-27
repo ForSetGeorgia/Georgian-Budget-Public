@@ -20,5 +20,9 @@ module.exports = defineMessages({
   date: {
     id: 'app.media.date',
     defaultMessage: 'Date:'
+  },
+  source: {
+    id: 'app.media.source',
+    defaultMessage: 'Source:'
   }
 })

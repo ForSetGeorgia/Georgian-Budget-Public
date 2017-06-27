@@ -38,7 +38,6 @@
   flex-wrap: wrap;
 }
 .gb-MediaListItem {
-  width: 50%;
   margin-bottom: 30px;
   &:nth-child(odd) {
     padding-right: 0;
@@ -55,8 +54,11 @@
     line-height: 2.56rem;
     padding-bottom: 16px;
   }
-  .embed-wrapper {
+  .media-wrapper {
     width: 100%;
+    > * {
+      width: 100%;
+    }
   }
   .source {
     padding-bottom: 20px;

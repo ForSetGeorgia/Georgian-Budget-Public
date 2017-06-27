@@ -1,5 +1,6 @@
 const React = require('react')
 const { injectIntl, intlShape } = require('react-intl')
+const { object } = React.PropTypes
 const Griddle = require('griddle-react')
 const axios = require('axios')
 const mediaMessages = require('src/messages/media')
@@ -13,19 +14,18 @@ const MediaContent = React.createClass({
       results: [],
       currentPage: 0,
       pageSize: 10,
-      maxPages: 0,
+      maxPages: 0
     }
   },
   componentWillMount: function () {
     this.loadDataFromAPI(this.state.currentPage)
   },
   setPage: function (index) { // This should interact with the data source to get the page at the given index
-    console.log('setPage')
     this.loadDataFromAPI(index)
   },
 
   updateState ({results, currentPage, total}) {
-    console.log(results)
+    // console.log(results, currentPage, total)
     this.setState({
       maxPages: Math.ceil(total / this.state.pageSize),
       results: results,
@@ -33,9 +33,9 @@ const MediaContent = React.createClass({
     })
   },
   loadDataFromAPI (currentPage) {
+    const { intl } = this.props
     axios.get(
-      `https://jsonplaceholder.typicode.com/posts?_page=${currentPage+1}&_limit=${this.state.pageSize}`,
-      // `${process.env.API_URL}/${intl.locale}/v1/page_contents/about`,
+      `${process.env.API_URL}/${intl.locale}/v1/media?page=${currentPage + 1}&per_page=${this.state.pageSize}`,
       {
         headers: {
           'X-Requested-With': 'XMLHttpRequest',
@@ -44,34 +44,32 @@ const MediaContent = React.createClass({
       }
     )
     .then(response => {
-      console.log('then', response)
-      if (!((response || {}).data || {})) {
+      // console.log('then', response)
+      if (!(response.hasOwnProperty('data') && response.data.hasOwnProperty('results') && response.data.hasOwnProperty('total'))) {
         this.setState({
           title: 'Unable to load media data'
         })
 
         return
       }
-
+      var d = response.data
       this.updateState({
-        results: response.data,
+        results: d.results,
         currentPage: currentPage,
-        total: +response.headers['x-total-count']
+        total: +d.total
       })
     })
-
   },
   setPageSize: function (size) { },
-  changeSort: function(sort, sortAscending){},
-  setFilter: function(filter){},
-  getResults: function(){ console.log('getResults')},
+  changeSort: function (sort, sortAscending) {},
+  setFilter: function (filter) {},
 
   render () {
     return (
       <Griddle
 
         useCustomRowComponent
-        customRowComponent={injectIntl(OtherComponent)}
+        customRowComponent={injectIntl(MediaListItemComponent)}
 
         useGriddleStyles={false}
         gridClassName='gb-MediaContent'
@@ -102,20 +100,20 @@ const MediaContent = React.createClass({
   }
 })
 
-var OtherComponent = React.createClass({
+var MediaListItemComponent = React.createClass({
+  propTypes: {
+    intl: intlShape,
+    data: object.isRequired
+  },
   render: function () {
     const { data: item } = this.props
-    item.author = 'Ipsum Lorem'
-    item.media_name = 'CNN'
-    item.date = '15/03/2016'
-    item.embed_code = '<iframe src="https://giphy.com/embed/RyIFWRsw4nkYw" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>'
-    item.source = 'https://drive.google.com/drive/search?q=pin'
+
     return (
       <div className='gb-MediaListItem'>
-        <h4 className='title'>{item.id}. {item.title}</h4>
+        <h4 className='title'>{item.title}</h4>
         <div className='field-wrapper'>
           <label className='field-label'>{this.props.intl.formatMessage(mediaMessages.media_name)}</label>
-          <div className='field-value'>{item.media_name}</div>
+          <div className='field-value'>{item.mediaName}</div>
         </div>
         <div className='field-wrapper'>
           <label className='field-label'>{this.props.intl.formatMessage(mediaMessages.author)}</label>
@@ -123,11 +121,14 @@ var OtherComponent = React.createClass({
         </div>
         <div className='field-wrapper'>
           <label className='field-label'>{this.props.intl.formatMessage(mediaMessages.date)}</label>
-          <div className='field-value'>{item.date}</div>
+          <div className='field-value'>{item.publishedAt}</div>
         </div>
-        <div className='embed-wrapper' dangerouslySetInnerHTML={{__html: item.embed_code}}></div>
-        <div className='description'>{item.body}</div>
-        <div className='source'><a href='{item.source}'>{item.source}</a></div>
+        <div className='media-wrapper' dangerouslySetInnerHTML={{__html: item.media}}></div>
+        <div className='description' dangerouslySetInnerHTML={{__html: item.description}}></div>
+        <div className='field-wrapper source'>
+          <label className='field-label'>{this.props.intl.formatMessage(mediaMessages.source)}</label>
+          <div className='field-value'><a href='{item.source}'>{item.source}</a></div>
+        </div>
       </div>
     )
   }
