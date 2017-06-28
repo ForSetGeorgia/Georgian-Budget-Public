@@ -16,7 +16,7 @@ module.exports = function (shipit) {
         ]
       },
       workspace: 'tmp/build',
-      repositoryUrl: 'https://github.com/JumpStartGeorgia/Georgian-Budget-Public',
+      repositoryUrl: 'https://github.com/ForSetGeorgia/Georgian-Budget-Public',
       ignores: [
         '.git',
         'node_modules',

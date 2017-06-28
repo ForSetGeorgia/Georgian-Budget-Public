@@ -1,4 +1,4 @@
-This site allows users to interact with data from the [Georgian-Budget project API](https://github.com/JumpStartGeorgia/Georgian-Budget-API).
+This site allows users to interact with data from the [Georgian-Budget project API](https://github.com/ForSetGeorgia/Georgian-Budget-API).
 
 ## Get Started
 
@@ -14,7 +14,7 @@ This site allows users to interact with data from the [Georgian-Budget project A
 If you want to use the API locally, then...
 
 1. Change `API_URL` in the `.env` file to `http://localhost:3000`
-1. [Setup the API app on your computer](https://github.com/JumpStartGeorgia/Georgian-Budget-API#get-started)
+1. [Setup the API app on your computer](https://github.com/ForSetGeorgia/Georgian-Budget-API#get-started)
 
 ## Deploy
 

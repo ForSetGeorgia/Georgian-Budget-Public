@@ -87,7 +87,7 @@
   "directories": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JumpStartGeorgia/Georgian-Budget-Public.git"
+    "url": "git+https://github.com/ForSetGeorgia/Georgian-Budget-Public.git"
   },
   "keywords": [
     "budget",
@@ -96,7 +96,7 @@
     "interactive"
   ],
   "bugs": {
-    "url": "https://github.com/JumpStartGeorgia/Georgian-Budget-Public/issues"
+    "url": "https://github.com/ForSetGeorgia/Georgian-Budget-Public/issues"
   },
-  "homepage": "https://github.com/JumpStartGeorgia/Georgian-Budget-Public"
+  "homepage": "https://github.com/ForSetGeorgia/Georgian-Budget-Public"
 }
