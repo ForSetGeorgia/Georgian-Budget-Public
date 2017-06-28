@@ -21,11 +21,12 @@ If you want to use the API locally, then...
 For the first time:
 
 1. Add your environment-specific config to `config/pm2/{env}.json` and `shipitfile.js`.
-2. `shipit staging deploy`
+2. `shipit staging deploy` *
 3. The first deploy won't work fully, because the `.env` file is missing on the server. Run `cp current/.env.example shared/.env` and then add the necessary environment variables to `.env`.
 4. Run `shipit staging deploy` again
 5. App should be running now. Run `pm2 startup` to get instructions from `pm2` on how to make the app server start up again whenever the server reboots.
 
+* if shipit is not preinstalled - install globally npm install --global shipit-cli
 ## ReDUCKS
 
 You may have noticed that redux reducers and actions in this repo are grouped into modules, called ducks, located in the `js/ducks` directory. [Learn more about ducks here](https://github.com/erikras/ducks-modular-redux).
