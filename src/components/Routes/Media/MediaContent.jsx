@@ -127,7 +127,7 @@ var MediaListItemComponent = React.createClass({
         <div className='description' dangerouslySetInnerHTML={{__html: item.description}}></div>
         <div className='field-wrapper source'>
           <label className='field-label'>{this.props.intl.formatMessage(mediaMessages.source)}</label>
-          <div className='field-value'><a href='{item.source}'>{item.source}</a></div>
+          <div className='field-value'><a href={item.source}>{item.source}</a></div>
         </div>
       </div>
     )

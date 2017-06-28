@@ -21,6 +21,7 @@
     vertical-align: middle;
     padding: 0.8rem;
     line-height: 1;
+    white-space: nowrap;
 
     &:hover {
       color: $dark-text-color;
