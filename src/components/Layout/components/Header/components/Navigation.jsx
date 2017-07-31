@@ -13,7 +13,7 @@ const Navigation = (props) => {
     className += ' is-shown-on-small-screens'
   }
 
-  const enableSharing = false
+  const enableSharing = true
 
   return (
     <div className={className}>
