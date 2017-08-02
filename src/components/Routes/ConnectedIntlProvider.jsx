@@ -93,7 +93,7 @@ const ConnectedIntlProvider = React.createClass({
     //   sharePath = sharePath.replace('/explore/', '/share/')
     // }
 
-    return `${process.env.APP_URL}${sharePath}`
+    return encodeURIComponent(`${process.env.APP_URL}${sharePath}`)
   },
   render () {
     const { locale } = this.props.params
