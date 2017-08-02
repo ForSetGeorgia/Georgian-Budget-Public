@@ -61,6 +61,7 @@ const Navigation = (props) => {
       <a
         href={enableSharing ? `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}` : '#'}
         className='app-navigation-link'
+        target='_blank'
       >
         <Svg
           className='app-navigation-link-img'
@@ -70,6 +71,7 @@ const Navigation = (props) => {
       <a
         href={enableSharing ? `https://twitter.com/share?url=${shareUrl}` : '#'}
         className='app-navigation-link'
+        target='_blank'
       >
         <Svg
           className='app-navigation-link-img'
