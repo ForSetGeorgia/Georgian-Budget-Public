@@ -38,7 +38,8 @@ module.exports = function (shipit) {
     production: {
       deployTo: '/home/budget/Budget-Public-Production',
       servers: 'budget@delta.jumpstart.ge',
-      pm2_config: 'current/config/pm2/production.json'
+      pm2_config: 'current/config/pm2/production.json',
+      branch: "inmedia"
     }
   });
 
