@@ -111,7 +111,8 @@ const pages = {
               descriptionData: itemData.descriptionData,
               url: pageUrl,
               canonicalUrl: canonicalPageUrl,
-              imageUrl: imageUrl
+              imageUrl: imageUrl,
+              appId: process.env.FB_APP_ID
             }
           )
         )

@@ -1,6 +1,6 @@
 const React = require('react')
 const { intlShape, injectIntl } = require('react-intl')
-const { string, array } = React.PropTypes
+const { string, array, number } = React.PropTypes
 
 // const englishLocaleData = require('node_modules/react-intl/locale-data/en')[0]
 // const georgianLocaleData = require('node_modules/react-intl/locale-data/ka')[0]
@@ -21,7 +21,8 @@ const Share = React.createClass({
     url: string.isRequired,
     canonicalUrl: string.isRequired,
     imageUrl: string.isRequired,
-    intl: intlShape
+    intl: intlShape,
+    appId: number
     // intl: intlShape.isRequired
   },
   getDefaultProps: function () {
@@ -48,7 +49,7 @@ const Share = React.createClass({
     return msg
   },
   render () {
-    const { locale, url, imageUrl, canonicalUrl } = this.props
+    const { locale, url, imageUrl, canonicalUrl, appId } = this.props
     const title = this.getTitle()
     const description = this.getDescription() // formatMessage(messages.feesMessage) //
     return (
@@ -63,8 +64,9 @@ const Share = React.createClass({
           <meta property='og:image:width' content='1200' />
           <meta property='og:image:height' content='750' />
           <meta property="og:description" content={description} />
-          <meta property="og:url" content={canonicalUrl} />
+          <meta property="og:url" content={url} />
           <meta property="og:type" content="website" />
+          <meta property='fb:app_id' content={appId} />
 
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={title} />
