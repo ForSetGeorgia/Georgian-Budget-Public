@@ -95,7 +95,7 @@ const pages = {
     )
     res.status(200).send(html)
   },
-  share: function ({ res, params, locale, imageUrl, pageUrl }) {
+  share: function ({ res, params, locale, imageUrl, pageUrl, canonicalPageUrl }) {
 
     const IntlProvider = require('react-intl').IntlProvider
     const Share = require('src/components/Share')
@@ -112,6 +112,7 @@ const pages = {
               title: itemData.title,
               descriptionData: itemData.descriptionData,
               url: pageUrl,
+              canonicalUrl: canonicalPageUrl,
               imageUrl: imageUrl
             }
           )
@@ -142,7 +143,8 @@ module.exports = {
     const pageUrl = helpers.fullUrl(req) // req.url is not the whole URL
 
     if(page === 'share') {
-      pages.share({res, params, locale, imageUrl, pageUrl: pageUrl.replace('/share/', '/explore/') })
+      const canonicalPageUrl = helpers.urlWithPath(req, req.path) // req.url is not the whole URL
+      pages.share({res, params, locale, imageUrl, pageUrl: pageUrl.replace('/share/', '/explore/'), canonicalPageUrl: canonicalPageUrl.replace('/share/', '/explore/') })
     } else {
       const mainJs = isomorphic_assets.javascript.main
       const mainCss = isomorphic_assets.styles.main

@@ -30,7 +30,12 @@ app.use((req, res) => {
 
         // share page for explore page, will generate page with meta ready for facebook and twitter
         if(routePath === '/:locale/share/details/:detailsItemId') {
-          getPage('share', pageOptions)
+          const userAgent = req.headers['user-agent']
+          if (userAgent.indexOf('facebookexternalhit') !== -1 || userAgent.indexOf('Twitterbot') !== -1) {
+            getPage('share', pageOptions)
+          } else {
+            res.redirect(302, req.originalUrl.replace('/share/', '/explore/'))
+          }
         } else { // pages except share
           getPage('generic', pageOptions)
         }
