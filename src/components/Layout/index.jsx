@@ -10,7 +10,8 @@ const FooterContainer = require('./components/FooterContainer')
 const Layout = React.createClass({
   propTypes: {
     locale: string,
-    children: object
+    children: object,
+    shareUrl: string
   },
 
   render () {
@@ -21,7 +22,7 @@ const Layout = React.createClass({
         <LocaleInitializer />
 
         <div>
-          <Header />
+          <Header shareUrl={this.props.shareUrl} />
 
           <main className='gb-Layout-mainContent'>
             {this.props.children}

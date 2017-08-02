@@ -1,5 +1,5 @@
 const React = require('react')
-const { bool } = React.PropTypes
+const { bool, string } = React.PropTypes
 const { intlShape, injectIntl } = require('react-intl')
 const { Link } = require('react-router')
 const LocaleLink = require('./LocaleLink')
@@ -12,6 +12,7 @@ const Navigation = (props) => {
   if (props.showOnSmallScreens) {
     className += ' is-shown-on-small-screens'
   }
+  const { shareUrl } = props
 
   const enableSharing = true
 
@@ -58,7 +59,7 @@ const Navigation = (props) => {
         className='app-navigation-link'
       />
       <a
-        href={enableSharing ? 'https://www.facebook.com/sharer/sharer.php' : '#'}
+        href={enableSharing ? `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}` : '#'}
         className='app-navigation-link'
       >
         <Svg
@@ -67,7 +68,7 @@ const Navigation = (props) => {
         />
       </a>
       <a
-        href={enableSharing ? 'https://twitter.com/share' : '#'}
+        href={enableSharing ? `https://twitter.com/share?url=${shareUrl}` : '#'}
         className='app-navigation-link'
       >
         <Svg
@@ -81,7 +82,8 @@ const Navigation = (props) => {
 
 Navigation.propTypes = {
   showOnSmallScreens: bool,
-  intl: intlShape
+  intl: intlShape,
+  shareUrl: string
 }
 
 module.exports = injectIntl(Navigation)

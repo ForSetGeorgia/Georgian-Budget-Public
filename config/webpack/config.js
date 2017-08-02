@@ -66,6 +66,7 @@ module.exports = env => {
 
   const plugins = [
     new webpack.DefinePlugin({
+      'process.env.APP_URL': JSON.stringify(process.env.APP_URL),
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
       'process.env.GOOGLE_ANALYTICS_ID': JSON.stringify(process.env.GOOGLE_ANALYTICS_ID),
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)

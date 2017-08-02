@@ -1,51 +1,18 @@
-const Env = process.env.NODE_ENV || 'development'
-const DEV = Env === 'development'
-const STAGING = Env === 'staging'
-const PROD = Env === 'production'
-
+// The port we've chosen to run our app on
+const port = 8080
 // Express is a node-based server
 const express = require('express')
 
 const React = require('react')
-
-// Renders react components as a string
-const ReactDOMServer = require('react-dom/server')
-
-const ReactRouter = require('react-router')
-const RouterContext = ReactRouter.RouterContext
-const match = ReactRouter.match
-
-const IntlProvider = require('react-intl').IntlProvider
-
-const ReactRedux = require('react-redux')
-const Provider = ReactRedux.Provider
-
-// Must specify .js because node does not use webpack
-const store = require('src/data/store.js')
-
-// The port we've chosen to run our app on
-const port = 8080
-
+const match = require('react-router').match
 const Routes = require('src/components/Routes/index.jsx')
-const Helmet = require('react-helmet')
-const Meta = require('src/components/shared/Meta.jsx')
-const Html = require('src/components/Html.jsx')
+const getPage = require('src/serverPages').getPage
 
 const app = express()
 
 app.use('/public', express.static('./public'))
 
 app.use((req, res) => {
-  if (DEV) {
-    // global variable
-    webpack_isomorphic_tools.refresh()
-  }
-
-  const isomorphic_assets = webpack_isomorphic_tools.assets()
-
-  const mainJs = isomorphic_assets.javascript.main
-  const mainCss = isomorphic_assets.styles.main
-
   match(
     { routes: Routes(), location: req.url },
     (error, redirectLocation, renderProps) => {
@@ -54,46 +21,19 @@ app.use((req, res) => {
       } else if (redirectLocation) {
         res.redirect(302, redirectLocation.pathname + redirectLocation.search)
       } else if (renderProps) {
-        const body = ReactDOMServer.renderToString(
-          React.createElement(Provider, {store},
-            React.createElement(RouterContext, renderProps)
-          )
-        )
 
-        const head = Helmet.rewind()
-        const htmlAttributes = head.htmlAttributes.toComponent()
-        const title = head.title.toComponent()
-        const meta = head.meta.toComponent()
-        const locale = renderProps.params.locale
+        // assemble full route
+        const routePath = renderProps.routes
+          .map((m) => { return m.hasOwnProperty('path') ? m.path : null })
+          .filter((f) => { return f !== null }).join('/')
+        const pageOptions = { req, res, renderProps }
 
-        const urlWithPath = (req, path) => (
-          req.protocol + '://' + req.get('Host') + path
-        )
-
-        const fullUrl = req => urlWithPath(req, req.originalUrl)
-
-        const html = '<!DOCTYPE html>' + ReactDOMServer.renderToStaticMarkup(
-          React.createElement(
-            Html,
-            {
-              htmlAttributes,
-              title,
-              meta,
-              body,
-              mainJs,
-              mainCss,
-              // req.url is not the whole URL
-              url: fullUrl(req),
-              imageUrl: urlWithPath(
-                req,
-                isomorphic_assets.assets[`./public/images/share_${locale}.jpg`]
-              ),
-              appId: process.env.FB_APP_ID
-            }
-          )
-        )
-
-        res.status(200).send(html)
+        // share page for explore page, will generate page with meta ready for facebook and twitter
+        if(routePath === '/:locale/share/details/:detailsItemId') {
+          getPage('share', pageOptions)
+        } else { // pages except share
+          getPage('generic', pageOptions)
+        }
       } else {
         res.status(404).send('Not found')
       }

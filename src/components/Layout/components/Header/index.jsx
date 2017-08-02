@@ -1,8 +1,12 @@
 const React = require('react')
+const { string } = React.PropTypes
 const Brand = require('./components/Brand')
 const Navigation = require('./components/Navigation')
 
 const Header = React.createClass({
+  propTypes: {
+    shareUrl: string
+  },
   getInitialState () {
     return {
       menuIsShownOnSmallScreens: false
@@ -28,8 +32,7 @@ const Header = React.createClass({
               <span className='gb-Header-content-brandAndButton-button-bar'></span>
             </button>
           </div>
-
-          <Navigation showOnSmallScreens={this.state.menuIsShownOnSmallScreens} />
+          <Navigation showOnSmallScreens={this.state.menuIsShownOnSmallScreens} shareUrl={this.props.shareUrl} />
         </header>
       </div>
     )

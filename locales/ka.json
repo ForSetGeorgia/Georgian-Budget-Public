@@ -26,6 +26,8 @@
   "app.media.author": "Author:",
   "app.media.date": "თარიღი:",
   "app.media.source": "Source:",
+  "app.share.description": "{year1} წელს, ბოლო მონაცემებით, {amount1} დაიხარჯა, {year2} წელს კი დანახარჯი {amount2} იყო. გაიგე მეტი!",
+  "app.share.description_short": "{year1} წელს, ბოლო მონაცემებით, {amount1} დაიხარჯა. გაიგე მეტი!",
   "budgetItem.name": "სახელი",
   "budgetItem.code": "კოდი",
   "budgetItem.type": "ტიპი",

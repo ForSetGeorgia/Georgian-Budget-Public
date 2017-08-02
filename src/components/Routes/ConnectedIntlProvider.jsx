@@ -1,5 +1,5 @@
 const React = require('react')
-const { object, string, shape, func } = React.PropTypes
+const { object, string, shape, func, array } = React.PropTypes
 const { addLocaleData, IntlProvider } = require('react-intl')
 const { connect } = require('react-redux')
 
@@ -20,7 +20,8 @@ const ConnectedIntlProvider = React.createClass({
     children: object.isRequired,
     params: shape({ locale: string.isRequired }),
     switchLocale: func.isRequired,
-    location: object.isRequired
+    location: object.isRequired,
+    routes: array.isRequired
   },
 
   contextTypes: {
@@ -80,13 +81,27 @@ const ConnectedIntlProvider = React.createClass({
     return require(`locales/${locale}.json`)
   },
 
+  getShareUrl (childrenObject) {
+    const routePath = this.props.routes
+      .map((m) => { return m.hasOwnProperty('path') ? m.path : null })
+      .filter((f) => { return f !== null }).join('/')
+
+    const { pathname, search } = this.props.location
+
+    let sharePath = `${pathname}${search}`
+    if (routePath === '/:locale/explore/details/:detailsItemId') {
+      sharePath = sharePath.replace('/explore/', '/share/')
+    }
+
+    return `${process.env.APP_URL}${sharePath}`
+  },
   render () {
     const { locale } = this.props.params
     const { children } = this.props
 
     return (
       <IntlProvider locale={locale} messages={this.messages()}>
-        <Layout children={children} locale={locale} />
+        <Layout children={children} locale={locale} shareUrl={this.getShareUrl()} />
       </IntlProvider>
     )
   }
