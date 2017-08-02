@@ -27,18 +27,37 @@ app.use((req, res) => {
           .map((m) => { return m.hasOwnProperty('path') ? m.path : null })
           .filter((f) => { return f !== null }).join('/')
         const pageOptions = { req, res, renderProps }
+        const userAgent = req.headers['user-agent']
 
-        // share page for explore page, will generate page with meta ready for facebook and twitter
-        if(routePath === '/:locale/share/details/:detailsItemId') {
-          const userAgent = req.headers['user-agent']
-          if (userAgent.indexOf('facebookexternalhit') !== -1 || userAgent.indexOf('Twitterbot') !== -1) {
+        if(routePath === '/:locale/explore/details/:detailsItemId' &&
+          (userAgent.indexOf('facebookexternalhit') !== -1 ||
+          userAgent.indexOf('Twitterbot') !== -1)) {
             getPage('share', pageOptions)
-          } else {
-            res.redirect(302, req.originalUrl.replace('/share/', '/explore/'))
-          }
-        } else { // pages except share
+        } else { // pages except explore page scraped by facebook and twitter bots
           getPage('generic', pageOptions)
         }
+
+
+        // var fs = require('fs');
+        // console.log('Going to open file')
+        // fs.writeFile("src/test.log", "Hey there!", function(err) {
+        //     if(err) {
+        //         return console.log(err);
+        //     }
+
+        //     console.log("The file was saved!");
+        // });
+        // share page for explore page, will generate page with meta ready for facebook and twitter
+        // if(routePath === '/:locale/share/details/:detailsItemId') {
+
+        //   if (userAgent.indexOf('facebookexternalhit') !== -1 || userAgent.indexOf('Twitterbot') !== -1) {
+        //     getPage('share', pageOptions)
+        //   } else {
+        //     res.redirect(302, req.originalUrl.replace('/share/', '/explore/'))
+        //   }
+        // } else { // pages except share
+        //   getPage('generic', pageOptions)
+        // }
       } else {
         res.status(404).send('Not found')
       }

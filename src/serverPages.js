@@ -142,7 +142,7 @@ module.exports = {
 
     if(page === 'share') {
       const canonicalPageUrl = helpers.urlWithPath(req, req.path) // req.url is not the whole URL
-      pages.share({res, params, locale, imageUrl, pageUrl: pageUrl.replace('/share/', '/explore/'), canonicalPageUrl: canonicalPageUrl.replace('/share/', '/explore/') })
+      pages.share({res, params, locale, imageUrl, pageUrl: pageUrl, canonicalPageUrl: canonicalPageUrl })
     } else {
       const mainJs = isomorphic_assets.javascript.main
       const mainCss = isomorphic_assets.styles.main

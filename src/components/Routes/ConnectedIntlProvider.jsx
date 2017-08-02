@@ -81,17 +81,17 @@ const ConnectedIntlProvider = React.createClass({
     return require(`locales/${locale}.json`)
   },
 
-  getShareUrl (childrenObject) {
-    const routePath = this.props.routes
-      .map((m) => { return m.hasOwnProperty('path') ? m.path : null })
-      .filter((f) => { return f !== null }).join('/')
+  getShareUrl () {
+    // const routePath = this.props.routes
+    //   .map((m) => { return m.hasOwnProperty('path') ? m.path : null })
+    //   .filter((f) => { return f !== null }).join('/')
 
     const { pathname, search } = this.props.location
 
     let sharePath = `${pathname}${search}`
-    if (routePath === '/:locale/explore/details/:detailsItemId') {
-      sharePath = sharePath.replace('/explore/', '/share/')
-    }
+    // if (routePath === '/:locale/explore/details/:detailsItemId') {
+    //   sharePath = sharePath.replace('/explore/', '/share/')
+    // }
 
     return `${process.env.APP_URL}${sharePath}`
   },
