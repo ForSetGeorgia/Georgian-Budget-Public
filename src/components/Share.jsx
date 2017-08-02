@@ -64,7 +64,7 @@ const Share = React.createClass({
           <meta property='og:image:width' content='1200' />
           <meta property='og:image:height' content='750' />
           <meta property="og:description" content={description} />
-          <meta property="og:url" content={url} />
+          <meta property="og:url" content={canonicalUrl} />
           <meta property="og:type" content="website" />
           <meta property='fb:app_id' content={appId} />
 
