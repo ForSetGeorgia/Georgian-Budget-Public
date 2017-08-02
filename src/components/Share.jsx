@@ -19,7 +19,6 @@ const Share = React.createClass({
     title: string.isRequired,
     descriptionData: array,
     url: string.isRequired,
-    canonicalUrl: string.isRequired,
     imageUrl: string.isRequired,
     intl: intlShape,
     appId: number
@@ -49,7 +48,7 @@ const Share = React.createClass({
     return msg
   },
   render () {
-    const { locale, url, imageUrl, canonicalUrl, appId } = this.props
+    const { locale, url, imageUrl, appId } = this.props
     const title = this.getTitle()
     const description = this.getDescription() // formatMessage(messages.feesMessage) //
     return (
@@ -64,7 +63,7 @@ const Share = React.createClass({
           <meta property='og:image:width' content='1200' />
           <meta property='og:image:height' content='750' />
           <meta property="og:description" content={description} />
-          <meta property="og:url" content={canonicalUrl} />
+          <meta property="og:url" content={url} />
           <meta property="og:type" content="website" />
           <meta property='fb:app_id' content={appId} />
 

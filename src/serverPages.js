@@ -5,10 +5,6 @@ const ReactDOMServer = require('react-dom/server')
 const DEV = (process.env.NODE_ENV || 'development') === 'development'
 
 const Helmet = require('react-helmet')
-// const Meta = require('src/components/shared/Meta.jsx')
-
-
-
 
 const helpers = {
   shareDataFetcher: function (locale, detailsItemId, callback) {
@@ -93,7 +89,7 @@ const pages = {
     )
     res.status(200).send(html)
   },
-  share: function ({ res, params, locale, imageUrl, pageUrl, canonicalPageUrl }) {
+  share: function ({ res, params, locale, imageUrl, pageUrl }) {
 
     const IntlProvider = require('react-intl').IntlProvider
     const Share = require('src/components/Share')
@@ -110,7 +106,6 @@ const pages = {
               title: itemData.title,
               descriptionData: itemData.descriptionData,
               url: pageUrl,
-              canonicalUrl: canonicalPageUrl,
               imageUrl: imageUrl,
               appId: process.env.FB_APP_ID
             }
@@ -139,15 +134,13 @@ module.exports = {
       req,
       isomorphic_assets.assets[`./public/images/share_${locale}.jpg`]
     )
-    const pageUrl = helpers.fullUrl(req) // req.url is not the whole URL
 
     if(page === 'share') {
-      const canonicalPageUrl = helpers.urlWithPath(req, req.path) // req.url is not the whole URL
-      pages.share({res, params, locale, imageUrl, pageUrl: pageUrl, canonicalPageUrl: canonicalPageUrl })
+      pages.share({res, params, locale, imageUrl, pageUrl: helpers.urlWithPath(req, req.path) })
     } else {
       const mainJs = isomorphic_assets.javascript.main
       const mainCss = isomorphic_assets.styles.main
-      pages.generic({res, renderProps, head, locale, imageUrl, pageUrl, mainJs, mainCss})
+      pages.generic({res, renderProps, head, locale, imageUrl, pageUrl: helpers.fullUrl(req), mainJs, mainCss})
     }
   }
 }

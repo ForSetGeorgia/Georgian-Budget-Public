@@ -37,27 +37,6 @@ app.use((req, res) => {
           getPage('generic', pageOptions)
         }
 
-
-        // var fs = require('fs');
-        // console.log('Going to open file')
-        // fs.writeFile("src/test.log", "Hey there!", function(err) {
-        //     if(err) {
-        //         return console.log(err);
-        //     }
-
-        //     console.log("The file was saved!");
-        // });
-        // share page for explore page, will generate page with meta ready for facebook and twitter
-        // if(routePath === '/:locale/share/details/:detailsItemId') {
-
-        //   if (userAgent.indexOf('facebookexternalhit') !== -1 || userAgent.indexOf('Twitterbot') !== -1) {
-        //     getPage('share', pageOptions)
-        //   } else {
-        //     res.redirect(302, req.originalUrl.replace('/share/', '/explore/'))
-        //   }
-        // } else { // pages except share
-        //   getPage('generic', pageOptions)
-        // }
       } else {
         res.status(404).send('Not found')
       }
