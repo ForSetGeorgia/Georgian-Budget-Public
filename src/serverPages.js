@@ -12,7 +12,6 @@ const Helmet = require('react-helmet')
 
 const helpers = {
   shareDataFetcher: function (locale, detailsItemId, callback) {
-    console.log(locale, detailsItemId)
     const axios = require('axios')
     const defaultResonse = {title: '', descriptionData: []}
     axios
@@ -41,7 +40,6 @@ const helpers = {
 
         yearlySpentFinances = [yearlySpentFinances.pop(), yearlySpentFinances.pop()].filter((f) => { return f !== undefined })
 
-        console.log(name, yearlySpentFinances)
         callback({title: name, descriptionData: yearlySpentFinances})
       } else {
         callback(defaultResonse)

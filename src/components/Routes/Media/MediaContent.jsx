@@ -25,7 +25,6 @@ const MediaContent = React.createClass({
   },
 
   updateState ({results, currentPage, total}) {
-    // console.log(results, currentPage, total)
     this.setState({
       maxPages: Math.ceil(total / this.state.pageSize),
       results: results,
@@ -44,7 +43,6 @@ const MediaContent = React.createClass({
       }
     )
     .then(response => {
-      // console.log('then', response)
       if (!(response.hasOwnProperty('data') && response.data.hasOwnProperty('results') && response.data.hasOwnProperty('total'))) {
         this.setState({
           title: 'Unable to load media data'
