@@ -5,6 +5,7 @@ This site allows users to interact with data from the [Georgian-Budget project A
 1. Setup .env file
   1. `cp .env.example .env`
   1. Set `NODE_ENV` to 'development'
+  1. Set `APP_URL` to `https://dev-budget.jumpstart.ge` (domain name used for share)
   1. Set `API_URL` to `https://dev-budgetapi.jumpstart.ge` (for now)
 1. Install [docker](https://www.docker.com/products/overview)
 1. `docker-compose build` (takes a while)
