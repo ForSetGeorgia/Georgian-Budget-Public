@@ -33,13 +33,13 @@ module.exports = function (shipit) {
       deployTo: '/home/budget-staging/Budget-Public-Staging',
       servers: 'budget-staging@alpha.jumpstart.ge',
       pm2_config: 'current/config/pm2/staging.json',
-      branch: "inmedia"
+      branch: "master"
     },
     production: {
       deployTo: '/home/budget/Budget-Public-Production',
       servers: 'budget@delta.jumpstart.ge',
       pm2_config: 'current/config/pm2/production.json',
-      branch: "inmedia"
+      branch: "master"
     }
   });
 

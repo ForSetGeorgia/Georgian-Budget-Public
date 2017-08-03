@@ -26,6 +26,7 @@
   "app.media.author": "Author:",
   "app.media.date": "თარიღი:",
   "app.media.source": "Source:",
+  "app.media.nodata": "მონაცემები ჯერ კიდევ იტვირთება ან ვერ მოიძებნა.",
   "app.share.description": "{year1} წელს, ბოლო მონაცემებით, {amount1} ლარი დაიხარჯა, {year2} წელს კი დანახარჯი {amount2} ლარი იყო. გაიგე მეტი!",
   "app.share.description_short": "{year1} წელს, ბოლო მონაცემებით, {amount1} ლარი დაიხარჯა. გაიგე მეტი!",
   "budgetItem.name": "სახელი",

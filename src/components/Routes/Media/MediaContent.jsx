@@ -63,17 +63,14 @@ const MediaContent = React.createClass({
   setFilter: function (filter) {},
 
   render () {
-    return (
-      <Griddle
-
+    const componentToRender = this.state.results.length
+      ? <Griddle
         useCustomRowComponent
         customRowComponent={injectIntl(MediaListItemComponent)}
 
         useGriddleStyles={false}
         gridClassName='gb-MediaContent'
         customRowComponentClassName='gb-MediaList'
-
-        noDataMessage='sorry'
 
         useExternal
         externalCurrentPage={this.state.currentPage}
@@ -92,12 +89,13 @@ const MediaContent = React.createClass({
         nextText={this.props.intl.formatMessage(mediaMessages.next)}
         nextClassName='gb-GriddlePaginationLink'
         nextIconComponent=' →'
+      />
+      : <div className='gb-NoDataMessage'>{this.props.intl.formatMessage(mediaMessages.nodata)}</div>
 
-        />
-    )
+    return componentToRender
   }
 })
-
+1
 var MediaListItemComponent = React.createClass({
   propTypes: {
     intl: intlShape,

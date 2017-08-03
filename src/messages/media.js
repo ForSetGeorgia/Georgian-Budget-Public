@@ -24,5 +24,9 @@ module.exports = defineMessages({
   source: {
     id: 'app.media.source',
     defaultMessage: 'Source:'
+  },
+  nodata: {
+    id: 'app.media.nodata',
+    defaultMessage: 'There data is still loading or no media records were found.'
   }
 })
