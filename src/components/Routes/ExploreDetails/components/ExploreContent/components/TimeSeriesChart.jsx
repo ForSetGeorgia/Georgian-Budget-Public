@@ -73,7 +73,8 @@ const TimeSeriesChart = React.createClass({
           contextButton: {
             menuItems: menuItems
           }
-        }
+        },
+        filename: exportTitle.replace(/^\s+|\s+$/g, '').replace(/\s+/g, '_').replace(/[^ა-ჰA-Za-z0-9_\-]/g, '')
       },
       title: {
         text: title
