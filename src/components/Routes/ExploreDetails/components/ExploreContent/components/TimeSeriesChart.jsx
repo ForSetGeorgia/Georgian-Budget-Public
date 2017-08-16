@@ -50,10 +50,12 @@ const TimeSeriesChart = React.createClass({
     const { Highcharts, getHighchartsOptions } = require('src/highcharts')
     Highcharts.setOptions(getHighchartsOptions(intl))
 
-    // mapping between SVG attributes and the corresponding options
-    Highcharts.seriesTypes.column.prototype.pointAttrToOptions.dashstyle = 'dashStyle'
+    // mapping between SVG attributes and the corresponding options, removed due error and default support in newer version of highcharts
+    // Highcharts.seriesTypes.column.prototype.pointAttrToOptions.dashstyle = 'dashStyle'
 
     // Set container which the chart should render to.
+    const menuItems = Highcharts.defaultOptions.exporting.buttons.contextButton.menuItems.filter((f) => { return f !== 'viewData' })
+
     const options = {
       chart: {
         type: 'column'
@@ -65,6 +67,11 @@ const TimeSeriesChart = React.createClass({
           },
           subtitle: {
             text: exportSubTitle
+          }
+        },
+        buttons: {
+          contextButton: {
+            menuItems: menuItems
           }
         }
       },

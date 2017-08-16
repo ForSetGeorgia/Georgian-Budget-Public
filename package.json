@@ -41,7 +41,7 @@
     "extract-text-webpack-plugin": "2.0.0-beta.4",
     "file-loader": "^0.10.0",
     "griddle-react": "^0.7.0",
-    "highcharts": "^4.2.7",
+    "highcharts": "^5.0.14",
     "json-loader": "^0.5.4",
     "lodash.isequal": "^4.5.0",
     "lodash.padstart": "^4.6.1",

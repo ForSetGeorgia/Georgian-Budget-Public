@@ -1,7 +1,8 @@
 const Highcharts = require('highcharts')
 require('highcharts/modules/exporting')(Highcharts)
+require('highcharts/modules/export-data')(Highcharts)
 const { defineMessages } = require('react-intl')
-
+1
 const messages = defineMessages({
   thousandsSep: {
     id: 'number.thousandsSep',
