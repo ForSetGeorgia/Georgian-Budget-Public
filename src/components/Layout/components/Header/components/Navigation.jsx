@@ -48,6 +48,17 @@ const Navigation = (props) => {
           defaultMessage='About'
         />
       </Link>
+      <Link
+        to={`https://biujeti-api.jumpstart.ge/${locale}/csv/complete_primary_finances`}
+        className='app-navigation-link'
+        target="_blank"
+      >
+        <FormattedMessage
+          id='app.header.data'
+          description='Link to data file from API'
+          defaultMessage='Data'
+        />
+      </Link>
       <LocaleLink
         text='ქა'
         locale='ka'

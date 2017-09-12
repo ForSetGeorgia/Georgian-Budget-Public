@@ -2,6 +2,7 @@
   "app.header.about": "შესახებ",
   "app.header.explore": "გაეცანი",
   "app.header.media": "მედიაში",
+  "app.header.data": "მონაცემები",
   "app.filters.budgetItemType.label": "აირჩიე სახეობა",
   "app.filters.financeType.label": "აირჩიე ფინანსები",
   "app.filters.timePeriod.allOption": "ყველა",
