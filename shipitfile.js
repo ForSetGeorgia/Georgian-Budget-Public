@@ -31,13 +31,13 @@ module.exports = function (shipit) {
     },
     staging: {
       deployTo: '/home/budget-staging/Budget-Public-Staging',
-      servers: 'budget-staging@alpha.jumpstart.ge',
+      servers: 'budget-staging@beta.forset.ge',
       pm2_config: 'current/config/pm2/staging.json',
       branch: "master"
     },
     production: {
-      deployTo: '/home/budget/Budget-Public-Production',
-      servers: 'budget@delta.jumpstart.ge',
+      deployTo: '/home/deploy/Budget-Public',
+      servers: 'budget@alpha.forset.ge',
       pm2_config: 'current/config/pm2/production.json',
       branch: "master"
     }

@@ -49,7 +49,7 @@ const Navigation = (props) => {
         />
       </Link>
       <Link
-        to={`https://biujeti-api.jumpstart.ge/${locale}/csv/complete_primary_finances`}
+        to={`https://biujeti-api.forset.ge/${locale}/csv/complete_primary_finances`}
         className='app-navigation-link'
         target="_blank"
       >

@@ -31,8 +31,8 @@ const Footer = ({ lastUpdatedDate }) => (
           <Svg markup={nedLogo} />
         </a>
 
-        <a href='https://jumpstart.ge/' target='blank'>
-          <img src='/public/images/jumpstart_logo.png' alt="JumpStart's Logo" />
+        <a href='https://forset.ge/' target='blank'>
+          <img src='/public/images/forset.svg' alt="ForSet's Logo" />
         </a>
       </div>
     </footer>

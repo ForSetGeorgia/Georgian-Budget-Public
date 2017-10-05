@@ -1,6 +1,6 @@
 {
   "apps": [{
-    "name": "Budget-Public-Production",
+    "name": "Budget-Public",
     "script": "./app.js",
     "cwd": "./current"
   }]

@@ -13,7 +13,7 @@
     "start:dev": "NODE_PATH=. nodemon --ext js,jsx --watch src app.js",
     "fix": "standard --fix"
   },
-  "author": "JumpStart Georgia",
+  "author": "ForSet Georgia",
   "license": "MIT",
   "dependencies": {
     "autoprefixer": "^6.5.1",
