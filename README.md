@@ -17,9 +17,53 @@ If you want to use the API locally, then...
 1. Change `API_URL` in the `.env` file to `http://localhost:3000`
 1. [Setup the API app on your computer](https://github.com/ForSetGeorgia/Georgian-Budget-API#get-started)
 
-## Deploy
+## Prepaire server
 
-For the first time:
+### Install node, nvm [source](http://www.hostingadvice.com/how-to/install-nodejs-ubuntu-14-04/), npm, [yarn](https://yarnpkg.com/en/docs/install), pm2
+#### nvm & node
+`sudo apt-get install build-essential checkinstall`
+`sudo apt-get install libssl-dev`
+`curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash`
+exit and enter terminal back
+`command -v nvm`
+`nvm -l`
+`nvm install v8.6.0`
+`nvm use v8.6.0`
+`nvm alias default node`
+
+#### npm
+`sudo apt-get update && sudo apt-get install npm`
+
+#### yarn
+`curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
+`echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
+
+`sudo apt-get install yarn`
+
+#### pm2
+`npm install pm2 -g`
+information commands
+`pm2 startup`
+`pm2 status`
+`which pm2`
+
+#### .bashrc
+
+#move export nvm above those lines on server in .bashrc
+`export NVM_DIR="/home/deploy/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac`
+
+
+`. ~/.bashrc on`
+
+
+## Deploy
 
 1. Add your environment-specific config to `config/pm2/{env}.json` and `shipitfile.js`.
 2. `shipit staging deploy` *
