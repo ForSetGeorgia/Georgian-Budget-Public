@@ -49,15 +49,15 @@ information commands
 
 #### .bashrc
 
-#move export nvm above those lines on server in .bashrc
-`export NVM_DIR="/home/deploy/.nvm"
+move next two lines above next four lines on server in .bashrc
+```export NVM_DIR="/home/deploy/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-# If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
-esac`
+esac
+```
 
 
 `. ~/.bashrc on`
