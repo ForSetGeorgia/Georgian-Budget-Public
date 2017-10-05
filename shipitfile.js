@@ -30,14 +30,14 @@ module.exports = function (shipit) {
       shallowClone: true
     },
     staging: {
-      deployTo: '/home/budget-staging/Budget-Public-Staging',
-      servers: 'budget-staging@beta.forset.ge',
+      deployTo: '/home/deploy/Budget-Public-Staging',
+      servers: 'deploy@beta.forset.ge',
       pm2_config: 'current/config/pm2/staging.json',
       branch: "master"
     },
     production: {
       deployTo: '/home/deploy/Budget-Public',
-      servers: 'budget@alpha.forset.ge',
+      servers: 'deploy@alpha.forset.ge',
       pm2_config: 'current/config/pm2/production.json',
       branch: "master"
     }
