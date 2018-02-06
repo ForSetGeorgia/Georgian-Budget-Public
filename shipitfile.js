@@ -49,7 +49,7 @@ module.exports = function (shipit) {
 
   shipit.blTask('install_modules', function() {
     return shipit.remote(
-      `node -v && cd ${shipit.releasePath} && npm install -g yarn`
+      `node -v && cd ${shipit.releasePath}`
     ).then(function(result) {
       shipit.log(chalk.green('modules successfully installed'))
     }).catch(function(e) {
