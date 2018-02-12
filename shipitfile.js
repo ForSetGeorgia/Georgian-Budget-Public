@@ -37,7 +37,7 @@ module.exports = function (shipit) {
     },
     production: {
       deployTo: '/home/deploy/Budget-Public',
-      servers: '159.65.22.44',
+      servers: 'deploy@178.62.74.79',
       pm2_config: 'current/config/pm2/production.json',
       branch: "master"
     }
@@ -49,7 +49,7 @@ module.exports = function (shipit) {
 
   shipit.blTask('install_modules', function() {
     return shipit.remote(
-      `node -v && cd ${shipit.releasePath}`
+      `node -v && cd ${shipit.releasePath} && yarn install`
     ).then(function(result) {
       shipit.log(chalk.green('modules successfully installed'))
     }).catch(function(e) {

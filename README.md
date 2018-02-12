@@ -19,8 +19,13 @@ If you want to use the API locally, then...
 
 ## Prepaire server
 
-### Install node, nvm [source](http://www.hostingadvice.com/how-to/install-nodejs-ubuntu-14-04/), npm, [yarn](https://yarnpkg.com/en/docs/install), pm2
+### Install node, nvm, npm, [yarn](https://yarnpkg.com/en/docs/install), pm2
 #### nvm & node
+For 16.04 use this [instructions](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04)
+Do not forget to add output lines to .bashrc
+
+For older instructions below [source](http://www.hostingadvice.com/how-to/install-nodejs-ubuntu-14-04/)
+
 `sudo apt-get install build-essential checkinstall`
 `sudo apt-get install libssl-dev`
 `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash`
