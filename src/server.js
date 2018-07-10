@@ -30,6 +30,7 @@ app.use((req, res) => {
         const userAgent = req.headers['user-agent']
 
         if(routePath === '/:locale/explore/details/:detailsItemId' &&
+          typeof userAgent !== 'undefined' &&
           (userAgent.indexOf('facebookexternalhit') !== -1 ||
           userAgent.indexOf('Twitterbot') !== -1)) {
             getPage('share', pageOptions)
